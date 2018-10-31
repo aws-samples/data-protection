@@ -31,14 +31,6 @@ for data in transit as well as data at rest
 </body>
 </html>
 
-
-Title               | Description
-:---: | :---
-[Key admins And Key Access](https://github.com/aws-samples/data-encryption-builders-session/tree/key-access-usecase-2)  | This workshop demonstrates how KMS key policies works for admins and users
-[Server Side Encryption](https://github.com/aws-samples/data-encryption-builders-session/tree/kms-sse-usecase-1)  | This workshop demonstrates how you can use boto3 and python to demonstrate AWS Server side encryption 
-[Client Side Encryption](https://github.com/aws-samples/data-encryption-builders-session/tree/kms-cse-usecase-3)  | This workshop demonstrates how you can use boto3 and python to demonstrate AWS client side encryption 
-[Client Side Encryption With Data Key Caching](https://github.com/aws-samples/data-encryption-builders-session/tree/kms-cse-usecase-4)  | This workshop demonstrates how you can use boto3 and python to demonstrate AWS client side encryption with data key caching
-[Creating Certs With ACM Private Certificate Authority](https://github.com/aws-samples/data-encryption-builders-session/tree/acm-pca-usecase-5)  | This workshop demonstrates how you can use boto3 and python to create a AWS Certificate Manager private certificate authority and use this CA to create private X.509 certififcates
 ## Prerequisites
 
 ### AWS Account
