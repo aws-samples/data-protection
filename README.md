@@ -19,7 +19,7 @@ for data in transit as well as data at rest
 
 <link rel="stylesheet" type="text/css" href="css/styles.css">
 
-<br><input type="image" name="image" src="images/identity-access-control.png" width="352" height="240"><br>
+<br><input type="image" name="image" src="images/identity-access-control.png" width="352" height="240"></br>
 <a href="https://github.com/aws-samples/data-encryption-builders-session/tree/kms-sse-usecase-1"><img src="images/identity-access-control.png" width="352" height="240"></a>
 <a href="https://github.com/aws-samples/data-encryption-builders-session/tree/kms-sse-usecase-1"><img src="images/data-encryption.png" width="352" height="240"></a>
 <a href="https://github.com/aws-samples/data-encryption-builders-session/tree/kms-sse-usecase-1"><img src="images/infra-security.png" width="352" height="240"></a>
