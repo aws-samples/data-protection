@@ -4,7 +4,7 @@
 
 body {
     margin: 0;
-    font-family: Arial;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .header {
@@ -13,18 +13,17 @@ body {
 }
 
 .row {
-    display: -ms-flexbox; /* IE10 */
+    display: -ms-flexbox; /* IE 10 */
     display: flex;
-    -ms-flex-wrap: wrap; /* IE10 */
+    -ms-flex-wrap: wrap; /* IE 10 */
     flex-wrap: wrap;
     padding: 0 4px;
 }
 
-/* Create four equal columns that sits next to each other */
+/* Create two equal columns that sits next to each other */
 .column {
-    -ms-flex: 25%; /* IE10 */
-    flex: 25%;
-    max-width: 25%;
+    -ms-flex: 50%; /* IE 10 */
+    flex: 50%;
     padding: 0 4px;
 }
 
@@ -33,20 +32,21 @@ body {
     vertical-align: middle;
 }
 
-/* Responsive layout - makes a two column-layout instead of four columns */
-@media screen and (max-width: 800px) {
-    .column {
-        -ms-flex: 50%;
-        flex: 50%;
-        max-width: 50%;
-    }
+/* Style the buttons */
+.btn {
+    border: none;
+    outline: none;
+    padding: 10px 16px;
+    background-color: #f1f1f1;
+    cursor: pointer;
+    font-size: 18px;
 }
 
-/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
-@media screen and (max-width: 600px) {
-    .column {
-        -ms-flex: 100%;
-        flex: 100%;
-        max-width: 100%;
-    }
+.btn:hover {
+    background-color: #ddd;
+}
+
+.btn.active {
+    background-color: #666;
+    color: white;
 }
