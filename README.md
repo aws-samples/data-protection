@@ -14,11 +14,9 @@ for data in transit as well as data at rest
 > Please review and complete all prerequisites before attempting these workshops.
 
 
-
-<!DOCTYPE html>
 <!DOCTYPE html>
 <html>
-<style>
+<style type="text/css">
 * {
     box-sizing: border-box;
 }
