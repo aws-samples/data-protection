@@ -77,7 +77,7 @@ body {
 <!-- Photo Grid -->
 <div class="row"> 
   <div class="column">
-    <img src="images/identity&access-control.png" style="width:100%">
+    <img src="images/identity-access-control.png" style="width:100%">
   </div>
   <div class="column">
     <img src="images/data-encryption.png" style="width:100%">
