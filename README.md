@@ -16,6 +16,8 @@ for data in transit as well as data at rest
 
 
 <!DOCTYPE html>
+<!DOCTYPE html>
+<html>
 <style>
 * {
     box-sizing: border-box;
@@ -70,6 +72,7 @@ body {
     }
 }
 </style>
+<body>
 
 <!-- Photo Grid -->
 <div class="row"> 
@@ -83,8 +86,8 @@ body {
     <img src="images/infra-security.png" style="width:100%">
   </div>
 </div>
-
-
+</body>
+</html>
 
 
 Title               | Description
