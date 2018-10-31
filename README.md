@@ -18,7 +18,7 @@ for data in transit as well as data at rest
 <body>
 
 <kbd>
-<a href="https://github.com/aws-samples/data-encryption-builders-session/tree/kms-sse-usecase-1"><img src="images/identity-access-control.png" width="352" height="240" border="3"></a>
+<a href="https://github.com/aws-samples/data-encryption-builders-session/tree/kms-sse-usecase-1"><img src="images/identity-access-control.png" width="352" height="240" border="3" title="click me"></a>
 </kbd>
 <kbd>
 <a href="https://github.com/aws-samples/data-encryption-builders-session/tree/kms-sse-usecase-1"><img src="images/data-encryption.png" width="352" height="240" border="3"></a>
