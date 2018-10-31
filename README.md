@@ -7,7 +7,7 @@ If you are dealing with data encryption or certificate management within your AW
 Data encryption provides a strong layer of security to protect data that you store within AWS services. AWS provides tooling to achieve ubiquitous encryption 
 for data in transit as well as data at rest
 
-![Components](images/ubiquitous-encryption.png)
+<a><img src="images/ubiquitous-encryption.png" width="800" height="680"></a>
 
 ## Workshops
 
