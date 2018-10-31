@@ -1,52 +1,22 @@
-* {
-    box-sizing: border-box;
-}
-
-body {
-    margin: 0;
+.nav3 {
+    background-color: #E9E8C7;
+    height: auto;
+    width: 150px;
+    float: left;
+    padding-left: 20px;
     font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    color: #333333;
+    padding-top: 20px;
+    padding-right: 20px;
 }
 
-.header {
-    text-align: center;
-    padding: 32px;
-}
+.icons{
+    display:inline-block;
+    width: 64px; 
+    height: 64px; 
+   }
 
-.row {
-    display: -ms-flexbox; /* IE 10 */
-    display: flex;
-    -ms-flex-wrap: wrap; /* IE 10 */
-    flex-wrap: wrap;
-    padding: 0 4px;
-}
-
-/* Create two equal columns that sits next to each other */
-.column {
-    -ms-flex: 50%; /* IE 10 */
-    flex: 50%;
-    padding: 0 4px;
-}
-
-.column img {
-    margin-top: 8px;
-    vertical-align: middle;
-}
-
-/* Style the buttons */
-.btn {
-    border: none;
-    outline: none;
-    padding: 10px 16px;
-    background-color: #f1f1f1;
-    cursor: pointer;
-    font-size: 18px;
-}
-
-.btn:hover {
-    background-color: #ddd;
-}
-
-.btn.active {
-    background-color: #666;
-    color: white;
-}
+ a.icons:hover {
+     background: #C93;
+ }

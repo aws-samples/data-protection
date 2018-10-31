@@ -16,57 +16,14 @@ for data in transit as well as data at rest
 <!DOCTYPE html>
 <html>
 <body>
-<link rel="stylesheet" href="css/style.css"  type="text/css"/>
 
-<!-- Header -->
-<div class="header" id="myHeader">
-  <h1>Image Grid</h1>
-  <p>Click on the icons to access the workshops.</p>
-  <button class="btn active" onclick="three()">Workshops</button>
+<link rel="stylesheet" type="text/css" href="css/styles.css">
+
+<div class="nav3" style="height:705px;">
+    <a href="https://github.com/aws-samples/data-encryption-builders-session/tree/kms-sse-usecase-1" class="icons"><img src="images/identity-access-control.png"></a>
+    <a href="https://github.com/aws-samples/data-encryption-builders-session/tree/kms-sse-usecase-1" class="icons"><img src="images/data-encryption.png"></a>
+    <a href="https://github.com/aws-samples/data-encryption-builders-session/tree/kms-sse-usecase-1" class="icons"><img src="images/infra-security.png"></a>
 </div>
-
-<!-- Photo Grid -->
-<div class="row"> 
-  <div class="column">
-    <img src="images/identity-access-control.png" style="width:100%">
-  </div>
-  <div class="column">
-    <img src="images/data-encryption.png" style="width:100%">
-  </div>  
-  <div class="column">
-    <img src="images/infra-security.png" style="width:100%">
-  </div>
-</div>
-
-<script>
-// Get the elements with class="column"
-var elements = document.getElementsByClassName("column");
-
-// Declare a loop variable
-var i;
-
-// Full-width images
-
-// Four images side by side
-function three() {
-    for (i = 0; i < elements.length; i++) {
-        elements[i].style.msFlex = "33%";  // IE10
-        elements[i].style.flex = "33%";
-    }
-}
-
-// Add active class to the current button (highlight it)
-var header = document.getElementById("myHeader");
-var btns = header.getElementsByClassName("btn");
-for (var i = 0; i < btns.length; i++) {
-  btns[i].addEventListener("click", function() {
-    var current = document.getElementsByClassName("active");
-    current[0].className = current[0].className.replace(" active", "");
-    this.className += " active";
-  });
-}
-</script>
-
 </body>
 </html>
 
