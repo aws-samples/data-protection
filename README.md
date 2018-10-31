@@ -1,11 +1,11 @@
-# AWS Encryption & Certificate Management Workshops
+# AWS Crypto Builder Workshops
 
-If you are dealing with data encryption or certificate management within your AWS account, these workshops can help. This workshop is based on python programming language and uses the AWS Cloud9 IDE
+If you are dealing with data encryption or certificate management within your AWS infrastructure, these workshops can help. We will be using the Cloud9 IDE and python boto3 for these workshops.
 
 # Ubiquitous Encryption 
 
-To ensure that data is encrypted within your AWS architecture  AWS provides various tooling to achieve ubiquitous encryption 
-for data in transit as well as datat at rest
+Data encryption provides a strong layer of security to protect data that you store within AWS services. AWS provides tooling to achieve ubiquitous encryption 
+for data in transit as well as data at rest
 
 ![Components](images/ubiquitous-encryption.png)
 
@@ -13,13 +13,87 @@ for data in transit as well as datat at rest
 
 > Please review and complete all prerequisites before attempting these workshops.
 
+
+
+<!DOCTYPE html>
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial;
+}
+
+.header {
+    text-align: center;
+    padding: 32px;
+}
+
+.row {
+    display: -ms-flexbox; /* IE10 */
+    display: flex;
+    -ms-flex-wrap: wrap; /* IE10 */
+    flex-wrap: wrap;
+    padding: 0 4px;
+}
+
+/* Create four equal columns that sits next to each other */
+.column {
+    -ms-flex: 25%; /* IE10 */
+    flex: 25%;
+    max-width: 25%;
+    padding: 0 4px;
+}
+
+.column img {
+    margin-top: 8px;
+    vertical-align: middle;
+}
+
+/* Responsive layout - makes a two column-layout instead of four columns */
+@media screen and (max-width: 800px) {
+    .column {
+        -ms-flex: 50%;
+        flex: 50%;
+        max-width: 50%;
+    }
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+    .column {
+        -ms-flex: 100%;
+        flex: 100%;
+        max-width: 100%;
+    }
+}
+</style>
+
+<!-- Photo Grid -->
+<div class="row"> 
+  <div class="column">
+    <img src="images/identity&access-control.png" style="width:100%">
+  </div>
+  <div class="column">
+    <img src="images/data-encryption.png" style="width:100%">
+  </div>  
+  <div class="column">
+    <img src="images/infra-security.png" style="width:100%">
+  </div>
+</div>
+
+
+
+
 Title               | Description
 :---: | :---
-[Key admins And Key Access](./aws-kms-key-policy/)  | This workshop demonstrates how KMS key policies works for admins and users
+[Key admins And Key Access](https://github.com/aws-samples/data-encryption-builders-session/tree/key-access-usecase-2)  | This workshop demonstrates how KMS key policies works for admins and users
 [Server Side Encryption](https://github.com/aws-samples/data-encryption-builders-session/tree/kms-sse-usecase-1)  | This workshop demonstrates how you can use boto3 and python to demonstrate AWS Server side encryption 
-[Client Side Encryption](./aws-kms-client-side-encryption/)  | This workshop demonstrates how you can use boto3 and python to demonstrate AWS client side encryption 
-[Client Side Encryption With Data Key Caching](./aws-kms-client-side-encryption-data-key-caching/)  | This workshop demonstrates how you can use boto3 and python to demonstrate AWS client side encryption with data key caching
-[Creating Certs With ACM Private Certificate Authority](./aws-acm-private-certificate-authority/)  | This workshop demonstrates how you can use boto3 and python to create a AWS Certificate Manager private certificate authority and use this CA to create private X.509 certififcates
+[Client Side Encryption](https://github.com/aws-samples/data-encryption-builders-session/tree/kms-cse-usecase-3)  | This workshop demonstrates how you can use boto3 and python to demonstrate AWS client side encryption 
+[Client Side Encryption With Data Key Caching](https://github.com/aws-samples/data-encryption-builders-session/tree/kms-cse-usecase-4)  | This workshop demonstrates how you can use boto3 and python to demonstrate AWS client side encryption with data key caching
+[Creating Certs With ACM Private Certificate Authority](https://github.com/aws-samples/data-encryption-builders-session/tree/acm-pca-usecase-5)  | This workshop demonstrates how you can use boto3 and python to create a AWS Certificate Manager private certificate authority and use this CA to create private X.509 certififcates
 ## Prerequisites
 
 ### AWS Account
