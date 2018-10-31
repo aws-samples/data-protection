@@ -16,7 +16,7 @@ for data in transit as well as datat at rest
 Title               | Description
 :---: | :---
 [Key admins And Key Access](./aws-kms-key-policy/)  | This workshop demonstrates how KMS key policies works for admins and users
-[Server Side Encryption](https://git-codecommit.us-east-1.amazonaws.com/v1/repos/cryptobuilders/kms-sse-usecase-1/)  | This workshop demonstrates how you can use boto3 and python to demonstrate AWS Server side encryption 
+[Server Side Encryption](https://github.com/aws-samples/data-encryption-builders-session/kms-sse-usecase-1/)  | This workshop demonstrates how you can use boto3 and python to demonstrate AWS Server side encryption 
 [Client Side Encryption](./aws-kms-client-side-encryption/)  | This workshop demonstrates how you can use boto3 and python to demonstrate AWS client side encryption 
 [Client Side Encryption With Data Key Caching](./aws-kms-client-side-encryption-data-key-caching/)  | This workshop demonstrates how you can use boto3 and python to demonstrate AWS client side encryption with data key caching
 [Creating Certs With ACM Private Certificate Authority](./aws-acm-private-certificate-authority/)  | This workshop demonstrates how you can use boto3 and python to create a AWS Certificate Manager private certificate authority and use this CA to create private X.509 certififcates
