@@ -20,9 +20,9 @@ for data in transit as well as data at rest
 <link rel="stylesheet" type="text/css" href="css/styles.css">
 
 
-<a href="https://github.com/aws-samples/data-encryption-builders-session/tree/kms-sse-usecase-1"><img src="images/identity-access-control.png" width="100" height="80"></a>
-<a href="https://github.com/aws-samples/data-encryption-builders-session/tree/kms-sse-usecase-1"><img src="images/data-encryption.png" width="100" height="80"></a>
-<a href="https://github.com/aws-samples/data-encryption-builders-session/tree/kms-sse-usecase-1"><img src="images/infra-security.png" width="100" height="80"></a>
+<a href="https://github.com/aws-samples/data-encryption-builders-session/tree/kms-sse-usecase-1"><img src="images/identity-access-control.png" width="150" height="130"></a>
+<a href="https://github.com/aws-samples/data-encryption-builders-session/tree/kms-sse-usecase-1"><img src="images/data-encryption.png" width="150" height="130"></a>
+<a href="https://github.com/aws-samples/data-encryption-builders-session/tree/kms-sse-usecase-1"><img src="images/infra-security.png" width="150" height="130"></a>
 
 </body>
 </html>
