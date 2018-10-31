@@ -17,15 +17,14 @@ for data in transit as well as data at rest
 <html>
 <body>
 
+<kbd>
 <a href="https://github.com/aws-samples/data-encryption-builders-session/tree/kms-sse-usecase-1"><img src="images/identity-access-control.png" width="352" height="240" border="1"></a>
+</kbd>
 <a href="https://github.com/aws-samples/data-encryption-builders-session/tree/kms-sse-usecase-1"><img src="images/data-encryption.png" width="352" height="240" border="1"></a>
 <a href="https://github.com/aws-samples/data-encryption-builders-session/tree/kms-sse-usecase-1"><img src="images/infra-security.png" width="352" height="240" border="1"></a>
 [![button](images/identity-access-control.png)](https://github.com/aws-samples/data-encryption-builders-session/tree/kms-sse-usecase-1)
-<!-- Place this tag where you want the button to render. -->
-<a class="github-button" href="https://github.com/ntkme" data-size="large" aria-label="Follow @ntkme on GitHub">Follow @ntkme</a>
 
-<!-- Place this tag in your head or just before your close body tag. -->
-<script async defer src="https://buttons.github.io/buttons.js"></script>
+
 </body>
 </html>
 
