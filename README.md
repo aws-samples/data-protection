@@ -32,6 +32,7 @@ The above stack creates an IAM user called **builders-session-user** .
 Please login into your account as  **builders-session-user** . The password for this user is **reinvent**
 
 [![Deploy IAM user creation stack](images/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=cryptobuilders-env-setup&templateURL=https://s3.amazonaws.com/crypto-builders-cf-templates/template-env-setup.yaml)
+<a href="https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=cryptobuilders-env-setup&templateURL=https://s3.amazonaws.com/crypto-builders-cf-templates/template-env-setup.yaml" target="_blank"><img src="images/cloudformation-launch-stack.png" width="80" height="60" title="click me"></a>
 
 The above stack creates an Cloud9 IDE environment called **crypto-builders** 
 
