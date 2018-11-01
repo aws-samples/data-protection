@@ -45,7 +45,7 @@ The above stack creates an Cloud9 IDE environment called **crypto-builders** .Be
 <kbd>
 <a href="https://github.com/aws-samples/data-encryption-builders-session/tree/data-encryption"><img src="images/data-encryption.png" width="352" height="240" title="click me"></a>
 </kbd>
-<br style="line-height: 50px" />
+<br style="line-height: 100px" />
 <kbd>
 <a href="https://github.com/aws-samples/data-encryption-builders-session/tree/infrastructure-security"><img src="images/infra-security.png" width="352" height="240" title="click me"></a>
 </kbd>
