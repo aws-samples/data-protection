@@ -11,6 +11,14 @@ Parameters:
       - crypto-builders-session
       Description: Prefix for resources created for this session.
       
+   InstanceType: 
+    Type: String
+    Default: t2.medium
+    AllowedValues: 
+      - t2.micro
+      - t2.medium
+    Description: Pick a instance type for the Cloud9 environment 
+      
 # This IAM user will be used for all login and development
 Resources:
 
@@ -197,7 +205,7 @@ Resources:
       Properties: 
          Description: "Cloud9 environment for the crypto builders python modules"
          AutomaticStopTimeMinutes: 60
-         InstanceType: "t2.medium"
+         InstanceType: !Ref InstanceType
          Name: "workshop-environment"
          SubnetId: !Ref Subnet
 
