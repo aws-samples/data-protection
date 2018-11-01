@@ -23,17 +23,29 @@ If the resources that you use for this workshop are left undeleted you will incu
 
 Please run these cloudformation stacks in your AWS account as this is required for all the workshops
 
+### Step 1 :
+
 [![Deploy IAM user creation stack](images/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=cryptobuilders-iam-user-creation&templateURL=https://s3.amazonaws.com/crypto-builders-cf-templates/template-create-user.yaml)
 
 The above stack creates an IAM user called **builders-session-user** .
 
-### Before you launch the next clouformation stack 
+### Before you proceed to Step 2
 
 Please login into your account as  **builders-session-user** . The password for this user is **reinvent**
+
+### Step 2 :
 
 [![Deploy IAM user creation stack](images/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=cryptobuilders-env-setup&templateURL=https://s3.amazonaws.com/crypto-builders-cf-templates/template-env-setup.yaml)
 
 The above stack creates an Cloud9 IDE environment called **crypto-builders** 
+
+### Step 3 :
+
+* Navigate to the Cloud9 service within your AWS console
+* In the Cloud9 IDE environment you will find a folder called data-encryption-builders in the folder pane on the left side of the screen
+* Open the file named **environment-setup.py**  in the IDE
+* Run the python module **environment-setup.py** by clicking the play button on the top pane 
+* In the runner window below you should see **Workshop environment setup was successful** printed
 
 # Workshops
 
