@@ -27,11 +27,13 @@ Please run these cloudformation stacks in your AWS account as this is required f
 
 The above stack creates an IAM user called **builders-session-user** .
 
-### Before you launch the next stack please login into your account as  **builders-session-user** . The password for the user is **reinvent**
+### Before you launch the next clouformation stack 
+
+Please login into your account as  **builders-session-user** . The password for this user is **reinvent**
 
 [![Deploy IAM user creation stack](images/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=cryptobuilders-env-setup&templateURL=https://s3.amazonaws.com/crypto-builders-cf-templates/template-env-setup.yaml)
 
-The above stack creates an Cloud9 IDE environment called **crypto-builders** .Before you launch the next stack please login into your account as the **builders-session-user**
+The above stack creates an Cloud9 IDE environment called **crypto-builders** 
 
 # Workshops
 
