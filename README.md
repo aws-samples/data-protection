@@ -5,30 +5,9 @@ If you are dealing with data encryption or certificate management within your AW
 # Ubiquitous Encryption 
 
 Data encryption provides a strong layer of security to protect data that you store within AWS services. AWS provides tooling to achieve ubiquitous encryption 
-for data in transit as well as data at rest
+for data in transit as well as data at rest.
 
 <a><img src="images/ubiquitous-encryption.png" width="800" height="600"></a>
-
-## Workshops
-
-> Please review and complete all prerequisites before attempting these workshops.
-
-<!DOCTYPE html>
-<html>
-<body>
-
-<kbd>
-<a href="https://github.com/aws-samples/data-encryption-builders-session/tree/identity-and-access-control"><img src="images/identity-access-control.png" width="352" height="240" title="click me"></a>
-</kbd>
-<kbd>
-<a href="https://github.com/aws-samples/data-encryption-builders-session/tree/data-encryption"><img src="images/data-encryption.png" width="352" height="240" title="click me"></a>
-</kbd>
-<kbd>
-<a href="https://github.com/aws-samples/data-encryption-builders-session/tree/infrastructure-security"><img src="images/infra-security.png" width="352" height="240" title="click me"></a>
-</kbd>
-
-</body>
-</html>
 
 ## Prerequisites
 
@@ -51,6 +30,27 @@ The above stack creates an IAM user called **builders-session-user** .Before you
 [![Deploy IAM user creation stack](images/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=cryptobuilders-env-setup&templateURL=https://s3.amazonaws.com/crypto-builders-cf-templates/template-env-setup.yaml)
 
 The above stack creates an Cloud9 IDE environment called **crypto-builders** .Before you launch the next stack please login into your account as the **builders-session-user**
+
+## Workshops
+
+> Please review and complete all prerequisites before attempting these workshops.
+
+<!DOCTYPE html>
+<html>
+<body>
+
+<kbd>
+<a href="https://github.com/aws-samples/data-encryption-builders-session/tree/identity-and-access-control"><img src="images/identity-access-control.png" width="352" height="240" title="click me"></a>
+</kbd>
+<kbd>
+<a href="https://github.com/aws-samples/data-encryption-builders-session/tree/data-encryption"><img src="images/data-encryption.png" width="352" height="240" title="click me"></a>
+</kbd>
+<kbd>
+<a href="https://github.com/aws-samples/data-encryption-builders-session/tree/infrastructure-security"><img src="images/infra-security.png" width="352" height="240" title="click me"></a>
+</kbd>
+
+</body>
+</html>
 
 
 ### Browser
