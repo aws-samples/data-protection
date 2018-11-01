@@ -9,7 +9,7 @@ Parameters:
       Default: crypto-builders-session
       AllowedValues: 
       - crypto-builders-session
-      Description: Prefix for resources created for this session.
+      Description: Prefix for resources created in this session.
       
    InstanceType: 
     Type: String
