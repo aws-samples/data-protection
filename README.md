@@ -9,7 +9,7 @@ for data in transit as well as data at rest.
 
 <a><img src="images/ubiquitous-encryption.png" width="800" height="600"></a>
 
-## Prerequisites
+# Prerequisites
 
 ### AWS Account
 
@@ -31,7 +31,7 @@ The above stack creates an IAM user called **builders-session-user** .Before you
 
 The above stack creates an Cloud9 IDE environment called **crypto-builders** .Before you launch the next stack please login into your account as the **builders-session-user**
 
-## Workshops
+# Workshops
 
 > Please review and complete all prerequisites before attempting these workshops.
 
