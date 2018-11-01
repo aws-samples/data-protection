@@ -44,7 +44,8 @@ The above stack creates an Cloud9 IDE environment called **crypto-builders**
 * Navigate to the Cloud9 service within your AWS console
 * In the Cloud9 IDE environment you will find a folder called data-encryption-builders in the folder pane on the left side of the screen
 * Open the file named **environment-setup.py**  in the IDE
-* Run the python module **environment-setup.py** by clicking the play button on the top pane 
+* Run the python module **environment-setup.py** by clicking the play button <a><img src="images/cloud9-ide-play-button.png" width="80" height="60"></a>
+ on the top pane 
 * In the runner window below you should see **Workshop environment setup was successful** printed
 
 # Workshops
