@@ -17,7 +17,7 @@ In order to complete these workshops you'll need a valid, usable AWS Account wit
 
 Use a **personal account** or create a new AWS account to ensure you have the neccessary access. This should not be an AWS account from the company you work for.
 
-All of the resources you will launch as part of these workshops are eligible for the AWS free tier if your account is less than 12 months old. See the [AWS Free Tier](https://aws.amazon.com/free/) page for more details.  If you are doing this workshop as part of an AWS sponsored event, you will receive credits to cover the costs.
+If the resources that you use for this workshop are left undeleted you will incur charges on your AWS account.
 
 ### Cloudformation templates for initial environment setup
 
