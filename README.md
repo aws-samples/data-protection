@@ -26,8 +26,10 @@ across the different python module that we will run in this usecase.
 Run the python module named **usecase-5-part-1.py**
 
 * This module creates a ACM private certificate authority called **reinvent.builder.subordinate**
-* Run the **usecase-1.py** python module
-* The module **usecase-1.py** uploads the ***plaintext_u.text*** file to an S3 bucket named reinvent-builderXXXX 
+* This private certificate authority will publish certificate revocation lists within a S3 bucket whose name
+  starts with **reinvent-builder-bucket-pca-crl**
+* In the AWS console browse to the AWS Certfificate Manaer(ACM) service 
+* 
 * Before the file is stored on S3 it is server side encrypted using the KMS key alias *kms_key_sse_usecase_1*
 
 ### Step 3 :
