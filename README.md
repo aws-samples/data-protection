@@ -16,14 +16,16 @@ Once you run the command above you will see a folder called **usecase-5** in the
 
 ### Step 1 
 
-Run the module named **kms_key_creation.py**
+Run the python module named **intial_config.py**
 
-This module will create a KMS master key with the key alias **kms_key_sse_usecase_1** . In the following steps we will refer to this
-master key using the alias.
+This module will create a DynamoDB table called **shared_variables_crypto_builders** . The primary purpose of this table is to share variables
+across the different python module that we will run in this usecase.
 
 ### Step 2 :
 
-* You will find a file called ***plaintext_u.txt*** which is the plaintext unencrypted file
+Run the python module named **usecase-5-part-1.py**
+
+* This module creates a ACM private certificate authority called **reinvent.builder.subordinate**
 * Run the **usecase-1.py** python module
 * The module **usecase-1.py** uploads the ***plaintext_u.text*** file to an S3 bucket named reinvent-builderXXXX 
 * Before the file is stored on S3 it is server side encrypted using the KMS key alias *kms_key_sse_usecase_1*
