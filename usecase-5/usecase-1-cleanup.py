@@ -1,0 +1,122 @@
+###############################################################################
+#  Cleanup all resources created within python modules for ACM usecase-1      #
+#                                                                             #
+#  1. S3 buckets used for CRL                                                 #
+#                                                                             #
+#  2. The private certifiate authority is deleted                             #
+#                                                                             #
+#  3. All the files created in the filesystem is deleted                      #
+#                                                                             #
+###############################################################################
+
+import boto3
+import sys 
+import os
+from pathlib import Path
+import time
+import subprocess
+
+try:
+    az = subprocess.check_output(['curl','-s','http://169.254.169.254/latest/meta-data/placement/availability-zone'])
+    list_az = az.split('-')
+    region = list_az[0]+'-'+list_az[1]+'-'+list_az[2][0]
+    s3_client = boto3.client('s3',region_name=region)
+    acm_pca_client = boto3.client('acm-pca',region_name=region)
+    ddb_client = boto3.client('dynamodb',region)
+
+    current_directory_path = os.path.dirname(os.path.realpath(__file__)) + '/'
+    
+    self_signed_cert_filename_path = current_directory_path + 'self_signed_cert.pem'
+    signed_subordinate_ca_cert_filename_path = current_directory_path + 'signed_subordinate_ca_cert.pem'
+    webserver_cert_path = current_directory_path + 'webserver_cert.pem'
+    webserver_cert_chain_path = current_directory_path + 'webserver_cert_chain.pem'
+
+    if Path(self_signed_cert_filename_path).exists():
+        os.remove(self_signed_cert_filename_path)
+        
+    if Path(signed_subordinate_ca_cert_filename_path).exists():
+        os.remove(signed_subordinate_ca_cert_filename_path)
+        
+    if Path(webserver_cert_path).exists():
+        os.remove(webserver_cert_path)   
+        
+    if Path(webserver_cert_chain_path).exists():
+        os.remove(webserver_cert_chain_path)    
+
+    dbg='Stop'
+##############################################################################
+#   REMOVE ALL THE FILES CREATED IN THE LOCAL FILESYSTEM FOR USECASE-2       #
+##############################################################################
+
+    response = ddb_client.get_item(TableName='shared_variables_data_encryption_builder', \
+                        Key={
+                                'shared_variables': {
+                                    'N': '1000',
+                                },
+                                'session': {
+                                    'N': '1000',
+                                },
+                            },
+                        # ProjectionExpression='root_ca_private_key',
+                    )
+                    
+    subordinate_pca_arn = response['Item']['subordinate_pca_arn']['S']
+    
+    response = acm_pca_client.describe_certificate_authority(
+        CertificateAuthorityArn=subordinate_pca_arn
+    )
+    
+    if response['CertificateAuthority']['Status'] != 'DELETED':
+        if response['CertificateAuthority']['Status'] == 'ACTIVE':
+            response = acm_pca_client.update_certificate_authority(
+                CertificateAuthorityArn=subordinate_pca_arn,
+                Status='DISABLED'
+            )
+        
+        response = acm_pca_client.delete_certificate_authority(
+            CertificateAuthorityArn=subordinate_pca_arn,
+            PermanentDeletionTimeInDays=7
+        )
+        time.sleep(20)
+
+# Delete the objects and buckets that were created as part of usecase-1
+    response = s3_client.list_buckets()
+    for bucket_name in response['Buckets']:
+        if bucket_name['Name'].startswith('reinvent-builder-bucket-pca'):
+            try:
+                response = s3_client.get_bucket_tagging(
+                    Bucket=bucket_name['Name']
+                )
+            except:
+                pass
+    
+            if 'TagSet' in response: 
+                if (response['TagSet'][0]['Key'] == 'reinvent') and (response['TagSet'][0]['Value'] == 'dataencryption_builderssession'):
+                    # Delete the objects stored in S3 within reinvent-builders-bucket
+                    response = s3_client.list_objects(
+                        Bucket=bucket_name['Name'],
+                        )
+                        
+                    if 'Contents' in response:    
+                        for object_name in response['Contents']:    
+                            response = s3_client.delete_object(
+                                Bucket=bucket_name['Name'],
+                                Key=object_name['Key']
+                            )
+                    
+                    response = s3_client.delete_bucket(
+                    Bucket=bucket_name['Name']
+                    )
+                    
+    print "\nEverything cleaned up ,you are all good !!\n"
+    
+except:
+    print "Unexpected error:", sys.exc_info()[0]
+    raise
+else:
+    exit(0)
+ 
+
+##############################################################################
+#   REMOVE ALL THE S3 BUCKETS AND OBJECTS CREATED IN USECASE-1               #
+##############################################################################
