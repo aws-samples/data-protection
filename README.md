@@ -6,7 +6,7 @@ This workshop demonstrates ACM Private Certificate authority and how it can be u
 
 <a><img src="images/acm-pca-vs-public-ca.png" width="800" height="600"></a><br>
 
-## Let's do some private cert generaton with AWS Certificate Manager(ACM) private certificate authority(PCA)
+## Let's do some private cert generaton with AWS Certificate Manager(ACM) private certificate authority(PCA) :
 
 Open the Cloud9 IDE environment called **workshop-environment**. Within the Cloud9 IDE open the bash terminal and use the following command to checkout code for this usecase :
 
@@ -38,11 +38,12 @@ Run the python module named **usecase-5-part-1.py**
     * "Success : The ARN of the subordinate private certificate authority is : "
        arn:aws:acm-pca:<region>:<your-acccount-number>:certificate-authority/57943599-30d2-8723-1234-1cb4b7d81128
 * In the AWS console browse to the AWS Certificate Manager service(ACM) . Under Private CA's you will see the private CA created and
-  the status shows "Pending Certificate"
+  the status should show "Pending Certificate"
 
-<a><img src="images/acm-pca-vs-public-ca.png" width="800" height="600"></a><br>
+<a><img src="images/private-ca-pending-cert.png" width="200" height="80"></a><br>
 
-Some questions to think about :
+
+**Some questions to think about :**
 
 * Why is the status of the private CA showing "Pending Certificate" ?
 * Is the private certificate authority that's created a root CA or a subordinate CA ?
