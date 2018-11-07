@@ -5,19 +5,20 @@
 import boto3
 import json
 import sys 
+import subprocess
 
 try:
 
-  az = subprocess.check_output(['curl','-s','http://169.254.169.254/latest/meta-data/placement/availability-zone'])
-  list_az = az.split('-')
-  region = list_az[0]+'-'+list_az[1]+'-'+list_az[2][0]
-  ddb_client = boto3.client('dynamodb',region)
+    az = subprocess.check_output(['curl','-s','http://169.254.169.254/latest/meta-data/placement/availability-zone'])
+    list_az = az.split('-')
+    region = list_az[0]+'-'+list_az[1]+'-'+list_az[2][0]
+    ddb_client = boto3.client('dynamodb',region)
   
   # Create a DDB table for storing key value pairs shared across multiple python modules
   
     try:
         response = ddb_client.describe_table(TableName='shared_variables_crypto_builders')
-        print "shared_variables_crypto_builders Table already exists, please delete it and execute this module again"
+        print "shared_variables_crypto_builders Table already exists, please delete it before re-running this module"
     except ddb_client.exceptions.ResourceNotFoundException:
         # Since table does not exist create it
         table = ddb_client.create_table(
@@ -59,7 +60,7 @@ try:
         
         ddb_client.put_item(TableName='shared_variables_crypto_builders', \
                             Item={'shared_variables':{'N':'1000'},'session':{'N':'1000'}})
-        print ("shared_variables_crypto_builders DynamoDB table created")
+        print ("\nshared_variables_crypto_builders DynamoDB table created")
     
     dbg = 'True'
     

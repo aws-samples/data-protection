@@ -18,6 +18,10 @@ Once you run the command above you will see a folder called **usecase-5** in the
 
 Run the python module named **intial_config.py**
 
+* First you will see **"Pending DynamoDB table creation for storing shared variables"** printed on the runner window pane below
+* Wait for a minute
+* You should see **"shared_variables_crypto_builders DynamoDB table created"** printed on the runner window pane below
+
 This module will create a DynamoDB table called **shared_variables_crypto_builders** . The primary purpose of this table is to share variables
 across the different python module that we will run in this usecase.
 
@@ -25,9 +29,27 @@ across the different python module that we will run in this usecase.
 
 Run the python module named **usecase-5-part-1.py**
 
-* This module creates a ACM private certificate authority called **reinvent.builder.subordinate**
+* This module creates a ACM private certificate authority with the common name **reinvent.builder.subordinate**
 * This private certificate authority will publish certificate revocation lists within a S3 bucket whose name
   starts with **reinvent-builder-bucket-pca-crl**
+* You should see the following printed in the runner window pane
+    * "Private CA has been created"
+    * "Please generate the CSR and get it signed by your organizations's root cert"
+    * "Success : The ARN of the subordinate private certificate authority is : "
+       arn:aws:acm-pca:<region>:<your-acccount-number>:certificate-authority/57943599-30d2-8723-1234-1cb4b7d81128
+* In the AWS console browse to the AWS Certificate Manager service(ACM) . Under Private CA's you will see the private CA created and
+  the status shows "Pending Certificate"
+
+<a><img src="images/acm-pca-vs-public-ca.png" width="800" height="600"></a><br>
+
+Some questions to think about :
+
+* Why is the status of the private CA showing "Pending Certificate" ?
+* Is the private certificate authority that's created a root CA or a subordinate CA ?
+
+
+
+
 * In the AWS console browse to the AWS Certfificate Manaer(ACM) service 
 * 
 * Before the file is stored on S3 it is server side encrypted using the KMS key alias *kms_key_sse_usecase_1*
