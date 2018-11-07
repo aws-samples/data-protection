@@ -42,7 +42,7 @@ The above stack creates an Cloud9 IDE environment called **workshop-environment*
 ### Step 3 :
 
 * Navigate to the Cloud9 service within your AWS console
-* In the Cloud9 IDE environment you will find a folder called data-encryption-builders in the folder pane on the left side of the screen
+* In the Cloud9 IDE environment you will find a folder called crypto-builders in the folder pane on the left side of the screen
 * Open the file named **environment-setup.py**  in the IDE
 * Run the python module **environment-setup.py** by clicking the play button <a><img src="images/cloud9-ide-play-button.png" width="50" height="30"></a>
  on the top pane 
@@ -57,10 +57,10 @@ The above stack creates an Cloud9 IDE environment called **workshop-environment*
 <body>
 
 <kbd>
-<a href="https://github.com/aws-samples/data-encryption-builders-session/tree/identity-and-access-control"><img src="images/identity-access-control.png" width="352" height="240" title="click me"></a>
+<a href="https://github.com/aws-samples/crypto-builders/tree/identity-and-access-control"><img src="images/identity-access-control.png" width="352" height="240" title="click me"></a>
 </kbd>
 <kbd>
-<a href="https://github.com/aws-samples/data-encryption-builders-session/tree/data-encryption"><img src="images/data-encryption.png" width="352" height="240" title="click me"></a>
+<a href="https://github.com/aws-samples/crypto-builders/tree/data-encryption"><img src="images/data-encryption.png" width="352" height="240" title="click me"></a>
 </kbd>
 <br>
 
