@@ -42,7 +42,6 @@ Run the python module named **usecase-5-part-1.py**
 
 <a><img src="images/private-ca-pending-cert.png" width="200" height="80"></a><br>
 
-
 **Some questions to think about :**
 
 * Why is the status of the private CA showing "Pending Certificate" ?
