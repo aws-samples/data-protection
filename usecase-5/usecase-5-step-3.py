@@ -122,7 +122,7 @@ try:
     
     cert_pem = cert.public_bytes(encoding=serialization.Encoding.PEM)
     current_directory_path = os.path.dirname(os.path.realpath(__file__)) + '/'
-    self_signed_cert_filename_path = current_directory_path + 'self_signed_cert.pem'
+    self_signed_cert_filename_path = current_directory_path + 'self-signed-cert.pem'
     
     textfile = open(self_signed_cert_filename_path, 'w')
     textfile.write(cert_pem)

@@ -5,6 +5,7 @@ This workshop demonstrates ACM Private Certificate authority and how it can be u
 ## Let's look at some concepts :
 
 <a><img src="images/acm-pca-vs-public-ca.png" width="800" height="600"></a><br>
+<a><img src="images/acm-pca-functionality.png" width="800" height="600"></a><br>
 
 ## Let's do some private cert generaton with AWS Certificate Manager(ACM) private certificate authority(PCA) :
 
@@ -14,9 +15,9 @@ Open the Cloud9 IDE environment called **workshop-environment**. Within the Clou
 
 Once you run the command above you will see a folder called **usecase-5** in the Cloud9 environment. Follow the below steps:
 
-### Step 1 
+### Step 1 :
 
-Run the python module named **intial_config.py**
+Run the python module named **intial-config-step-1.py**
 
 * First you will see **"Pending DynamoDB table creation for storing shared variables"** printed on the runner window pane below
 * Wait for a minute
@@ -27,7 +28,7 @@ across the different python module that we will run in this usecase.
 
 ### Step 2 :
 
-Run the python module named **usecase-5-part-1.py**
+Run the python module named **usecase-5-step-2.py**
 
 * This module creates a ACM private certificate authority with the common name **reinvent.builder.subordinate**
 * This private certificate authority will publish certificate revocation lists within a S3 bucket whose name
@@ -46,15 +47,28 @@ Run the python module named **usecase-5-part-1.py**
 
 * Why is the status of the private CA showing "Pending Certificate" ?
 * Is the private certificate authority that's created a root CA or a subordinate CA ?
-
-
-
-
-* In the AWS console browse to the AWS Certfificate Manaer(ACM) service 
-* 
-* Before the file is stored on S3 it is server side encrypted using the KMS key alias *kms_key_sse_usecase_1*
+* What's the purpose the S3 bucket storing certificate revocation lists ?
 
 ### Step 3 :
+
+Run the python module named **usecase-5-step-3.py**
+
+* This module creates a self signed root certificate  with the common name **rootca-reinvent-builder**
+* You can see in the code that the private key associated with the self signed cert is stored in an encrypted DynamoDB table.
+  This is purely for demonstration purposes. In your organization you should store it in an HSM or a secure vault
+* You should see the following printed in the runner window pane below 
+   * Success - Self signed certificate file ***self-signed-cert.pem*** created"
+   * "This self signed certificate will be used in the certificate chain of trust"
+
+**Some questions to think about :**
+
+* In your organization would you use the root cert to sign subordinate CA's ?
+* Why is it necessary to store the private keys of root certs in an HSM ?
+* What would happen if the private key of the root cert gets compromised or stolen ?
+
+### Step 4 :
+
+This self signed certificate will sign the subordinate private CA that we created in **Step 1**
 
 * In the AWS console,navigate to the S3 service
 * Look for the bucket named reinvent-builderXXXX
