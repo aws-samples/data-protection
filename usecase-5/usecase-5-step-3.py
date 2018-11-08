@@ -69,7 +69,7 @@ try:
             },
         },
         ReturnValues='ALL_NEW',
-        TableName='shared_variables_data_encryption_builder',
+        TableName='shared_variables_crypto_builders',
         UpdateExpression='SET #rsn = :a, #rcpk = :b',
     )
 

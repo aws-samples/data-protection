@@ -59,6 +59,8 @@ Run the python module named **usecase-5-step-3.py**
 * You should see the following printed in the runner window pane below 
    * Success - Self signed certificate file ***self-signed-cert.pem*** created"
    * "This self signed certificate will be used in the certificate chain of trust"
+ 
+<a><img src="images/cert-hierarchy-best-practice.png" width="800" height="600"></a><br>
 
 **Some questions to think about :**
 
@@ -68,26 +70,54 @@ Run the python module named **usecase-5-step-3.py**
 
 ### Step 4 :
 
-This self signed certificate will sign the subordinate private CA that we created in **Step 1**
+Run the python module named **usecase-5-step-4.py**
 
-* In the AWS console,navigate to the S3 service
-* Look for the bucket named reinvent-builderXXXX
-* In the bucket there would be a file called    .This file was encrypted using a Data key under the KMS master key **key_sse_usecase_1**
-* Take a look at the properties of the file ***encrypted_e.text***.You will find that it's encrypted using AWS-KMS as shown in the picture below
-
-<a><img src="images/in-aws-console-sse.png" width="400" height="200"></a><br>
-
-### Step 4 :
-
-* The **usecase-1.py** python module does a S3 getobject API Call on ***encrypted_e.text***
-* The ***encrypted_e.text*** file is decrypted on the S3 service and over TLS gets delivered to this environment
-* In the folder **usecase-1** ,you should see a file called ***plaintext_cycled_u.txt*** 
-* Check whether the contents of ***plaintext_u.txt*** and ***plaintext_u_cycled.txt*** is the same 
+* This module gets a Certificate signing request(CSR) for the private certifiate authority with 
+  common name **reinvent.builder.subordinate** that was created in **Step 2**
+* The certificate signing request is signed using the self signed certificate and it's private key 
+  that was created in **Step 3** 
+* The signed cert is stored in a pem file called ***signed_subordinate_ca_cert.pem***
 
 ### Step 5 :
 
-* Run **usecase-1-cleanup.py** python module 
-* This modules deletes the kms key and it's alias that we created in **kms_key_creation.py**
-* and also deletes all the files that were created in the **usecase-1** folder
-* Please remember that every time you run **usecase-1-cleanup.py** ,if you want to re-run this uecase,
-  you will have to start from **Step 1**
+Run the python module named **usecase-5-step-5.py**
+
+* This module imports the subordinate CA signed certificate ***signed_subordinate_ca_cert.pem*** and 
+  certificate chain of trust into AWS Certificate Manager(ACM)
+* The certificate chain contains the self signed CA certificate that we created in **Step 3**
+* After this operation the subordinate privcate certificate authority(CA) changes status to ACTIVE. 
+* Browse to the ACM service within the AWS console and you should see the status of the subordiate CA with 
+  common name **reinvent.builder.subordinate** as ACTIVE as shown below
+* We are at a point where the subordinate private certificate authority(PCA) can issue private certificates
+  for any endpoint, device or server
+
+### Step 6 :
+
+Run the python module named **usecase-5-step-6.py**
+
+* This module creates a CSR for a webserver endpoint with common name ***127.0.0.1*** and the CSR is then
+  the issue_certificate API call is used to sign the the CSR using the subordinate private certificate
+  authority 
+* The signed webserver endpoint certificate pem file is called ***"webserver_cert.pem"***
+* The issue_certificate API calls also returns the chain of trust and the pem file that stores the
+  chain of trust is called ***"webserver_cert_chain.pem"***
+
+### Step 7 :
+
+Run the python module named **usecase-5-step-7.py**
+
+* This module imports the subordinate CA signed certificate ***signed_subordinate_ca_cert.pem*** and 
+  certificate chain of trust into AWS Certificate Manager(ACM)
+* The certificate chain contains the self signed CA certificate that we created in **Step 3**
+* After this operation the subordinate privcate certificate authority(CA) changes status to ACTIVE. 
+* Browse to the ACM service within the AWS console and you should see the status of the subordiate CA with 
+  common name **reinvent.builder.subordinate** as ACTIVE as shown below
+* We are at a point where the subordinate CA can create private certificate for any endpoint or device 
+
+
+
+
+
+
+
+

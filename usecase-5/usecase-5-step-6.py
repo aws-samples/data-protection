@@ -38,7 +38,7 @@ try:
 
     current_directory_path = os.path.dirname(os.path.realpath(__file__)) + '/'
     
-    response = ddb_client.get_item(TableName='shared_variables_data_encryption_builder', \
+    response = ddb_client.get_item(TableName='shared_variables_crypto_builders', \
                         Key={
                                 'shared_variables': {
                                     'N': '1000',
@@ -86,7 +86,7 @@ try:
             },
         },
         ReturnValues='ALL_NEW',
-        TableName='shared_variables_data_encryption_builder',
+        TableName='shared_variables_crypto_builders',
         UpdateExpression='SET #wep = :b',
     )
    
@@ -125,7 +125,7 @@ try:
     #                                                                                         #
     #   A simple flask webserver is the endpoint here                                         #
     #                                                                                         #
-    #   We will get the hello world flask web page running in part 6 of this usecase          #
+    #   We will get the hello world flask web page running in Step7 of this usecase           #
     #                                                                                         #
     #   We are not using domain names in this example because obtaining a domain name takes   #
     #   time, therefore we are using 127.0.0.1 as the common name within the CSR subject      #

@@ -18,7 +18,7 @@ try:
     acm_pca_client = boto3.client('acm-pca',region_name=region)
     ddb_client = boto3.client('dynamodb',region)
     
-    response = ddb_client.get_item(TableName='shared_variables_data_encryption_builder', \
+    response = ddb_client.get_item(TableName='shared_variables_crypto_builders', \
                         Key={
                                 'shared_variables': {
                                     'N': '1000',

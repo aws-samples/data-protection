@@ -34,7 +34,7 @@ try:
 
     current_directory_path = os.path.dirname(os.path.realpath(__file__)) + '/'
    
-    response = ddb_client.get_item(TableName='shared_variables_data_encryption_builder', \
+    response = ddb_client.get_item(TableName='shared_variables_crypto_builders', \
                         Key={
                                 'shared_variables': {
                                     'N': '1000',
@@ -129,6 +129,8 @@ try:
     textfile = open(signed_subordinate_ca_cert_filename_path, 'w')
     textfile.write(cert_pem)
     textfile.close()
+    
+    print "Successfully created signed subordinate CA pem file signed_subordinate_ca_cert.pem"
     
     dbg='Stop'
     ##########################################################################################

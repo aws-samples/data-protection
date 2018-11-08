@@ -1,7 +1,7 @@
 ###############################################################################
-#  Cleanup all resources created within python modules for ACM usecase-1      #
+#  Cleanup all resources created within python modules for ACM usecase-5      #
 #                                                                             #
-#  1. S3 buckets used for CRL                                                 #
+#  1. S3 buckets used for CRL(Certificate revocation list                     #
 #                                                                             #
 #  2. The private certifiate authority is deleted                             #
 #                                                                             #
@@ -26,7 +26,7 @@ try:
 
     current_directory_path = os.path.dirname(os.path.realpath(__file__)) + '/'
     
-    self_signed_cert_filename_path = current_directory_path + 'self_signed_cert.pem'
+    self_signed_cert_filename_path = current_directory_path + 'self-signed-cert.pem'
     signed_subordinate_ca_cert_filename_path = current_directory_path + 'signed_subordinate_ca_cert.pem'
     webserver_cert_path = current_directory_path + 'webserver_cert.pem'
     webserver_cert_chain_path = current_directory_path + 'webserver_cert_chain.pem'
@@ -48,7 +48,7 @@ try:
 #   REMOVE ALL THE FILES CREATED IN THE LOCAL FILESYSTEM FOR USECASE-2       #
 ##############################################################################
 
-    response = ddb_client.get_item(TableName='shared_variables_data_encryption_builder', \
+    response = ddb_client.get_item(TableName='shared_variables_crypto_builders', \
                         Key={
                                 'shared_variables': {
                                     'N': '1000',
@@ -61,23 +61,24 @@ try:
                     )
                     
     subordinate_pca_arn = response['Item']['subordinate_pca_arn']['S']
-    
-    response = acm_pca_client.describe_certificate_authority(
-        CertificateAuthorityArn=subordinate_pca_arn
-    )
-    
-    if response['CertificateAuthority']['Status'] != 'DELETED':
-        if response['CertificateAuthority']['Status'] == 'ACTIVE':
-            response = acm_pca_client.update_certificate_authority(
-                CertificateAuthorityArn=subordinate_pca_arn,
-                Status='DISABLED'
-            )
         
-        response = acm_pca_client.delete_certificate_authority(
-            CertificateAuthorityArn=subordinate_pca_arn,
-            PermanentDeletionTimeInDays=7
+    if subordinate_pca_arn:
+        response = acm_pca_client.describe_certificate_authority(
+            CertificateAuthorityArn=subordinate_pca_arn
         )
-        time.sleep(20)
+        
+        if response['CertificateAuthority']['Status'] != 'DELETED':
+            if response['CertificateAuthority']['Status'] == 'ACTIVE':
+                response = acm_pca_client.update_certificate_authority(
+                    CertificateAuthorityArn=subordinate_pca_arn,
+                    Status='DISABLED'
+                )
+            
+            response = acm_pca_client.delete_certificate_authority(
+                CertificateAuthorityArn=subordinate_pca_arn,
+                PermanentDeletionTimeInDays=7
+            )
+            time.sleep(20)
 
 # Delete the objects and buckets that were created as part of usecase-1
     response = s3_client.list_buckets()
@@ -108,6 +109,15 @@ try:
                     Bucket=bucket_name['Name']
                     )
                     
+    
+    ddb_client = boto3.client('dynamodb',region)
+  
+    # Delete the DDB Table that stores key value pairs shared across multiple python modules
+    response = ddb_client.delete_table(
+        TableName='shared_variables_crypto_builders'
+    )
+  
+
     print "\nEverything cleaned up ,you are all good !!\n"
     
 except:
@@ -118,5 +128,5 @@ else:
  
 
 ##############################################################################
-#   REMOVE ALL THE S3 BUCKETS AND OBJECTS CREATED IN USECASE-1               #
+#   REMOVE ALL THE S3 BUCKETS AND OBJECTS CREATED IN USECASE-5               #
 ##############################################################################
