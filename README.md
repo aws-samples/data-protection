@@ -106,14 +106,18 @@ Run the python module named **usecase-5-step-6.py**
 
 Run the python module named **usecase-5-step-7.py**
 
-* This module imports the subordinate CA signed certificate ***signed_subordinate_ca_cert.pem*** and 
-  certificate chain of trust into AWS Certificate Manager(ACM)
-* The certificate chain contains the self signed CA certificate that we created in **Step 3**
-* After this operation the subordinate privcate certificate authority(CA) changes status to ACTIVE. 
-* Browse to the ACM service within the AWS console and you should see the status of the subordiate CA with 
-  common name **reinvent.builder.subordinate** as ACTIVE as shown below
-* We are at a point where the subordinate CA can create private certificate for any endpoint or device 
+* This module creates a python flask web server with an HTML page that prints **"Hello World"**
+* The webserver is running within the Cloud9 environment and is exposed through the following
+  URL **https://127.0.0.1:5000/**
 
+ 
+### Step 8 :
+
+Run the python module named **usecase-5-step-8.py**
+
+* This module creates a python flask web server with an HTML page that prints **"Hello World"**
+* The webserver is running within the Cloud9 environment and is exposed through the following
+  URL **https://127.0.0.1:5000/**
 
 
 
