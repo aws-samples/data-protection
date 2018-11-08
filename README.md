@@ -60,7 +60,7 @@ Run the python module named **usecase-5-step-3.py**
    * Success - Self signed certificate file ***self-signed-cert.pem*** created"
    * "This self signed certificate will be used in the certificate chain of trust"
  
-<a><img src="images/cert-hierarchy-best-practice.png" width="800" height="600"></a><br>
+<a><img src="images/pki-ca-hierarchy.png" width="800" height="600"></a><br>
 
 **Some questions to think about :**
 
