@@ -152,7 +152,7 @@ Run the python module named **usecase-5-step-9.py**
 * Since the curl command has the chain of trust pem file as a parameter the flask webserver certificate
   is successfully authenticated and you should see the following printed in the runner window pane.
 
-  Hello World!
+  **Hello World!**
   
   \* Closing connection 0
 
