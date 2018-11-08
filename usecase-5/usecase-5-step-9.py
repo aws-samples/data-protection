@@ -10,16 +10,19 @@ import sys
 import os 
 
 try:
-    os.system('curl --verbose -X GET https://127.0.0.1:5000/ ')
+    current_directory_path = os.path.dirname(os.path.realpath(__file__)) + '/'
+    curl_command = 'curl --verbose --cacert ' + current_directory_path + 'webserver_cert_chain.pem ' + \
+                  '-X GET https://127.0.0.1:5000/'
+    os.system(curl_command)
     dbg = 'Stop' 
     ######################################################################################
     #                                                                                    #
     #   1.Runing curl to hit the website                                                 #
-    #   
-    #   2.You will see in the run configuration window that this line gets printed :
-    #
-    #   curl: (60) Peer's Certificate issuer is not recognized. Why did this happen ?
-    #                   
+    #                                                                                    #
+    #   2.You will see in the run configuration window that this line gets printed :     #
+    #                                                                                    #
+    #   SSL connection using TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384                       #
+    #                                                                                    #
     ######################################################################################
     
 except SystemExit as e:

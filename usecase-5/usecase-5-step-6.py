@@ -166,6 +166,8 @@ try:
     current_directory_path = os.path.dirname(os.path.realpath(__file__)) + '/'
     webserver_cert_path = current_directory_path + 'webserver_cert.pem'
     webserver_cert_chain_path = current_directory_path + 'webserver_cert_chain.pem'
+    webserver_privkey_path = current_directory_path + 'webserver_privkey.pem'
+
     
     textfilecert = open(webserver_cert_path, 'w')
     textfilecert.write(response['Certificate'])
@@ -175,6 +177,11 @@ try:
     textfilecertchain.write(response['CertificateChain'])
     textfilecertchain.close()
     
+    textfilecertchain = open(webserver_privkey_path, 'w')
+    textfilecertchain.write(csr_webserver_privkey_pem)
+    textfilecertchain.close()
+    
+    print "Successfully created server certificate and chain of trust for the flask web server"
     dbg = 'Stop' 
     ##############################################################################################
     #   1.Issuing a certificate for the webserver endpoint that's valid for 6 months             #

@@ -30,6 +30,7 @@ try:
     signed_subordinate_ca_cert_filename_path = current_directory_path + 'signed_subordinate_ca_cert.pem'
     webserver_cert_path = current_directory_path + 'webserver_cert.pem'
     webserver_cert_chain_path = current_directory_path + 'webserver_cert_chain.pem'
+    webserver_privkey_path = current_directory_path + 'webserver_privkey.pem'
 
     if Path(self_signed_cert_filename_path).exists():
         os.remove(self_signed_cert_filename_path)
@@ -42,25 +43,40 @@ try:
         
     if Path(webserver_cert_chain_path).exists():
         os.remove(webserver_cert_chain_path)    
+        
+    if Path(webserver_privkey_path).exists():
+        os.remove(webserver_privkey_path) 
 
     dbg='Stop'
 ##############################################################################
 #   REMOVE ALL THE FILES CREATED IN THE LOCAL FILESYSTEM FOR USECASE-2       #
 ##############################################################################
-
-    response = ddb_client.get_item(TableName='shared_variables_crypto_builders', \
-                        Key={
-                                'shared_variables': {
-                                    'N': '1000',
-                                },
-                                'session': {
-                                    'N': '1000',
-                                },
-                            },
-                        # ProjectionExpression='root_ca_private_key',
-                    )
-                    
-    subordinate_pca_arn = response['Item']['subordinate_pca_arn']['S']
+    subordinate_pca_arn = None 
+    try:
+        response = ddb_client.describe_table(TableName='shared_variables_crypto_builders')
+        if response:
+            response = ddb_client.get_item(TableName='shared_variables_crypto_builders', \
+                                Key={
+                                        'shared_variables': {
+                                            'N': '1000',
+                                        },
+                                        'session': {
+                                            'N': '1000',
+                                        },
+                                    },
+                                # ProjectionExpression='root_ca_private_key',
+                            )
+                            
+            subordinate_pca_arn = response['Item']['subordinate_pca_arn']['S']
+            ddb_client = boto3.client('dynamodb',region)
+  
+            # Delete the DDB Table that stores key value pairs shared across multiple python modules
+            response = ddb_client.delete_table(
+                TableName='shared_variables_crypto_builders'
+            )
+    except ddb_client.exceptions.ResourceNotFoundException:
+        print "No DDB table found to delete !! that's OK"
+        
         
     if subordinate_pca_arn:
         response = acm_pca_client.describe_certificate_authority(
@@ -110,12 +126,7 @@ try:
                     )
                     
     
-    ddb_client = boto3.client('dynamodb',region)
-  
-    # Delete the DDB Table that stores key value pairs shared across multiple python modules
-    response = ddb_client.delete_table(
-        TableName='shared_variables_crypto_builders'
-    )
+    
   
 
     print "\nEverything cleaned up ,you are all good !!\n"

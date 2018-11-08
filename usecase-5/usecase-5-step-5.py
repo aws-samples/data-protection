@@ -37,9 +37,10 @@ try:
     response = acm_pca_client.import_certificate_authority_certificate(
         CertificateAuthorityArn=subordinate_pca_arn,
         Certificate=open(current_directory_path +'signed_subordinate_ca_cert.pem', 'rb').read(),
-        CertificateChain=open(current_directory_path + 'self_signed_cert.pem', 'rb').read(),
+        CertificateChain=open(current_directory_path + 'self-signed-cert.pem', 'rb').read(),
     )
     
+    print "Successfully imported signed cert and certificate chain into ACM"
     dbg='True'
     ##################################################################################
     #   Import subordinate CA signed cert and certificate chain into ACM             #

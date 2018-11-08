@@ -20,7 +20,7 @@ Once you run the command above you will see a folder called **usecase-5** in the
 Run the python module named **intial-config-step-1.py**
 
 * First you will see **"Pending DynamoDB table creation for storing shared variables"** printed on the runner window pane below
-* Wait for a minute
+* Wait for about 45 seconds 
 * You should see **"shared_variables_crypto_builders DynamoDB table created"** printed on the runner window pane below
 
 This module will create a DynamoDB table called **shared_variables_crypto_builders** . The primary purpose of this table is to share variables
@@ -41,7 +41,7 @@ Run the python module named **usecase-5-step-2.py**
 * In the AWS console browse to the AWS Certificate Manager service(ACM) . Under Private CA's you will see the private CA created and
   the status should show "Pending Certificate"
 
-<a><img src="images/private-ca-pending-cert.png" width="600" height="300"></a><br>
+<a><img src="images/private-ca-pending-cert.png" width="500" height="300"></a><br>
 
 **Some questions to think about :**
 
@@ -53,7 +53,7 @@ Run the python module named **usecase-5-step-2.py**
 
 Run the python module named **usecase-5-step-3.py**
 
-* This module creates a self signed root certificate  with the common name **rootca-reinvent-builder**
+* This module creates a self signed root certificate with the common name **rootca-reinvent-builder**
 * You can see in the code that the private key associated with the self signed cert is stored in an encrypted DynamoDB table.
   This is purely for demonstration purposes. In your organization you should store it in an HSM or a secure vault
 * You should see the following printed in the runner window pane below 
@@ -77,6 +77,8 @@ Run the python module named **usecase-5-step-4.py**
 * The certificate signing request is signed using the self signed certificate and it's private key 
   that was created in **Step 3** 
 * The signed cert is stored in a pem file called ***signed_subordinate_ca_cert.pem***
+* You should see the following printed in the runner window pane below 
+   * Successfully created signed subordinate CA pem file ***signed_subordinate_ca_cert.pem*** 
 
 ### Step 5 :
 
@@ -90,17 +92,23 @@ Run the python module named **usecase-5-step-5.py**
   common name **reinvent.builder.subordinate** as ACTIVE as shown below
 * We are at a point where the subordinate private certificate authority(PCA) can issue private certificates
   for any endpoint, device or server
+* You should see the following printed in the runner window pane below 
+   * Successfully imported signed cert and certificate chain into ACM
 
 ### Step 6 :
 
 Run the python module named **usecase-5-step-6.py**
 
+* This module takes about 2 minutes to complete 
 * This module creates a CSR for a webserver endpoint with common name ***127.0.0.1*** and the CSR is then
-  the issue_certificate API call is used to sign the the CSR using the subordinate private certificate
-  authority 
+  passed to the issue_certificate API call which sends the CSR to AWS Certificate Manager and is signed
+  by the subordinate private certificate authority that was created earlier 
 * The signed webserver endpoint certificate pem file is called ***"webserver_cert.pem"***
 * The issue_certificate API calls also returns the chain of trust and the pem file that stores the
   chain of trust is called ***"webserver_cert_chain.pem"***
+* You should see the following printed in the runner window pane below 
+   * Successfully created server certificate and chain of trust for the flask web server
+
 
 ### Step 7 :
 
@@ -109,15 +117,44 @@ Run the python module named **usecase-5-step-7.py**
 * This module creates a python flask web server with an HTML page that prints **"Hello World"**
 * The webserver is running within the Cloud9 environment and is exposed through the following
   URL **https://127.0.0.1:5000/**
+* You should see the following printed in the runner window pane below 
+   * Running on https://127.0.0.1:5000/ (Press CTRL+C to quit)
+* For the next steps this webserver needs to keep running. So please don't kill the runner window pane tab
 
- 
 ### Step 8 :
 
 Run the python module named **usecase-5-step-8.py**
 
-* This module creates a python flask web server with an HTML page that prints **"Hello World"**
-* The webserver is running within the Cloud9 environment and is exposed through the following
-  URL **https://127.0.0.1:5000/**
+* This module uses the below curl command to do a HTTP GET on the flask webserver created in **Step 7** 
+
+  curl --verbose -X GET https://127.0.0.1:5000/
+  
+* We are using the curl command to simulate a HTTPS web client 
+
+* Since the curl commmand does not supply the certificate trust chain as a parameter the HTTPS connection is going to
+  complain that the server certificate is not recognized. You will see the following printed in the runner window
+  pane below if you look through the printed log 
+
+  * curl: (60) Peer's Certificate issuer is not recognized
+
+**Some questions to think about :**
+
+* Why was the server certificate not recognized by the curl command ?
+
+### Step 9 :
+
+Run the python module named **usecase-5-step-9.py**
+
+* This module uses curl to do a HTTPS GET on the flask webserver created in Step 7 using the following command :
+
+  curl --verbose --cacert 'webserver_cert_chain.pem' -X GET https://127.0.0.1:5000/
+  
+* Since the curl command has the chain of trust pem file as a parameter the flask webserver certificate
+  is successfully authenticated and you should see the following printed in the runner window pane.
+
+  Hello World!
+  
+  \* Closing connection 0
 
 
 
