@@ -1,7 +1,7 @@
 ###############################################################################
 #  Cleanup all resources created within python modules for ACM usecase-5      #
 #                                                                             #
-#  1. S3 buckets used for CRL(Certificate revocation list                     #
+#  1. S3 buckets used for CRL(Certificate revocation list)                    #
 #                                                                             #
 #  2. The private certifiate authority is deleted                             #
 #                                                                             #
@@ -47,14 +47,14 @@ try:
     if Path(webserver_privkey_path).exists():
         os.remove(webserver_privkey_path) 
 
-    dbg='Stop'
-##############################################################################
-#   REMOVE ALL THE FILES CREATED IN THE LOCAL FILESYSTEM FOR USECASE-2       #
-##############################################################################
+    dbg='STOP'
+    ##############################################################################
+    #   REMOVE ALL THE FILES CREATED IN THE LOCAL FILESYSTEM FOR USECASE-2       #
+    ##############################################################################
     subordinate_pca_arn = None 
     try:
         response = ddb_client.describe_table(TableName='shared_variables_crypto_builders')
-        if response:
+        if response is not None:
             response = ddb_client.get_item(TableName='shared_variables_crypto_builders', \
                                 Key={
                                         'shared_variables': {
@@ -67,7 +67,9 @@ try:
                                 # ProjectionExpression='root_ca_private_key',
                             )
                             
-            subordinate_pca_arn = response['Item']['subordinate_pca_arn']['S']
+            if  'subordinate_pca_arn' in response['Item']:
+                subordinate_pca_arn = response['Item']['subordinate_pca_arn']['S']
+            
             ddb_client = boto3.client('dynamodb',region)
   
             # Delete the DDB Table that stores key value pairs shared across multiple python modules
@@ -78,7 +80,7 @@ try:
         print "No DDB table found to delete !! that's OK"
         
         
-    if subordinate_pca_arn:
+    if subordinate_pca_arn is not None:
         response = acm_pca_client.describe_certificate_authority(
             CertificateAuthorityArn=subordinate_pca_arn
         )
@@ -96,7 +98,7 @@ try:
             )
             time.sleep(20)
 
-# Delete the objects and buckets that were created as part of usecase-1
+    # Delete the objects and buckets that were created as part of usecase-1
     response = s3_client.list_buckets()
     for bucket_name in response['Buckets']:
         if bucket_name['Name'].startswith('reinvent-builder-bucket-pca'):
