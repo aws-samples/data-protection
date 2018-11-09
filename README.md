@@ -107,7 +107,8 @@ Run the python module named **usecase-5-step-6.py**
 * The issue_certificate API calls also returns the chain of trust and the pem file that stores the
   chain of trust is called ***"webserver_cert_chain.pem"***
 * You should see the following printed in the runner window pane below 
-   * Successfully created server certificate and chain of trust for the flask web server
+    * Successfully created server certificate webserver_cert.pem for the flask web server
+    * Successfully created chain of trust for the flask web server
 
 
 ### Step 7 :

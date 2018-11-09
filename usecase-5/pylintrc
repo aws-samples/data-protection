@@ -1,0 +1,9 @@
+[FORMAT]
+
+# Regexp for a line that is allowed to be longer than the limit.
+ignore-long-lines=^\s*(# )?<?https?://\S+>?$
+
+[MESSAGES CONTROL]
+# C0111: Missing docstring
+# R0904: Too many public methods
+disable=C0303,C0301
