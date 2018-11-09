@@ -136,7 +136,7 @@ Resources:
          FunctionName: 'cryptobuider-cse-lambda'
          Code : 
             S3Bucket: "crypto-builders-dont-remove"
-            S3Key: "crypto-zip.zip"
+            S3Key: "crypto-cw-lambda.zip"
          Handler: 'lambda_handler'
          Role: !GetAtt cryptocwelambdarole.Arn
          Runtime: 'python2.7'
