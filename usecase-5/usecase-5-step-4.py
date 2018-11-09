@@ -54,7 +54,11 @@ def main():
         root_ca_serial_number = response['Item']['rootca_serial_number']['N']
         subordinate_ca_serial_number = int(response['Item']['subordinate_ca_serial_number']['N'])
         subordinate_pca_arn = response['Item']['subordinate_pca_arn']['S']
-    
+        
+        #####################################################################################
+        #   The private key used here is for demonstration purposes, the best practice      #
+        #   is to store private keys on an HSM                                              #
+        #####################################################################################
         root_ca_private_key = serialization.load_pem_private_key(
             response['Item']['root_ca_private_key']['B'],
             password=None,

@@ -38,11 +38,13 @@ def main():
         region = list_az[0]+ '-' + list_az[1] + '-' + list_az[2][0]
         ddb_client = boto3.client('dynamodb', region)
         
-        ##################################################################################
-        #   Generating key pair for self signed cert                                     #
-        #   Storing private key of self signed cert in an encrypted DynamoDB table       #
-        #   so that other python modules can access it                                   #
-        ##################################################################################
+        #####################################################################################
+        #   Generating key pair for self signed cert                                        #
+        #   Storing private key of self signed cert in an encrypted DynamoDB table          #
+        #   so that other python modules can access it                                      #
+        #   The private key generated here is for demonstration purposes, the best practice #
+        #   is to store private keys on an HSM                                              #
+        #####################################################################################
         privkey = rsa.generate_private_key(
             public_exponent=65537,
             key_size=2048,

@@ -63,6 +63,8 @@ def main():
         ###########################################################################################
         #   create a key pair for the webserver endpoint                                          #
         #   The private key portion of the key pair is required for signing the webserver CSR     #
+        #   The private key used here is for demonstration purposes, the best practice            #
+        #   is to store private keys on an HSM                                                    #
         ###########################################################################################
         csr_webserver_privkey = rsa.generate_private_key(
             public_exponent=65537,
