@@ -133,7 +133,7 @@ Resources:
    cryptocselambda:
       Type : AWS::Lambda::Function
       Properties: 
-         FunctionName: 'cryptobuider-cse-lambda'
+         FunctionName: 'cryptobuilder-cse-lambda'
          Code : 
             S3Bucket: "crypto-workshop-dont-delete"
             S3Key: "crypto-cw-lambda.zip"
