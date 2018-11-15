@@ -125,6 +125,32 @@ Resources:
       Properties:
          SubnetId: !Ref Subnet
          NetworkAclId: !Ref PublicNACL
+         
+  # Create a cloudwatch event rule that will trigger the cryptobuider-cse-lambda lambda
+# function when GenerateDataKey calls are made
+
+   cryptocweeventcse:
+      Type : AWS::Events::Rule
+      Properties: 
+         Description: "Cloudwatch event rule for client side encryption usecases"
+         EventPattern: 
+            source: 
+               - "aws.kms"
+            detail-type: 
+               - "AWS API Call via CloudTrail"
+            detail: 
+               eventSource: 
+                  - "kms.amazonaws.com"
+               eventName: 
+                  - "GenerateDataKey"
+         Name: 'crypto-builder-cse-cw-rule'
+         State: "ENABLED"
+         Targets:
+            - 
+               Arn: !GetAtt cryptocselambda.Arn
+               Id: "cw-rule-cse"
+               
+   # Create a cloud9 environment 
 
 # Create the lambda function used for client side encryption usecase
 # This is mainly for studying GenerateDataKey calls that happen during client
@@ -174,31 +200,13 @@ Resources:
          Roles:
             - !Ref cryptocwelambdarole
             
-   # Create a cloudwatch event rule that will trigger the cryptobuider-cse-lambda lambda
-# function when GenerateDataKey calls are made
-
-   cryptocweeventcse:
-      Type : AWS::Events::Rule
-      Properties: 
-         Description: "Cloudwatch event rule for client side encryption usecases"
-         EventPattern: 
-            source: 
-               - "aws.kms"
-            detail-type: 
-               - "AWS API Call via CloudTrail"
-            detail: 
-               eventSource: 
-                  - "kms.amazonaws.com"
-               eventName: 
-                  - "GenerateDataKey"
-         Name: 'crypto-builder-cse-cw-rule'
-         State: "ENABLED"
-         Targets:
-            - 
-               Arn: !GetAtt cryptocselambda.Arn
-               Id: "cw-rule-cse"
-               
-   # Create a cloud9 environment 
+   LambdaInvokePermission:
+     Type: AWS::Lambda::Permission
+     Properties:
+       FunctionName: !GetAtt cryptocselambda.Arn
+       Action: 'lambda:InvokeFunction'
+       Principal: 'events.amazonaws.com'
+       SourceArn: !GetAtt cryptocweeventcse.Arn
 
    cryptocloud9env:
       Type : AWS::Cloud9::EnvironmentEC2
@@ -240,16 +248,6 @@ Resources:
                Resource: "*"
          Roles:
             - !Ref cryptocloudninerole
-
-
-         
-
-
-
-
-         
-
-
          
             
 
