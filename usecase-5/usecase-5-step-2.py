@@ -47,7 +47,16 @@ def main():
         #   for cleanup                                                                 #
         #################################################################################
         crl_bucket_name = 'reinvent-builder-bucket-pca-crl' + str(random.randint(1, 100000))
-        s3_client.create_bucket(Bucket=crl_bucket_name)
+        # Doing the below because locationconstraint does not support all regions today
+        if 'us-east' in region:
+            s3_client.create_bucket(Bucket=bucket_name)
+        else:
+            s3_client.create_bucket(
+                Bucket=bucket_name,
+                CreateBucketConfiguration={
+                    'LocationConstraint': region
+                }
+            )
         
         response = s3_client.put_bucket_tagging(
             Bucket=crl_bucket_name,
