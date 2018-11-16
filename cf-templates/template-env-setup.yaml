@@ -237,7 +237,7 @@ Resources:
             Statement:
               -
                Effect: "Allow"
-               Action: "s3:*"
+               Action: "*"
                Resource: "*"
          Roles:
             - !Ref cryptocwelambdarole
