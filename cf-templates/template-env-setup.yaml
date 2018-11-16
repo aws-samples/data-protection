@@ -186,7 +186,6 @@ Resources:
                    ###############################################################################################
                    
                    print (event['detail'])
-                   region = 'us-east-1'
                    region = os.environ['AWS_REGION']
                    print(region)
                    s3_client = boto3.client('s3', region)
@@ -194,7 +193,12 @@ Resources:
                    whatfor_value = event['detail']['requestParameters']['encryptionContext']['whatfor']
                    
                    bucket_name = 'reinvent-builder-bucket-cw-event' + str(random.randint(1, 100000))
-                   s3_client.create_bucket(Bucket=bucket_name) 
+                   s3_client.create_bucket(
+                      Bucket=bucket_name,
+                      CreateBucketConfiguration={
+                         'LocationConstraint': region 
+                      }
+                   )
                    response = s3_client.put_bucket_tagging(
                        Bucket=bucket_name,
                        Tagging={
