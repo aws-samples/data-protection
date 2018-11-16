@@ -160,7 +160,7 @@ Resources:
       Type : AWS::Lambda::Function
       Properties: 
          FunctionName: 'cryptobuilder-cse-lambda'
-         Handler: "index.handler"
+         Handler: "index.lambda_handler"
          Role: !GetAtt cryptocwelambdarole.Arn
          Runtime: 'python2.7'
          Code: 
