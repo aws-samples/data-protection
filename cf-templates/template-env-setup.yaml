@@ -166,11 +166,9 @@ Resources:
          Code: 
             ZipFile: |
                from __future__ import print_function
-               import requests
                import os
-               import json
                import boto3
-               import random
+               
                
                # Main event function for pushing CW events containing GenerateDataKey calls 
                def lambda_handler(event, context):
@@ -189,6 +187,7 @@ Resources:
                    print (event['detail'])
                    region = 'us-east-1'
                    region = os.environ['AWS_REGION']
+                   print(region)
                    s3_client = boto3.client('s3', region)
                    
                    whatfor_value = event['detail']['requestParameters']['encryptionContext']['whatfor']
