@@ -160,14 +160,56 @@ Resources:
       Type : AWS::Lambda::Function
       Properties: 
          FunctionName: 'cryptobuilder-cse-lambda'
-         Code : 
-            S3Bucket: "crypto-workshop-dont-delete"
-            S3Key: "crypto-cw-lambda.zip"
-         Handler: 'lambda_handler'
+         Handler: "index.handler"
          Role: !GetAtt cryptocwelambdarole.Arn
          Runtime: 'python2.7'
-   
-           
+         Code: 
+            ZipFile: |
+               from __future__ import print_function
+               import requests
+               import os
+               import json
+               import boto3
+               import random
+               
+               # Main event function for pushing CW events containing GenerateDataKey calls 
+               def lambda_handler(event, context):
+                   ###############################################################################################
+                   #                                                                                             #
+                   #   Lambda function get a cloudwatch event for the GenerateDatakeyCall                        #
+                   #   for the KMS service                                                                       #                                                                     #
+                   #                                                                                             #
+                   #   Checks if the encryption context matches the client side encryption context provided for  #
+                   #   cse usecases                                                                              #
+                   #                                                                                             #
+                   #   Creates a bucket with a tag containing the encryption context so that the usecase code    #
+                   #   can identify whether GenerateDataKey call was for CSE usecase-2 or usecase-3              #
+                   ###############################################################################################
+                   
+                   print (event['detail'])
+                   region = 'us-east-1'
+                   region = os.environ['AWS_REGION']
+                   s3_client = boto3.client('s3', region)
+                   
+                   whatfor_value = event['detail']['requestParameters']['encryptionContext']['whatfor']
+                   
+                   bucket_name = 'reinvent-builder-bucket-cw-event' + str(random.randint(1, 100000))
+                   s3_client.create_bucket(Bucket=bucket_name) 
+                   response = s3_client.put_bucket_tagging(
+                       Bucket=bucket_name,
+                       Tagging={
+                           'TagSet': [
+                               {
+                                   'Key': 'whatfor',
+                                   'Value': whatfor_value
+                               },
+                           ]
+                       }
+                   )
+                   print("Exiting")
+               
+                   return
+
    # We will use admin privileges for now and make it least privilege as we learn
    cryptocwelambdarole:
       Type : AWS::IAM::Role
