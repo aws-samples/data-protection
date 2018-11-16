@@ -186,7 +186,6 @@ Resources:
                    ###############################################################################################
                    
                    print (event['detail'])
-                   region = 'us-east-1'
                    region = os.environ['AWS_REGION']
                    print(region)
                    s3_client = boto3.client('s3', region)
@@ -204,6 +203,7 @@ Resources:
                                 'LocationConstraint': region
                            }
                         )
+            
                    response = s3_client.put_bucket_tagging(
                        Bucket=bucket_name,
                        Tagging={
