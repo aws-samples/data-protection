@@ -260,6 +260,7 @@ Resources:
        SourceArn: !GetAtt cryptocweeventcse.Arn
        
    S3Bucket: 
+      DeletionPolicy: Retain
       Type: AWS::S3::Bucket
       Properties: {}
    BucketPolicy: 
