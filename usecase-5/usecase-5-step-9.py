@@ -8,6 +8,8 @@
 """
 import os
 import sys 
+import subprocess
+import shlex
 
 def main():
     """
@@ -23,9 +25,14 @@ def main():
     """
     try:
         CURRENT_DIRECTORY_PATH = os.path.dirname(os.path.realpath(__file__)) + '/'
-        curl_command = 'curl --verbose --cacert ' + CURRENT_DIRECTORY_PATH + 'webserver_cert_chain.pem ' + \
-                  '-X GET https://127.0.0.1:5000/'
-        os.system(curl_command)
+        command = 'curl --verbose --cacert ' + CURRENT_DIRECTORY_PATH + 'webserver_cert_chain.pem ' + \
+                  'https://127.0.0.1:5000/'
+        command = shlex.split(command)
+        returned_output = subprocess.check_output(command)
+        print returned_output
+        print "Certificate is trusted and is valid"
+    except subprocess.CalledProcessError as e:
+        print "\nCertificate is not trusted - cannot validate server certificate"
     except:
         print "Unexpected error:", sys.exc_info()[0]
         raise

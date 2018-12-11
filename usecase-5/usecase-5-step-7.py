@@ -42,6 +42,13 @@ try:
         CURRENT_DIRECTORY_PATH = os.path.dirname(os.path.realpath(__file__)) + '/'
         webserver_cert_path = CURRENT_DIRECTORY_PATH + 'webserver_cert.pem'
         webserver_key_path = CURRENT_DIRECTORY_PATH + 'webserver_privkey.pem'
+        
+        ##########################################################################################
+        # Since the ssl_context supplied below for the flask webserver requires the private key  #
+        # to be a on file webserver_privkey.pem was created                                      #
+        # This is only for demonstration purposes, for seucurity private keys should be never be #     
+        # stored on disk                                                                         #
+        ##########################################################################################
         APP.run(ssl_context=(webserver_cert_path, webserver_key_path))
 except:
     print "Unexpected error:", sys.exc_info()[0]

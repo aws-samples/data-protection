@@ -8,6 +8,8 @@
 """
 import os
 import sys 
+import subprocess
+import shlex
 
 def main():
     """
@@ -19,7 +21,16 @@ def main():
     ######################################################################################
     """
     try:
-        os.system('curl --verbose -X GET https://127.0.0.1:5000/ ')
+        command = "curl --verbose https://127.0.0.1:5000/"
+        command = shlex.split(command)
+
+        returned_output = subprocess.check_output(command)
+        # text = proc.communicate()[0]
+        # #output = proc.stdout.read()
+        # print text
+        #print returned_output
+    except subprocess.CalledProcessError as e:
+        print "\nCertificate is not trusted - cannot validate server certificate"
     except:
         print "Unexpected error:", sys.exc_info()[0]
         raise

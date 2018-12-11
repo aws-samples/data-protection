@@ -139,7 +139,8 @@ Run the python module named ***usecase-5-step-8.py***
   complain that the server certificate is not recognized. You will see the following printed in the runner window
   pane below if you look through the printed log 
 
-  * curl: (60) Peer's Certificate issuer is not recognized
+  ** curl: (60) Peer's Certificate issuer is not recognized **
+  ** Certificate is not trusted - cannot validate server certificate **
 
 **Some questions to think about :**
 
@@ -158,8 +159,8 @@ Run the python module named **usecase-5-step-9.py**
 
   **Hello World!**
   
-  \* Closing connection 0
-
+  **Certificate is trusted and is valid**
+  
 
 
 
