@@ -1,6 +1,6 @@
-# AWS Crypto Builder Workshops
+# AWS Data Protection Workshops
 
-If you are dealing with data encryption or certificate management within your AWS infrastructure, these workshops can help. We will be using the Cloud9 IDE and python boto3 for these workshops.
+If you are dealing with data protection with methods such as encryption or certificate management within your AWS infrastructure, these workshops can help. We will be using the Cloud9 IDE and a combination of python code and AWS console access for these workshops.
 
 # Ubiquitous Encryption 
 
@@ -27,11 +27,11 @@ Please run these cloudformation stacks in your AWS account as this is required f
 
 [![Deploy IAM user creation stack](images/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=cryptobuilders-iam-user-creation&templateURL=https://s3.amazonaws.com/crypto-workshop-dont-delete/template-create-user.yaml)
 
-The above stack creates an IAM user called **builders-session-user** .
+The above stack creates an IAM user called **builder** .
 
 ### Before you proceed to Step 2
 
-Please login into your account as  **builders-session-user** . The password for this user is **reinvent**
+Please login into your account as  **builders** . The password for this user is **reinvent**
 
 ### Step 2 :
 
@@ -42,7 +42,7 @@ The above stack creates an Cloud9 IDE environment called **workshop-environment*
 ### Step 3 :
 
 * Navigate to the Cloud9 service within your AWS console
-* In the Cloud9 IDE environment you will find a folder called crypto-builders in the folder pane on the left side of the screen
+* In the Cloud9 IDE environment you will find a folder called **data-protection-workshops** in the folder pane on the left side of the screen
 * Open the file named **environment-setup.py**  in the IDE
 * Run the python module **environment-setup.py** by clicking the play button <a><img src="images/cloud9-ide-play-button.png" width="50" height="30"></a>
  on the top pane 
@@ -50,7 +50,7 @@ The above stack creates an Cloud9 IDE environment called **workshop-environment*
 
 # Workshops
 
-**Please review and complete all prerequisites before attempting these workshops.**
+**Please review and complete all the above prerequisites before attempting these workshops.**
 
 <!DOCTYPE html>
 <html>
