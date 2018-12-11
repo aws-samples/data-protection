@@ -1,6 +1,7 @@
 ## ACM Private Certificate authority - Private certs for your webserver 
 
-This workshop demonstrates ACM Private Certificate authority and how it can be used to generate private certs 
+This workshop demonstrates how ACM Private Certificate authority(PCA) can be created and made operational. It also helps you learn
+about how ACM PCA can be used to generate private certificates for your web applications that are not exposed to the public internet.
 
 ## Let's look at some concepts :
 
@@ -17,7 +18,7 @@ Once you run the command above you will see a folder called **usecase-5** in the
 
 ### Step 1 :
 
-Run the python module named **intial-config-step-1.py**
+Run the python module named ***intial-config-step-1.py***
 
 * First you will see **"Pending DynamoDB table creation for storing shared variables"** printed on the runner window pane below
 * Wait for about 45 seconds 
@@ -28,7 +29,7 @@ across the different python module that we will run in this usecase.
 
 ### Step 2 :
 
-Run the python module named **usecase-5-step-2.py**
+Run the python module named ***usecase-5-step-2.py***
 
 * This module creates a ACM private certificate authority with the common name **reinvent.builder.subordinate**
 * This private certificate authority will publish certificate revocation lists within a S3 bucket whose name
@@ -47,11 +48,11 @@ Run the python module named **usecase-5-step-2.py**
 
 * Why is the status of the private CA showing "Pending Certificate" ?
 * Is the private certificate authority that's created a root CA or a subordinate CA ?
-* What's the purpose the S3 bucket storing certificate revocation lists ?
+* What's the purpose of the S3 bucket storing certificate revocation lists ?
 
 ### Step 3 :
 
-Run the python module named **usecase-5-step-3.py**
+Run the python module named ***usecase-5-step-3.py***
 
 * This module creates a self signed root certificate with the common name **rootca-reinvent-builder**
 * You can see in the code that the private key associated with the self signed cert is stored in an encrypted DynamoDB table.
@@ -70,7 +71,7 @@ Run the python module named **usecase-5-step-3.py**
 
 ### Step 4 :
 
-Run the python module named **usecase-5-step-4.py**
+Run the python module named ***usecase-5-step-4.py***
 
 * This module gets a Certificate signing request(CSR) for the private certifiate authority with 
   common name **reinvent.builder.subordinate** that was created in **Step 2**
@@ -82,7 +83,7 @@ Run the python module named **usecase-5-step-4.py**
 
 ### Step 5 :
 
-Run the python module named **usecase-5-step-5.py**
+Run the python module named ***usecase-5-step-5.py***
 
 * This module imports the subordinate CA signed certificate ***signed_subordinate_ca_cert.pem*** and 
   certificate chain of trust into AWS Certificate Manager(ACM)
@@ -97,34 +98,36 @@ Run the python module named **usecase-5-step-5.py**
 
 ### Step 6 :
 
-Run the python module named **usecase-5-step-6.py**
+**Time : 2 minutes**
+
+Run the python module named ***usecase-5-step-6.py***
 
 * This module takes about 2 minutes to complete 
 * This module creates a CSR for a webserver endpoint with common name ***127.0.0.1*** and the CSR is then
   passed to the issue_certificate API call which sends the CSR to AWS Certificate Manager and is signed
   by the subordinate private certificate authority that was created earlier 
 * The signed webserver endpoint certificate pem file is called ***"webserver_cert.pem"***
-* The issue_certificate API calls also returns the chain of trust and the pem file that stores the
+* The issue_certificate API calls also returns the certificate chain of trust and the pem file that stores the
   chain of trust is called ***"webserver_cert_chain.pem"***
 * You should see the following printed in the runner window pane below 
-    * Successfully created server certificate webserver_cert.pem for the flask web server
-    * Successfully created chain of trust for the flask web server
+    * Successfully created server certificate ***webserver_cert.pem*** for the flask web server
+    * Successfully created chain of trust ***webserver\_cert_chain.pem*** for the flask web server
 
 
 ### Step 7 :
 
-Run the python module named **usecase-5-step-7.py**
+Run the python module named ***usecase-5-step-7.py***
 
 * This module creates a python flask web server with an HTML page that prints **"Hello World"**
 * The webserver is running within the Cloud9 environment and is exposed through the following
   URL **https://127.0.0.1:5000/**
 * You should see the following printed in the runner window pane below 
-   * Running on https://127.0.0.1:5000/ (Press CTRL+C to quit)
+   * Running on https://127.0.0.1:5000/ 
 * For the next steps this webserver needs to keep running. So please don't kill the runner window pane tab
 
 ### Step 8 :
 
-Run the python module named **usecase-5-step-8.py**
+Run the python module named ***usecase-5-step-8.py***
 
 * This module uses the below curl command to do a HTTP GET on the flask webserver created in **Step 7** 
 
