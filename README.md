@@ -31,7 +31,7 @@ The above stack creates an IAM user called **builder** .
 
 ### Before you proceed to Step 2
 
-Please login into your account as  **builders** . The password for this user is **reinvent**
+Please login into your account with the username **builder** . The password for this user is **reinvent**
 
 ### Step 2 :
 
