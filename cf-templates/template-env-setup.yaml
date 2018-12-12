@@ -84,6 +84,25 @@ Resources:
       Properties:
          RouteTableId: !Ref RouteTable
          SubnetId: !Ref Subnet
+   
+   SubnetTwo:
+      Type: AWS::EC2::Subnet
+      Properties:
+         CidrBlock: 10.0.128.0/24
+         MapPublicIpOnLaunch: true
+         Tags:
+           - Key: Name
+             Value: !Ref ResourceName
+         VpcId: !Ref VPC
+         
+   SubnetAssoc:
+      DependsOn:
+         - SubnetTwo
+         - RouteTable
+      Type: AWS::EC2::SubnetRouteTableAssociation
+      Properties:
+         RouteTableId: !Ref RouteTable
+         SubnetId: !Ref SubnetTwo
          
    PublicNACL:
       Type: AWS::EC2::NetworkAcl
