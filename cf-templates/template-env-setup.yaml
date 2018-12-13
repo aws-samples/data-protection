@@ -362,7 +362,11 @@ Resources:
          Roles:
             - !Ref cryptocloudninerole
          
-            
+Outputs: 
+   SYSTEMVPC: 
+      Value: !Ref VPC
+      Export:
+         Name: WorkshopVPC     
 
 
 
