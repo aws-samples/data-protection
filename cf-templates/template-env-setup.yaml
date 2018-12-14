@@ -367,11 +367,11 @@ Outputs:
       Value: !Ref VPC
       Export:
          Name: cryptobuilders-env-setup-vpc     
-   SYSTEMVPC: 
+   SYSTEMSUBNETAZ1: 
       Value: !Ref Subnet
       Export:
          Name: cryptobuilders-env-setup-subnetaz1 
-   SYSTEMVPC: 
+   SYSTEMSUBNETAZ2: 
       Value: !Ref SubnetTwo
       Export:
          Name: cryptobuilders-env-setup-subnetaz2  
