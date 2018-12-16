@@ -6,9 +6,7 @@ Parameters:
   
    ResourceName:
       Type: String
-      Default: crypto-builders-session
-      AllowedValues: 
-      - crypto-builders-session
+      Default: builders
       Description: Prefix for resources created in this session.
       
    InstanceType: 
@@ -22,7 +20,7 @@ Parameters:
 # This IAM user will be used for all login and development
 Resources:
 
-   VPC:
+   SystemVPC:
       Type: AWS::EC2::VPC
       Properties:
          CidrBlock: 192.168.0.0/16
@@ -44,7 +42,7 @@ Resources:
       Properties:
          InternetGatewayId:
            Ref: InternetGateway
-         VpcId: !Ref VPC
+         VpcId: !Ref SystemVPC
          
    RouteTable:
       DependsOn:
@@ -54,7 +52,7 @@ Resources:
          Tags:
            - Key: Name
              Value: !Ref ResourceName
-         VpcId: !Ref VPC
+         VpcId: !Ref SystemVPC
          
    PublicRoute:
       DependsOn:
@@ -74,7 +72,7 @@ Resources:
          Tags:
            - Key: Name
              Value: !Ref ResourceName
-         VpcId: !Ref VPC
+         VpcId: !Ref SystemVPC
          AvailabilityZone: 
             Fn::Select: 
                - 0
@@ -97,7 +95,7 @@ Resources:
          Tags:
            - Key: Name
              Value: !Ref ResourceName
-         VpcId: !Ref VPC
+         VpcId: !Ref SystemVPC
          AvailabilityZone: 
             Fn::Select: 
                - 1
@@ -115,7 +113,7 @@ Resources:
    PublicNACL:
       Type: AWS::EC2::NetworkAcl
       Properties:
-         VpcId: !Ref VPC
+         VpcId: !Ref SystemVPC
          Tags:
            -
             Key: Network
@@ -378,14 +376,14 @@ Resources:
          
 Outputs: 
    SYSTEMVPC: 
-      Value: !Ref VPC
+      Value: !Ref SystemVPC
       Export:
-         Name: cryptobuilders-env-setup-vpc     
+         Name: ${ResourceName}-vpc     
    SYSTEMSUBNETAZ1: 
       Value: !Ref Subnet
       Export:
-         Name: cryptobuilders-env-setup-subnetaz1 
+         Name: ${ResourceName}-subnetaz1 
    SYSTEMSUBNETAZ2: 
       Value: !Ref SubnetTwo
       Export:
-         Name: cryptobuilders-env-setup-subnetaz2  
+         Name: ${ResourceName}-subnetaz2  
