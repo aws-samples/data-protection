@@ -95,7 +95,7 @@ Resources:
              Value: !Ref ResourceName
          VpcId: !Ref VPC
          
-   SubnetAssoc:
+   SubnetTwoAssoc:
       DependsOn:
          - SubnetTwo
          - RouteTable
@@ -143,6 +143,12 @@ Resources:
       Type: AWS::EC2::SubnetNetworkAclAssociation
       Properties:
          SubnetId: !Ref Subnet
+         NetworkAclId: !Ref PublicNACL
+         
+   SubnetTwoNACLAssociation:
+      Type: AWS::EC2::SubnetNetworkAclAssociation
+      Properties:
+         SubnetId: !Ref SubnetTwo
          NetworkAclId: !Ref PublicNACL
          
   # Create a cloudwatch event rule that will trigger the cryptobuider-cse-lambda lambda
@@ -375,5 +381,3 @@ Outputs:
       Value: !Ref SubnetTwo
       Export:
          Name: cryptobuilders-env-setup-subnetaz2  
-
-
