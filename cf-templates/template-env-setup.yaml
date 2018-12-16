@@ -75,6 +75,10 @@ Resources:
            - Key: Name
              Value: !Ref ResourceName
          VpcId: !Ref VPC
+         AvailabilityZone: 
+            Fn::Select: 
+               - 0
+               - Fn::GetAZs: ""
          
    SubnetAssoc:
       DependsOn:
@@ -94,6 +98,10 @@ Resources:
            - Key: Name
              Value: !Ref ResourceName
          VpcId: !Ref VPC
+         AvailabilityZone: 
+            Fn::Select: 
+               - 1
+               - Fn::GetAZs: ""
          
    SubnetTwoAssoc:
       DependsOn:
