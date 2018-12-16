@@ -378,12 +378,12 @@ Outputs:
    SYSTEMVPC: 
       Value: !Ref SystemVPC
       Export:
-         Name: ${ResourceName}-systemvpc     
+         Name: !Sub "${ResourceName}-systemvpc"     
    SYSTEMSUBNETAZ1: 
       Value: !Ref Subnet
       Export:
-         Name: ${ResourceName}-subnetaz1 
+         Name: !Sub "${ResourceName}-subnetaz1"
    SYSTEMSUBNETAZ2: 
       Value: !Ref SubnetTwo
       Export:
-         Name: ${ResourceName}-subnetaz2  
+         Name: !Sub "${ResourceName}-subnetaz2"
