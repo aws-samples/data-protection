@@ -46,7 +46,7 @@ Resources:
          
    RouteTable:
       DependsOn:
-      - VPC
+      - SystemVPC
       Type: AWS::EC2::RouteTable
       Properties:
          Tags:
@@ -378,7 +378,7 @@ Outputs:
    SYSTEMVPC: 
       Value: !Ref SystemVPC
       Export:
-         Name: ${ResourceName}-vpc     
+         Name: ${ResourceName}-systemvpc     
    SYSTEMSUBNETAZ1: 
       Value: !Ref Subnet
       Export:
