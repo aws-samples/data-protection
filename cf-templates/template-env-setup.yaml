@@ -191,7 +191,7 @@ Resources:
                      StringEquals:
                         s3:x-amz-acl: "bucket-owner-full-control"
     
-   myTrail: 
+   SystemTrail: 
       DependsOn: 
          - BucketPolicy
       Type: AWS::CloudTrail::Trail
