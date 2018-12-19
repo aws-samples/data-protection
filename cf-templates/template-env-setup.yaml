@@ -27,8 +27,8 @@ Resources:
          EnableDnsHostnames: true
          EnableDnsSupport: true
          Tags:
-            - Key: Name
-              Value: !Ref ResourceName
+            - Key: vpc-for-what
+              Value: system-vpc
    
    InternetGateway:
       Type: AWS::EC2::InternetGateway
