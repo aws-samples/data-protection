@@ -254,3 +254,7 @@ Outputs:
       Value: !Ref SubnetTwo
       Export:
          Name: !Sub "${ResourceName}-subnetaz2"
+   STACKREGION:
+      Value: !Ref "AWS::Region"
+      Export:
+         Name: !Sub "${ResourceName}-stackregion"
