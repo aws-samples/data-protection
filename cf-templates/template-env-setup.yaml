@@ -259,7 +259,7 @@ Outputs:
       Export:
          Name: !Sub "${ResourceName}-stackregion"
    DEFAULTSECURITYGROUPSYSTEMVPC:
-      Value: !Ref "AWS::Region"
+      Value: !GetAtt myVPC.DefaultSecurityGroup
       Export:
-         Name: !GetAtt myVPC.DefaultSecurityGroup
+         Name: !Sub "${ResourceName}-defaultsystemsecuritygroup"
    
