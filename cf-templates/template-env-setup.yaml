@@ -259,7 +259,7 @@ Outputs:
       Export:
          Name: !Sub "${ResourceName}-stackregion"
    DEFAULTSECURITYGROUPSYSTEMVPC:
-      Value: !GetAtt myVPC.DefaultSecurityGroup
+      Value: !GetAtt SystemVPC.DefaultSecurityGroup
       Export:
          Name: !Sub "${ResourceName}-defaultsystemsecuritygroup"
    
