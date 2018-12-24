@@ -27,7 +27,7 @@ Resources:
        UserName: 'builder'
        LoginProfile:
          Password: 'reinvent'
-         PasswordResetRequired: false
+         PasswordResetRequired: True
  
 
 
