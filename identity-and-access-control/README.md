@@ -7,7 +7,7 @@ these workshops are as follows :
 * Who in your organization can administer AWS KMS keys ?
 * Which application or user can use AWS KMS keys to encrypt and decrypt data ?
 * Which group of people in your organization can revoke ACM Certificates ?
-* How does separation of duties work with respect to encryption key management and certificates management
+* How does separation of duties work with respect to encryption key management and certificates management ?
 
 The below workshops will added to this repo as they become available
 
@@ -16,7 +16,7 @@ The below workshops will added to this repo as they become available
 <body>
 
 <kbd>
-<img src="images/coming-soon.png" width="352" height="240" title="Coming Soon">
+<img src="images/coming-soon.png" width="480" height="320" title="Coming Soon">
 </kbd>
 <br>
 
