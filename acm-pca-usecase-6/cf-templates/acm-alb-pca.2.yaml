@@ -1,0 +1,172 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Description: This AWS CloudFormation Template creates the necessary resources for the AWS Certificate manager PCA workshop 
+
+Parameters:
+  
+   SystemStack: 
+      Type: String
+      Default: builders
+      Description: environment setup cf stack for this workshop 
+   
+# This IAM user will be used for all login and development
+Resources:
+
+# Create the lambda function used for the origin behind the ALB
+
+   LambdaOrigin:
+      Type : AWS::Lambda::Function
+      Properties: 
+         FunctionName: 'builders-lambda-origin-one'
+         Handler: "index.lambda_handler"
+         Role: !GetAtt LambdaOriginRole.Arn
+         Runtime: 'python2.7'
+         Tags:
+            - Key: lambda-for-what
+              Value: acm-pca-workshop-usecase-6
+         Code: 
+            ZipFile: |
+               from __future__ import print_function
+            
+               # This is the lambda origin behing the application load balancer
+               def lambda_handler(event, context):
+                  print "Lambda for returning HTML was called"
+                  response = {
+                    "statusCode": 200,
+                    "statusDescription": "200 OK",
+                    "isBase64Encoded": False,
+                    "headers": {
+                    "Content-Type": "text/html; charset=utf-8"
+                    }
+                  }
+                  
+                  response['body'] = """<html>
+                  <head>
+                  <title>Hello World!</title>
+                  <style>
+                  html, body {
+                  margin: 0; padding: 0;
+                  font-family: arial; font-weight: 700; font-size: 3em;
+                  text-align: center;
+                  }
+                  </style>
+                  </head>
+                  <body>
+                  <p>Hello World!</p>
+                  </body>
+                  </html>"""
+                  
+                  return response
+   
+   # We will use admin privileges for now and make it least privilege as we learn
+   LambdaOriginRole:
+      Type : AWS::IAM::Role
+      Properties:
+         RoleName: 'acmcalblambdaoriginrole'
+         AssumeRolePolicyDocument: 
+           Version: "2012-10-17"
+           Statement: 
+             - 
+               Effect: "Allow"
+               Principal: 
+                 Service: 
+                   - "lambda.amazonaws.com"
+               Action: 
+                 - "sts:AssumeRole"
+         
+   # We will use admin privileges for now and make it least privilege as we learn
+   LambdaOriginPolicy:
+      Type : AWS::IAM::Policy
+      Properties: 
+         PolicyName : 'acm-alb-lambdaorigin-policy'
+         PolicyDocument : 
+            Version: "2012-10-17"
+            Statement:
+              -
+               Effect: "Allow"
+               Action: "*"
+               Resource: "*"
+         Roles:
+            - !Ref LambdaOriginRole
+      
+   LambdaInvokePermission:
+      Type: AWS::Lambda::Permission
+      Properties:
+         FunctionName: !GetAtt LambdaOrigin.Arn
+         Action: 'lambda:InvokeFunction'
+         Principal: 'elasticloadbalancing.amazonaws.com'
+   
+   LambdaEventSourceMapping:
+      Type: AWS::Lambda::EventSourceMapping
+      Properties:
+         FunctionName: !GetAtt LambdaOrigin.Arn
+         EventSourceArn: 
+            Fn::Join: 
+              - ""
+              - 
+                - "arn:aws:elasticloadbalancing:"
+                - 
+                  Ref: "AWS::Region"
+                - ":"
+                - 
+                  Ref: "AWS::AccountId"
+                - ":loadbalancer/"
+                - 
+                  !GetAtt ApplicationLoadBalancer.LoadBalancerFullName
+         
+   ALBSecurityGroup:
+      Type: 'AWS::EC2::SecurityGroup'
+      Properties:
+         GroupDescription: 'ALB Security Group'
+         VpcId: {'Fn::ImportValue': !Sub '${SystemStack}-systemvpc'}
+      
+   # Creating a ALB in CF - Target group and listener will be createdin Boto      
+   ApplicationLoadBalancer:
+      Type: 'AWS::ElasticLoadBalancingV2::LoadBalancer'
+      Properties:
+         Scheme: internal
+         "Name" : "acm-pca-usecase-6-alb"
+         SecurityGroups:
+         - !Ref ALBSecurityGroup
+         Subnets: 
+            - {'Fn::ImportValue': !Sub '${SystemStack}-subnetaz1'}
+            - {'Fn::ImportValue': !Sub '${SystemStack}-subnetaz2'}
+         Tags:
+            - Key: alb-for-what
+              Value: acm-pca-workshop-usecase-6
+   
+   DNSHostedZone: 
+      Type: "AWS::Route53::HostedZone"
+      Properties: 
+         HostedZoneConfig: 
+            Comment: "My hosted zone for private domain workshop.com"
+         Name: "workshop.com"
+         VPCs: 
+         - 
+            VPCId: {'Fn::ImportValue': !Sub '${SystemStack}-systemvpc'}
+            VPCRegion: {'Fn::ImportValue': !Sub '${SystemStack}-stackregion'}
+         HostedZoneTags: 
+         - 
+            Key: "hostedzone-for-what"
+            Value: "acm-pca-workshop-usecase-6"
+     
+   
+   DNSRecordSet:
+      Type: AWS::Route53::RecordSet
+      Properties:
+         HostedZoneId: !Ref DNSHostedZone
+         Comment: Private hosted zone for the acm-pca-usecase-6.
+         Name: "alb.workshop.com."
+         Type: CNAME
+         TTL: '900'
+         ResourceRecords:
+         - !GetAtt ApplicationLoadBalancer.DNSName
+
+         
+
+
+         
+            
+
+
+

@@ -1,0 +1,21 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "acm-pca.amazonaws.com"
+      },
+      "Action": [
+        "s3:PutObject",
+        "s3:PutObjectAcl",
+        "s3:GetBucketAcl",
+        "s3:GetBucketLocation"
+      ],
+      "Resource": [
+          "arn:aws:s3:::your-bucket-name/*",
+          "arn:aws:s3:::your-bucket-name"
+      ]
+    }
+  ]
+}

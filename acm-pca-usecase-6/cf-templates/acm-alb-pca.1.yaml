@@ -1,0 +1,148 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Description: This AWS CloudFormation Template creates the necessary resources for the AWS Certificate manager PCA workshop 
+
+Parameters:
+  
+   SystemStack: 
+      Type: String
+      Default: builders
+      Description: environment setup cf stack for this workshop 
+   
+# This IAM user will be used for all login and development
+Resources:
+
+# Create the lambda function used for the origin behind the ALB
+
+   LambdaOrigin:
+      Type : AWS::Lambda::Function
+      Properties: 
+         FunctionName: 'lambda-origin-one'
+         Handler: "index.lambda_handler"
+         Role: !GetAtt LambdaOriginRole.Arn
+         Runtime: 'python2.7'
+         Code: 
+            ZipFile: |
+               from __future__ import print_function
+            
+               # This is the lambda origin behing the application load balancer
+               def lambda_handler(event, context):
+                  print "Lambda for returning HTML was called"
+                  response = {
+                    "statusCode": 200,
+                    "statusDescription": "200 OK",
+                    "isBase64Encoded": False,
+                    "headers": {
+                    "Content-Type": "text/html; charset=utf-8"
+                    }
+                  }
+                  
+                  response['body'] = """<html>
+                  <head>
+                  <title>Hello World!</title>
+                  <style>
+                  html, body {
+                  margin: 0; padding: 0;
+                  font-family: arial; font-weight: 700; font-size: 3em;
+                  text-align: center;
+                  }
+                  </style>
+                  </head>
+                  <body>
+                  <p>Hello World!</p>
+                  </body>
+                  </html>"""
+                  
+                  return response
+   
+   # We will use admin privileges for now and make it least privilege as we learn
+   LambdaOriginRole:
+      Type : AWS::IAM::Role
+      Properties:
+         RoleName: 'acmcalblambdaoriginrole'
+         AssumeRolePolicyDocument: 
+           Version: "2012-10-17"
+           Statement: 
+             - 
+               Effect: "Allow"
+               Principal: 
+                 Service: 
+                   - "lambda.amazonaws.com"
+               Action: 
+                 - "sts:AssumeRole"
+         
+   # We will use admin privileges for now and make it least privilege as we learn
+   LambdaOriginPolicy:
+      Type : AWS::IAM::Policy
+      Properties: 
+         PolicyName : 'acm-alb-lambdaorigin-policy'
+         PolicyDocument : 
+            Version: "2012-10-17"
+            Statement:
+              -
+               Effect: "Allow"
+               Action: "*"
+               Resource: "*"
+         Roles:
+            - !Ref LambdaOriginRole
+      
+   LambdaInvokePermission:
+      Type: AWS::Lambda::Permission
+      Properties:
+         FunctionName: !GetAtt LambdaOrigin.Arn
+         Action: 'lambda:InvokeFunction'
+         Principal: 'elasticloadbalancing.amazonaws.com'
+         
+   ALBSecurityGroup:
+      Type: 'AWS::EC2::SecurityGroup'
+      Properties:
+         GroupDescription: 'ALB Security Group'
+         VpcId: {'Fn::ImportValue': !Sub '${SystemStack}-systemvpc'}
+            
+   ApplicationLoadBalancer:
+      Type: 'AWS::ElasticLoadBalancingV2::LoadBalancer'
+      Properties:
+         Scheme: internal
+         SecurityGroups:
+         - !Ref ALBSecurityGroup
+         Subnets: 
+            - {'Fn::ImportValue': !Sub '${SystemStack}-subnetaz1'}
+            - {'Fn::ImportValue': !Sub '${SystemStack}-subnetaz2'}
+         Tags:
+            - Key: alb-for-what
+              Value: acm-pca-workshop
+            
+   AlbLambdaTargetGroup: 
+      Type: 'AWS::ElasticLoadBalancingV2::TargetGroup'
+      Properties:
+         Name: !Sub '${SystemStack}-alb-lambda' 
+         Port: 443
+         Protocol: HTTPS
+         VpcId: {'Fn::ImportValue': !Sub '${SystemStack}-systemvpc'}
+         Targets:
+            - Id: 
+                !Ref LambdaOrigin
+         TargetType: lambda 
+
+   # Creating a HTTP listener because a listener is mandatory
+   # In this workshop we will create a HTTPS listener for this ALB within the Cloud9 environment
+   AlbHttpListener:
+      Type: 'AWS::ElasticLoadBalancingV2::Listener'
+      Properties:
+         DefaultActions:
+         - TargetGroupArn: !Ref AlbLambdaTargetGroup
+           Type: forward
+         LoadBalancerArn: !Ref ApplicationLoadBalancer
+         Port: 80
+         Protocol: HTTP
+   
+
+
+         
+
+
+         
+            
+
+
+
