@@ -111,7 +111,7 @@ def main():
         ###################################################
         response = s3_client.list_buckets()
         for bucket_name in response['Buckets']:
-            if bucket_name['Name'].startswith('reinvent-builder-bucket-pca'):
+            if bucket_name['Name'].startswith('reinvent-builder-bucket-pca') or bucket_name['Name'].startswith('builder-acm-pca-usecase-5-bucket-pca-crl') :
                 try:
                     response = s3_client.get_bucket_tagging(
                         Bucket=bucket_name['Name']

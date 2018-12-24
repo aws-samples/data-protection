@@ -31,9 +31,9 @@ across the different python module that we will run in this usecase.
 
 Run the python module named ***usecase-5-step-2.py***
 
-* This module creates a ACM private certificate authority with the common name **reinvent.builder.subordinate**
+* This module creates a ACM private certificate authority with the common name **acmpcausecase5.subordinate**
 * This private certificate authority will publish certificate revocation lists within a S3 bucket whose name
-  starts with **reinvent-builder-bucket-pca-crl**
+  starts with **builder-acm-pca-usecase-5-bucket-pca-crl**
 * You should see the following printed in the runner window pane
     * "Private CA has been created"
     * "Please generate the CSR and get it signed by your organizations's root cert"
@@ -54,7 +54,7 @@ Run the python module named ***usecase-5-step-2.py***
 
 Run the python module named ***usecase-5-step-3.py***
 
-* This module creates a self signed root certificate with the common name **rootca-reinvent-builder**
+* This module creates a self signed root certificate with the common name **rootca-builder**
 * You can see in the code that the private key associated with the self signed cert is stored in an encrypted DynamoDB table.
   This is purely for demonstration purposes. In your organization you should store it in an HSM or a secure vault
 * You should see the following printed in the runner window pane below 

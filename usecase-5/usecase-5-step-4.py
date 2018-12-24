@@ -79,7 +79,7 @@ def main():
         #   Sign the subordinate private CA CSR using the self signed cert  #  
         #####################################################################
         issuer_name = x509.Name([
-            x509.NameAttribute(NameOID.COMMON_NAME, u'rootca-reinvent-builder'),
+            x509.NameAttribute(NameOID.COMMON_NAME, u'rootca-builder'),
             x509.NameAttribute(NameOID.COUNTRY_NAME, u'US'),
             x509.NameAttribute(NameOID.STATE_OR_PROVINCE_NAME, u'Nevada'),
             x509.NameAttribute(NameOID.LOCALITY_NAME, u'Las Vegas'),
@@ -89,7 +89,7 @@ def main():
         ])
                
         subject_name = x509.Name([
-            x509.NameAttribute(NameOID.COMMON_NAME, u'reinvent.builder.subordinate'),
+            x509.NameAttribute(NameOID.COMMON_NAME, u'acmpcausecase5.subordinate'),
             x509.NameAttribute(NameOID.COUNTRY_NAME, u'US'),
             x509.NameAttribute(NameOID.STATE_OR_PROVINCE_NAME, u'Nevada'),
             x509.NameAttribute(NameOID.LOCALITY_NAME, u'Las Vegas'),

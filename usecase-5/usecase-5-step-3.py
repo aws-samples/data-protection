@@ -89,7 +89,7 @@ def main():
         #  Create the subject and issuer for the self signed cert   #                
         #############################################################
         subject_name = x509.Name([
-            x509.NameAttribute(NameOID.COMMON_NAME, u'rootca-reinvent-builder'),
+            x509.NameAttribute(NameOID.COMMON_NAME, u'rootca-builder'),
             x509.NameAttribute(NameOID.COUNTRY_NAME, u'US'),
             x509.NameAttribute(NameOID.STATE_OR_PROVINCE_NAME, u'Nevada'),
             x509.NameAttribute(NameOID.LOCALITY_NAME, u'Las Vegas'),
