@@ -1,0 +1,47 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Description: This AWS CloudFormation Template creates the necessary resources for the data encryption builders session 
+
+# This IAM user will be used for all login and development
+Resources:
+
+   # Policy for a user trying out modules on a Cloud9 environment 
+   cryptoiamuserpolicy:
+      Type : AWS::IAM::Policy
+      Properties: 
+         PolicyName : 'cryptobuilder-iamuser-policy'
+         PolicyDocument : 
+            Version: "2012-10-17"
+            Statement:
+              -
+               Effect: "Allow"
+               Action: "*"
+               Resource: "*"
+         Users:
+            - !Ref cryptobuilderiamuser
+             
+   cryptobuilderiamuser:
+      Type: AWS::IAM::User
+      Properties:
+       Path: "/"
+       UserName: 'builder'
+       LoginProfile:
+         Password: 'reinvent'
+         PasswordResetRequired: false
+ 
+
+
+
+         
+
+
+
+
+         
+
+
+         
+            
+
+
+
