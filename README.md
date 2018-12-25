@@ -1,6 +1,6 @@
 # AWS Data Protection Workshops
 
-If you are dealing with data protection with methods such as encryption or certificate management within your AWS infrastructure, these workshops can help. We will be using the Cloud9 IDE and a combination of python code and AWS console access for these workshops.
+If you are dealing with protecting data on your AWS architecture using methods such as encryption or certificate management, these workshops can help you learn in depth. We will be using the Cloud9 IDE and a combination of python code and AWS console access for these workshops.
 
 # Ubiquitous Encryption 
 
@@ -31,7 +31,7 @@ The above stack creates an IAM user called **builder** .
 
 ### Before you proceed to Step 2
 
-Please login into your account with the username **builder** . The password for this user is **reinvent**
+Please login into your account with the username **builder** . You need to change the password on login.
 
 ### Step 2 :
 
@@ -42,15 +42,16 @@ The above stack creates an Cloud9 IDE environment called **workshop-environment*
 ### Step 3 :
 
 * Navigate to the Cloud9 service within your AWS console
-* In the Cloud9 IDE environment you will find a folder called **data-protection-workshops** in the folder pane on the left side of the screen
+* In the Cloud9 IDE environment you will find a folder called **data-protection** in the folder pane on the left side of the screen
 * Open the file named **environment-setup.py**  in the IDE
 * Run the python module **environment-setup.py** by clicking the play button <a><img src="images/cloud9-ide-play-button.png" width="50" height="30"></a>
  on the top pane 
 * In the runner window below you should see **Workshop environment setup was successful** printed
+* This script is run for initial environment setup that's requires for these workshops
 
 # Workshops
 
-**Please review and complete all the above prerequisites before attempting these workshops.**
+**Please review and complete all the above prerequisites before attempting these workshops. The images below are clickable links**
 
 <!DOCTYPE html>
 <html>
