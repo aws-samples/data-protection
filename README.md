@@ -60,7 +60,7 @@ The above stack creates an Cloud9 IDE environment called **workshop-environment*
 <a href="https://github.com/aws-samples/data-protection/tree/identity-and-access-control"><img src="images/identity-access-control.png" width="352" height="240" title="click me"></a>
 </kbd>
 <kbd>
-<a href="https://github.com/aws-samples/data-protection/master/data-encryption"><img src="images/data-encryption.png" width="352" height="240" title="click me"></a>
+<a href="https://github.com/aws-samples/data-protection/tree/data-encryption"><img src="images/data-encryption.png" width="352" height="240" title="click me"></a>
 </kbd>
 <br>
 
