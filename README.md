@@ -47,7 +47,7 @@ The above stack creates an Cloud9 IDE environment called **workshop-environment*
 * Run the python module **environment-setup.py** by clicking the play button <a><img src="images/cloud9-ide-play-button.png" width="50" height="30"></a>
  on the top pane 
 * In the runner window below you should see **Workshop environment setup was successful** printed
-* This script is run for initial environment setup that's requires for these workshops
+* This script is run for initial environment setup that's required for these workshops
 
 # Workshops
 
