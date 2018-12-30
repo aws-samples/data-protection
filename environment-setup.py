@@ -7,12 +7,15 @@ import os
 import subprocess
 
 try:
-    print subprocess.check_output(['sudo','pip','install','boto3'])
-    print subprocess.check_output(['sudo','pip','install','aws-encryption-sdk'])
-    print subprocess.check_output(['sudo','pip','install','ikpdb'])
-    print subprocess.check_output(['sudo','pip','install','pathlib'])
-    print subprocess.check_output(['sudo','pip','install','flask'])
-    print subprocess.check_output(['sudo','pip','install','pyopenssl'])
+    print subprocess.check_output(['pip','install','--user','--upgrade','pip'])
+    print subprocess.check_output(['sudo','pip','uninstall','pip'])
+    print subprocess.check_output(['source','~/.bash_profile'])
+    print subprocess.check_output(['pip','install','--user','boto3'])
+    print subprocess.check_output(['pip','install','--user','aws-encryption-sdk'])
+    print subprocess.check_output(['pip','install','--user','ikpdb'])
+    print subprocess.check_output(['pip','install','--user','pathlib'])
+    print subprocess.check_output(['pip','install','--user','flask'])
+    print subprocess.check_output(['pip','install','--user','pyopenssl'])
     print "\n"
     print "Workshop environment setup was successful"
 except:
