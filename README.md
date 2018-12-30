@@ -4,7 +4,7 @@ If you are dealing with protecting data on your AWS architecture using methods s
 
 # Ubiquitous Encryption 
 
-Data encryption provides a strong layer of security to protect data that you store within AWS services. AWS provides tooling to achieve ubiquitous encryption 
+Data encryption provides a strong layer of security to protect data that you store within AWS services. AWS services can help you achieve ubiquitous encryption 
 for data in transit as well as data at rest.
 
 <a><img src="images/ubiquitous-encryption.png" width="800" height="600"></a>
@@ -13,7 +13,7 @@ for data in transit as well as data at rest.
 
 ### AWS Account
 
-In order to complete these workshops you'll need a valid, usable AWS Account with Admin permissions.  The code and instructions in these workshops assume only one student is using a given AWS account at a time. If you try sharing an account with another student, you'll run into naming conflicts for certain resources. 
+In order to complete these workshops you'll need a valid active AWS Account with Admin permissions.  The code and instructions in these workshops assume only one student is using a given AWS account at a time. If you try sharing an account with another student, you'll run into naming conflicts for certain resources. 
 
 Use a **personal account** or create a new AWS account to ensure you have the neccessary access. This should not be an AWS account from the company you work for.
 
@@ -21,13 +21,13 @@ If the resources that you use for this workshop are left undeleted you will incu
 
 ### Cloudformation templates for initial environment setup
 
-Please run these cloudformation stacks in your AWS account as this is required for all the workshops
+Please run these cloudformation stacks in your AWS account as this is required for all the workshops in this repository.
 
 ### Step 1 :
 
 [![Deploy IAM user creation stack](images/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=data-protection-iam-user-creation&templateURL=https://s3.amazonaws.com/crypto-workshop-dont-delete/template-create-user.yaml)
 
-The above stack creates an IAM user called **builder** .
+The above stack creates an IAM user called **builder** with the password **reinvent**. 
 
 ### Before you proceed to Step 2
 
@@ -37,17 +37,20 @@ Please login into your account with the username **builder** . You need to chang
 
 [![Deploy workshops environment creation stack](images/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=data-protection-env-setup&templateURL=https://s3.amazonaws.com/crypto-workshop-dont-delete/template-env-setup.yaml)
 
-The above stack creates an Cloud9 IDE environment called **workshop-environment** 
+The above stack creates an Cloud9 IDE environment called **workshop-environment** .
 
 ### Step 3 :
 
 * Navigate to the Cloud9 service within your AWS console
+* Open the Cloud9 IDE environment called **workshop-environment** .It takes about 30 seconds for the
+  environment to start up.
 * In the Cloud9 IDE environment you will find a folder called **data-protection** in the folder pane on the left side of the screen
 * Open the file named **environment-setup.py**  in the IDE
 * Run the python module **environment-setup.py** by clicking the play button <a><img src="images/cloud9-ide-play-button.png" width="50" height="30"></a>
- on the top pane 
+  on the top pane 
+* This module would take about a minute to complete
 * In the runner window below you should see **Workshop environment setup was successful** printed
-* This script is run for initial environment setup that's required for these workshops
+* At this point the cloud9 environment is ready for the workshops
 
 # Workshops
 
@@ -71,7 +74,7 @@ The above stack creates an Cloud9 IDE environment called **workshop-environment*
 
 ### Browser
 
-These workshops assume you are using a Cloud IDE environment. We recommend you use the latest version of Chrome or Firefox to complete this workshop.
+These workshops assume that you are using a Cloud IDE environment. We recommend you use the latest version of Chrome or Firefox to complete this workshop.
 
 ## License Summary
 
