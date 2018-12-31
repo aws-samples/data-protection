@@ -71,6 +71,13 @@ The above stack creates an Cloud9 IDE environment called **workshop-environment*
 </body>
 </html>
 
+# Final Cleanup
+
+Once you you have finished working on the workshops within this repository ,the final step is to clean up the resources by deleting
+the cloudformation stacks that setup the workshop environment. For cleanup follow the steps below :
+
+
+
 
 ### Browser
 
