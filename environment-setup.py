@@ -8,8 +8,8 @@ import subprocess
 
 try:
     print subprocess.check_output(['pip','install','--user','--upgrade','pip'])
-    print subprocess.check_output(['yes','|','sudo','pip','uninstall','pip'])
-    print subprocess.check_output(['source','~/.bash_profile'])
+    cmd='yes|sudo pip uninstall pip'
+    print subprocess.Popen(cmd,shell=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
     print subprocess.check_output(['pip','install','--user','boto3'])
     print subprocess.check_output(['pip','install','--user','aws-encryption-sdk'])
     print subprocess.check_output(['pip','install','--user','ikpdb'])
