@@ -19,6 +19,11 @@ Use a **personal account** or create a new AWS account to ensure you have the ne
 
 If the resources that you use for this workshop are left undeleted you will incur charges on your AWS account.
 
+### Region
+
+Since these workshops used the Cloud9 IDE you can use run these workshops in the following regions where the Cloud9 IDE
+service is available N.Virginia, Ohio, Oregon, Ireland and Singapore
+
 ### Cloudformation templates for initial environment setup
 
 Please run these cloudformation stacks in your AWS account as this is required for all the workshops in this repository.
