@@ -71,18 +71,34 @@ The above stack creates an Cloud9 IDE environment called **workshop-environment*
 </body>
 </html>
 
+### Browser
+
+These workshops assume that you are using a Cloud IDE environment. We recommend you use the latest version of Chrome or Firefox to complete this workshop.
+
 # Final Cleanup
 
 Once you you have finished working on the workshops within this repository ,the final step is to clean up the resources by deleting
 the cloudformation stacks that setup the workshop environment. For cleanup follow the steps below :
 
+### Step 1 :
 
+Within the Cloud9 IDE **workshop environment** that you used for this workshop checkout the final clean up branch
+by using the following command :
 
+**git checkout final-cleanup**
 
-### Browser
+### Step 2 :
 
-These workshops assume that you are using a Cloud IDE environment. We recommend you use the latest version of Chrome or Firefox to complete this workshop.
+* In the Cloud9 IDE you will find a python module called ***final-cleanup.py***
+* Run **final-cleanup.py** python module 
+* At this point cleanup of the cloudformation stacks is intitiated
+* It takes about 3 minutes for the cloudformation stacks named **data-protection-iam-user-creation**
+  and **data-protection-env-setup** to be cleaned up
+* If you are logged in as user **builder** you will be logged out and the Cloud9 IDE **workshop environment**
+  session will be terminated.
 
 ## License Summary
 
 This sample code is made available under a modified MIT license. See the [LICENSE](LICENSE) file.
+
+
