@@ -7,7 +7,7 @@ If you are dealing with protecting data on your AWS architecture using methods s
 Data encryption provides a strong layer of security to protect data that you store within AWS services. AWS services can help you achieve ubiquitous encryption 
 for data in transit as well as data at rest.
 
-<a><img src="images/ubiquitous-encryption.png" width="800" height="600"></a>
+<a><img src="images/ubiquitous-encryption.png" width="700" height="500"></a>
 
 # Prerequisites
 
