@@ -208,6 +208,9 @@ Resources:
          InstanceType: !Ref InstanceType
          Name: "workshop-environment"
          SubnetId: !Ref Subnet
+         Repositories: 
+            - PathComponent: data-protection
+            - RepositoryUrl: 
 
    # We will use admin privileges for now and make it least privilege as we learn
    cryptocloudninerole:
