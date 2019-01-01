@@ -22,7 +22,7 @@ If the resources that you use for this workshop are left undeleted you will incu
 ### Region Support
 
 Since these workshops use the Cloud9 IDE you can use run these workshops in the following regions where the  AWS Cloud9 
-service is available : N.Virginia, Ohio, Oregon, Ireland and Singapore
+service is available : **N.Virginia, Ohio, Oregon, Ireland and Singapore**
 
 ### Cloudformation templates for initial environment setup
 
