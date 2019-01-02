@@ -19,6 +19,10 @@ Use a **personal account** or create a new AWS account to ensure you have the ne
 
 If the resources that you use for this workshop are left undeleted you will incur charges on your AWS account.
 
+### Knowledge Of Python Programming Language
+
+You don't need to be an expert in the python programming language to consume these workshops.
+
 ### Region Support
 
 Since these workshops use the Cloud9 IDE you can use run these workshops in the following regions where the  AWS Cloud9 
