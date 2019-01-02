@@ -25,8 +25,8 @@ Basic python knowledge is sufficient to consume these workshops.
 
 ### Region Support
 
-Since these workshops use the Cloud9 IDE you can use run these workshops in the following regions where the  AWS Cloud9 
-service is available : **N.Virginia, Ohio, Oregon, Ireland and Singapore**
+Since these workshops use the Cloud9 IDE, you can use run these workshops in the following regions where the  AWS Cloud9 
+service is available : **N.Virginia, Ohio, Oregon, Ireland and Singapore.**
 
 ### Cloudformation templates for initial environment setup
 
