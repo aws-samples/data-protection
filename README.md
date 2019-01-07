@@ -19,6 +19,10 @@ Use a **personal account** or create a new AWS account to ensure you have the ne
 
 If the resources that you use for this workshop are left undeleted you will incur charges on your AWS account.
 
+### Browser
+
+These workshops assume that you are using a Cloud IDE environment. We recommend you use the latest version of Chrome or Firefox to complete this workshop.
+
 ### Knowledge Of Python Programming Language
 
 Basic python knowledge is sufficient to consume these workshops.
@@ -79,10 +83,6 @@ The above stack creates an Cloud9 IDE environment called **workshop-environment*
 
 </body>
 </html>
-
-# Browser
-
-These workshops assume that you are using a Cloud IDE environment. We recommend you use the latest version of Chrome or Firefox to complete this workshop.
 
 # Final Cleanup
 
