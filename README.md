@@ -50,7 +50,8 @@ Please login into your account with the username **builder** . You need to chang
 
 [![Deploy workshops environment creation stack](images/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=data-protection-env-setup&templateURL=https://s3.amazonaws.com/crypto-workshop-dont-delete/template-env-setup.yaml)
 
-The above stack creates an Cloud9 IDE environment called **workshop-environment** .
+The above stack creates an Cloud9 IDE environment called **workshop-environment** . In addition a VPC with two subnets and
+an internet gateway is also created.
 
 ### Step 3 :
 
