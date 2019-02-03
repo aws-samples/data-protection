@@ -64,7 +64,10 @@ an internet gateway is also created.
   on the top pane 
 * This module would take about a minute to complete
 * In the runner window below you should see **Workshop environment setup was successful** printed
+* Open a bash terminal within the Cloud9 environment and change directory to **data-protection **. See Images below
 * At this point the cloud9 environment is ready for the workshops
+
+<a><img src="images/bash-terminal-environment.png" width="500" height="200"></a>
 
 # Workshops
 
