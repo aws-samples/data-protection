@@ -44,7 +44,8 @@ The above stack creates an IAM user called **builder** with the password **reInv
 
 ### Before you proceed to Step 2
 
-Please login into your account with the username **builder** . You need to change the password on login.
+Please login into your account with the username **builder** . You need to change the password on login and going forward
+you have to be logged in as user **builder** for all the workshops.
 
 ### Step 2 :
 
@@ -53,7 +54,7 @@ Please login into your account with the username **builder** . You need to chang
 The above stack creates an Cloud9 IDE environment called **workshop-environment** . In addition a VPC with two subnets and
 an internet gateway is also created.
 
-### Step 3 :
+### Step 3 : (Cloud9 IDE Environment Setup)
 
 * Navigate to the Cloud9 service within your AWS console
 * Open the Cloud9 IDE environment called **workshop-environment** .It takes about 30 seconds for the
