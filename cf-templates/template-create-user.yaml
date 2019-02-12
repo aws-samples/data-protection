@@ -44,7 +44,7 @@ Resources:
       Type: AWS::IAM::User
       Properties:
        Path: "/"
-       UserName: 'boulder'
+       UserName: 'builder'
        LoginProfile:
          Password: 'reInvent1#'
          PasswordResetRequired: True
