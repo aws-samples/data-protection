@@ -1,6 +1,6 @@
 AWSTemplateFormatVersion: "2010-09-09"
 
-Description: This AWS CloudFormation Template creates the necessary resources for the data encryption builders session 
+Description: This AWS CloudFormation Template creates the necessary resources for the data protection workshops
 
 Parameters:
   
