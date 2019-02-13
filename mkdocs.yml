@@ -1,0 +1,53 @@
+# Project information
+
+site_name: Scaling threat detection and response in AWS
+site_short_name: Scaling threat detection
+site_description: 'This hands-on workshop is where you will learn about a number of AWS services involved with threat detection and response as we walk through real-world threat scenarios. Learn about the threat detection capabilities of Amazon GuardDuty, Amazon Macie and AWS Security Hub and the available response options. For each hands-on scenario, we review methods to detect and respond to threats using the following services: AWS CloudTrail, Amazon VPC flow logs, Amazon CloudWatch Events, Amazon Macie, AWS Lambda, Amazon Inspector, Amazon GuardDuty and Amazon Security Hub.'
+site_author: 'aws-security-workshops@amazon.com'
+site_url: 'https://scaling-threat-detection.awssecworkshops.com/'
+
+# Repository
+repo_name: 'aws-samples/aws-scaling-threat-detection-workshop'
+repo_url: 'https://github.com/aws-samples/aws-scaling-threat-detection-workshop'
+
+# Copyright
+copyright: '&copy; 2019, Amazon Web Services, Inc. or its affiliates. All rights reserved.'
+
+# Configuration
+theme:
+  name: 'material'
+  logo: 'assets/images/aws_smile_logo.png'
+  favicon: 'assets/images/aws-favicon.ico'
+  feature:
+    tabs: true
+  custom_dir: 'docs/theme'
+
+# Customization
+extra_css:
+  - 'stylesheets/custom.css'
+extra:
+  social:
+    - type: 'home'
+      link: 'https://awssecworkshops.com'
+    - type: 'shield'
+      link: 'https://aws.amazon.com/security/'
+    - type: 'twitter'
+      link: 'https://twitter.com/awssecurityinfo?lang=en'
+    - type: 'rss'
+      link: 'https://aws.amazon.com/blogs/security/'
+
+# Extensions
+markdown_extensions:
+  - admonition
+  - codehilite
+  - pymdownx.details
+
+# Navigation
+nav:
+  - Overview: 'index.md'
+  - 'Module 1: Environment Build': '01-environment-setup.md'
+  - 'Module 2: Attack Simulation': '02-attack-simulation.md'
+  - 'Module 3: Detect & Respond': '03-detection-and-remediation.md'
+  - 'Module 4: Discussion': '04-review-and-discussion.md'
+  - Contributing: 'contribute.md'
+  - License: 'license.md'
