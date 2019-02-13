@@ -488,13 +488,13 @@ service is available : <strong>N.Virginia, Ohio, Oregon, Ireland and Singapore.<
 <h3 id="cloudformation-templates-for-initial-environment-setup">Cloudformation templates for initial environment setup</h3>
 <p>Please run these cloudformation stacks in your AWS account as this is required for all the workshops in this repository.</p>
 <h3 id="step-1">Step 1 :</h3>
-<p><a href="https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=data-protection-iam-user-creation&amp;templateURL=https://s3.amazonaws.com/crypto-workshop-dont-delete/template-create-user.yaml"><img alt="Deploy IAM user creation stack" src="/images/cloudformation-launch-stack.png" /></a></p>
+<p><a href="https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=data-protection-iam-user-creation&amp;templateURL=https://s3.amazonaws.com/crypto-workshop-dont-delete/template-create-user.yaml"><img alt="Deploy IAM user creation stack" src="images/cloudformation-launch-stack.png" /></a></p>
 <p>The above stack creates an IAM user called <strong>builder</strong> with the password <strong>reInvent1#</strong>. </p>
 <h3 id="before-you-proceed-to-step-2">Before you proceed to Step 2</h3>
 <p>Please login into your account with the username <strong>builder</strong> . You need to change the password on login and going forward
 you have to be logged in as user <strong>builder</strong> for all the workshops.</p>
 <h3 id="step-2">Step 2 :</h3>
-<p><a href="https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=data-protection-env-setup&amp;templateURL=https://s3.amazonaws.com/crypto-workshop-dont-delete/template-env-setup.yaml"><img alt="Deploy workshops environment creation stack" src="/images/cloudformation-launch-stack.png" /></a></p>
+<p><a href="https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=data-protection-env-setup&amp;templateURL=https://s3.amazonaws.com/crypto-workshop-dont-delete/template-env-setup.yaml"><img alt="Deploy workshops environment creation stack" src="images/cloudformation-launch-stack.png" /></a></p>
 <p>The above stack creates an Cloud9 IDE environment called <strong>workshop-environment</strong> . In addition a VPC with two subnets and
 an internet gateway is also created.</p>
 <h3 id="step-3-cloud9-ide-environment-setup">Step 3 : (Cloud9 IDE Environment Setup)</h3>
