@@ -34,7 +34,12 @@ service is available : **N.Virginia, Ohio, Oregon, Ireland and Singapore.**
 
 ### Cloudformation templates for initial environment setup
 
-Please run these cloudformation stacks in your AWS account as this is required for all the workshops in this repository.
+Please run these cloudformation stacks in your AWS account as this is required for all the workshops in this repository. When you launch
+the Cloudformation stack keep clicking next until you get to the point where it says 
+
+**"I acknowledge that AWS CloudFormation might create IAM resources with custom names."**
+
+Acknowledge the above statement by clicking on the check box and then click on the **Create** button
 
 ### Step 1 :
 
