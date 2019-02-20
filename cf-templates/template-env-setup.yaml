@@ -160,7 +160,11 @@ Resources:
    S3Bucket: 
       DeletionPolicy: Retain
       Type: AWS::S3::Bucket
-      Properties: {}
+      Properties:
+         Tags:
+              -
+               Key: bucket-for-what
+               Value: !Join [ "-", [ !Ref "AWS::Region", system-cloudtrail-log-storage] ]     
    BucketPolicy: 
       Type: AWS::S3::BucketPolicy
       Properties: 
