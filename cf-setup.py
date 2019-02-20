@@ -9,7 +9,7 @@ import time
 import boto3
 
 try:
-    
+    client = boto3.client('cloudformation')
     # client side encryption
     try:
         response = client.describe_stacks(
