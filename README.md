@@ -41,7 +41,7 @@ the Cloudformation stack keep clicking next until you get to the point where it 
 
 Acknowledge the above statement by clicking on the check box and then click on the **Create** button
 
-### Step 1 :
+### Step 1 : (Launch CF Stack)
 
 [![Deploy workshops environment creation stack](images/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=data-protection-env-setup&templateURL=https://s3.amazonaws.com/crypto-workshop-dont-delete/template-env-setup.yaml)
 
