@@ -59,6 +59,20 @@ an internet gateway is also created.
   on the top pane 
 * This module would take about a minute to complete
 * In the runner window below you should see **Workshop environment setup was successful** printed
+
+### Step 3 : (Initiating CF stacks creation)
+
+* Within the Cloud9 environment, open the file named **cf-setup.py** in the IDE
+* Run the python module **cf-setup.py** by clicking the play button <a><img src="images/cloud9-ide-play-button.png" width="50" height="30"></a>
+  on the top pane 
+* In the runner window below you should see **All cloudformation stack creation for the workshops has been initiated** printed
+* It takes about 5 minutes for all cloudformation stacks creation to complete. Once complete you should see the
+  following stacks successfully completed as shown in the picture below :
+
+<a><img src="images/cf-template-complete-pic.png" width="700" height="300"></a>
+
+### Step 3 : (Change directory)
+
 * Open a bash terminal within the Cloud9 environment and change directory to **data-protection **. See Images below
 * At this point the cloud9 environment is ready for the workshops
 
