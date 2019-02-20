@@ -43,23 +43,12 @@ Acknowledge the above statement by clicking on the check box and then click on t
 
 ### Step 1 :
 
-[![Deploy IAM user creation stack](images/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=data-protection-iam-user-creation&templateURL=https://s3.amazonaws.com/crypto-workshop-dont-delete/template-create-user.yaml)
-
-The above stack creates an IAM user called **builder** with the password **reInvent1#**. 
-
-### Before you proceed to Step 2
-
-Please login into your account with the username **builder** . You need to change the password on login and going forward
-you have to be logged in as user **builder** for all the workshops.
-
-### Step 2 :
-
 [![Deploy workshops environment creation stack](images/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=data-protection-env-setup&templateURL=https://s3.amazonaws.com/crypto-workshop-dont-delete/template-env-setup.yaml)
 
 The above stack creates an Cloud9 IDE environment called **workshop-environment** . In addition a VPC with two subnets and
 an internet gateway is also created.
 
-### Step 3 : (Cloud9 IDE Environment Setup)
+### Step 2 : (Cloud9 IDE Environment Setup)
 
 * Navigate to the Cloud9 service within your AWS console
 * Open the Cloud9 IDE environment called **workshop-environment** .It takes about 30 seconds for the
@@ -111,10 +100,8 @@ by using the following command :
 * In the Cloud9 IDE you will find a python module called ***final-cleanup.py***
 * Run the **final-cleanup.py** python module 
 * At this point cleanup of the cloudformation stacks is intitiated
-* It takes about 3 minutes for the cloudformation stacks named **data-protection-iam-user-creation**
-  and **data-protection-env-setup** to be deleted
-* If you are logged in as user **builder** you will be logged out and the Cloud9 IDE **workshop environment**
-  session will be terminated.
+* It takes about 3 minutes for the cloudformation stacks named **data-protection-env-setup** to be deleted
+* The Cloud9 IDE **workshop environment** session shall will be terminated at this point
 
 ## License Summary
 
