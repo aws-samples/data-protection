@@ -52,7 +52,8 @@ try:
             ],
         )
         
-    print "All cloudformation stacks have been setup for the workshops"
+    print "All cloudformation stack creation for the workshops has been initiated"
+    print "This will take about 9 minutes to complete"
 except:
     print "Unexpected error:", sys.exc_info()[0]
     raise
