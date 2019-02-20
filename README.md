@@ -73,7 +73,7 @@ an internet gateway is also created.
 
 ### Step 3 : (Change directory)
 
-* Open a bash terminal within the Cloud9 environment and change directory to **data-protection **. See Images below
+* Open a bash terminal within the Cloud9 environment and change directory to **data-protection**. See Images below
 * At this point the cloud9 environment is ready for the workshops
 
 <a><img src="images/bash-terminal-environment.png" width="700" height="300"></a>
