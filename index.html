@@ -10,10 +10,10 @@
       <meta name="viewport" content="width=device-width,initial-scale=1">
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
-        <meta name="description" content="Workshop and sample code that builders can use for experiential learning of AWS services that provide data protection. Services such as AWS KMS, AWS ACM, AWS CloudHSM and others will be explored">
+        <meta name="description" content="This hands-on workshop is where you will learn about a number of AWS services involved with threat detection and response as we walk through real-world threat scenarios. Learn about the threat detection capabilities of Amazon GuardDuty, Amazon Macie and AWS Security Hub and the available response options. For each hands-on scenario, we review methods to detect and respond to threats using the following services: AWS CloudTrail, Amazon VPC flow logs, Amazon CloudWatch Events, Amazon Macie, AWS Lambda, Amazon Inspector, Amazon GuardDuty and Amazon Security Hub.">
       
       
-        <link rel="canonical" href="https://data-protection.awssecworkshops.com/">
+        <link rel="canonical" href="https://scaling-threat-detection.awssecworkshops.com/">
       
       
         <meta name="author" content="aws-security-workshops@amazon.com">
@@ -42,7 +42,7 @@
     
     
       
-        <title>Data Protection in AWS</title>
+        <title>Scaling threat detection and response in AWS</title>
       
     
     
@@ -102,7 +102,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#aws-data-protection-workshops" tabindex="1" class="md-skip">
+      <a href="#overview" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -157,7 +157,7 @@
             
               
                 <span class="md-header-nav__topic">
-                  Data Protection in AWS
+                  Scaling threat detection and response in AWS
                 </span>
                 <span class="md-header-nav__topic">
                   Overview
@@ -222,7 +222,7 @@
 
   
 
-<a href="https://github.com/aws-samples/data-protection/" title="Go to repository" class="md-source" data-md-source="github">
+<a href="https://github.com/aws-samples/aws-scaling-threat-detection-workshop/" title="Go to repository" class="md-source" data-md-source="github">
   
     <div class="md-source__icon">
       <svg viewBox="0 0 24 24" width="24" height="24">
@@ -231,7 +231,7 @@
     </div>
   
   <div class="md-source__repository">
-    aws-samples/data-protection
+    aws-samples/aws-scaling-threat-detection-workshop
   </div>
 </a>
             </div>
@@ -309,13 +309,13 @@
 
   <!-- Site title -->
   <label class="md-nav__title md-nav__title--site" for="__drawer">
-    <a href="https://data-protection.awssecworkshops.com/"
-        title="Data Protection in AWS" class="md-nav__button md-logo">
+    <a href="https://scaling-threat-detection.awssecworkshops.com/"
+        title="Scaling threat detection and response in AWS" class="md-nav__button md-logo">
       
         <img src="assets/images/aws_smile_logo.png" width="48" height="48" />
       
     </a>
-    Data Protection
+    Scaling threat detection
   </label>
 
   <!-- Repository containing source -->
@@ -326,7 +326,7 @@
 
   
 
-<a href="https://github.com/aws-samples/data-protection/" title="Go to repository" class="md-source" data-md-source="github">
+<a href="https://github.com/aws-samples/aws-scaling-threat-detection-workshop/" title="Go to repository" class="md-source" data-md-source="github">
   
     <div class="md-source__icon">
       <svg viewBox="0 0 24 24" width="24" height="24">
@@ -335,7 +335,7 @@
     </div>
   
   <div class="md-source__repository">
-    aws-samples/data-protection
+    aws-samples/aws-scaling-threat-detection-workshop
   </div>
 </a>
     </div>
@@ -358,9 +358,66 @@
       
     
     
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Overview
+      </label>
+    
     <a href="." title="Overview" class="md-nav__link md-nav__link--active">
       Overview
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#scenario" title="Scenario" class="md-nav__link">
+    Scenario
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#architecture" title="Architecture" class="md-nav__link">
+    Architecture
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#presentation-deck" title="Presentation deck" class="md-nav__link">
+    Presentation deck
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#region" title="Region" class="md-nav__link">
+    Region
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modules" title="Modules" class="md-nav__link">
+    Modules
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
     
   </li>
 
@@ -371,7 +428,7 @@
 
 
   <li class="md-nav__item">
-    <a href="01-environment-setup.md" title="Module 1: Environment Build" class="md-nav__link">
+    <a href="01-environment-setup/" title="Module 1: Environment Build" class="md-nav__link">
       Module 1: Environment Build
     </a>
   </li>
@@ -383,7 +440,7 @@
 
 
   <li class="md-nav__item">
-    <a href="02-attack-simulation.md" title="Module 2: Attack Simulation" class="md-nav__link">
+    <a href="02-attack-simulation/" title="Module 2: Attack Simulation" class="md-nav__link">
       Module 2: Attack Simulation
     </a>
   </li>
@@ -395,7 +452,7 @@
 
 
   <li class="md-nav__item">
-    <a href="03-detection-and-remediation.md" title="Module 3: Detect & Respond" class="md-nav__link">
+    <a href="03-detection-and-remediation/" title="Module 3: Detect & Respond" class="md-nav__link">
       Module 3: Detect & Respond
     </a>
   </li>
@@ -407,7 +464,7 @@
 
 
   <li class="md-nav__item">
-    <a href="04-review-and-discussion.md" title="Module 4: Discussion" class="md-nav__link">
+    <a href="04-review-and-discussion/" title="Module 4: Discussion" class="md-nav__link">
       Module 4: Discussion
     </a>
   </li>
@@ -454,6 +511,50 @@
     
   
   
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#scenario" title="Scenario" class="md-nav__link">
+    Scenario
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#architecture" title="Architecture" class="md-nav__link">
+    Architecture
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#presentation-deck" title="Presentation deck" class="md-nav__link">
+    Presentation deck
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#region" title="Region" class="md-nav__link">
+    Region
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modules" title="Modules" class="md-nav__link">
+    Modules
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -464,88 +565,36 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/aws-samples/data-protection/edit/master/docs/index.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/aws-samples/aws-scaling-threat-detection-workshop/edit/master/docs/index.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                <h1 id="aws-data-protection-workshops">AWS Data Protection Workshops</h1>
-<p>If you are dealing with protecting data on your AWS architecture using methods such as encryption or certificate management, these workshops can help you learn in depth. We will be using the Cloud9 IDE and a combination of python code and AWS console access for these workshops.</p>
-<h1 id="ubiquitous-encryption">Ubiquitous Encryption</h1>
-<p>Data encryption provides a strong layer of security to protect data that you store within AWS services. AWS services can help you achieve ubiquitous encryption 
-for data in transit as well as data at rest.</p>
-<p><a><img src="./images/ubiquitous-encryption.png" width="700" height="500"></a></p>
-<h1 id="prerequisites">Prerequisites</h1>
-<h3 id="aws-account">AWS Account</h3>
-<p>In order to complete these workshops you'll need a valid active AWS Account with Admin permissions.  The code and instructions in these workshops assume only one student is using a given AWS account at a time. If you try sharing an account with another student, you'll run into naming conflicts for certain resources. </p>
-<p>Use a <strong>personal account</strong> or create a new AWS account to ensure you have the neccessary access. This should not be an AWS account from the company you work for.</p>
-<p>If the resources that you use for this workshop are left undeleted you will incur charges on your AWS account.</p>
-<h3 id="browser">Browser</h3>
-<p>These workshops assume that you are using a Cloud IDE environment. We recommend you use the latest version of Chrome or Firefox to complete this workshop.</p>
-<h3 id="knowledge-of-python-programming-language">Knowledge Of Python Programming Language</h3>
-<p>Basic python knowledge is sufficient to consume these workshops.</p>
-<h3 id="region-support">Region Support</h3>
-<p>Since these workshops use the Cloud9 IDE, you can use run these workshops in the following regions where the  AWS Cloud9 
-service is available : <strong>N.Virginia, Ohio, Oregon, Ireland and Singapore.</strong></p>
-<h3 id="cloudformation-templates-for-initial-environment-setup">Cloudformation templates for initial environment setup</h3>
-<p>Please run these cloudformation stacks in your AWS account as this is required for all the workshops in this repository.</p>
-<h3 id="step-1">Step 1 :</h3>
-<p><a href="https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=data-protection-iam-user-creation&amp;templateURL=https://s3.amazonaws.com/crypto-workshop-dont-delete/template-create-user.yaml"><img alt="Deploy IAM user creation stack" src="images/cloudformation-launch-stack.png" /></a></p>
-<p>The above stack creates an IAM user called <strong>builder</strong> with the password <strong>reInvent1#</strong>. </p>
-<h3 id="before-you-proceed-to-step-2">Before you proceed to Step 2</h3>
-<p>Please login into your account with the username <strong>builder</strong> . You need to change the password on login and going forward
-you have to be logged in as user <strong>builder</strong> for all the workshops.</p>
-<h3 id="step-2">Step 2 :</h3>
-<p><a href="https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=data-protection-env-setup&amp;templateURL=https://s3.amazonaws.com/crypto-workshop-dont-delete/template-env-setup.yaml"><img alt="Deploy workshops environment creation stack" src="images/cloudformation-launch-stack.png" /></a></p>
-<p>The above stack creates an Cloud9 IDE environment called <strong>workshop-environment</strong> . In addition a VPC with two subnets and
-an internet gateway is also created.</p>
-<h3 id="step-3-cloud9-ide-environment-setup">Step 3 : (Cloud9 IDE Environment Setup)</h3>
+                <h1 id="overview">Overview</h1>
+<p>This workshop is designed to help you get familiar with AWS Security services and learn how to use them to identify and remediate threats in your environment.  You'll be working with services such as Amazon GuardDuty, Amazon Macie, Amazon Inspector, AWS Security Hub. You will learn how to use these services to investigate threats during and after an attack, set up a notification and response pipeline, and  add additional protections to improve the security posture of your environment.</p>
 <ul>
-<li>Navigate to the Cloud9 service within your AWS console</li>
-<li>Open the Cloud9 IDE environment called <strong>workshop-environment</strong> .It takes about 30 seconds for the
-  environment to start up.</li>
-<li>In the Cloud9 IDE environment you will find a folder called <strong>data-protection</strong> in the folder pane on the left side of the screen</li>
-<li>Open the file named <strong>environment-setup.py</strong>  in the IDE</li>
-<li>Run the python module <strong>environment-setup.py</strong> by clicking the play button <a><img src="images/cloud9-ide-play-button.png" width="50" height="30"></a>
-  on the top pane </li>
-<li>This module would take about a minute to complete</li>
-<li>In the runner window below you should see <strong>Workshop environment setup was successful</strong> printed</li>
-<li>Open a bash terminal within the Cloud9 environment and change directory to <strong>data-protection </strong>. See Images below</li>
-<li>At this point the cloud9 environment is ready for the workshops</li>
+<li><strong>Level</strong>: Intermediate</li>
+<li><strong>Duration</strong>: 2 - 3 hours</li>
+<li><strong><a href="https://www.nist.gov/cyberframework/online-learning/components-framework" target="_blank">CSF Functions</a></strong>: Detect, Respond, Recover</li>
+<li><strong><a href="https://d0.awsstatic.com/whitepapers/AWS_CAF_Security_Perspective.pdf" target="_blank">CAF Components</a></strong>: Detective, Responsive</li>
+<li><strong><a href="https://awssecworkshops.com/getting-started/" target="_blank">Prerequisites</a href></strong>: AWS Account, Admin IAM User</li>
 </ul>
-<p><a><img src="./images/bash-terminal-environment.png" width="700" height="300"></a></p>
-<h1 id="workshops">Workshops</h1>
-<p><strong>Please review and complete all the above prerequisites before attempting these workshops. The images below are clickable links</strong></p>
-<!DOCTYPE html>
-<html>
-<body>
-
-<p><kbd>
-<a href="https://github.com/aws-samples/data-protection/tree/identity-and-access-control"><img src="./images/identity-access-control.png" width="352" height="240" title="click me"></a>
-</kbd>
-<kbd>
-<a href="https://github.com/aws-samples/data-protection/tree/data-encryption"><img src="./images/data-encryption.png" width="352" height="240" title="click me"></a>
-</kbd>
-<br></p>
-<p></body>
-</html></p>
-<h1 id="final-cleanup">Final Cleanup</h1>
-<p>Once you you have finished working on the workshops within this repository ,the final step is to clean up the resources by deleting
-the cloudformation stacks that setup the workshop environment. For cleanup follow the steps below :</p>
-<h3 id="step-1_1">Step 1 :</h3>
-<p>Within the Cloud9 IDE <strong>workshop environment</strong> that you used for this workshop checkout the final clean up branch
-by using the following command :</p>
-<p><strong>git checkout final-cleanup</strong></p>
-<h3 id="step-2_1">Step 2 :</h3>
-<ul>
-<li>In the Cloud9 IDE you will find a python module called <strong><em>final-cleanup.py</em></strong></li>
-<li>Run the <strong>final-cleanup.py</strong> python module </li>
-<li>At this point cleanup of the cloudformation stacks is intitiated</li>
-<li>It takes about 3 minutes for the cloudformation stacks named <strong>data-protection-iam-user-creation</strong>
-  and <strong>data-protection-env-setup</strong> to be deleted</li>
-<li>If you are logged in as user <strong>builder</strong> you will be logged out and the Cloud9 IDE <strong>workshop environment</strong>
-  session will be terminated.</li>
-</ul>
-<h2 id="license-summary">License Summary</h2>
-<p>This sample code is made available under a modified MIT license. See the <a href="LICENSE">LICENSE</a> file.</p>
+<h2 id="scenario">Scenario</h2>
+<p>Your company is new to the cloud and has recently performed a lift-and-shift of your infrastructure for piloting purposes.  You are a systems administrator and have been tasked with security monitoring within your AWS environment.  As part of that maintenance you are also responsible for responding to any security event in your environment.</p>
+<h2 id="architecture">Architecture</h2>
+<p>For this Workshop you will have a single instance setup in the us-west-2 region. As this was a “lift-and-shift” migration for piloting, you have yet to build redundancy into your application, so you have a single public-facing web server. The web server has access to the Internet Gateway through an Elastic Network Interface. Customers access your web server through a DNS entry pointing to the Elastic Network Interface. You store static content in an S3 bucket and use the VPC S3 Endpoint Gateway for access from the web server.</p>
+<p>For this Workshop you will have a simple setup with a single instance setup in the us-west-2 region. As this was a “lift-and-shift” migration for piloting, you have yet to build redundancy into your application, so you have a single public-facing web server that is accessed through an internet gateway and retrieves static content from an S3 bucket.</p>
+<p><img alt="Architecture" src="images/diagram-basic-arch.png" title="Workload Architecture" /></p>
+<h2 id="presentation-deck">Presentation deck</h2>
+<p><a href="threat-detect-workshop-presentation.pdf">Workshop Presentation Deck</a></p>
+<h2 id="region">Region</h2>
+<p>Please use the <strong>us-west-2 (Oregon)</strong> region for this workshop.</p>
+<h2 id="modules">Modules</h2>
+<p>This workshop is broken up into the four modules below: </p>
+<ol>
+<li><a href="01-environment-setup/">Environment Build and Configuration</a></li>
+<li><a href="02-attack-simulation/">Attack Simulation</a> </li>
+<li><a href="03-detection-and-remediation/">Detection and Remediation</a> </li>
+<li><a href="04-review-and-discussion/">Review and Discussion</a></li>
+</ol>
                 
                   
                 
@@ -567,13 +616,13 @@ by using the following command :</p>
       <nav class="md-footer-nav__inner md-grid">
         
         
-          <a href="contribute/" title="Contributing" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="01-environment-setup/" title="Module 1: Environment Build" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Contributing
+                Module 1: Environment Build
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
