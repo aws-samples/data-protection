@@ -48,7 +48,7 @@
     position: relative;
     display: inline-block;
     font-size: 1.9rem;
-    padding: 0 0 0 20px;
+    padding: 0 0 0 0px;
 }
 
 .md-lang-dropbtn {
