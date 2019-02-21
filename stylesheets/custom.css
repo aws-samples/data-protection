@@ -45,7 +45,7 @@
 }
 
 .md-lang-drop {
-    position: relative;
+    display: inline-block;
     font-size: 1.9rem;
     padding: 0 0 0 5px;
 }
