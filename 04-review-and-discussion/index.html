@@ -564,7 +564,7 @@
 </ol>
 <h2 id="architecture-overview">Architecture Overview</h2>
 <p>Below is a diagram of the overall workshop setup:
-<img alt="Part 1 Diagram" src="../images/04-diagram-module4.png" /></p>
+<img alt="Part 1 Diagram" src="./images/04-diagram-module4.png" /></p>
 <h2 id="what-is-really-going-on">What is Really Going On?</h2>
 <p>In <strong>Module 1</strong> of the workshop you setup the initial components of your infrastructure including GuardDuty, Macie and a simple notification and remediation pipeline. Some of the steps required manual configuration but you also ran a CloudFormation template which setup some of the components. In <strong>Module 2</strong> you launched a second CloudFormation template that initiated the attack simulated by this workshop. The CloudFormation template created two EC2 instances. One instance (named <strong>Malicious Host</strong>) had an EIP attached to it that was added to your GuardDuty custom threat list. Although the <strong>Malicious Host</strong> is in the same VPC as the other instance, for the sake of the scenario (and to prevent the need to submit a penetration testing request) we acted as if it is on the Internet and represented the attack's computer. The other instance (named <strong>Compromised Instance</strong>) was your web server and it was taken over by the <strong>Malicious Host</strong>. In <strong>Module 3</strong> you investigated the attack, remediated the damage, and setup some automated remediations for future attacks.  </p>
 <p><strong>Here is what occurred in the attack:</strong></p>

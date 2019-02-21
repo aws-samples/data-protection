@@ -613,7 +613,7 @@
 <tbody>
 <tr>
 <td>US West 2 (Oregon)</td>
-<td><a href="https://console.aws.amazon.com/cloudformation/home?region=us-west-2#/stacks/new?stackName=ThreatDetectionWksp-Env-Setup&templateURL=https://s3-us-west-2.amazonaws.com/sa-security-specialist-workshops-us-west-2/threat-detect-workshop/staging/01-environment-setup.yml" target="_blank"><img alt="Deploy Module 1 in us-west-2" src="../images/deploy-to-aws.png" /></a></td>
+<td><a href="https://console.aws.amazon.com/cloudformation/home?region=us-west-2#/stacks/new?stackName=ThreatDetectionWksp-Env-Setup&templateURL=https://s3-us-west-2.amazonaws.com/sa-security-specialist-workshops-us-west-2/threat-detect-workshop/staging/01-environment-setup.yml" target="_blank"><img alt="Deploy Module 1 in us-west-2" src="./images/deploy-to-aws.png" /></a></td>
 </tr>
 </tbody>
 </table>
@@ -649,9 +649,9 @@
 <p>Finally, acknowledge that the template will create IAM roles and click <strong>Create</strong>.</p>
 </li>
 </ol>
-<p><img alt="IAM Capabilities" src="../images/iam-capabilities.png" /></p>
+<p><img alt="IAM Capabilities" src="./images/iam-capabilities.png" /></p>
 <p>This will bring you back to the CloudFormation console. You can refresh the page to see the stack starting to create. Before moving on, make sure the stack is in a <strong>CREATE_COMPLETE</strong> status as shown below.</p>
-<p><img alt="Stack Complete" src="../images/01-stack-complete.png" /></p>
+<p><img alt="Stack Complete" src="./images/01-stack-complete.png" /></p>
 <p>You will get an email from SNS asking you to confirm the Subscription. <strong>Confirm the subscription</strong> so you can receive email alerts from AWS services during the Workshop.</p>
 <h2 id="setup-amazon-cloudwatch-event-rules-and-automatic-response">Setup Amazon CloudWatch event rules and automatic response</h2>
 <p>The CloudFormation template you just ran created three <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/WhatIsCloudWatchEvents.html" target="_blank">CloudWatch Event Rules</a> for alerting and response purposes. The steps below will walk you through creating the final rule.  After this you'll have rules in place to receive email notifications and trigger AWS Lambda functions to respond to threats.</p>
@@ -768,7 +768,7 @@ Copy and paste in the custom event pattern below:</p>
 <p>AWS Security Hub is now enabled and will begin collecting and aggregating findings from the security services we have enabled so far.</p>
 <h2 id="architecture-overview">Architecture overview</h2>
 <p>Your environment is now configured and ready for operations.  Below is a diagram to depict the detective controls you now have in place.</p>
-<p><img alt="Detective Controls" src="../images/01-diagram-module1.png" /></p>
+<p><img alt="Detective Controls" src="./images/01-diagram-module1.png" /></p>
 <p>After you have successfully setup your environment, you can proceed to the next module.</p>
                 
                   
