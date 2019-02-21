@@ -52,6 +52,7 @@
 }
 
 .md-lang-dropbtn {
+    position: relative;
     color: white;
     border: none;
     cursor: pointer;
