@@ -71,7 +71,7 @@ an internet gateway is also created.
 
 <a><img src="images/cf-template-complete-pic.png" width="700" height="300"></a>
 
-### Step 3 : (Change directory)
+### Step 4 : (Change directory)
 
 * Open a bash terminal within the Cloud9 environment and change directory to **data-protection**. See Images below
 * At this point the cloud9 environment is ready for the workshops
