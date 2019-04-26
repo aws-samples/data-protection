@@ -127,7 +127,6 @@ by using the following command :
 * Run the **final-cleanup.py** python module 
 * At this point, cleanup of the cloudformation stacks is initiated.
 * It takes about 10 minutes for all the cloudformation stacks to be deleted. 
-* Please make sure that you don't close this browser window until all the cloudformation stacks are deleted
 * The Cloud9 IDE **workshop environment** session shall will be terminated at this point
 
 ## License Summary
