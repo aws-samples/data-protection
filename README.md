@@ -43,7 +43,7 @@ Acknowledge the above statement by clicking on the check box and then click on t
 
 ### Step 1 : (Launch CF Stack)
 
-** Please run this step only if you are consuming this workshop in your own AWS account. If AWS provides an account as part of an event you can skip this step **
+**Please run this step only if you are consuming this workshop in your own AWS account. If AWS provides an account as part of an event you can skip this step**
 
 [![Deploy workshops environment creation stack](images/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=data-protection-env-setup&templateURL=https://github.com/aws-samples/data-protection/blob/master/cf-templates/template-workshops-setup.yaml)
 
