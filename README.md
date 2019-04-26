@@ -45,7 +45,7 @@ Acknowledge the above statement by clicking on the check box and then click on t
 
 **Please run this step only if you are consuming this workshop in your own AWS account. If AWS provides an account as part of an event you can skip this step.**
 
-[![Deploy workshops environment creation stack](images/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=data-protection-env-setup&templateURL=https://github.com/aws-samples/data-protection/blob/master/cf-templates/template-workshops-setup.yaml)
+[![Deploy workshops environment creation stack](images/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=data-protection-env-setup&templateURL=https://s3.amazonaws.com/crypto-workshop-dont-delete/template-workshops-setup.yaml)
 
 The above stack creates an Cloud9 IDE environment called **workshop-environment** . In addition a VPC with two subnets and
 an internet gateway is also created. It takes about 5 minutes for the stack creation to complete. After
