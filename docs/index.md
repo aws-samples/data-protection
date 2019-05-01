@@ -7,7 +7,7 @@ If you are dealing with protecting data on your AWS architecture using methods s
 Data encryption provides a strong layer of security to protect data that you store within AWS services. AWS services can help you achieve ubiquitous encryption 
 for data in transit as well as data at rest.
 
-<a><img src="./images/ubiquitous-encryption.png" width="700" height="500"></a>
+<a><img src="./images/ubiquitous-encryption.png" width="989" height="557"></a>
 
 # Prerequisites
 
@@ -55,7 +55,7 @@ an internet gateway is also created.
   environment to start up.
 * In the Cloud9 IDE environment you will find a folder called **data-protection** in the folder pane on the left side of the screen
 * Open the file named **environment-setup.py**  in the IDE
-* Run the python module **environment-setup.py** by clicking the play button <a><img src="images/cloud9-ide-play-button.png" width="50" height="30"></a>
+* Run the python module **environment-setup.py** by clicking the play button <a><img src="images/cloud9-ide-play-button.png" width="109" height="49"></a>
   on the top pane 
 * This module would take about a minute to complete
 * In the runner window below you should see **Workshop environment setup was successful** printed
@@ -63,20 +63,20 @@ an internet gateway is also created.
 ### Step 3 : (Initiating CF stacks creation)
 
 * Within the Cloud9 environment, open the file named **cf-setup.py** in the IDE
-* Run the python module **cf-setup.py** by clicking the play button <a><img src="images/cloud9-ide-play-button.png" width="50" height="30"></a>
+* Run the python module **cf-setup.py** by clicking the play button <a><img src="images/cloud9-ide-play-button.png" width="109" height="49"></a>
   on the top pane 
 * In the runner window below you should see **All cloudformation stack creation for the workshops has been initiated** printed
 * It takes about 5 minutes for all cloudformation stacks creation to complete. Once complete you should see the
   following stacks successfully completed as shown in the picture below :
 
-<a><img src="images/cf-template-complete-pic.png" width="700" height="300"></a>
+<a><img src="images/cf-template-complete-pic.png" width="1032" height="304"></a>
 
 ### Step 3 : (Change directory)
 
 * Open a bash terminal within the Cloud9 environment and change directory to **data-protection**. See Images below
 * At this point the cloud9 environment is ready for the workshops
 
-<a><img src="images/bash-terminal-environment.png" width="700" height="300"></a>
+<a><img src="images/bash-terminal-environment.png" width="803" height="302"></a>
 
 # Workshops
 
@@ -87,10 +87,10 @@ an internet gateway is also created.
 <body>
 
 <kbd>
-<a href="https://github.com/aws-samples/data-protection/tree/identity-and-access-control"><img src="images/identity-access-control.png" width="352" height="240" title="click me"></a>
+<a href="https://github.com/aws-samples/data-protection/tree/identity-and-access-control"><img src="images/identity-access-control.png" width="360" height="261" title="click me"></a>
 </kbd>
 <kbd>
-<a href="https://github.com/aws-samples/data-protection/tree/data-encryption"><img src="images/data-encryption.png" width="352" height="240" title="click me"></a>
+<a href="https://github.com/aws-samples/data-protection/tree/data-encryption"><img src="images/data-encryption.png" width="360" height="261" title="click me"></a>
 </kbd>
 <br>
 
