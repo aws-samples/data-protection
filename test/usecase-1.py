@@ -18,7 +18,7 @@ class TestUseCase1(unittest.TestCase):
         self.assertEqual(child.returncode, 0)
         kmsAlias = False
         i = 0
-        data = alias = self.kms_client.list_aliases()
+        data = self.kms_client.list_aliases()
         while ( i < len(data['Aliases']) and not(kmsAlias)):
             kmsAlias = data['Aliases'][i]['AliasName'] == 'alias/kms_key_sse_usecase_1'
             i=i+1
