@@ -58,7 +58,7 @@ def main():
         # Delete the objects and buckets that were created as part of usecase-1
         response = s3_client.list_buckets()
         for bucket_name in response['Buckets']:
-            if bucket_name['Name'].startswith('reinvent-builder') or bucket_name['Name'].startswith('reinvent-builder-bucket-cw-event-usecase-4'):
+            if bucket_name['Name'].startswith('dp-workshop') or bucket_name['Name'].startswith('dp-workshop-bucket-cw-event-usecase-4'):
                 try:
                     response = s3_client.get_bucket_tagging(
                         Bucket=bucket_name['Name']
@@ -67,8 +67,8 @@ def main():
                     pass
         
                 if 'TagSet' in response: 
-                    if (response['TagSet'][0]['Key'] == 'reinvent') and (response['TagSet'][0]['Value'] == 'dataencryption_builderssession'):
-                        # Delete the objects stored in S3 within reinvent-builders-bucket
+                    if (response['TagSet'][0]['Key'] == 'workshop') and (response['TagSet'][0]['Value'] == 'data-protection'):
+                        # Delete the objects stored in S3 within dp-workshops-bucket
                         response = s3_client.list_objects(
                             Bucket=bucket_name['Name'],
                             )
@@ -86,7 +86,7 @@ def main():
                         
                 if 'TagSet' in response: 
                     if (response['TagSet'][0]['Key'] == 'whatfor') and (response['TagSet'][0]['Value'] == 'usecase-4-cse'):
-                        # Delete the objects stored in S3 within buckets that start with reinvent-builder-bucket-cw-event
+                        # Delete the objects stored in S3 within buckets that start with dp-workshop-bucket-cw-event
                         response = s3_client.delete_bucket(
                             Bucket=bucket_name['Name']
                         )

@@ -25,7 +25,7 @@ def main():
         #   creating a s3 bucket with some name randomization   #
         #########################################################
         s3_client = boto3.client('s3', region)
-        bucket_name = 'reinvent-builder-bucket' + str(random.randint(1, 100000))
+        bucket_name = 'dp-workshop-bucket' + str(random.randint(1, 100000))
         
         # Doing the below because locationconstraint does not support all regions today
         if 'us-east-1' in region:
@@ -44,8 +44,8 @@ def main():
             Tagging={
                 'TagSet': [
                     {
-                        'Key': 'reinvent',
-                        'Value': 'dataencryption_builderssession'
+                        'Key': 'workshop',
+                        'Value': 'data-protection'
                     },
                 ]
             }

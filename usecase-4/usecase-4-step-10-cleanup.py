@@ -121,8 +121,8 @@ def main():
                     pass
         
                 if 'TagSet' in response: 
-                    if (response['TagSet'][0]['Key'] == 'reinvent') and (response['TagSet'][0]['Value'] == 'dataencryption_builderssession'):
-                        # Delete the objects stored in S3 within reinvent-builders-bucket
+                    if (response['TagSet'][0]['Key'] == 'workshop') and (response['TagSet'][0]['Value'] == 'data-protection'):
+                        # Delete the objects stored in S3 within dp-workshops-bucket
                         response = s3_client.list_objects(
                             Bucket=bucket_name['Name'],
                             )

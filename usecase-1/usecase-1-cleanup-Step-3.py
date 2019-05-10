@@ -24,7 +24,7 @@ def main():
         s3_client = boto3.client('s3', region)
         response = s3_client.list_buckets()
         for bucket_name in response['Buckets']:
-            if bucket_name['Name'].startswith('reinvent-builder'):
+            if bucket_name['Name'].startswith('dp-workshop'):
                 try:
                     response = s3_client.get_bucket_tagging(
                         Bucket=bucket_name['Name']
@@ -33,8 +33,8 @@ def main():
                     pass
         
                 if 'TagSet' in response: 
-                    if (response['TagSet'][0]['Key'] == 'reinvent') and (response['TagSet'][0]['Value'] == 'dataencryption_builderssession'):
-                        # Delete the objects stored in S3 within reinvent-builders-bucket
+                    if (response['TagSet'][0]['Key'] == 'workshop') and (response['TagSet'][0]['Value'] == 'data-protection'):
+                        # Delete the objects stored in S3 within dp-workshop-bucket
                         response = s3_client.list_objects(
                             Bucket=bucket_name['Name'],
                             )

@@ -149,7 +149,7 @@ def main():
                 'Value': 180,
                 'Type': 'DAYS'
             },
-            IdempotencyToken='reinvent-builder-subordinate'
+            IdempotencyToken='dp-workshop-subordinate'
         )
         
         cert_arn = response['CertificateArn']

@@ -13,8 +13,10 @@ Parameters:
     Type: String
     Default: t2.medium
     AllowedValues: 
-      - t2.micro
+      - t2.small
       - t2.medium
+      - t3.small
+      - t3.medium
     Description: Pick a instance type for the Cloud9 environment 
       
 # This IAM user will be used for all login and development
@@ -207,6 +209,10 @@ Resources:
    cryptocloud9env:
       Type : AWS::Cloud9::EnvironmentEC2
       Properties: 
+         # OwnerArn for event engine module
+         OwnerArn: !Sub 'arn:aws:sts::${AWS::AccountId}:assumed-role/TeamRole/MasterKey'
+         # OwnerArn for testing in AWS account
+         # OwnerArn: !Sub 'arn:aws:sts::${AWS::AccountId}:user/eventengine'
          Description: "Cloud9 environment for the crypto builders python modules"
          AutomaticStopTimeMinutes: 60
          InstanceType: !Ref InstanceType
@@ -446,7 +452,7 @@ Resources:
                    whatfor_value = event['detail']['requestParameters']['encryptionContext']['whatfor']
                    
                    if whatfor_value == 'usecase-3-cse':
-                      bucket_name = 'reinvent-builder-bucket-cw-event' + str(random.randint(1, 100000))
+                      bucket_name = 'dp-workshop-bucket-cw-event' + str(random.randint(1, 100000))
                       # Doing the below because locationconstraint does not support all regions today
                       if 'us-east-1' in region:
                            s3_client.create_bucket(Bucket=bucket_name)
@@ -575,7 +581,7 @@ Resources:
                    whatfor_value = event['detail']['requestParameters']['encryptionContext']['whatfor']
                    
                    if whatfor_value == 'usecase-4-cse':
-                      bucket_name = 'reinvent-builder-bucket-cw-event-usecase-4' + str(random.randint(1, 100000))
+                      bucket_name = 'dp-workshop-bucket-cw-event-usecase-4' + str(random.randint(1, 100000))
                       # Doing the below because locationconstraint does not support all regions today
                       if 'us-east-1' in region:
                            s3_client.create_bucket(Bucket=bucket_name)

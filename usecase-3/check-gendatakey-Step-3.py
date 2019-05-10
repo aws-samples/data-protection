@@ -23,7 +23,7 @@ def main():
         s3_client = boto3.client('s3', region)
         response = s3_client.list_buckets()
         for bucket in response['Buckets']:
-            if bucket['Name'].startswith("reinvent-builder-bucket-cw-event-usecase-4"):
+            if bucket['Name'].startswith("dp-workshop-bucket-cw-event-usecase-4"):
                 bucket_name = bucket['Name']
                 response = s3_client.get_bucket_tagging(
                     Bucket=bucket_name

@@ -64,8 +64,8 @@ def main():
             Tagging={
                 'TagSet': [
                     {
-                        'Key': 'reinvent',
-                        'Value': 'dataencryption_builderssession'
+                        'Key': 'workshop',
+                        'Value': 'data-protection'
                     },
                 ]
             }
