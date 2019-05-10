@@ -13,7 +13,7 @@ class TestUseCase1(unittest.TestCase):
     def test_step1(self):
         
         print(self.pwd)
-        child = subprocess.Popen(['python3', self.pwd+'/data-protection/usecase-1/kms_key_creation-Step-1.py'])
+        child = subprocess.Popen(['python', self.pwd+'/data-protection/usecase-1/kms_key_creation-Step-1.py'])
         output = child.communicate()[0]
         self.assertEqual(child.returncode, 0)
         kmsAlias = False
