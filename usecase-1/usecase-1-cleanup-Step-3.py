@@ -18,10 +18,7 @@ def main():
     """
     try:
         print "\n This step takes about 5 seconds to complete"
-        az = subprocess.check_output(['curl', '-s', 'http://169.254.169.254/latest/meta-data/placement/availability-zone'])
-        list_az = az.split('-')
-        region = list_az[0]+ '-' + list_az[1] + '-' + list_az[2][0]
-        s3_client = boto3.client('s3', region)
+        s3_client = boto3.client('s3')
         response = s3_client.list_buckets()
         for bucket_name in response['Buckets']:
             if bucket_name['Name'].startswith('dp-workshop'):
@@ -57,7 +54,7 @@ def main():
         if Path(plaintext_cycled_filename_path).exists():
             os.remove(plaintext_cycled_filename_path)
             
-        kms_client = boto3.client('kms', region)
+        kms_client = boto3.client('kms')
         
         response = kms_client.list_aliases(
             Limit=100

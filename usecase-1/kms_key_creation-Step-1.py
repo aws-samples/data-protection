@@ -15,10 +15,7 @@ def main():
     ##########################################################
     """
     try:
-        az = subprocess.check_output(['curl', '-s', 'http://169.254.169.254/latest/meta-data/placement/availability-zone'])
-        list_az = az.split('-')
-        region = list_az[0]+ '-' + list_az[1] + '-' + list_az[2][0]
-        kms_client = boto3.client('kms', region)
+        kms_client = boto3.client('kms')
    
         account_num = boto3.client('sts').get_caller_identity().get('Account')
     
