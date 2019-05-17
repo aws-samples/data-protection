@@ -1,0 +1,123 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "ec2:RunInstances",
+            "Resource": "arn:aws:ec2:*:*:instance/*",
+            "Condition": {
+                "StringEquals": {
+                    "ec2:InstanceType": [
+                        "t2.small",
+                        "t2.medium",
+                        "t3.small",
+                        "t3.medium"
+                    ]
+                }
+            }
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ssm:GetParameter*",
+                "ssm:PutParameter",
+                "ssm:DeleteParameter",
+                "health:DescribeAffectedEntities",
+                "application-autoscaling:*",
+                "iam:List*",
+                "ec2:Reject*",
+                "ec2:Reset*",
+                "logs:*",
+                "dynamodb:*",
+                "ec2:Enable*",
+                "autoscaling:*",
+                "acm-pca:*",
+                "ec2:Terminate*",
+                "ec2messages:*",
+                "ec2:Get*",
+                "ec2:Associate*",
+                "sns:*",
+                "ec2:Detach*",
+                "ec2:Disable*",
+                "cloudformation:*",
+                "ec2:Cancel*",
+                "ec2:Unassign*",
+                "ec2:Modify*",
+                "cloudwatch:*",
+                "ec2:Monitor*",
+                "ec2:Delete*",
+                "ec2:Attach*",
+                "ec2:Move*",
+                "cloudtrail:*",
+                "ec2:Restore*",
+                "ec2:Start*",
+                "ec2:Report*",
+                "health:DescribeEventTypes",
+                "ec2:Deregister*",
+                "ec2:Unmonitor*",
+                "health:DescribeEntityAggregates",
+                "ec2:Revoke*",
+                "iam:Get*",
+                "health:DescribeEventAggregates",
+                "ec2:Accept*",
+                "ec2:Confirm*",
+                "kms:*",
+                "elasticloadbalancing:*",
+                "ec2:Import*",
+                "ec2:Release*",
+                "health:DescribeEvents",
+                "ec2:Bundle*",
+                "ec2:Create*",
+                "s3:*",
+                "ec2:Copy*",
+                "ec2:Replace*",
+                "health:DescribeEventDetails",
+                "sts:*",
+                "ec2:Authorize*",
+                "cloud9:*",
+                "ec2:Reboot*",
+                "ec2:Stop*",
+                "ec2:Assign*",
+                "ec2:Register*",
+                "ec2:Describe*",
+                "ec2:Disassociate*",
+                "lambda:*",
+                "ec2:Allocate*",
+                "acm:*",
+                "route53:*"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": "ec2:RunInstances",
+            "Resource": [
+                "arn:aws:ec2:*::image/ami-*",
+                "arn:aws:ec2:*:*:subnet/*",
+                "arn:aws:ec2:*:*:key-pair/*",
+                "arn:aws:ec2:*:*:volume/*",
+                "arn:aws:ec2:*:*:security-group/*",
+                "arn:aws:ec2:*:*:network-interface/*"
+            ]
+        },
+        {
+            "Effect": "Deny",
+            "Action": [
+                "ec2:DeleteSpotDatafeedSubscription",
+                "ec2:RequestSpotInstances",
+                "ec2:PurchaseReservedInstancesOffering",
+                "ec2:CancelSpotFleetRequests",
+                "dynamodb:PurchaseReservedCapacityOfferings",
+                "ec2:PurchaseHostReservation",
+                "ec2:RequestSpotFleet",
+                "rds:PurchaseReservedDBInstancesOffering",
+                "ec2:CancelSpotInstanceRequests",
+                "ec2:ModifySpotFleetRequest",
+                "ec2:CreateSpotDatafeedSubscription",
+                "ec2:PurchaseScheduledInstances",
+                "ec2:ModifyReservedInstances"
+            ],
+            "Resource": "*"
+        }
+    ]
+}
