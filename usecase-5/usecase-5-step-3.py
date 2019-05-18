@@ -36,7 +36,7 @@ def main():
         az = subprocess.check_output(['curl', '-s', 'http://169.254.169.254/latest/meta-data/placement/availability-zone'])
         list_az = az.split('-')
         region = list_az[0]+ '-' + list_az[1] + '-' + list_az[2][0]
-        ddb_client = boto3.client('dynamodb', region)
+        ssm_client = boto3.client('ssm')
         
         #####################################################################################
         #   Generating key pair for self signed cert                                        #
@@ -59,32 +59,11 @@ def main():
     
         rootca_serial_number = random.randint(1, 100000)
         
-        response = ddb_client.update_item(
-            ExpressionAttributeNames={
-                '#rsn': 'rootca_serial_number',
-                '#rcpk': 'root_ca_private_key',
-            },
-            ExpressionAttributeValues={
-                ':a': {
-                    'N': str(rootca_serial_number),
-                },
-                ':b': {
-                    'B': privkey_pem,
-                },
-            },
-            Key={
-                'shared_variables': {
-                    'N': '1000',
-                },
-                'session': {
-                    'N': '1000',
-                },
-            },
-            ReturnValues='ALL_NEW',
-            TableName='shared_variables_crypto_builders_usecase_6',
-            UpdateExpression='SET #rsn = :a, #rcpk = :b',
-        )
-    
+        ssm_client.put_parameter(Name='/dp-workshop/rootca_serial_number',Type='String',Value=str(rootca_serial_number))
+        with open('/tmp/root_ca_private_key', 'wb') as key_file:
+            key_file.write(privkey_pem)
+        os.chmod('/tmp/root_ca_private_key', 0600)
+
         #############################################################
         #  Create the subject and issuer for the self signed cert   #                
         #############################################################

@@ -2,7 +2,6 @@
 #################################################################################
 #  Issuing a certificate for the private domain alb.workshop.com                #
 #                                                                               #
-#                                                                               #
 #  The endpoint cert and the certificate chain can be used                      #
 #  for accomplishing a successful TLS connection from a client to the webserver #
 #                                                                               #
@@ -29,31 +28,20 @@ def main():
         region = list_az[0]+ '-' + list_az[1] + '-' + list_az[2][0]
         elbv2_client = boto3.client('elbv2', region)
         lambda_client = boto3.client('lambda',region)
-        ddb_client = boto3.client('dynamodb', region)
+        ssm_client = boto3.client('ssm', region)
         acm_pca_client = boto3.client('acm-pca', region_name=region)
         acm_client = boto3.client('acm', region_name=region)
 
         ##################################################################################################
-        #   Getting subordinate_pca_arn stored in Dynamo DB                                              #
+        #   Retrieve subordinate_pca_arn                                                                 #
         #   The subordinate pca arn comes from the ACM subordinate PCA created in step 2 and is required #
         #   for issuing certificates                                                                     #
         #   The target group was created in step 1                                                       #
         ##################################################################################################
-        response = ddb_client.get_item(
-            TableName='shared_variables_crypto_builders_usecase_6',
-            Key={
-                'shared_variables': {
-                    'N': '1000',
-                },
-                'session': {
-                    'N': '1000',
-                },
-            },
-        )
-        
-        subordinate_pca_arn = response['Item']['subordinate_pca_arn']['S']
-        target_group_arn = response['Item']['target_group_arn']['S']
-        
+
+        subordinate_pca_arn = ssm_client.get_parameter(Name='/dp-workshop/subordinate_pca_arn')['Parameter']['Value']
+        target_group_arn = ssm_client.get_parameter(Name='/dp-workshop/target_group_arn')['Parameter']['Value']
+
         response = acm_client.request_certificate(
             DomainName='alb.workshop.com',
             CertificateAuthorityArn=subordinate_pca_arn
@@ -82,30 +70,10 @@ def main():
         textfilecertchain.close()
         
         ##################################################################################
-        #   Putting the certificate ARN in the shared DDB table to use later for cleanup #
+        #   Putting the certificate ARN in the parameter store to use later for cleanup  #
         ##################################################################################
-        response = ddb_client.update_item(
-            ExpressionAttributeNames={
-                '#certarn': 'private_cert_arn',
-            },
-            ExpressionAttributeValues={
-                ':a': {
-                    'S': certificate_arn,
-                },
-            },
-            Key={
-                'shared_variables': {
-                    'N': '1000',
-                },
-                'session': {
-                    'N': '1000',
-                },
-            },
-            ReturnValues='ALL_NEW',
-            TableName='shared_variables_crypto_builders_usecase_6',
-            UpdateExpression='SET #certarn = :a',
-        )
-        
+        ssm_client.put_parameter(Name='/dp-workshop/private_cert_arn',Type='String',Value=certificate_arn)
+
         ###########################################################################################
         #   Creating a HTTPS listener for the ALB                                                 #
         #   Associating the certificate and target group with the HTTPS listener                  #
@@ -141,30 +109,10 @@ def main():
                         )
                         
                         #######################################################################################
-                        #   Putting the listener ARN in the shared DDB table to use later for cleanup later   #
+                        #   Putting the listener ARN in the parameter store to use later for cleanup later    #
                         #######################################################################################
-                        response = ddb_client.update_item(
-                            ExpressionAttributeNames={
-                                '#listarn': 'listener_arn',
-                            },
-                            ExpressionAttributeValues={
-                                ':a': {
-                                    'S': response['Listeners'][0]['ListenerArn'],
-                                },
-                            },
-                            Key={
-                                'shared_variables': {
-                                    'N': '1000',
-                                },
-                                'session': {
-                                    'N': '1000',
-                                },
-                            },
-                            ReturnValues='ALL_NEW',
-                            TableName='shared_variables_crypto_builders_usecase_6',
-                            UpdateExpression='SET #listarn = :a',
-                        )
-        
+                        ssm_client.put_parameter(Name='/dp-workshop/listener_arn',Type='String',Value=response['Listeners'][0]['ListenerArn'])
+
         time.sleep(60)
         print "Successfully attached a HTTPS listener to the ALB"
         print "\nSuccessfully issued a private certificate for the private domain alb.workshop.com"

@@ -27,21 +27,11 @@ def main():
         list_az = az.split('-')
         region = list_az[0]+ '-' + list_az[1] + '-' + list_az[2][0]
         acm_pca_client = boto3.client('acm-pca', region_name=region)
-        ddb_client = boto3.client('dynamodb', region)
+        ssm_client = boto3.client('ssm')
         
-        response = ddb_client.get_item(
-            TableName='shared_variables_crypto_builders_usecase_6',
-            Key={
-                'shared_variables': {
-                    'N': '1000',
-                },
-                'session': {
-                    'N': '1000',
-                },
-            },
-        )
+        subordinate_pca_arn = ssm_client.get_parameter(Name='/dp-workshop/subordinate_pca_arn')['Parameter']['Value']
                         
-        subordinate_pca_arn = response['Item']['subordinate_pca_arn']['S']
+        # subordinate_pca_arn = response['Item']['subordinate_pca_arn']['S']
         current_directory_path = os.path.dirname(os.path.realpath(__file__)) + '/'
         response = acm_pca_client.import_certificate_authority_certificate(
             CertificateAuthorityArn=subordinate_pca_arn,

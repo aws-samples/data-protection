@@ -30,7 +30,7 @@ def main():
         list_az = az.split('-')
         region = list_az[0]+ '-' + list_az[1] + '-' + list_az[2][0]
         acm_pca_client = boto3.client('acm-pca', region_name=region)
-        ddb_client = boto3.client('dynamodb', region)
+        ssm_client = boto3.client('ssm')
         
         #####################################################################################
         #   Get the self signed CA cert private key, cert serial numbers from the DynamoDB  #  
@@ -39,32 +39,22 @@ def main():
     
         current_directory_path = os.path.dirname(os.path.realpath(__file__)) + '/'
        
-        response = ddb_client.get_item(
-            TableName='shared_variables_crypto_builders_usecase_6',
-            Key={
-                'shared_variables': {
-                    'N': '1000',
-                },
-                'session': {
-                    'N': '1000',
-                },
-            },
-        )
-                        
-        root_ca_serial_number = response['Item']['rootca_serial_number']['N']
-        subordinate_ca_serial_number = int(response['Item']['subordinate_ca_serial_number']['N'])
-        subordinate_pca_arn = response['Item']['subordinate_pca_arn']['S']
-        
+
+        root_ca_serial_number = int(ssm_client.get_parameter(Name='/dp-workshop/rootca_serial_number')['Parameter']['Value'])
+        subordinate_ca_serial_number = int(ssm_client.get_parameter(Name='/dp-workshop/subordinate_ca_serial_number')['Parameter']['Value'])
+        subordinate_pca_arn = ssm_client.get_parameter(Name='/dp-workshop/subordinate_pca_arn')['Parameter']['Value']
         #####################################################################################
         #   The private key used here is for demonstration purposes, the best practice      #
         #   is to store private keys on an HSM                                              #
         #####################################################################################
-        root_ca_private_key = serialization.load_pem_private_key(
-            response['Item']['root_ca_private_key']['B'],
-            password=None,
-            backend=default_backend() 
-        )
-        
+        root_ca_private_key = None
+        with open('/tmp/root_ca_private_key', "rb") as binary_key_file:
+            root_ca_private_key = serialization.load_pem_private_key(
+                binary_key_file.read(),
+                password=None,
+                backend=default_backend() 
+            )
+
         #####################################################################################
         #   Get the subordinate CA CSR from ACM                                             #  
         #   Load the CSR into a format that the crytography.io package understands          #

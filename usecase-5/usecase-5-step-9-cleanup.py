@@ -8,8 +8,6 @@
 #                                                                             #
 #  3. All the files created in the filesystem is deleted                      #
 #                                                                             #
-#  4. CF stack acm-pca-usecase-6 is deleted                                   #
-#                                                                             #
 ###############################################################################
 """
 import os
@@ -31,7 +29,7 @@ def main():
         region = list_az[0]+ '-' + list_az[1] + '-' + list_az[2][0]
         s3_client = boto3.client('s3', region_name=region)
         acm_pca_client = boto3.client('acm-pca', region_name=region)
-        ddb_client = boto3.client('dynamodb', region)
+        ssm_client = boto3.client('ssm')
         elbv2_client = boto3.client('elbv2', region)
         acm_client = boto3.client('acm', region_name=region)
         
@@ -55,45 +53,18 @@ def main():
         if Path(cert_chain_path).exists():
             os.remove(cert_chain_path)    
        
-        ##########################################
-        #  Delete the subordinate pca created    #
-        ##########################################
-        subordinate_pca_arn = None 
-        target_group_arn = None
-        private_cert_arn = None
-        listener_arn = None
-        try:
-            response = ddb_client.describe_table(TableName='shared_variables_crypto_builders_usecase_6')
-            if response is not None:
-                response = ddb_client.get_item(TableName='shared_variables_crypto_builders_usecase_6', \
-                    Key={
-                            'shared_variables': {
-                                'N': '1000',
-                            },
-                            'session': {
-                                'N': '1000',
-                            },
-                        },
-                )
-                                
-                if  'subordinate_pca_arn' in response['Item']:
-                    subordinate_pca_arn = response['Item']['subordinate_pca_arn']['S']
-                
-                if  'target_group_arn' in response['Item']:
-                    target_group_arn = response['Item']['target_group_arn']['S']
-                
-                if  'private_cert_arn' in response['Item']:
-                    private_cert_arn = response['Item']['private_cert_arn']['S']
-                
-                if  'listener_arn' in response['Item']:
-                    listener_arn = response['Item']['listener_arn']['S']
-                
-                # Delete the DDB Table that stores key value pairs shared across multiple python modules
-                response = ddb_client.delete_table(
-                    TableName='shared_variables_crypto_builders_usecase_6'
-                )
-        except ddb_client.exceptions.ResourceNotFoundException:
-            print "No DDB table found to delete !! that's OK"
+
+        subordinate_pca_arn = ssm_client.get_parameter(Name='/dp-workshop/subordinate_pca_arn')['Parameter']['Value']
+        target_group_arn = ssm_client.get_parameter(Name='/dp-workshop/target_group_arn')['Parameter']['Value']
+        private_cert_arn = ssm_client.get_parameter(Name='/dp-workshop/private_cert_arn')['Parameter']['Value']
+        listener_arn = ssm_client.get_parameter(Name='/dp-workshop/listener_arn')['Parameter']['Value']
+        params = ['/dp-workshop/listener_arn',
+            '/dp-workshop/private_cert_arn',
+            '/dp-workshop/target_group_arn',
+            '/dp-workshop/subordinate_pca_arn',
+            '/dp-workshop/rootca_serial_number',
+            '/dp-workshop/subordinate_ca_serial_number'
+        ]
             
         if subordinate_pca_arn is not None:
             response = acm_pca_client.describe_certificate_authority(
@@ -192,27 +163,11 @@ def main():
         except:
             print "No private certificates for the private domain alb.workshop.com mapping to the ALB"
 
-        ###########################################
-        #  Cleanup the cloudformation template    #
-        ###########################################
-        # cf_client = boto3.client('cloudformation',region)
-        # response = cf_client.list_stacks(
-        #     StackStatusFilter=[
-        #         'CREATE_COMPLETE',
-        #     ]
-        # )
-        
-        # for stack in response['StackSummaries']:
-        #     if stack['StackName'] == 'acm-pca-usecase-6':
-        #         response = cf_client.delete_stack(
-        #             StackName='acm-pca-usecase-6',
-        #         )
-        
-        #print "\nDeleting Cloudformation stack created for this usecase has been initiated .It takes about 3 minutes for the CF stack to be deleted"
+        ssm_client.delete_parameters(Names=params)
+        os.remove('/tmp/root_ca_private_key')
         print "\nEverything cleaned up ,you are all good !!\n"
         print "\nStep-9 cleanup has been successfully completed \n"
-        # print "\nif you plan to re-run this usecase after cleanup please wait until the CF stack named acm-pca-usecase-6 has been deleted \n"
-    
+
     except:
         print "Unexpected error:", sys.exc_info()[0]
         raise

@@ -21,9 +21,9 @@ def main():
         az = subprocess.check_output(['curl', '-s', 'http://169.254.169.254/latest/meta-data/placement/availability-zone'])
         list_az = az.split('-')
         region = list_az[0]+ '-' + list_az[1] + '-' + list_az[2][0]
-        ddb_client = boto3.client('dynamodb', region)
         acm_pca_client = boto3.client('acm-pca', region_name=region)
         s3_client = boto3.client('s3', region_name=region)
+        ssm_client = boto3.client('ssm')
         
         ####################################################################
         #   Creating the subject for the private certificate authority     #
@@ -138,35 +138,9 @@ def main():
             
         print "\nSuccess : The ARN of the subordinate private certificate authority is : \n" + subordinate_pca_arn
         
-        ##########################################################################
-        #   Storing shared variables in dynamoDB for other python modules to use #
-        ##########################################################################
-        response = ddb_client.update_item(
-            ExpressionAttributeNames={
-                '#spa': 'subordinate_pca_arn',
-                '#scsn': 'subordinate_ca_serial_number',
-            },
-            ExpressionAttributeValues={
-                ':a': {
-                    'S': subordinate_pca_arn,
-                },
-                ':b': {
-                    'N': str(subordinate_ca_serial_number),
-                },
-            },
-            Key={
-                'shared_variables': {
-                    'N': '1000',
-                },
-                'session': {
-                    'N': '1000',
-                },
-            },
-            ReturnValues='ALL_NEW',
-            TableName='shared_variables_crypto_builders_usecase_6',
-            UpdateExpression='SET #spa = :a, #scsn = :b',
-        )
-        
+        ssm_client.put_parameter(Name='/dp-workshop/subordinate_pca_arn',Type='String',Value=subordinate_pca_arn)
+        ssm_client.put_parameter(Name='/dp-workshop/subordinate_ca_serial_number',Type='String',Value=str(subordinate_ca_serial_number))
+
         print "\nStep-2 has been successfully completed \n"
     except:
         print "Unexpected error:", sys.exc_info()[0]
