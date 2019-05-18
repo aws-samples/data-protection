@@ -10,7 +10,6 @@
 from datetime import datetime
 from datetime import timedelta
 import os
-import subprocess
 import sys
 import random
 import time
@@ -23,14 +22,11 @@ def main():
     ############################################################################
     """
     try:
-        az = subprocess.check_output(['curl', '-s', 'http://169.254.169.254/latest/meta-data/placement/availability-zone'])
-        list_az = az.split('-')
-        region = list_az[0]+ '-' + list_az[1] + '-' + list_az[2][0]
-        elbv2_client = boto3.client('elbv2', region)
-        lambda_client = boto3.client('lambda',region)
-        ssm_client = boto3.client('ssm', region)
-        acm_pca_client = boto3.client('acm-pca', region_name=region)
-        acm_client = boto3.client('acm', region_name=region)
+        elbv2_client = boto3.client('elbv2')
+        lambda_client = boto3.client('lambda')
+        ssm_client = boto3.client('ssm')
+        acm_pca_client = boto3.client('acm-pca')
+        acm_client = boto3.client('acm')
 
         ##################################################################################################
         #   Retrieve subordinate_pca_arn                                                                 #

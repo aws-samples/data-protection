@@ -18,11 +18,8 @@ def main():
     #########################################################################################
     """
     try:
-        az = subprocess.check_output(['curl', '-s', 'http://169.254.169.254/latest/meta-data/placement/availability-zone'])
-        list_az = az.split('-')
-        region = list_az[0]+ '-' + list_az[1] + '-' + list_az[2][0]
-        acm_pca_client = boto3.client('acm-pca', region_name=region)
-        s3_client = boto3.client('s3', region_name=region)
+        acm_pca_client = boto3.client('acm-pca')
+        s3_client = boto3.client('s3')
         ssm_client = boto3.client('ssm')
         
         ####################################################################
@@ -49,6 +46,7 @@ def main():
         #################################################################################
         crl_bucket_name = 'builder-acm-pca-usecase-6-bucket-pca-crl' + str(random.randint(1, 100000))
         # Doing the below because locationconstraint does not support all regions today
+        region = boto3.Session().region_name
         if 'us-east-1' in region:
             s3_client.create_bucket(Bucket=crl_bucket_name)
         else:

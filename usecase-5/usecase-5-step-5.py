@@ -23,15 +23,11 @@ def main():
     ##################################################################################
     """
     try:
-        az = subprocess.check_output(['curl', '-s', 'http://169.254.169.254/latest/meta-data/placement/availability-zone'])
-        list_az = az.split('-')
-        region = list_az[0]+ '-' + list_az[1] + '-' + list_az[2][0]
-        acm_pca_client = boto3.client('acm-pca', region_name=region)
+        acm_pca_client = boto3.client('acm-pca')
         ssm_client = boto3.client('ssm')
         
         subordinate_pca_arn = ssm_client.get_parameter(Name='/dp-workshop/subordinate_pca_arn')['Parameter']['Value']
                         
-        # subordinate_pca_arn = response['Item']['subordinate_pca_arn']['S']
         current_directory_path = os.path.dirname(os.path.realpath(__file__)) + '/'
         response = acm_pca_client.import_certificate_authority_certificate(
             CertificateAuthorityArn=subordinate_pca_arn,

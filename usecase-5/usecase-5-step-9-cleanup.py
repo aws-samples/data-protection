@@ -24,14 +24,11 @@ def main():
     ###########################################
     """
     try:
-        az = subprocess.check_output(['curl', '-s', 'http://169.254.169.254/latest/meta-data/placement/availability-zone'])
-        list_az = az.split('-')
-        region = list_az[0]+ '-' + list_az[1] + '-' + list_az[2][0]
-        s3_client = boto3.client('s3', region_name=region)
-        acm_pca_client = boto3.client('acm-pca', region_name=region)
+        s3_client = boto3.client('s3')
+        acm_pca_client = boto3.client('acm-pca')
         ssm_client = boto3.client('ssm')
-        elbv2_client = boto3.client('elbv2', region)
-        acm_client = boto3.client('acm', region_name=region)
+        elbv2_client = boto3.client('elbv2')
+        acm_client = boto3.client('acm')
         
         ####################################################################################
         #  Remove all the files created in the local filesystem as part of this usecase    #
@@ -53,7 +50,6 @@ def main():
         if Path(cert_chain_path).exists():
             os.remove(cert_chain_path)    
        
-
         subordinate_pca_arn = ssm_client.get_parameter(Name='/dp-workshop/subordinate_pca_arn')['Parameter']['Value']
         target_group_arn = ssm_client.get_parameter(Name='/dp-workshop/target_group_arn')['Parameter']['Value']
         private_cert_arn = ssm_client.get_parameter(Name='/dp-workshop/private_cert_arn')['Parameter']['Value']
@@ -165,7 +161,7 @@ def main():
 
         ssm_client.delete_parameters(Names=params)
         os.remove('/tmp/root_ca_private_key')
-        print "\nEverything cleaned up ,you are all good !!\n"
+        print "\nEverything cleaned up, you are all good !!\n"
         print "\nStep-9 cleanup has been successfully completed \n"
 
     except:

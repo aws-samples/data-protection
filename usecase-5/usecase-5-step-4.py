@@ -26,10 +26,7 @@ def main():
     #################################
     """
     try:
-        az = subprocess.check_output(['curl', '-s', 'http://169.254.169.254/latest/meta-data/placement/availability-zone'])
-        list_az = az.split('-')
-        region = list_az[0]+ '-' + list_az[1] + '-' + list_az[2][0]
-        acm_pca_client = boto3.client('acm-pca', region_name=region)
+        acm_pca_client = boto3.client('acm-pca')
         ssm_client = boto3.client('ssm')
         
         #####################################################################################

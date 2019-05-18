@@ -3,33 +3,33 @@
 # Create target group for ALB and register lambda target                        #
 #################################################################################
 """
-import subprocess
+import requests
 import sys
 import boto3
 
 def main():
 
     try:
-        az = subprocess.check_output(['curl', '-s', 'http://169.254.169.254/latest/meta-data/placement/availability-zone'])
-        list_az = az.split('-')
-        region = list_az[0]+ '-' + list_az[1] + '-' + list_az[2][0]
-        ec2_client = boto3.client('ec2',region)
-        elbv2_client = boto3.client('elbv2', region)
-        lambda_client = boto3.client('lambda', region)
+        ec2_client = boto3.client('ec2')
+        elbv2_client = boto3.client('elbv2')
+        lambda_client = boto3.client('lambda')
         ssm_client = boto3.client('ssm')
         
-        cf_client = boto3.client('cloudformation',region)
+        cf_client = boto3.client('cloudformation')
         response = cf_client.list_stacks(
             StackStatusFilter=[
                 'CREATE_COMPLETE',
             ]
         )
         
-        cloud9_instance_id = subprocess.check_output(['curl', '-s', 'http://169.254.169.254/latest/meta-data/instance-id'])
-        vpc_mac_id = subprocess.check_output(['curl', '-s', 'http://169.254.169.254/latest/meta-data/network/interfaces/macs/'])
-        vpc_id = subprocess.check_output(['curl', '-s', 'http://169.254.169.254/latest/meta-data/network/interfaces/macs/'+ vpc_mac_id + 'vpc-id'])
+        response = requests.get('http://169.254.169.254/latest/meta-data/instance-id')
+        cloud9_instance_id = response.text
+        response = requests.get('http://169.254.169.254/latest/meta-data/network/interfaces/macs/')
+        vpc_mac_id = response.text
+        response = requests.get('http://169.254.169.254/latest/meta-data/network/interfaces/macs/'+ vpc_mac_id + 'vpc-id')
+        vpc_id = response.text
         #print vpc_id
-        ec2 = boto3.resource('ec2',region)
+        ec2 = boto3.resource('ec2')
         instance = ec2.Instance(cloud9_instance_id)
         
         # Get all the security groups attached to the Cloud9 environment EC2 instance
