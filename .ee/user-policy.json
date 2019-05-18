@@ -22,7 +22,7 @@
                 "ssm:DescribeParameters",
                 "ssm:GetParameter*",
                 "ssm:PutParameter",
-                "ssm:DeleteParameter",
+                "ssm:DeleteParameter*",
                 "health:DescribeAffectedEntities",
                 "application-autoscaling:*",
                 "iam:List*",
