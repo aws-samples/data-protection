@@ -44,7 +44,7 @@ def main():
         #   Also tag the bucket so that it can be associated with this builders session #
         #   for cleanup                                                                 #
         #################################################################################
-        crl_bucket_name = 'builder-acm-pca-usecase-6-bucket-pca-crl' + str(random.randint(1, 100000))
+        crl_bucket_name = 'dp-workshop-acm-pca-crl-bucket' + str(random.randint(1, 100000))
         # Doing the below because locationconstraint does not support all regions today
         region = boto3.Session().region_name
         if 'us-east-1' in region:
