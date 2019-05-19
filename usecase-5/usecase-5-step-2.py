@@ -19,14 +19,14 @@ def main():
     """
     try:
         acm_pca_client = boto3.client('acm-pca')
-        s3_client = boto3.client('s3')
+        s3_client = boto3.client('s3'   )
         ssm_client = boto3.client('ssm')
         
         ####################################################################
         #   Creating the subject for the private certificate authority     #
         ####################################################################
         subordinate_ca_serial_number = random.randint(1, 100000)
-        common_name = 'acmpcausecase6.subordinate'
+        common_name = 'dp-workshop.subordinate'
         
         subject = {
             'Country': 'US',
