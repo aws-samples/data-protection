@@ -9,7 +9,6 @@
 from datetime import datetime
 from datetime import timedelta
 import os
-import subprocess
 import sys
 import boto3
 
@@ -35,7 +34,6 @@ def main():
         #####################################################################################   
     
         current_directory_path = os.path.dirname(os.path.realpath(__file__)) + '/'
-       
 
         root_ca_serial_number = int(ssm_client.get_parameter(Name='/dp-workshop/rootca_serial_number')['Parameter']['Value'])
         subordinate_ca_serial_number = int(ssm_client.get_parameter(Name='/dp-workshop/subordinate_ca_serial_number')['Parameter']['Value'])
@@ -45,7 +43,7 @@ def main():
         #   is to store private keys on an HSM                                              #
         #####################################################################################
         root_ca_private_key = None
-        with open('/tmp/root_ca_private_key', "rb") as binary_key_file:
+        with open(current_directory_path+'root_ca_private_key.pem', "rb") as binary_key_file:
             root_ca_private_key = serialization.load_pem_private_key(
                 binary_key_file.read(),
                 password=None,
@@ -105,7 +103,6 @@ def main():
         
         cert_pem = cert.public_bytes(encoding=serialization.Encoding.PEM)
     
-        current_directory_path = os.path.dirname(os.path.realpath(__file__)) + '/'
         signed_subordinate_ca_cert_filename_path = current_directory_path + 'signed_subordinate_ca_cert.pem'
         
         textfile = open(signed_subordinate_ca_cert_filename_path, 'w')

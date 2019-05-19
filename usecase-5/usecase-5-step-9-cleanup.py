@@ -160,7 +160,7 @@ def main():
             print "No private certificates for the private domain alb.workshop.com mapping to the ALB"
 
         ssm_client.delete_parameters(Names=params)
-        os.remove('/tmp/root_ca_private_key')
+        os.remove(current_directory_path+'root_ca_private_key.pem')
         print "\nEverything cleaned up, you are all good !!\n"
         print "\nStep-9 cleanup has been successfully completed \n"
 

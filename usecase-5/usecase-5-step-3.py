@@ -57,9 +57,9 @@ def main():
         rootca_serial_number = random.randint(1, 100000)
         
         ssm_client.put_parameter(Name='/dp-workshop/rootca_serial_number',Type='String',Value=str(rootca_serial_number))
-        with open('/tmp/root_ca_private_key', 'wb') as key_file:
+        with open(current_directory_path+'root_ca_private_key.pem', 'wb') as key_file:
             key_file.write(privkey_pem)
-        os.chmod('/tmp/root_ca_private_key', 0600)
+        os.chmod(current_directory_path+'root_ca_private_key.pem', 0600)
 
         #############################################################
         #  Create the subject and issuer for the self signed cert   #                
