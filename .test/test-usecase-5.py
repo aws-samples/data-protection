@@ -9,6 +9,7 @@ class TestUseCase5(unittest.TestCase):
     def setUp(self):
         self.ddb_client = boto3.client('dynamodb')
         self.acm_pca_client = boto3.client('acm-pca')
+        self.ssm_client = boto3.client('ssm')
         self.cwd = os.getcwd()
 
     def test_step1(self):
@@ -17,10 +18,10 @@ class TestUseCase5(unittest.TestCase):
         output = child.communicate()[0]
         self.assertEqual(child.returncode, 0)
         time.sleep(5)
-        # try:
-        #     t = self.ddb_client.describe_table(TableName='shared_variables_crypto_builders_usecase_6')
-        # except self.ddb_client.exceptions.ResourceNotFoundException:
-        #     self.fail("missing ddb table")
+        try: 
+            self.ssm_client.get_parameter(Name='/dp-workshop/target_group_arn')['Parameter']['Value']
+        except ClientError as e:
+            self.fail(msg='missing parameter /dp-workshop/target_group_arn')       
 
     def test_step2(self):
         print("Test step 2")
@@ -28,10 +29,14 @@ class TestUseCase5(unittest.TestCase):
         output = child.communicate()[0]
         self.assertEqual(child.returncode, 0)
         time.sleep(5)
-        # TODO:
-        # response = self.acm_pca_client.describe_certificate_authority(
-        #     CertificateAuthorityArn=subordinate_pca_arn
-        # )
+        try: 
+            self.ssm_client.get_parameter(Name='/dp-workshop/subordinate_pca_arn')['Parameter']['Value']
+        except ClientError as e:
+            self.fail(msg='missing parameter /dp-workshop/subordinate_pca_arn')       
+        try: 
+            self.ssm_client.get_parameter(Name='/dp-workshop/subordinate_ca_serial_number')['Parameter']['Value']
+        except ClientError as e:
+            self.fail(msg='missing parameter /dp-workshop/subordinate_ca_serial_number')      
 
     def test_step3(self):
         print("Test step 3")
@@ -41,7 +46,10 @@ class TestUseCase5(unittest.TestCase):
         time.sleep(1)
         self.assertEqual(os.path.isfile(self.cwd+'/data-protection/usecase-5/self-signed-cert.pem'), True )
         self.assertEqual(os.path.isfile(self.cwd+'/data-protection/usecase-5/root_ca_private_key.pem'), True )
-        # TODO: root ca
+        try: 
+            self.ssm_client.get_parameter(Name='/dp-workshop/rootca_serial_number')['Parameter']['Value']
+        except ClientError as e:
+            self.fail(msg='missing parameter /dp-workshop/rootca_serial_number')      
 
     def test_step4(self):
         print("Test step 4")
@@ -57,6 +65,11 @@ class TestUseCase5(unittest.TestCase):
         output = child.communicate()[0]
         self.assertEqual(child.returncode, 0)
         time.sleep(1)
+        subordinate_pca_arn = self.ssm_client.get_parameter(Name='/dp-workshop/subordinate_pca_arn')['Parameter']['Value']
+        response = self.acm_pca_client.describe_certificate_authority(
+            CertificateAuthorityArn=subordinate_pca_arn
+        )
+        self.assertEqual(response['CertificateAuthority']['Status'],'ACTIVE')
 
     def test_step6(self):
         print("Test step 6")
@@ -80,14 +93,27 @@ class TestUseCase5(unittest.TestCase):
 
     def test_step9(self):
         print("Test step 9")
+        subordinate_pca_arn = self.ssm_client.get_parameter(Name='/dp-workshop/subordinate_pca_arn')['Parameter']['Value']
         child = subprocess.Popen(['python', self.cwd+'/data-protection/usecase-5/usecase-5-step-9-cleanup.py'])
         output = child.communicate()[0]
         self.assertEqual(child.returncode, 0)
         time.sleep(5)
+        
+        # validate file removed
         self.assertEqual(os.path.isfile(self.cwd+'/data-protection/usecase-5/self-signed-cert.pem'), False )
         self.assertEqual(os.path.isfile(self.cwd+'/data-protection/usecase-5/signed_subordinate_ca_cert.pem'), False )
         self.assertEqual(os.path.isfile(self.cwd+'/data-protection/usecase-5/cert_chain.pem'), False )
-
+        self.assertEqual(os.path.isfile(self.cwd+'/data-protection/usecase-5/root_ca_private_key.pem'), False )
+        
+        # validate parameters removed
+        parameters = self.ssm_client.describe_parameters()
+        self.assertEqual(len(parameters['Parameters']),0)
+        
+        # validate subordinate pca removed
+        response = self.acm_pca_client.describe_certificate_authority(
+            CertificateAuthorityArn=subordinate_pca_arn
+        )
+        self.assertEqual(response['CertificateAuthority']['Status'],'DELETED')
 
 if __name__ == '__main__':
     unittest.main()
