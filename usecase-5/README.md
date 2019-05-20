@@ -6,7 +6,7 @@ a HTTPS connection
 
 ## Let's look at some concepts and the architecture diagram:
 
-<a><img src="images/acm-pca-usecase-6-arch.png" width="700" height="500"></a><br>
+<a><img src="images/acm-pca-usecase-arch.png" width="700" height="500"></a><br>
 
 The on-premise application in a data-center is for illustration purposes only, we won't be deploying the on-premise application for this usecase. Only the lambda function behind the application load balancer will be deployed and called from the Cloud9 session inside the VPC. 
 
@@ -105,12 +105,12 @@ Since the request does not supply the certificate trust chain as a parameter the
 ```
 **Some questions to think about :**
 
-* Why was the server certificate from alb.workshop.com not recognized by the curl command ? 
+* Why was the server certificate from alb.workshop.com not trusted? 
 * What potential automation you might need within your organization to use these private certificates at scale ?
 
 ### 8. Run the module named `usecase-5-step-8.py`
 
-This module uses the requests library to do a HTTPS GET on the private domain `alb.workshop.com`
+This module uses the requests library to do a HTTPS GET request to the private domain `alb.workshop.com`
 
 Since the request has the chain of trust pem file as a parameter the private domain cert for `alb.workshop.com` is trusted and successfully authenticated. You should see the following printed in the runner window pane after the HTML returned by the lambda function:
   
@@ -118,7 +118,11 @@ Since the request has the chain of trust pem file as a parameter the private dom
 Certificate is trusted and is valid
 ```  
 
-### 8. Run the module named `usecase-5-step-9-cleanup.py`
+**Some questions to think about :**
+
+* What happens if certificate verification is disabled in the HTTPS GET request to `alb.workshop.com`?
+
+### 9. Run the module named `usecase-5-step-9-cleanup.py`
 
 This is the step for cleaning up all the resources that were created for this use case.
 

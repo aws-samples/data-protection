@@ -1,6 +1,6 @@
 # AWS Data Protection Workshops
 
-If you are dealing with protecting data on your AWS architecture using methods such as encryption or certificate management, these workshops can help you learn in depth. We will be using the Cloud9 IDE and a combination of python code and AWS console access for these workshops.
+If you are considering protecting data in your [AWS](https://aws.amazon.com/) environment using methods such as encryption or certificate management, these workshops can help you learn in depth. We will be using the [Cloud9 IDE environment](https://aws.amazon.com/cloud9/) and a combination of [Python](https://www.python.org/) code and AWS console access for these workshops.
 
 # Ubiquitous Encryption 
 
@@ -46,12 +46,12 @@ These workshops demonstrates server side encryption, client side encryption and 
 * How do I use AWS Certificate Manager to generate a private certificate authority ?
 
 | Title | Description | Learning Time | Teaching Time With Discussion | 
-| :--- | :-------- | :-- | :-- |
-| [Server Side Encryption](usecase-1/)  | This workshop demonstrates server side encryption on S3 | 15 min | 30 min |
-| [Client Side Encryption](usecase-2/)  | This workshop demonstrates client side encryption | 15 min | 30 min |
-| [Client Side Encryption With Data Key Caching](usecase-3/)  | This workshop demonstrates client side encryption with data key caching | 15 min | 30 min |
-| [Creating Private Certs ACM Private Certificate Authority - Mode-1 ](usecase-4/)  | This workshop demonstrates how you create a AWS Certificate Manager private certificate authority(PCA) and use ACM PCA to sign a CSR to create a private certificate | 40 mins | 1 hour |
-| [Creating Private Certs ACM Private Certificate Authority - Mode-2 ](usecase-5/)  | This workshop demonstrates how you create a AWS Certificate Manager private certificate authority and use this CA to create private X.509 certififcates for a private domain | 40 mins | 1 hour |
+| :------- | :---------- | :-- | :-- |
+| [Level 200: Server Side Encryption](usecase-1/)  | This workshop demonstrates server side encryption on S3 | 15 min | 30 min |
+| [Level 200: Client Side Encryption](usecase-2/)  | This workshop demonstrates client side encryption | 15 min | 30 min |
+| [Level 200: Client Side Encryption With Data Key Caching](usecase-3/)  | This workshop demonstrates client side encryption with data key caching | 15 min | 30 min |
+| [Level 300: Creating Private Certs ACM Private Certificate Authority - Mode-1 ](usecase-4/)  | This workshop demonstrates how you create a AWS Certificate Manager private certificate authority(PCA) and use ACM PCA to sign a CSR to create a private certificate | 40 mins | 1 hour |
+| [Level 300: Creating Private Certs ACM Private Certificate Authority - Mode-2 ](usecase-5/)  | This workshop demonstrates how you create a AWS Certificate Manager private certificate authority and use this CA to create private X.509 certififcates for a private domain | 40 mins | 1 hour |
 
 <hr/>
 
@@ -77,7 +77,9 @@ service is available :
 
 Please download the [Data Protection Workshop cloudformation stack](cf-templates/template-workshops-setup.yaml) and launch it in your AWS account as this is required for all the workshops in this repository. To launch the stack you must go to the AWS Console and navigate to the CloudFormation service where you can choose **Create Stack** and upload the Cloudformation stack for the workshop. You provide a name for the stack and keep clicking **next** until you get to the point where it says:
 
-**"I acknowledge that AWS CloudFormation might create IAM resources with custom names."**
+```
+I acknowledge that AWS CloudFormation might create IAM resources with custom names.
+```
 
 Acknowledge the above statement by clicking on the check box and then click on the **Create** button
 
