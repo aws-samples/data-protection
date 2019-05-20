@@ -5,6 +5,8 @@ import os
 import time
 from botocore.exceptions import ClientError
 
+# Note: beware of the limit on number of PCA certificates that can be generated!
+
 class TestUseCase5(unittest.TestCase):
 
     def setUp(self):
@@ -107,8 +109,19 @@ class TestUseCase5(unittest.TestCase):
         self.assertEqual(os.path.isfile(self.cwd+'/data-protection/usecase-5/root_ca_private_key.pem'), False )
         
         # validate parameters removed
-        parameters = self.ssm_client.describe_parameters()
-        self.assertEqual(len(parameters['Parameters']),0)
+        params = ['/dp-workshop/listener_arn',
+            '/dp-workshop/private_cert_arn',
+            '/dp-workshop/target_group_arn',
+            '/dp-workshop/subordinate_pca_arn',
+            '/dp-workshop/rootca_serial_number',
+            '/dp-workshop/subordinate_ca_serial_number'
+        ]
+        for param in params: 
+            try: 
+                self.ssm_client.get_parameter(Name=param)
+                self.fail("parameter not removed: "+param)
+            except ClientError as e:
+                print "Validating parameter deleted: "+param       
         
         # validate subordinate pca removed
         response = self.acm_pca_client.describe_certificate_authority(
