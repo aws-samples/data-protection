@@ -84,8 +84,7 @@ def main():
             )
             for TagsAlb in  response['TagDescriptions']:
                 #print TagsAlb['Tags']
-                for Tag in TagsAlb['Tags']:
-                    if Tag['Key'] == 'alb-for-what' and Tag['Value'] == 'acm-pca-workshop-usecase-6':
+                    if Tag['Key'] == 'workshop' and Tag['Value'] == 'data-protection':
                         # Add a HTTPS listener
                         response = elbv2_client.create_listener(
                             LoadBalancerArn=LB['LoadBalancerArn'],

@@ -78,7 +78,7 @@ def main():
             
         for TagsAlb in  response['TagDescriptions']:
             for Tag in TagsAlb['Tags']:
-                if Tag['Key'] == 'alb-for-what' and Tag['Value'] == 'acm-pca-workshop-usecase-6':
+                if Tag['Key'] == 'workshop' and Tag['Value'] == 'data-protection':
                     # Create a target group for this application load balancer
                     response = elbv2_client.create_target_group(
                         Name='builders-alb-lambda-target-group',

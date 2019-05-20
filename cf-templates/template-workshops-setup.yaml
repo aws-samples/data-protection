@@ -29,8 +29,8 @@ Resources:
          EnableDnsHostnames: true
          EnableDnsSupport: true
          Tags:
-            - Key: vpc-for-what
-              Value: system-vpc
+            - Key: workshop
+              Value: data-protection
    
    InternetGateway:
       Type: AWS::EC2::InternetGateway
@@ -165,8 +165,8 @@ Resources:
       Properties:
          Tags:
               -
-               Key: bucket-for-what
-               Value: !Join [ "-", [ !Ref "AWS::Region", system-cloudtrail-log-storage] ]     
+               Key: worksop
+               Value: data-protection     
    BucketPolicy: 
       Type: AWS::S3::BucketPolicy
       Properties: 
@@ -265,8 +265,8 @@ Resources:
          Role: !GetAtt LambdaOriginRole.Arn
          Runtime: 'python2.7'
          Tags:
-            - Key: lambda-for-what
-              Value: acm-pca-workshop-usecase-6
+            - Key: workshop
+              Value: data-protection
          Code: 
             ZipFile: |
                from __future__ import print_function
@@ -357,8 +357,8 @@ Resources:
             - Ref: Subnet
             - Ref: SubnetTwo
          Tags:
-            - Key: alb-for-what
-              Value: acm-pca-workshop-usecase-6
+            - Key: workshop
+              Value: data-protection
    
    DNSHostedZone: 
       Type: "AWS::Route53::HostedZone"
@@ -372,8 +372,8 @@ Resources:
             VPCRegion: !Ref "AWS::Region"
          HostedZoneTags: 
          - 
-            Key: "hostedzone-for-what"
-            Value: "acm-pca-workshop-usecase-6"
+            Key: workshop
+            Value: data-protection
      
    
    DNSRecordSet:
