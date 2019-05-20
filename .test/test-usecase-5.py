@@ -3,6 +3,7 @@ import subprocess
 import boto3
 import os
 import time
+from botocore.exceptions import ClientError
 
 class TestUseCase5(unittest.TestCase):
 
