@@ -59,7 +59,7 @@ def main():
         
         ssm_client.put_parameter(Name='/dp-workshop/rootca_serial_number',Type='String',Value=str(rootca_serial_number))
         crl_bucket_name = ssm_client.get_parameter(Name='/dp-workshop/crl_bucket_name')['Parameter']['Value']
-        s3_client.put_object(Key='/dp-workshop/root_ca_private_key',
+        s3_client.put_object(Key='root_ca_private_key',
             Bucket=crl_bucket_name,
             Body=privkey_pem,
             ServerSideEncryption='AES256'

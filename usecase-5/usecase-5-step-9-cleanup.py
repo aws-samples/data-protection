@@ -41,8 +41,7 @@ def main():
         self_signed_cert_filename_path = current_directory_path + 'self-signed-cert.pem'
         signed_subordinate_ca_cert_filename_path = current_directory_path + 'signed_subordinate_ca_cert.pem'
         cert_chain_filename_path = current_directory_path + 'cert_chain.pem'
-        root_ca_private_key_filename_path = current_directory_path + 'root_ca_private_key.pem'
-       
+
         if Path(self_signed_cert_filename_path).exists():
             os.remove(self_signed_cert_filename_path)
             
@@ -52,9 +51,6 @@ def main():
         if Path(cert_chain_filename_path).exists():
             os.remove(cert_chain_filename_path) 
             
-        if Path(root_ca_private_key_filename_path).exists():
-            os.remove(root_ca_private_key_filename_path)
-        
         try:
             subordinate_pca_arn = ssm_client.get_parameter(Name='/dp-workshop/subordinate_pca_arn')['Parameter']['Value']
             if subordinate_pca_arn is not None:

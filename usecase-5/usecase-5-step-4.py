@@ -46,7 +46,7 @@ def main():
         bucket_name = ssm_client.get_parameter(Name='/dp-workshop/crl_bucket_name')['Parameter']['Value']
         response = s3_client.get_object(
             Bucket=bucket_name,
-            Key='/dp-workshop/root_ca_private_key'
+            Key='root_ca_private_key'
         )
         root_ca_private_key = serialization.load_pem_private_key(
                 response['Body'].read(),

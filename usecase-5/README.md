@@ -42,8 +42,8 @@ In the AWS console browse to the AWS Certificate Manager service(ACM). Under Pri
 ### 3. Run the module named `usecase-5-step-3.py`
 
 This module creates a self signed root certificate with the common name `rootca-builder`.
-You can see in the code that the private key associated with the self signed cert is stored in a local file named `root_ca_private_key.pem`.
-This is purely for demonstration purposes. In your organization you should store the private key in an HSM or a secure vault
+You can see in the code that the private key associated with the self signed cert is stored in an encrypted S3 file named `root_ca_private_key` inside the bucket created in the previous step.
+This is purely for demonstration purposes. In your organization you should store the private key in an HSM or a secure vault.
 You should see the following printed in the runner window pane below:
 ```
    Success - Self signed certificate file self-signed-cert.pem created
