@@ -76,18 +76,21 @@ def main():
         ###################################################
         #   remove all the s3 buckets that were created   #
         ###################################################
-        crl_bucket_name = ssm_client.get_parameter(Name='/dp-workshop/crl_bucket_name')['Parameter']['Value']
         try:
-            response = s3_client.list_objects(Bucket=crl_bucket_name)
-            if 'Contents' in response:    
-                for object_name in response['Contents']:    
-                    response = s3_client.delete_object(
-                        Bucket=crl_bucket_name,
-                        Key=object_name['Key']
-                    )
-            response = s3_client.delete_bucket(crl_bucket_name)
+            crl_bucket_name = ssm_client.get_parameter(Name='/dp-workshop/crl_bucket_name')['Parameter']['Value']
+            try:
+                response = s3_client.list_objects(Bucket=crl_bucket_name)
+                if 'Contents' in response:    
+                    for object_name in response['Contents']:    
+                        response = s3_client.delete_object(
+                            Bucket=crl_bucket_name,
+                            Key=object_name['Key']
+                        )
+                response = s3_client.delete_bucket(Bucket=crl_bucket_name)
+            except ClientError:
+                print 'no bucket to clean up: '+crl_bucket_name
         except ClientError:
-            print 'no bucket to clean up: '+crl_bucket_name
+            print 'no parameter value: /dp-workshop/crl_bucket_name'
 
         #####################################################################################################################################
         #   Remove HTTPS listener for the ALB, remove the TargetGroup, cleanup default security group from the ALB and cloud9 environment   #
