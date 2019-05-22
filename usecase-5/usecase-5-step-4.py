@@ -27,6 +27,7 @@ def main():
     try:
         acm_pca_client = boto3.client('acm-pca')
         ssm_client = boto3.client('ssm')
+        s3_client = boto3.client('s3')
         
         #####################################################################################
         #   Get the self signed CA cert private key, cert serial numbers from the DynamoDB  #  
@@ -42,14 +43,16 @@ def main():
         #   The private key used here is for demonstration purposes, the best practice      #
         #   is to store private keys on an HSM                                              #
         #####################################################################################
-        root_ca_private_key = None
-        with open(current_directory_path+'root_ca_private_key.pem', "rb") as binary_key_file:
-            root_ca_private_key = serialization.load_pem_private_key(
-                binary_key_file.read(),
+        bucket_name = ssm_client.get_parameter(Name='/dp-workshop/crl_bucket_name')['Parameter']['Value']
+        response = s3_client.get_object(
+            Bucket=bucket_name,
+            Key='/dp-workshop/root_ca_private_key'
+        )
+        root_ca_private_key = serialization.load_pem_private_key(
+                response['Body'].read(),
                 password=None,
                 backend=default_backend() 
             )
-
         #####################################################################################
         #   Get the subordinate CA CSR from ACM                                             #  
         #   Load the CSR into a format that the crytography.io package understands          #

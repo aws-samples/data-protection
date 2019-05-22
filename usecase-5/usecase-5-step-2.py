@@ -138,6 +138,8 @@ def main():
         
         ssm_client.put_parameter(Name='/dp-workshop/subordinate_pca_arn',Type='String',Value=subordinate_pca_arn)
         ssm_client.put_parameter(Name='/dp-workshop/subordinate_ca_serial_number',Type='String',Value=str(subordinate_ca_serial_number))
+        ssm_client.put_parameter(Name='/dp-workshop/crl_bucket_name',Type='String',Value=crl_bucket_name)
+        
 
         print "\nStep-2 has been successfully completed \n"
     except:

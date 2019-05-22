@@ -80,34 +80,19 @@ def main():
         ###################################################
         #   remove all the s3 buckets that were created   #
         ###################################################
-        response = s3_client.list_buckets()
-        for bucket_name in response['Buckets']:
-            if bucket_name['Name'].startswith('dp-workshop-acm-pca-crl-bucket'):
-                try:
-                    response = s3_client.get_bucket_tagging(
-                        Bucket=bucket_name['Name']
+        crl_bucket_name = ssm_client.get_parameter(Name='/dp-workshop/crl_bucket_name')['Parameter']['Value']
+        try:
+            response = s3_client.list_objects(Bucket=crl_bucket_name)
+            if 'Contents' in response:    
+                for object_name in response['Contents']:    
+                    response = s3_client.delete_object(
+                        Bucket=crl_bucket_name,
+                        Key=object_name['Key']
                     )
-                except:
-                    pass
-        
-                if 'TagSet' in response: 
-                    if (response['TagSet'][0]['Key'] == 'workshop') and (response['TagSet'][0]['Value'] == 'data-protection'):
-                        # Delete the objects stored in S3 within dp-workshop-bucket
-                        response = s3_client.list_objects(
-                            Bucket=bucket_name['Name'],
-                            )
-                            
-                        if 'Contents' in response:    
-                            for object_name in response['Contents']:    
-                                response = s3_client.delete_object(
-                                    Bucket=bucket_name['Name'],
-                                    Key=object_name['Key']
-                                )
-                        
-                        response = s3_client.delete_bucket(
-                            Bucket=bucket_name['Name']
-                            )
-        
+            response = s3_client.delete_bucket(crl_bucket_name)
+        except ClientError:
+            print 'no bucket to clean up: '+crl_bucket_name
+
         #####################################################################################################################################
         #   Remove HTTPS listener for the ALB, remove the TargetGroup, cleanup default security group from the ALB and cloud9 environment   #
         #####################################################################################################################################
@@ -164,7 +149,8 @@ def main():
             '/dp-workshop/target_group_arn',
             '/dp-workshop/subordinate_pca_arn',
             '/dp-workshop/rootca_serial_number',
-            '/dp-workshop/subordinate_ca_serial_number'
+            '/dp-workshop/subordinate_ca_serial_number',
+            '/dp-workshop/crl_bucket_name'
         ]
         for param in params: 
             try: 

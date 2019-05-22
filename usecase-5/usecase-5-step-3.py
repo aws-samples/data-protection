@@ -34,6 +34,7 @@ def main():
     """
     try:
         ssm_client = boto3.client('ssm')
+        s3_client = boto3.client('s3')
         
         #####################################################################################
         #   Generating key pair for self signed cert                                        #
@@ -57,10 +58,12 @@ def main():
         rootca_serial_number = random.randint(1, 100000)
         
         ssm_client.put_parameter(Name='/dp-workshop/rootca_serial_number',Type='String',Value=str(rootca_serial_number))
-        with open(current_directory_path+'root_ca_private_key.pem', 'wb') as key_file:
-            key_file.write(privkey_pem)
-        os.chmod(current_directory_path+'root_ca_private_key.pem', 0600)
-
+        crl_bucket_name = ssm_client.get_parameter(Name='/dp-workshop/crl_bucket_name')['Parameter']['Value']
+        s3_client.put_object(Key='/dp-workshop/root_ca_private_key',
+            Bucket=crl_bucket_name,
+            Body=privkey_pem,
+            ServerSideEncryption='AES256'
+        )
         #############################################################
         #  Create the subject and issuer for the self signed cert   #                
         #############################################################
