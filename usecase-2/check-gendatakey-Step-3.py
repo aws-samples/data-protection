@@ -1,7 +1,7 @@
 """
 #####################################################
 #   Check for generatedatakey API call for the      #
-#   alias/kms_key_cse_usecase_3 KMS master key      #
+#   alias/kms_key_cse_usecase_2 KMS master key      #
 #####################################################
 """
 import subprocess
@@ -12,7 +12,7 @@ def main():
     """
     ##############################################################
     #   Using CW events to check for GenerateDataKey calls for   #
-    #   the KMS master key  alias/kms_key_cse_usecase_3          #
+    #   the KMS master key  alias/kms_key_cse_usecase_2          #
     ##############################################################
     """
     try:
@@ -29,14 +29,14 @@ def main():
                     Bucket=bucket_name
                 )
                 
-                if response['TagSet'][0]['Value'] == 'usecase-3-cse':
+                if response['TagSet'][0]['Value'] == 'usecase-2-cse':
                     print "GenerateDataKey API Called"
                     print "\nStep 3 completed successfully"
                     gendatakey= True
                     
         if gendatakey == False:          
             print "\n Re-run this python module until the GenerateDataKey API called print appears"
-            print "\n The GenerateDataKey API call for the key alias kms_key_cse_usecase_3 that you created in Step 1"
+            print "\n The GenerateDataKey API call for the key alias kms_key_cse_usecase_2 that you created in Step 1"
             print "\n is being monitored using a CloudWatch event"
     except:
         print "Unexpected error:", sys.exc_info()[0]

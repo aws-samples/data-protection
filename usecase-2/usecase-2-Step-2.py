@@ -24,13 +24,13 @@ def main():
         #   The kmsmasterkeyprovider class is used to store the reference to  # 
         #   the customer master key                                           #
         #                                                                     #
-        #   The key alias kms_key_cse_usecase_3 that we created in the        #
+        #   The key alias kms_key_cse_usecase_2 that we created in the        #
         #   kms_key_creation.py is being used here                            #
         #######################################################################
         botocore_session = botocore.session.Session()
         botocore_session.set_config_variable('region', region)
         
-        kms_kwargs = dict(key_ids=['alias/kms_key_cse_usecase_3'])
+        kms_kwargs = dict(key_ids=['alias/kms_key_cse_usecase_2'])
         if botocore_session is not None:
             kms_kwargs["botocore_session"] = botocore_session
         kms_master__key_provider = aws_encryption_sdk.KMSMasterKeyProvider(**kms_kwargs)
@@ -51,7 +51,7 @@ def main():
         encrypted_filename_path = current_directory_path + encrypted_filename
         
         plaintext_cycled_filename_path = current_directory_path + 'plaintext_u_cycled.txt'
-        encryption_context = {'whatfor':'usecase-3-cse'}
+        encryption_context = {'whatfor':'usecase-2-cse'}
         
         #########################################################################################
         #   encrypt client side using a kms key and cipher text is put into encrypted_e.txt   #

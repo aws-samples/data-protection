@@ -1,7 +1,7 @@
 """
 ###########################################################################
-#   CLIENT SIDE ENCRYPTION - KMS  CLEAN-UP  FOR USECASE-4                 #
-#   LET'S DELETE THE BUCKET AND THE OBJECTS THAT WE CREATED FOR USECASE-4 #
+#   CLIENT SIDE ENCRYPTION - KMS  CLEAN-UP  FOR USECASE-3                 #
+#   LET'S DELETE THE BUCKET AND THE OBJECTS THAT WE CREATED FOR USECASE-3 #
 #   LET's ALSO DELETE THE FILES LOCALLY CREATED IN THE FILESYSTEM         #
 ###########################################################################
 """
@@ -24,7 +24,7 @@ def main():
         s3_client = boto3.client('s3', region)
         
         ##########################################################################
-        #   REMOVE ALL THE FILES CREATED IN THE LOCAL FILESYSTEM FOR USECASE-4   #
+        #   REMOVE ALL THE FILES CREATED IN THE LOCAL FILESYSTEM FOR USECASE-3   #
         ##########################################################################
         current_directory_path = os.path.dirname(os.path.realpath(__file__)) + '/'
         current_directory_path = os.path.dirname(os.path.realpath(__file__)) + '/'
@@ -37,7 +37,7 @@ def main():
         
         plaintext_cycled_filename_path_1 = current_directory_path + 'plaintext_u_cycled_1.txt'
         plaintext_cycled_filename_path_2 = current_directory_path + 'plaintext_u_cycled_2.txt'
-        enc_context = {'whatfor':'usecase-4-cse'}
+        enc_context = {'whatfor':'usecase-3-cse'}
     
         if Path(encrypted_filename_path_1).exists():
             os.remove(encrypted_filename_path_1)
@@ -55,10 +55,10 @@ def main():
        #     Delete all the S3 buckets and objects  #
        ##############################################
     
-        # Delete the objects and buckets that were created as part of usecase-1
+        # Delete the objects and buckets that were created as part of usecase-3
         response = s3_client.list_buckets()
         for bucket_name in response['Buckets']:
-            if bucket_name['Name'].startswith('dp-workshop') or bucket_name['Name'].startswith('dp-workshop-bucket-cw-event-usecase-4'):
+            if bucket_name['Name'].startswith('dp-workshop') or bucket_name['Name'].startswith('dp-workshop-bucket-cw-event-usecase-3'):
                 try:
                     response = s3_client.get_bucket_tagging(
                         Bucket=bucket_name['Name']
@@ -85,7 +85,7 @@ def main():
                         )
                         
                 if 'TagSet' in response: 
-                    if (response['TagSet'][0]['Key'] == 'whatfor') and (response['TagSet'][0]['Value'] == 'usecase-4-cse'):
+                    if (response['TagSet'][0]['Key'] == 'whatfor') and (response['TagSet'][0]['Value'] == 'usecase-3-cse'):
                         # Delete the objects stored in S3 within buckets that start with dp-workshop-bucket-cw-event
                         response = s3_client.delete_bucket(
                             Bucket=bucket_name['Name']
@@ -102,19 +102,19 @@ def main():
         
         alias_exists = False
         for alias in response['Aliases']:
-            if alias['AliasName'] == 'alias/kms_key_cse_usecase_4':
+            if alias['AliasName'] == 'alias/kms_key_cse_usecase_3':
                 alias_exists = True
         
         if alias_exists == True:
             response = kms_client.describe_key(
-                KeyId='alias/kms_key_cse_usecase_4'
+                KeyId='alias/kms_key_cse_usecase_3'
             )
             
             kms_key_id = response['KeyMetadata']['KeyId']
             
             # Delete the alias so that a use can run this use-case multiplt times with the same alias
             response_del_alias = kms_client.delete_alias(
-                AliasName='alias/kms_key_cse_usecase_4'
+                AliasName='alias/kms_key_cse_usecase_3'
             )
             
             if response['KeyMetadata']['KeyState'] != 'PendingDeletion':

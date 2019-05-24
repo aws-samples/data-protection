@@ -1,6 +1,6 @@
 """
 ##########################################################
-#     Create KMS key with alias kms_key_cse_usecase_4    #
+#     Create KMS key with alias kms_key_cse_usecase_3    #
 ##########################################################
 """
 import subprocess
@@ -11,7 +11,7 @@ import boto3
 def main():
     """
     ##########################################################
-    #     Create KMS key with alias kms_key_cse_usecase_4   #
+    #     Create KMS key with alias kms_key_cse_usecase_3   #
     ##########################################################
     """
     try:
@@ -127,11 +127,11 @@ def main():
       
         # Setting a key alias
         response = kms_client.create_alias(
-           AliasName='alias/kms_key_cse_usecase_4',
+           AliasName='alias/kms_key_cse_usecase_3',
            TargetKeyId=key_id
         )
         
-        print "\n KMS Master Key with alias name kms_key_cse_usecase_4 successfully created"
+        print "\n KMS Master Key with alias name kms_key_cse_usecase_3 successfully created"
         print "\n Step 1 completed successfully"
     except:
         print "Unexpected error:", sys.exc_info()[0]

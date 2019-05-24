@@ -402,15 +402,13 @@ Resources:
                   - "kms.amazonaws.com"
                eventName: 
                   - "GenerateDataKey"
-         Name: 'crypto-builder-cse-cw-rule-usecase-3'
+         Name: 'crypto-builder-cse-cw-rule-usecase-2'
          State: "ENABLED"
          Targets:
             - 
                Arn: !GetAtt cryptocselambda.Arn
                Id: "cw-rule-cse"
                
-   # Create a cloud9 environment 
-
 # Create the lambda function used for client side encryption usecase
 # This is mainly for studying GenerateDataKey calls that happen during client
 # side encryption with data key caching and without data key caching
@@ -418,7 +416,7 @@ Resources:
    cryptocselambda:
       Type : AWS::Lambda::Function
       Properties: 
-         FunctionName: 'cryptobuilder-cse-lambda-usecase-3'
+         FunctionName: 'cryptobuilder-cse-lambda-usecase-2'
          Handler: "index.lambda_handler"
          Role: !GetAtt cryptocwelambdarole.Arn
          Runtime: 'python3.6'
@@ -451,7 +449,7 @@ Resources:
                    
                    whatfor_value = event['detail']['requestParameters']['encryptionContext']['whatfor']
                    
-                   if whatfor_value == 'usecase-3-cse':
+                   if whatfor_value == 'usecase-2-cse':
                       bucket_name = 'dp-workshop-bucket-cw-event' + str(random.randint(1, 100000))
                       # Doing the below because locationconstraint does not support all regions today
                       if 'us-east-1' in region:
@@ -483,7 +481,7 @@ Resources:
    cryptocwelambdarole:
       Type : AWS::IAM::Role
       Properties:
-         RoleName: 'cryptobuildercwelambdaroleusecase3'
+         RoleName: 'cryptobuildercwelambdaroleusecase2'
          AssumeRolePolicyDocument: 
            Version: "2012-10-17"
            Statement: 
@@ -500,7 +498,7 @@ Resources:
    cryptocwelambdapolicy:
       Type : AWS::IAM::Policy
       Properties: 
-         PolicyName : 'cryptobuilder-cse-cwe-lambda-policy-usecase-3'
+         PolicyName : 'cryptobuilder-cse-cwe-lambda-policy-usecase-2'
          PolicyDocument : 
             Version: "2012-10-17"
             Statement:
@@ -533,7 +531,7 @@ Resources:
                   - "kms.amazonaws.com"
                eventName: 
                   - "GenerateDataKey"
-         Name: 'crypto-builder-cse-cw-rule-usecase-4'
+         Name: 'crypto-builder-cse-cw-rule-usecase-3'
          State: "ENABLED"
          Targets:
             - 
@@ -547,7 +545,7 @@ Resources:
    cryptocselambdawithkeycaching:
       Type : AWS::Lambda::Function
       Properties: 
-         FunctionName: 'cryptobuilder-cse-lambda-usecase-4'
+         FunctionName: 'cryptobuilder-cse-lambda-usecase-3'
          Handler: "index.lambda_handler"
          Role: !GetAtt cryptocwelambdarolewithkeycaching.Arn
          Runtime: 'python3.6'
@@ -580,8 +578,8 @@ Resources:
                    
                    whatfor_value = event['detail']['requestParameters']['encryptionContext']['whatfor']
                    
-                   if whatfor_value == 'usecase-4-cse':
-                      bucket_name = 'dp-workshop-bucket-cw-event-usecase-4' + str(random.randint(1, 100000))
+                   if whatfor_value == 'usecase-3-cse':
+                      bucket_name = 'dp-workshop-bucket-cw-event-usecase-3' + str(random.randint(1, 100000))
                       # Doing the below because locationconstraint does not support all regions today
                       if 'us-east-1' in region:
                            s3_client.create_bucket(Bucket=bucket_name)
@@ -612,7 +610,7 @@ Resources:
    cryptocwelambdarolewithkeycaching:
       Type : AWS::IAM::Role
       Properties:
-         RoleName: 'cryptobuildercwelambdarolewithkeycaching-usecase-4'
+         RoleName: 'cryptobuildercwelambdarolewithkeycaching-usecase-3'
          AssumeRolePolicyDocument: 
            Version: "2012-10-17"
            Statement: 
@@ -629,7 +627,7 @@ Resources:
    cryptocwelambdapolicywithkeycaching:
       Type : AWS::IAM::Policy
       Properties: 
-         PolicyName : 'cryptobuilder-cse-cwe-lambda-policy-usecase-4'
+         PolicyName : 'cryptobuilder-cse-cwe-lambda-policy-usecase-3'
          PolicyDocument : 
             Version: "2012-10-17"
             Statement:

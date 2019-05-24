@@ -1,7 +1,7 @@
 """
 ###########################################################################
-#   CLIENT SIDE ENCRYPTION - KMS  CLEAN-UP  FOR USECASE-3                 #
-#   LET'S DELETE THE BUCKET AND THE OBJECTS THAT WE CREATED FOR USECASE-3 #
+#   CLIENT SIDE ENCRYPTION - KMS  CLEAN-UP  FOR USECASE-2                 #
+#   LET'S DELETE THE BUCKET AND THE OBJECTS THAT WE CREATED FOR USECASE-2 #
 #   LET's ALSO DELETE THE FILES LOCALLY CREATED IN THE FILESYSTEM         #
 ###########################################################################
 """
@@ -15,7 +15,7 @@ import boto3
 def main():
     """
     #######################################################
-    #   Cleanup all data created for kms-cse-usecase-3    #
+    #   Cleanup all data created for kms-cse-usecase-2    #
     #######################################################
     """
     try:
@@ -25,7 +25,7 @@ def main():
         s3_client = boto3.client('s3', region)
         
         ###########################################################################
-        #   Remove all the files created in the local file system for usecase-3   #
+        #   Remove all the files created in the local file system for usecase-2   #
         ###########################################################################
         current_directory_path = os.path.dirname(os.path.realpath(__file__)) + '/'
         encrypted_filename_path = current_directory_path + 'encrypted_e.txt'
@@ -66,14 +66,14 @@ def main():
                         )
                         
                 if 'TagSet' in response: 
-                    if (response['TagSet'][0]['Key'] == 'whatfor') and (response['TagSet'][0]['Value'] == 'usecase-3-cse'):
+                    if (response['TagSet'][0]['Key'] == 'whatfor') and (response['TagSet'][0]['Value'] == 'usecase-2-cse'):
                         # Delete the objects stored in S3 within buckets that start with dp-workshop-bucket-cw-event
                         response = s3_client.delete_bucket(
                             Bucket=bucket_name['Name']
                         )
                         
         ########################################################
-        #   Delete the kms key alias kms_key_cse_usecase_3     #
+        #   Delete the kms key alias kms_key_cse_usecase_2     #
         #   Schedule the key for deletion                      #                         
         ########################################################
         kms_client = boto3.client('kms', region)
@@ -83,12 +83,12 @@ def main():
         
         alias_exists = False
         for alias in response['Aliases']:
-            if alias['AliasName'] == 'alias/kms_key_cse_usecase_3':
+            if alias['AliasName'] == 'alias/kms_key_cse_usecase_2':
                 alias_exists = True
         
         if alias_exists:
             response = kms_client.describe_key(
-                KeyId='alias/kms_key_cse_usecase_3'
+                KeyId='alias/kms_key_cse_usecase_2'
             )
             
             kms_key_id = response['KeyMetadata']['KeyId']
@@ -100,7 +100,7 @@ def main():
             
             # Delete the alias so that a use can run this use-case multiplt times with the same alias
             response_del_alias = kms_client.delete_alias(
-                AliasName='alias/kms_key_cse_usecase_3'
+                AliasName='alias/kms_key_cse_usecase_2'
             )
         
         # Cleanup the cloudformation stack 
