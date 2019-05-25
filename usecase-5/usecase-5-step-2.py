@@ -21,6 +21,7 @@ def main():
         acm_pca_client = boto3.client('acm-pca')
         s3_client = boto3.client('s3'   )
         ssm_client = boto3.client('ssm')
+        s3_control_client = boto3.client('s3control')
         
         ####################################################################
         #   Creating the subject for the private certificate authority     #
@@ -57,6 +58,19 @@ def main():
                 }
             )
         
+        aws_account_id = boto3.client('sts').get_caller_identity()['Account']
+        # Removing public acccess block for the AWS account - All S3 buckets
+        response = s3_control_client.put_public_access_block(
+            PublicAccessBlockConfiguration={
+                'BlockPublicAcls': False,
+                'IgnorePublicAcls': False,
+                'BlockPublicPolicy': False,
+                'RestrictPublicBuckets': False
+            },
+            AccountId=aws_account_id
+        )
+        
+        # Removing public acccess block for the CRL bucket
         response = s3_client.put_public_access_block(
             Bucket=crl_bucket_name,
             PublicAccessBlockConfiguration={
