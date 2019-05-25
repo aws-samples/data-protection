@@ -23,6 +23,8 @@ def main():
         ddb_client = boto3.client('dynamodb', region)
         acm_pca_client = boto3.client('acm-pca', region_name=region)
         s3_client = boto3.client('s3', region_name=region)
+        s3_control_client = boto3.client('s3control')
+
         
         ####################################################################
         #   Creating the subject for the private certificate authority     #
@@ -57,6 +59,30 @@ def main():
                     'LocationConstraint': region
                 }
             )
+        
+        aws_account_id = boto3.client('sts').get_caller_identity()['Account']
+        # Removing public acccess for the AWS account
+        response = s3_control_client.put_public_access_block(
+            PublicAccessBlockConfiguration={
+                'BlockPublicAcls': False,
+                'IgnorePublicAcls': False,
+                'BlockPublicPolicy': False,
+                'RestrictPublicBuckets': False
+            },
+            AccountId=aws_account_id
+        )
+        
+        # Removing public acccess for the CRL bucket
+        response = s3_client.put_public_access_block(
+            Bucket=crl_bucket_name,
+            PublicAccessBlockConfiguration={
+                'BlockPublicAcls': False,
+                'IgnorePublicAcls': False,
+                'BlockPublicPolicy': False,
+                'RestrictPublicBuckets': False
+            }
+        )
+        
         waiter = s3_client.get_waiter('bucket_exists')
         waiter.wait(Bucket=crl_bucket_name)
         response = s3_client.put_bucket_tagging(
