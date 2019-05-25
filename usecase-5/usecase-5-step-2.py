@@ -57,6 +57,16 @@ def main():
                 }
             )
         
+        response = s3_client.put_public_access_block(
+            Bucket=crl_bucket_name,
+            PublicAccessBlockConfiguration={
+                'BlockPublicAcls': False,
+                'IgnorePublicAcls': False,
+                'BlockPublicPolicy': False,
+                'RestrictPublicBuckets': False
+            }
+        )
+        
         waiter = s3_client.get_waiter('bucket_exists')
         waiter.wait(Bucket=crl_bucket_name)
         response = s3_client.put_bucket_tagging(
