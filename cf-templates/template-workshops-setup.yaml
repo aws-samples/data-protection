@@ -210,7 +210,7 @@ Resources:
       Type : AWS::Cloud9::EnvironmentEC2
       Properties: 
          # OwnerArn for event engine module
-         #OwnerArn: !Sub 'arn:aws:sts::${AWS::AccountId}:assumed-role/TeamRole/MasterKey'
+         # OwnerArn: !Sub 'arn:aws:sts::${AWS::AccountId}:assumed-role/TeamRole/MasterKey'
          # OwnerArn for testing in AWS account
          # OwnerArn: !Sub 'arn:aws:sts::${AWS::AccountId}:user/eventengine'
          Description: "Cloud9 environment for the crypto builders python modules"

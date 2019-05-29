@@ -19,7 +19,7 @@ This module will create a KMS master key with the key alias **kms_key_sse_usecas
 master key using the alias. Browse to the KMS console and you should find the key alias **kms_key_sse_usecase_1** under 
 customer managed keys
 
-### 2. Run the module named `kms_key_creation-Step-2.py`
+### 2. Run the module named `usecase-1-Step-2.py`
 
 This module uploads the ***plaintext_u.txt*** file to an S3 bucket named `dp-workshop-builderXXXX`. 
 Before the file is stored on S3 it is server side encrypted using the KMS key alias *kms_key_sse_usecase_1*
