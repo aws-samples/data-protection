@@ -37,7 +37,7 @@ Basic python knowledge is sufficient to consume these workshops.
 
 # Workshops
 
-These workshops demonstrates server side encryption, client side encryption and certfificate management concepts within AWS. For example :
+These workshops demonstrates server side encryption, client side encryption and certificate management concepts within AWS. For example :
 
 * How do I put an object on S3 with server side encryption ?
 * How do I use aws encryption sdk to encrypt data in my application before sending the data to an AWS service ?
@@ -51,7 +51,7 @@ These workshops demonstrates server side encryption, client side encryption and 
 | [Level 200: Client Side Encryption](usecase-2/)  | This workshop demonstrates client side encryption | 15 min | 30 min |
 | [Level 200: Client Side Encryption With Data Key Caching](usecase-3/)  | This workshop demonstrates client side encryption with data key caching | 15 min | 30 min |
 | [Level 300: Creating Private Certs ACM Private Certificate Authority - Mode-1 ](usecase-4/)  | This workshop demonstrates how you create a AWS Certificate Manager private certificate authority(PCA) and use ACM PCA to sign a CSR to create a private certificate | 40 mins | 1 hour |
-| [Level 300: Creating Private Certs ACM Private Certificate Authority - Mode-2 ](usecase-5/)  | This workshop demonstrates how you create a AWS Certificate Manager private certificate authority and use this CA to create private X.509 certififcates for a private domain | 40 mins | 1 hour |
+| [Level 300: Creating Private Certs ACM Private Certificate Authority - Mode-2 ](usecase-5/)  | This workshop demonstrates how you create a AWS Certificate Manager private certificate authority and use this CA to create private X.509 certificates for a private domain | 40 mins | 1 hour |
 
 **NOTE:** The ACM PCA use cases (the latter 2) can only be run within the VPC where the ALB is deployed as a private DNS name space is used. This will work within the Cloud9 IDE but not from machines that are outside of the VPC. 
 
@@ -63,7 +63,7 @@ These workshops demonstrates server side encryption, client side encryption and 
 * This section is only relevant if you are **not** using a pre-provisioned account. 
 * The resources used in this workshop **will incur charges** in the AWS account used if not torn down according to the procedure outlined below
 
-You can use a **personal account** or create a **new AWS account** to ensure you have the neccessary access. This should not be an AWS account from the company you work for. Please note that creating an AWS account takes time (credit card validation, etc.) and is not recommended when participating in the workshop during a time constrained event.
+You can use a **personal account** or create a **new AWS account** to ensure you have the necessary access. This should not be an AWS account from the company you work for. Please note that creating an AWS account takes time (credit card validation, etc.) and is not recommended when participating in the workshop during a time constrained event.
 
 ### Region Support
 
@@ -85,7 +85,7 @@ I acknowledge that AWS CloudFormation might create IAM resources with custom nam
 
 Acknowledge the above statement by clicking on the check box and then click on the **Create** button
 
-The above stack creates an Cloud9 IDE environment called **workshop-environment**. 
+The above stack creates a Cloud9 IDE environment called **workshop-environment**. 
 In addition a VPC with two subnets and an internet gateway is also created.
 
 
