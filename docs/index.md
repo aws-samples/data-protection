@@ -2,10 +2,9 @@
 
 If you are dealing with protecting data on your AWS architecture using methods such as encryption or certificate management, these workshops can help you learn in depth. We will be using the Cloud9 IDE and a combination of python code and AWS console access for these workshops.
 
-# Ubiquitous Encryption 
+# Ubiquitous Encryption
 
-Data encryption provides a strong layer of security to protect data that you store within AWS services. AWS services can help you achieve ubiquitous encryption 
-for data in transit as well as data at rest.
+Data encryption provides a strong layer of security to protect data that you store within AWS services. AWS services can help you achieve ubiquitous encryption for data in transit as well as data at rest.
 
 <a><img src="./images/ubiquitous-encryption.png" width="989" height="557"></a>
 
@@ -13,9 +12,9 @@ for data in transit as well as data at rest.
 
 ### AWS Account
 
-In order to complete these workshops you'll need a valid active AWS Account with Admin permissions.  The code and instructions in these workshops assume only one student is using a given AWS account at a time. If you try sharing an account with another student, you'll run into naming conflicts for certain resources. 
+In order to complete these workshops you'll need a valid active AWS Account with Admin permissions.  The code and instructions in these workshops assume only one student is using a given AWS account at a time. If you try sharing an account with another student, you'll run into naming conflicts for certain resources.
 
-Use a **personal account** or create a new AWS account to ensure you have the neccessary access. This should not be an AWS account from the company you work for.
+Use a **personal account** or create a new AWS account to ensure you have the necessary access. This should not be an AWS account from the company you work for.
 
 If the resources that you use for this workshop are left undeleted you will incur charges on your AWS account.
 
@@ -29,13 +28,13 @@ Basic python knowledge is sufficient to consume these workshops.
 
 ### Region Support
 
-Since these workshops use the Cloud9 IDE, you can use run these workshops in the following regions where the  AWS Cloud9 
+Since these workshops use the Cloud9 IDE, you can use run these workshops in the following regions where the  AWS Cloud9
 service is available : **N.Virginia, Ohio, Oregon, Ireland and Singapore.**
 
 ### Cloudformation templates for initial environment setup
 
 Please run these cloudformation stacks in your AWS account as this is required for all the workshops in this repository. When you launch
-the Cloudformation stack keep clicking next until you get to the point where it says 
+the Cloudformation stack keep clicking next until you get to the point where it says
 
 **"I acknowledge that AWS CloudFormation might create IAM resources with custom names."**
 
@@ -56,7 +55,7 @@ an internet gateway is also created.
 * In the Cloud9 IDE environment you will find a folder called **data-protection** in the folder pane on the left side of the screen
 * Open the file named **environment-setup.py**  in the IDE
 * Run the python module **environment-setup.py** by clicking the play button <a><img src="images/cloud9-ide-play-button.png" width="109" height="49"></a>
-  on the top pane 
+  on the top pane
 * This module would take about a minute to complete
 * In the runner window below you should see **Workshop environment setup was successful** printed
 
@@ -64,7 +63,7 @@ an internet gateway is also created.
 
 * Within the Cloud9 environment, open the file named **cf-setup.py** in the IDE
 * Run the python module **cf-setup.py** by clicking the play button <a><img src="images/cloud9-ide-play-button.png" width="109" height="49"></a>
-  on the top pane 
+  on the top pane
 * In the runner window below you should see **All cloudformation stack creation for the workshops has been initiated** printed
 * It takes about 5 minutes for all cloudformation stacks creation to complete. Once complete you should see the
   following stacks successfully completed as shown in the picture below :
@@ -112,7 +111,7 @@ by using the following command :
 ### Step 2 :
 
 * In the Cloud9 IDE you will find a python module called ***final-cleanup.py***
-* Run the **final-cleanup.py** python module 
+* Run the **final-cleanup.py** python module
 * At this point cleanup of the cloudformation stacks is intitiated
 * It takes about 3 minutes for the cloudformation stacks named **data-protection-env-setup** to be deleted
 * The Cloud9 IDE **workshop environment** session shall will be terminated at this point
