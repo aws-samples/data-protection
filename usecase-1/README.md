@@ -6,7 +6,6 @@ This workshop demonstrates server side encryption using AWS KMS and S3
 
 <a><img src="images/data-at-rest-encryption-primer.png" width="700" height="500"></a><br>
 <a><img src="images/server-side-encryption-in-aws.png" width="700" height="500"></a><br>
-<a><img src="images/aws-kms-key-hierarchy.png" width="700" height="500"></a><br>
 
 ## Let's do some server side encryption
 
