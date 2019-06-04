@@ -25,7 +25,7 @@ These workshops assume that you are using the [Cloud9 IDE environment](https://a
 
 Basic python knowledge is sufficient to consume these workshops.
 
-# Cloud9 Initialization
+# Setup Workshop Environment
 
 * Navigate to the Cloud9 service within your AWS console
 * Open the Cloud9 IDE environment called **workshop-environment** . It takes about 30 seconds for the environment to start up.
