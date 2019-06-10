@@ -9,6 +9,7 @@ import boto3
 
 def main():
 
+    albNotFound = 1
     try:
         ec2_client = boto3.client('ec2')
         elbv2_client = boto3.client('elbv2')
@@ -75,7 +76,7 @@ def main():
                     LB['LoadBalancerArn'],
                 ],
             )
-            
+        
         for TagsAlb in  response['TagDescriptions']:
             for Tag in TagsAlb['Tags']:
                 if Tag['Key'] == 'workshop' and Tag['Value'] == 'data-protection':
@@ -107,12 +108,17 @@ def main():
                         ]
                     )
                     print "\nLambda targets for the ALB successfully registered"
-        print "\nStep-1 has been successfully completed \n"                
+                    albNotFound = 0
     except:
         print "Unexpected error:", sys.exc_info()[0]
         raise
     else:
-        exit(0)
+        if (albNotFound):
+            print "\nError: unable to register Lambda targets for ALB\n"
+            sys.exit(1)
+        else:
+            print "\nStep-1 has been successfully completed \n"                
+            sys.exit(0)
 
 if __name__ == "__main__":
     main()
