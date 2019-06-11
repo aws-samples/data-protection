@@ -88,7 +88,6 @@ def main():
                     target_group_arn = response['TargetGroups'][0]['TargetGroupArn']
                     ssm_client.put_parameter(Name='/dp-workshop/target_group_arn',Type='String',Value=target_group_arn)
                     
-
                     #########################################################################################
                     #  Register the targets with the targetgroup that includes configuring the lambda origin #
                     #########################################################################################
