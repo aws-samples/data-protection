@@ -1,0 +1,39 @@
+version: 0.2
+# Buildspec Reference Doc: https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html#build-spec-ref-syntax
+
+# Test: /codebuild_build.sh -i aws/codebuild/python:2.7.12 -a ./out -s ~/data-protection >codebuild.log 2>%1
+
+env:
+    variables:
+     AWS_DEFAULT_REGION: "us-east-2"
+#   parameter-store:
+#     key: "value"
+#     key: "value"
+
+phases:
+  install:
+    commands:
+      # Use Install phase to install packages or any pre-reqs you may need throughout the build (e.g. dev deps, security checks, etc.)
+      - pip install --upgrade pip
+      - pip install --upgrade awscli
+      - sudo apt-get update
+      - sudo apt-get install -y jq
+  pre_build:
+    commands:
+      # Use Pre-Build phase to run tests, install any code deps or any other customization before build
+      - cp cf-templates/template-workshops-setup.yaml /tmp
+      - export STACKID=$(aws cloudformation create-stack --stack-name dp-workshop-test --capabilities CAPABILITY_NAMED_IAM --template-body file:///tmp/template-worksh
+ops-setup.yaml | jq -r ".StackId")
+      - aws cloudformation wait stack-create-complete --stack-name ${STACKID}
+  build:
+    commands:
+      # Use Build phase to build your artifacts (compile, package, etc.)
+      - cd ..
+      - /bin/bash data-protection/environment-setup.sh
+      - python data-protection/.test/test-usecase-1.py
+  post_build:
+    commands:
+      # Use Post Build for notifications, git tags and any further customization after build
+      - aws cloudformation delete-stack --stack-name ${STACKID}
+      - aws cloudformation wait stack-delete-complete --stack-name ${STACKID}
+      
