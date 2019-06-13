@@ -8,7 +8,6 @@ env:
      AWS_DEFAULT_REGION: "us-east-2"
 #   parameter-store:
 #     key: "value"
-#     key: "value"
 
 phases:
   install:
@@ -22,8 +21,7 @@ phases:
     commands:
       # Use Pre-Build phase to run tests, install any code deps or any other customization before build
       - cp cf-templates/template-workshops-setup.yaml /tmp
-      - export STACKID=$(aws cloudformation create-stack --stack-name dp-workshop-test --capabilities CAPABILITY_NAMED_IAM --template-body file:///tmp/template-worksh
-ops-setup.yaml | jq -r ".StackId")
+      - export STACKID=$(aws cloudformation create-stack --stack-name dp-workshop-test --capabilities CAPABILITY_NAMED_IAM --template-body file:///tmp/template-workshops-setup.yaml | jq -r ".StackId")
       - aws cloudformation wait stack-create-complete --stack-name ${STACKID}
   build:
     commands:
