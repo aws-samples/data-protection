@@ -11,8 +11,6 @@ env:
 
 phases:
   install:
-    runtime-versions:
-        python: 2.7
     commands:
       # Use Install phase to install packages or any pre-reqs you may need throughout the build (e.g. dev deps, security checks, etc.)
       - pip install --upgrade pip
