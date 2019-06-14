@@ -13,11 +13,11 @@ phases:
   install:
     commands:
       # Use Install phase to install packages or any pre-reqs you may need throughout the build (e.g. dev deps, security checks, etc.)
+      - yum install -y python2-pip
       - pip install --upgrade pip
       - pip install --upgrade awscli
-      - sudo apt-get update
-      - sudo apt-get install -y jq
-  pre_build:
+      - yum install -y jq
+   pre_build:
     commands:
       # Use Pre-Build phase to run tests, install any code deps or any other customization before build
       - cp cf-templates/template-workshops-setup.yaml /tmp
