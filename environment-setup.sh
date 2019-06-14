@@ -1,8 +1,8 @@
 #!/bin/bash
 
-PACKAGE_NAMES="boto3 aws-encryption-sdk ikpdb pathlib flask pyopenssl"
-if [ "$TEST_ENVIRONMENT" == "1" ]; then
-    PACKAGE_NAMES="boto3 aws-encryption-sdk pathlib flask pyopenssl"
+PACKAGE_NAMES="boto3 aws-encryption-sdk pathlib flask pyopenssl requests"
+if [ -z ${TEST_ENVIRONMENT+x} ] || [ "${TEST_ENVIRONMENT}" != "1" ]; then
+    PACKAGE_NAMES="${PACKAGE_NAMES} ikpdb"
 fi
 
 echo test environment: $TEST_ENVIRONMENT
