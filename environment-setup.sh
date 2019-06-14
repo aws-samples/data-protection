@@ -1,27 +1,39 @@
-#######################################
-#     Initial environment setup       #
-#######################################
+#!/bin/bash
 
-import sys 
-import os 
-import subprocess
-import time
+PACKAGE_NAMES="boto3 aws-encryption-sdk ikpdb pathlib flask pyopenssl"
+if [ "$TEST_ENVIRONMENT" == "1" ]; then
+    PACKAGE_NAMES="boto3 aws-encryption-sdk pathlib flask pyopenssl"
+fi
 
-try:
-    print subprocess.check_output(['pip','install','--user','--upgrade','pip'])
-    cmd='yes|sudo pip uninstall pip'
-    print subprocess.Popen(cmd,shell=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
-    time.sleep(1)
-    print subprocess.check_output(['pip','install','--user','boto3'])
-    print subprocess.check_output(['pip','install','--user','aws-encryption-sdk'])
-    print subprocess.check_output(['pip','install','--user','ikpdb'])
-    print subprocess.check_output(['pip','install','--user','pathlib'])
-    print subprocess.check_output(['pip','install','--user','flask'])
-    print subprocess.check_output(['pip','install','--user','pyopenssl'])
-    print "\n"
-    print "Workshop environment setup was successful"
-except:
-    print "Unexpected error:", sys.exc_info()[0]
-    raise
-else:
-    exit(0)
+echo test environment: $TEST_ENVIRONMENT
+echo installing python dependencies: $PACKAGE_NAMES
+
+PIPOK=0
+OUT=$(sudo pip install -U pip 2>&1)
+if [ "$?" == "0" ]; then
+    PIPOK=1
+else
+    echo $OUT > setup.log
+    OUT=$(pip install -U pip 2>&1)
+    if [ "$?" == "0" ]; then
+        PIPOK=1
+    else
+        echo $OUT > setup.log
+    fi
+fi
+
+if [ "$PIPOK" == "1" ]; then
+    OUT=$(pip install --user ${PACKAGE_NAMES})
+    if [ "$?" == "0" ]; then
+        echo "SUCCESS: installed python dependencies ${PACKAGE_NAMES}" > ok
+        cat ok
+        exit 0
+    else
+        echo ERROR: failed to install python dependencies
+        echo $OUT >> setup.log
+        exit 1
+    fi
+else
+    echo ERROR: failed to upgrade pip
+    exit 2
+fi
