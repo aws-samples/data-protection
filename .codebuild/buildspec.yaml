@@ -34,7 +34,7 @@ phases:
       # Use Build phase to build your artifacts (compile, package, etc.)
       - /bin/bash environment-setup.sh
       - python .test/test-usecase-1.py
-      - python .test/test-usecase-5.py
+      - #python .test/test-usecase-5.py
   post_build:
     commands:
       # Use Post Build for notifications, git tags and any further customization after build
