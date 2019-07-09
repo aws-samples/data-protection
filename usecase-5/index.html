@@ -506,7 +506,7 @@
 about how ACM PCA can be used to generate private certificates for a private domain so that the private domain can be accessed over
 a HTTPS connection</p>
 <h2 id="lets-look-at-some-concepts-and-the-architecture-diagram">Let's look at some concepts and the architecture diagram:</h2>
-<p><a><img src="images/acm-pca-usecase-arch.png" width="700" height="500"></a><br></p>
+<p><a><img src="./images/acm-pca-usecase-arch.png" width="700" height="500"></a><br></p>
 <p>The on-premise application in a data-center is for illustration purposes only, we won't be deploying the on-premise application for this usecase. Only the lambda function behind the application load balancer will be deployed and called from the Cloud9 session inside the VPC. </p>
 <h2 id="lets-do-some-private-cert-generaton-for-a-private-domain-with-aws-certificate-manageracm-private-certificate-authoritypca">Let's do some private cert generaton for a private domain with AWS Certificate Manager(ACM) private certificate authority(PCA) :</h2>
 <p>Open the Cloud9 IDE environment called <code>workshop-environment</code> and follow the recipe below:</p>
@@ -524,7 +524,7 @@ You should see the following printed in the runner window pane:</p>
 
 
 <p>In the AWS console browse to the AWS Certificate Manager service(ACM). Under Private CA's you will see the private CA created and the status should show "Pending Certificate"</p>
-<p><a><img src="images/pca-pending.png"></a><br></p>
+<p><a><img src="./images/pca-pending.png"></a><br></p>
 <p><strong>Some questions to think about :</strong></p>
 <ul>
 <li>Why is the status of the private CA showing "Pending Certificate" ?</li>
@@ -562,7 +562,7 @@ You should see the following printed in the runner window pane:</p>
 The certificate chain contains the self signed CA certificate that we created previously.
 After this operation the subordinate privcate certificate authority(CA) changes status to <strong>ACTIVE</strong>. 
 Browse to the ACM service within the AWS console and you should see the status of the subordiate CA with common name <code>dp-workshop.subordinate</code> as <strong>ACTIVE</strong> as shown below.</p>
-<p><a><img src="images/pca-active.png"></a><br></p>
+<p><a><img src="./images/pca-active.png"></a><br></p>
 <p>We are at a point where the subordinate private certificate authority(PCA) can issue private certificates for any endpoint, device or server.
 You should see the following printed in the runner window pane below:</p>
 <div class="codehilite"><pre><span></span>   Successfully imported signed cert and certificate chain into ACM
