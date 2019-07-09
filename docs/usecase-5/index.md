@@ -46,11 +46,11 @@ These workshops demonstrates server side encryption, client side encryption and 
 
 | Title | Description | Learning Time | Teaching Time With Discussion | 
 | :------- | :---------- | :-- | :-- |
-| [Level 200: Server Side Encryption](./usecase-1/)  | This workshop demonstrates server side encryption on S3 | 15 min | 30 min |
-| [Level 200: Client Side Encryption](./usecase-2/)  | This workshop demonstrates client side encryption | 15 min | 30 min |
-| [Level 200: Client Side Encryption With Data Key Caching](./usecase-3/)  | This workshop demonstrates client side encryption with data key caching | 15 min | 30 min |
-| [Level 300: Creating Private Certs ACM Private Certificate Authority - Mode-1 ](./usecase-4/)  | This workshop demonstrates how you create a AWS Certificate Manager private certificate authority(PCA) and use ACM PCA to sign a CSR to create a private certificate | 40 mins | 1 hour |
-| [Level 300: Creating Private Certs ACM Private Certificate Authority - Mode-2 ](./usecase-5/)  | This workshop demonstrates how you create a AWS Certificate Manager private certificate authority and use this CA to create private X.509 certififcates for a private domain | 40 mins | 1 hour |
+| [Level 200: Server Side Encryption](usecase-1/)  | This workshop demonstrates server side encryption on S3 | 15 min | 30 min |
+| [Level 200: Client Side Encryption](usecase-2/)  | This workshop demonstrates client side encryption | 15 min | 30 min |
+| [Level 200: Client Side Encryption With Data Key Caching](usecase-3/)  | This workshop demonstrates client side encryption with data key caching | 15 min | 30 min |
+| [Level 300: Creating Private Certs ACM Private Certificate Authority - Mode-1 ](usecase-4/)  | This workshop demonstrates how you create a AWS Certificate Manager private certificate authority(PCA) and use ACM PCA to sign a CSR to create a private certificate | 40 mins | 1 hour |
+| [Level 300: Creating Private Certs ACM Private Certificate Authority - Mode-2 ](usecase-5/)  | This workshop demonstrates how you create a AWS Certificate Manager private certificate authority and use this CA to create private X.509 certififcates for a private domain | 40 mins | 1 hour |
 
 **NOTE:** The ACM PCA use cases (the latter 2) can only be run within the VPC where the ALB is deployed as a private DNS name space is used. This will work within the Cloud9 IDE but not from machines that are outside of the VPC. 
 
