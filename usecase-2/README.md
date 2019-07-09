@@ -2,14 +2,6 @@
 
 This workshop demonstrates client side encryption 
 
-## Let's look at some concepts :
-
-<a><img src="images/client-side-encryption.png" width="700" height="500"></a><br>
-
-<a><img src="images/client-side-encryption-sdk.png" width="700" height="500"></a><br>
-
-<a><img src="images/generatedatakey.png" width="700" height="500"></a><br>
-
 ## Let's do some client side encryption
 
 Open the Cloud9 IDE environment called **workshop-environment** and navigate to the **data-protection/usecase-2** directory.
