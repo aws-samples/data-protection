@@ -406,43 +406,43 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#step-1" title="Step 1 :" class="md-nav__link">
-    Step 1 :
+  <a href="#1-run-the-module-named-kms_key_creation-step-1py" title="1. Run the module named kms_key_creation-Step-1.py" class="md-nav__link">
+    1. Run the module named kms_key_creation-Step-1.py
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#step-2" title="Step 2 :" class="md-nav__link">
-    Step 2 :
+  <a href="#2-run-the-usecase-2-step-2py-python-module" title="2. Run the usecase-2-Step-2.py python module ." class="md-nav__link">
+    2. Run the usecase-2-Step-2.py python module .
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#step-3" title="Step 3 :" class="md-nav__link">
-    Step 3 :
+  <a href="#3-check-the-decrypted-file" title="3. Check the decrypted file" class="md-nav__link">
+    3. Check the decrypted file
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#step-4" title="Step 4 :" class="md-nav__link">
-    Step 4 :
+  <a href="#4-check-whether-the-encryption-and-decryption-process-was-successful" title="4. Check whether the encryption and decryption process was successful" class="md-nav__link">
+    4. Check whether the encryption and decryption process was successful
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#step-5" title="Step 5 :" class="md-nav__link">
-    Step 5 :
+  <a href="#5-run-the-check-gendatakey-step-3py-python-module" title="5. Run the check-gendatakey-Step-3.py python module" class="md-nav__link">
+    5. Run the check-gendatakey-Step-3.py python module
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#step-6" title="Step 6 :" class="md-nav__link">
-    Step 6 :
+  <a href="#6-run-the-usecase-2-cleanup-step-4py-python-module" title="6. Run the usecase-2-cleanup-Step-4.py python module" class="md-nav__link">
+    6. Run the usecase-2-cleanup-Step-4.py python module
   </a>
   
 </li>
@@ -485,34 +485,33 @@
 <h2 id="lets-do-some-client-side-encryption">Let's do some client side encryption</h2>
 <p>Open the Cloud9 IDE environment called <strong>workshop-environment</strong> and navigate to the <strong>data-protection/usecase-2</strong> directory.
 Follow the steps below:</p>
-<h3 id="step-1">Step 1 :</h3>
+<h3 id="1-run-the-module-named-kms_key_creation-step-1py">1. Run the module named <code>kms_key_creation-Step-1.py</code></h3>
 <ul>
-<li>Run the module named <strong>kms_key_creation-Step-1.py</strong></li>
 <li>You should see <strong>"KMS Master Key with alias name kms_key_cse_usecase_3 successfully created"</strong> printed
   in the runner window pane below.</li>
 <li>This python module will create a KMS master key with the key alias <strong>kms_key_cse_usecase_2</strong> </li>
 <li>Browse to the KMS console and you should find the key alias <strong>kms_key_cse_usecase_2</strong> under 
   customer managed keys</li>
 </ul>
-<h3 id="step-2">Step 2 :</h3>
+<h3 id="2-run-the-usecase-2-step-2py-python-module">2. Run the <strong>usecase-2-Step-2.py</strong> python module .</h3>
 <ul>
+<li>The runner pane should print <strong>"Module run was successful !!"</strong></li>
 <li>You will find a file called <strong><em>plaintext_u.txt</em></strong> which is the plaintext unencrypted file</li>
-<li>Run the <strong>usecase-2-Step-2.py</strong> python module . The runner pane should print <strong>"Module run was successful !!"</strong></li>
 <li>The module <strong>usecase-2-Step-2.py</strong> encrypts the <strong><em>plaintext_u.txt</em></strong> file</li>
 <li>The encrypted file is created and is called <strong><em>encrypted_e.txt</em></strong></li>
 <li>You should see <strong>"Module run was successful"</strong> printed in the runner window pane below</li>
 </ul>
-<h3 id="step-3">Step 3 :</h3>
+<h3 id="3-check-the-decrypted-file">3. Check the decrypted file</h3>
 <ul>
 <li>The encrypted file <strong><em>encrypted_e.txt</em></strong> is then decrypted </li>
 <li>The decrypted file is called <strong><em>plaintext_u_cycled.txt</em></strong></li>
 </ul>
-<h3 id="step-4">Step 4 :</h3>
+<h3 id="4-check-whether-the-encryption-and-decryption-process-was-successful">4. Check whether the encryption and decryption process was successful</h3>
 <ul>
 <li>Check whether the<strong><em>plaintext_u.txt</em></strong> and <strong><em>plaintext_u_cycled.txt</em></strong> have the same content</li>
 <li>This indicates that the client side encryption and then decryption was successful</li>
 </ul>
-<h3 id="step-5">Step 5 :</h3>
+<h3 id="5-run-the-check-gendatakey-step-3py-python-module">5. Run the <strong>check-gendatakey-Step-3.py</strong> python module</h3>
 <ul>
 <li>Wait for 2 minutes</li>
 <li>Run the <strong>check-gendatakey-Step-3.py</strong> python module</li>
@@ -521,9 +520,8 @@ Follow the steps below:</p>
 <li>If all things go well, you should see <strong>"GenerateDataKey API Called"</strong> in the runner window below. If you don'things
   see this print wait for a minute and try again</li>
 </ul>
-<h3 id="step-6">Step 6 :</h3>
+<h3 id="6-run-the-usecase-2-cleanup-step-4py-python-module">6. Run the <strong>usecase-2-cleanup-Step-4.py</strong> python module</h3>
 <ul>
-<li>Run <strong>usecase-2-cleanup-Step-4.py</strong> python module </li>
 <li>You should see <strong>Cleanup Successful</strong> printed in the runner window pane below</li>
 <li>This modules deletes the kms key and it's alias that we created in <strong>kms_key_creation-Step-1.py</strong>
   .It also deletes all the files that were created in the <strong>usecase-2</strong> folder</li>
