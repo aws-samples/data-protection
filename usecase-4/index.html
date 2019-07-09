@@ -413,71 +413,71 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#step-1" title="Step 1 :" class="md-nav__link">
-    Step 1 :
+  <a href="#1-run-the-python-module-named-usecase-4-step-1py" title="1. Run the python module named usecase-4-step-1.py" class="md-nav__link">
+    1. Run the python module named usecase-4-step-1.py
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#step-2" title="Step 2 :" class="md-nav__link">
-    Step 2 :
+  <a href="#2-run-the-python-module-named-usecase-4-step-2py" title="2. Run the python module named usecase-4-step-2.py" class="md-nav__link">
+    2. Run the python module named usecase-4-step-2.py
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#step-3" title="Step 3 :" class="md-nav__link">
-    Step 3 :
+  <a href="#3-run-the-python-module-named-usecase-4-step-3py" title="3. Run the python module named usecase-4-step-3.py" class="md-nav__link">
+    3. Run the python module named usecase-4-step-3.py
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#step-4" title="Step 4 :" class="md-nav__link">
-    Step 4 :
+  <a href="#4-run-the-python-module-named-usecase-4-step-4py" title="4. Run the python module named usecase-4-step-4.py" class="md-nav__link">
+    4. Run the python module named usecase-4-step-4.py
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#step-5" title="Step 5 :" class="md-nav__link">
-    Step 5 :
+  <a href="#5-run-the-python-module-named-usecase-4-step-5py" title="5. Run the python module named usecase-4-step-5.py" class="md-nav__link">
+    5. Run the python module named usecase-4-step-5.py
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#step-6" title="Step 6 :" class="md-nav__link">
-    Step 6 :
+  <a href="#6-run-the-python-module-named-usecase-4-step-6py" title="6. Run the python module named usecase-4-step-6.py" class="md-nav__link">
+    6. Run the python module named usecase-4-step-6.py
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#step-7" title="Step 7 :" class="md-nav__link">
-    Step 7 :
+  <a href="#7-run-the-python-module-named-usecase-4-step-7py" title="7. Run the python module named usecase-4-step-7.py" class="md-nav__link">
+    7. Run the python module named usecase-4-step-7.py
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#step-8" title="Step 8 :" class="md-nav__link">
-    Step 8 :
+  <a href="#8-run-the-python-module-named-usecase-4-step-8py" title="8. Run the python module named usecase-4-step-8.py" class="md-nav__link">
+    8. Run the python module named usecase-4-step-8.py
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#step-9" title="Step 9 :" class="md-nav__link">
-    Step 9 :
+  <a href="#9-run-the-python-module-named-usecase-4-step-9py" title="9. Run the python module named usecase-4-step-9.py" class="md-nav__link">
+    9. Run the python module named usecase-4-step-9.py
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#step-9_1" title="Step 9 :" class="md-nav__link">
-    Step 9 :
+  <a href="#10-run-the-python-module-named-usecase-4-step-10-cleanuppy" title="10. Run the python module named usecase-4-step-10-cleanup.py" class="md-nav__link">
+    10. Run the python module named usecase-4-step-10-cleanup.py
   </a>
   
 </li>
@@ -518,8 +518,7 @@ CSR(certificate signing request) for your device or server and then get it signe
 <h2 id="lets-do-some-private-cert-generaton-with-aws-certificate-manageracm-private-certificate-authoritypca">Let's do some private cert generaton with AWS Certificate Manager(ACM) private certificate authority(PCA) :</h2>
 <p>Open the Cloud9 IDE environment called <strong>workshop-environment</strong> and navigate to the <strong>data-protection/usecase-4</strong> directory.
 Follow the instructions below:</p>
-<h3 id="step-1">Step 1 :</h3>
-<p>Run the python module named <strong><em>usecase-4-step-1.py</em></strong></p>
+<h3 id="1-run-the-python-module-named-usecase-4-step-1py">1. Run the python module named <strong><em>usecase-4-step-1.py</em></strong></h3>
 <ul>
 <li>First you will see <strong>Pending DynamoDB table creation for storing shared variables</strong> printed on the runner window pane below</li>
 <li>Wait for about 45 seconds </li>
@@ -527,8 +526,7 @@ Follow the instructions below:</p>
 </ul>
 <p>This module will create a DynamoDB table called <strong>shared_variables_crypto_builders</strong> . The primary purpose of this table is to share variables
 across the different python modules that we will run in this usecase.</p>
-<h3 id="step-2">Step 2 :</h3>
-<p>Run the python module named <strong><em>usecase-4-step-2.py</em></strong></p>
+<h3 id="2-run-the-python-module-named-usecase-4-step-2py">2. Run the python module named <strong><em>usecase-4-step-2.py</em></strong></h3>
 <ul>
 <li>This module creates a ACM private certificate authority with the common name <strong>acmpcausecase4.subordinate</strong></li>
 <li>This private certificate authority will publish certificate revocation lists within a S3 bucket whose name
@@ -550,8 +548,7 @@ across the different python modules that we will run in this usecase.</p>
 <li>Is the private certificate authority that's created a root CA or a subordinate CA ?</li>
 <li>What's the purpose of the S3 bucket storing certificate revocation lists ?</li>
 </ul>
-<h3 id="step-3">Step 3 :</h3>
-<p>Run the python module named <strong><em>usecase-4-step-3.py</em></strong></p>
+<h3 id="3-run-the-python-module-named-usecase-4-step-3py">3. Run the python module named <strong><em>usecase-4-step-3.py</em></strong></h3>
 <ul>
 <li>This module creates a self signed root certificate with the common name <strong>rootca-builder</strong></li>
 <li>You can see in the code that the private key associated with the self signed cert is stored in an encrypted DynamoDB table.
@@ -567,8 +564,7 @@ across the different python modules that we will run in this usecase.</p>
 <li>Why is it necessary to store the private keys of root certs in an HSM ?</li>
 <li>What would happen if the private key of the root cert gets compromised or stolen ?</li>
 </ul>
-<h3 id="step-4">Step 4 :</h3>
-<p>Run the python module named <strong><em>usecase-4-step-4.py</em></strong></p>
+<h3 id="4-run-the-python-module-named-usecase-4-step-4py">4. Run the python module named <strong><em>usecase-4-step-4.py</em></strong></h3>
 <ul>
 <li>This module gets a Certificate signing request(CSR) for the private certifiate authority with 
   common name <strong>acmpcausecas4.subordinate</strong> that was created in <strong>Step 2</strong></li>
@@ -578,8 +574,7 @@ across the different python modules that we will run in this usecase.</p>
 <li>You should see the following printed in the runner window pane below </li>
 <li>Successfully created signed subordinate CA pem file <strong><em>signed_subordinate_ca_cert.pem</em></strong> </li>
 </ul>
-<h3 id="step-5">Step 5 :</h3>
-<p>Run the python module named <strong><em>usecase-4-step-5.py</em></strong></p>
+<h3 id="5-run-the-python-module-named-usecase-4-step-5py">5. Run the python module named <strong><em>usecase-4-step-5.py</em></strong></h3>
 <ul>
 <li>This module imports the subordinate CA signed certificate <strong><em>signed_subordinate_ca_cert.pem</em></strong> and 
   the certificate chain of trust into AWS Certificate Manager(ACM)</li>
@@ -593,9 +588,7 @@ across the different python modules that we will run in this usecase.</p>
 <li>Successfully imported signed cert and certificate chain into ACM</li>
 </ul>
 <p><a><img src="./images/acmpcausecase4-status-active.png" width="700" height="500"></a><br></p>
-<h3 id="step-6">Step 6 :</h3>
-<p><strong>Time : 2 minutes</strong></p>
-<p>Run the python module named <strong><em>usecase-4-step-6.py</em></strong></p>
+<h3 id="6-run-the-python-module-named-usecase-4-step-6py">6. Run the python module named <strong><em>usecase-4-step-6.py</em></strong></h3>
 <ul>
 <li>This module takes about 2 minutes to complete </li>
 <li>This module creates a CSR for a webserver endpoint with common name <strong><em>127.0.0.1</em></strong> and the CSR is then
@@ -610,8 +603,7 @@ across the different python modules that we will run in this usecase.</p>
 </ul>
 </li>
 </ul>
-<h3 id="step-7">Step 7 :</h3>
-<p>Run the python module named <strong><em>usecase-4-step-7.py</em></strong></p>
+<h3 id="7-run-the-python-module-named-usecase-4-step-7py">7. Run the python module named <strong><em>usecase-4-step-7.py</em></strong></h3>
 <ul>
 <li>This module creates a python flask web server </li>
 <li>The webserver is running within the Cloud9 environment and is exposed through the following
@@ -620,8 +612,7 @@ across the different python modules that we will run in this usecase.</p>
 <li>Running on https://127.0.0.1:5000/ </li>
 <li>For the next steps this webserver needs to keep running. So please don't kill the runner window pane tab</li>
 </ul>
-<h3 id="step-8">Step 8 :</h3>
-<p>Run the python module named <strong><em>usecase-4-step-8.py</em></strong></p>
+<h3 id="8-run-the-python-module-named-usecase-4-step-8py">8. Run the python module named <strong><em>usecase-4-step-8.py</em></strong></h3>
 <ul>
 <li>This module uses the below curl command to do a HTTP GET on the flask webserver created in <strong>Step 7</strong> </li>
 </ul>
@@ -642,8 +633,7 @@ across the different python modules that we will run in this usecase.</p>
 <ul>
 <li>Why was the server certificate not recognized by the curl command ?</li>
 </ul>
-<h3 id="step-9">Step 9 :</h3>
-<p>Run the python module named <strong>usecase-4-step-9.py</strong></p>
+<h3 id="9-run-the-python-module-named-usecase-4-step-9py">9. Run the python module named <strong>usecase-4-step-9.py</strong></h3>
 <ul>
 <li>This module uses curl to do a HTTPS GET on the flask webserver created in Step 7 using the following command :</li>
 </ul>
@@ -654,8 +644,7 @@ across the different python modules that we will run in this usecase.</p>
 </ul>
 <p><strong>Hello World!</strong></p>
 <p><strong>Certificate is trusted and is valid</strong></p>
-<h3 id="step-9_1">Step 9 :</h3>
-<p>Run the python module named <strong>usecase-4-step-10-cleanup.py</strong></p>
+<h3 id="10-run-the-python-module-named-usecase-4-step-10-cleanuppy">10. Run the python module named <strong>usecase-4-step-10-cleanup.py</strong></h3>
 <ul>
 <li>This module cleans up all the resources that were created as part of this usecase</li>
 <li>Please make sure that you run this cleanup script. Otherwise you will continue accruing charges for the ACM private
