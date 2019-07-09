@@ -15,9 +15,7 @@ CSR(certificate signing request) for your device or server and then get it signe
 Open the Cloud9 IDE environment called **workshop-environment** and navigate to the **data-protection/usecase-4** directory.
 Follow the instructions below:
 
-### Step 1 :
-
-Run the python module named ***usecase-4-step-1.py***
+### 1. Run the python module named ***usecase-4-step-1.py***
 
 * First you will see **Pending DynamoDB table creation for storing shared variables** printed on the runner window pane below
 * Wait for about 45 seconds 
@@ -26,9 +24,7 @@ Run the python module named ***usecase-4-step-1.py***
 This module will create a DynamoDB table called **shared_variables_crypto_builders** . The primary purpose of this table is to share variables
 across the different python modules that we will run in this usecase.
 
-### Step 2 :
-
-Run the python module named ***usecase-4-step-2.py***
+### 2. Run the python module named ***usecase-4-step-2.py***
 
 * This module creates a ACM private certificate authority with the common name **acmpcausecase4.subordinate**
 * This private certificate authority will publish certificate revocation lists within a S3 bucket whose name
@@ -49,9 +45,7 @@ Run the python module named ***usecase-4-step-2.py***
 * Is the private certificate authority that's created a root CA or a subordinate CA ?
 * What's the purpose of the S3 bucket storing certificate revocation lists ?
 
-### Step 3 :
-
-Run the python module named ***usecase-4-step-3.py***
+### 3. Run the python module named ***usecase-4-step-3.py***
 
 * This module creates a self signed root certificate with the common name **rootca-builder**
 * You can see in the code that the private key associated with the self signed cert is stored in an encrypted DynamoDB table.
@@ -68,9 +62,7 @@ Run the python module named ***usecase-4-step-3.py***
 * Why is it necessary to store the private keys of root certs in an HSM ?
 * What would happen if the private key of the root cert gets compromised or stolen ?
 
-### Step 4 :
-
-Run the python module named ***usecase-4-step-4.py***
+### 4. Run the python module named ***usecase-4-step-4.py***
 
 * This module gets a Certificate signing request(CSR) for the private certifiate authority with 
   common name **acmpcausecas4.subordinate** that was created in **Step 2**
@@ -80,9 +72,7 @@ Run the python module named ***usecase-4-step-4.py***
 * You should see the following printed in the runner window pane below 
    * Successfully created signed subordinate CA pem file ***signed_subordinate_ca_cert.pem*** 
 
-### Step 5 :
-
-Run the python module named ***usecase-4-step-5.py***
+### 5. Run the python module named ***usecase-4-step-5.py***
 
 * This module imports the subordinate CA signed certificate ***signed_subordinate_ca_cert.pem*** and 
   the certificate chain of trust into AWS Certificate Manager(ACM)
@@ -97,11 +87,7 @@ Run the python module named ***usecase-4-step-5.py***
 
 <a><img src="./images/acmpcausecase4-status-active.png" width="700" height="500"></a><br>
 
-### Step 6 :
-
-**Time : 2 minutes**
-
-Run the python module named ***usecase-4-step-6.py***
+### 6. Run the python module named ***usecase-4-step-6.py***
 
 * This module takes about 2 minutes to complete 
 * This module creates a CSR for a webserver endpoint with common name ***127.0.0.1*** and the CSR is then
@@ -114,9 +100,7 @@ Run the python module named ***usecase-4-step-6.py***
     * Successfully created server certificate ***webserver_cert.pem*** for the flask web server
     * Successfully created chain of trust ***webserver\_cert_chain.pem*** for the flask web server
 
-### Step 7 :
-
-Run the python module named ***usecase-4-step-7.py***
+### 7. Run the python module named ***usecase-4-step-7.py***
 
 * This module creates a python flask web server 
 * The webserver is running within the Cloud9 environment and is exposed through the following
@@ -125,9 +109,7 @@ Run the python module named ***usecase-4-step-7.py***
    * Running on https://127.0.0.1:5000/ 
 * For the next steps this webserver needs to keep running. So please don't kill the runner window pane tab
 
-### Step 8 :
-
-Run the python module named ***usecase-4-step-8.py***
+### 8. Run the python module named ***usecase-4-step-8.py***
 
 * This module uses the below curl command to do a HTTP GET on the flask webserver created in **Step 7** 
 
@@ -147,9 +129,7 @@ Run the python module named ***usecase-4-step-8.py***
 
 * Why was the server certificate not recognized by the curl command ?
 
-### Step 9 :
-
-Run the python module named **usecase-4-step-9.py**
+### 9. Run the python module named **usecase-4-step-9.py**
 
 * This module uses curl to do a HTTPS GET on the flask webserver created in Step 7 using the following command :
 
@@ -162,9 +142,7 @@ Run the python module named **usecase-4-step-9.py**
   
   **Certificate is trusted and is valid**
   
-### Step 9 :
-
-Run the python module named **usecase-4-step-10-cleanup.py**
+### 10. Run the python module named **usecase-4-step-10-cleanup.py**
 
 * This module cleans up all the resources that were created as part of this usecase
 * Please make sure that you run this cleanup script. Otherwise you will continue accruing charges for the ACM private
