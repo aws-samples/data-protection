@@ -89,7 +89,7 @@ def main():
         ])
                
         subject_name = x509.Name([
-            x509.NameAttribute(NameOID.COMMON_NAME, u'acmpcausecase5.subordinate'),
+            x509.NameAttribute(NameOID.COMMON_NAME, u'acmpcausecase4.subordinate'),
             x509.NameAttribute(NameOID.COUNTRY_NAME, u'US'),
             x509.NameAttribute(NameOID.STATE_OR_PROVINCE_NAME, u'Nevada'),
             x509.NameAttribute(NameOID.LOCALITY_NAME, u'Las Vegas'),

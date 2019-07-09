@@ -19,7 +19,7 @@ try:
     #                                                                                                #
     #   The certificate chain file is called webserver_cert_chain.pem                                #
     #                                                                                                #
-    #   In your terminal make sure that you are in the directory AWS-Certificate-Manager/usecase-1   #
+    #   In your terminal make sure that you are in the directory data-protection/usecase-4           #
     #                                                                                                #
     #   We will use the following curl command line statement to verify whether TLS                  #
     #     authentication was successful.                                                             #

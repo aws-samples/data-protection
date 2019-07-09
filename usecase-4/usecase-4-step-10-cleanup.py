@@ -1,6 +1,6 @@
 """
 ###############################################################################
-#  Cleanup all resources created within python modules for ACM usecase-5      #
+#  Cleanup all resources created within python modules for ACM usecase-4      #
 #                                                                             #
 #  1. S3 buckets used for CRL(Certificate revocation list)                    #
 #                                                                             #
@@ -112,7 +112,7 @@ def main():
         ###################################################
         response = s3_client.list_buckets()
         for bucket_name in response['Buckets']:
-            if bucket_name['Name'].startswith('builder-acm-pca-usecase-5-bucket-pca-crl') :
+            if bucket_name['Name'].startswith('builder-acm-pca-usecase-4-bucket-pca-crl') :
                 try:
                     response = s3_client.get_bucket_tagging(
                         Bucket=bucket_name['Name']

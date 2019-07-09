@@ -10,7 +10,7 @@ This workshop demonstrates server side encryption using AWS KMS and S3
 ## Let's do some server side encryption
 
 Open the Cloud9 IDE environment called **workshop-environment** and navigate to the **data-protection/usecase-1** directory.
-Follow the recipe below:
+Follow the instructions below:
 
 ### 1. Run the module named `kms_key_creation-Step-1.py`
 
