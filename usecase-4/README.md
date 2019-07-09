@@ -162,7 +162,7 @@ Run the python module named **usecase-4-step-9.py**
   
   **Certificate is trusted and is valid**
   
-### Step 9 :
+### Step 10 :
 
 Run the python module named **usecase-4-step-10-cleanup.py**
 
