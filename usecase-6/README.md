@@ -42,13 +42,13 @@ This module takes about 30 seconds to complete and will create the CRL Bucket fo
 
 ### 7. Attach a HTTPS listener and private certificate to the ALB . Click link below for steps
 
-[Creating a Root CA](https://view.highspot.com/viewer/5d47012ec79c521b81aae987)  
+[Attach HTTPS Listener](https://view.highspot.com/viewer/5d47012ec79c521b81aae987)  
 
 ### 8. Validate the identity of the ALB by your browser 
 
 For firefox :
 
-[Creating a Root CA](https://view.highspot.com/viewer/5d47024c8117171d68fd9cca)  
+[Validate Certificate Identity](https://view.highspot.com/viewer/5d47024c8117171d68fd9cca)  
 
 For google chrome :
 
