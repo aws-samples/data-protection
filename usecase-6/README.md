@@ -32,19 +32,19 @@ This module takes about 30 seconds to complete and will create the CRL Bucket fo
 
 [Creating a Root CA](https://view.highspot.com/viewer/5d46f9bd628ba23f42730e68)  
 
-### 5. Create a subordinate issuing CA. Click link below for steps
+### 4. Create a subordinate issuing CA. Click link below for steps
  
 [Creating a Subordinate CA](https://view.highspot.com/viewer/5d46fd6c659e935f9b000792)  
 
-### 6. Issue a private certificate. Click link below for steps
+### 5. Issue a private certificate. Click link below for steps
 
 [Issue a private certificate](https://view.highspot.com/viewer/5d46ff47659e935fbdea2966)  
 
-### 7. Attach a HTTPS listener and private certificate to the ALB . Click link below for steps
+### 6. Attach a HTTPS listener and private certificate to the ALB . Click link below for steps
 
 [Attach HTTPS Listener](https://view.highspot.com/viewer/5d47012ec79c521b81aae987)  
 
-### 8. Validate the identity of the ALB by your browser 
+### 7. Validate the identity of the ALB by your browser 
 
 For firefox :
 
