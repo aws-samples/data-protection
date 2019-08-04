@@ -30,7 +30,7 @@ This module takes about 30 seconds to complete and will create the CRL Bucket fo
 
 ### 3. Create a Root CA. Click link below for steps
 
-[Creating a Root CA](https://view.highspot.com/viewer/5d46f9bd628ba23f42730e68)  
+[Creating a Root CA](https://view.highspot.com/viewer/5d472d49659e935f9b08b84f)  
 
 ### 4. Create a subordinate issuing CA. Click link below for steps
  
