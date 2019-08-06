@@ -266,7 +266,7 @@ Resources:
          Runtime: 'python2.7'
          Tags:
             - Key: workshop
-              Value: data-protection
+              Value: acm-private-ca
          Code: 
             ZipFile: |
                from __future__ import print_function
@@ -363,7 +363,7 @@ Resources:
             - Ref: SubnetTwo
          Tags:
             - Key: workshop
-              Value: data-protection
+              Value: acm-private-ca
             
    
   
