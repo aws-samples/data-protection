@@ -35,7 +35,7 @@ hierarchy
 
 ### 4. Create a Root CA. Click link below for steps
 
-[Creating a Root CA](https://view.highspot.com/viewer/5d473cf0c79c521b96976c69)  
+[Creating a Root CA](https://view.highspot.com/viewer/5d544bdd030dc833da6f2daf)
 
 ### 5. Create a subordinate issuing CA. Click link below for steps
  
@@ -98,4 +98,5 @@ After you have completed the workshop, you need to tear down the stack by naviga
 Choose the **delete** action and wait for the process to complete. Note that it can take a few minutes for the stack to clean up its resources.
 
 ## License Summary
+
 This sample code is made available under a modified MIT license. See the [LICENSE](LICENSE) file.
