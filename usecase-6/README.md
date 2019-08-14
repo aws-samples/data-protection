@@ -98,5 +98,4 @@ After you have completed the workshop, you need to tear down the stack by naviga
 Choose the **delete** action and wait for the process to complete. Note that it can take a few minutes for the stack to clean up its resources.
 
 ## License Summary
-
 This sample code is made available under a modified MIT license. See the [LICENSE](LICENSE) file.
