@@ -1,0 +1,20 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Description: This AWS CloudFormation Template creates the necessary resources needed for CA admnistration
+
+# This IAM user will be used for all login and development
+Resources:
+   # Creating a S3 bucket to store CRL's   
+   S3Bucket:
+      Type: AWS::S3::Bucket
+         Properties:
+            BucketName: acm-private-ca-crl-bucket
+            PublicAccessBlockConfiguration
+               - BlockPublicAcls: False
+               - BlockPublicPolicy: False
+               - IgnorePublicAcls: False
+               - RestrictPublicBuckets: False
+            TagFilters:
+               - Key: workshop
+                 Value: acm-private-ca
+         DeletionPolicy: Delete

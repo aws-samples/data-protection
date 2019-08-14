@@ -28,23 +28,45 @@ This shell script sets up the Cloud9 environment
 
 This module takes about 30 seconds to complete and will create the CRL Bucket for the ACM private CA and register the lambda function as the ALB target
 
-### 3. Create a Root CA. Click link below for steps
+### 3. An IAM Role called CaAdminRole is the role that a CA administrator would assume. Assume the role named CaAdminRole by using switch role on the AWS console in the AWS account that you are currently logged into
+
+This role has permissions that a Certificate Authority administrator will need for CA administration. As a CA administrator you will be responsible for creating a root and subordinate certificate authority
+hierarchy
+
+### 4. Create a Root CA. Click link below for steps
 
 [Creating a Root CA](https://view.highspot.com/viewer/5d473cf0c79c521b96976c69)  
 
-### 4. Create a subordinate issuing CA. Click link below for steps
+### 5. Create a subordinate issuing CA. Click link below for steps
  
 [Creating a Subordinate CA](https://view.highspot.com/viewer/5d473d0e628ba23f42792a44)
 
-### 5. Issue a private certificate. Click link below for steps
+### 5. quiz time. Open a link below in a new browser tab
+
+[quiz](https://bit.ly/2yQ5IML)
+
+### 3. An IAM Role called AppDevRole is the role that an application developer would assume. Assume the role named AppDevRole by using switch role on the AWS console in the AWS account that you are currently logged into
+
+This role has permissions that a Application developer will need for building an web aplication which is fronted by an application load balancer and behind the load balancer is a lambda origin that
+provides the HTML code for the website. The application developer will also have permissions to issue a certificate under a certificate authority that they select.
+
+### 6. Build the infrastructure by running a cloudformation template 
+
+Please download the [Application Developer cloudformation stack](cf-templates/template-app-dev.yaml) and launch it in your AWS account. To launch the stack you must go to the AWS Console and navigate to the CloudFormation service where you can choose **Create Stack** and upload the Cloudformation stack for the workshop. You provide a name for the stack and keep clicking **next** until you get to the point where it says:
+
+```
+I acknowledge that AWS CloudFormation might create IAM resources with custom names.
+```
+
+### 6. Next step is to issue a private certificate to put on the application load balancer. Click the link below for steps
 
 [Issue a private certificate](https://view.highspot.com/viewer/5d473d39030dc823ac380521)  
 
-### 6. Attach a HTTPS listener and private certificate to the ALB . Click link below for steps
+### 7. Attach a HTTPS listener and private certificate to the ALB . Click link below for steps
 
 [Attach HTTPS Listener](https://view.highspot.com/viewer/5d473d7a659e935fa5fcd237)  
 
-### 7. Validate the identity of the ALB by your browser 
+### 8. Validate the identity of the ALB by your browser 
 
 For firefox :
 
