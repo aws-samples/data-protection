@@ -12,7 +12,7 @@ hierarchy
 
 ### 2. Build the infrastructure needed for creating a CA hierarchy by deploying the cloudformation template below
 
-Please download the [Application Developer cloudformation stack](cf-templates/template-ca-admin.yaml) and launch it in your AWS account. To launch the stack you must go to the AWS Console and navigate to the CloudFormation service where you can choose **Create Stack** and upload the Cloudformation stack for the workshop. You provide a name for the stack and keep clicking **next** until you get to the point where it says:
+Please download the [CA Admin cloudformation stack](cf-templates/template-ca-admin.yaml) and launch it in your AWS account. To launch the stack you must go to the AWS Console and navigate to the CloudFormation service where you can choose **Create Stack** and upload the Cloudformation stack for the workshop. You provide a name for the stack and keep clicking **next** until you get to the point where it says:
 
 ```
 I acknowledge that AWS CloudFormation might create IAM resources with custom names.
