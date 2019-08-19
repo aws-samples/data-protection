@@ -57,6 +57,8 @@ Resources:
             - arn:aws:iam::aws:policy/AWSCertificateManagerPrivateCAPrivilegedUser
             - arn:aws:iam::aws:policy/AWSCloudFormationFullAccess
             - arn:aws:iam::aws:policy/AmazonS3FullAccess
+            - arn:aws:iam::aws:policy/IAMReadOnlyAccess
+            - arn:aws:iam::aws:policy/AmazonSNSReadOnlyAccess
             
     # We will use admin privileges for now and make it least privilege as we learn
    AppDevRole:
