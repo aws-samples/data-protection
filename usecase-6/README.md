@@ -25,9 +25,7 @@ I acknowledge that AWS CloudFormation might create IAM resources with custom nam
 
 * Click Create CA
 
-* Click link below for rest of steps :
-
-* [Creating a Root CA](https://view.highspot.com/viewer/5d5b129b6a3b116f4230f242)
+* Click link below for rest of steps : [Creating a Root CA](https://view.highspot.com/viewer/5d5b129b6a3b116f4230f242)
 
 ### 4. Create a Subordinate Issuing CA. 
 
@@ -37,9 +35,7 @@ I acknowledge that AWS CloudFormation might create IAM resources with custom nam
 
 * Click Create CA
 
-* Click link below for rest of steps :
- 
-* [Creating a Subordinate CA](https://view.highspot.com/viewer/5d5b12f7628ba2737b0f2c16)
+* Click link below for rest of steps : [Creating a Subordinate CA](https://view.highspot.com/viewer/5d5b12f7628ba2737b0f2c16)
 
 ### 5. Quiz time. Open a link below in a new browser tab
 
