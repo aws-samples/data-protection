@@ -16,7 +16,7 @@ Resources:
             -
                Effect: "Allow"
                Principal:
-                  AWS: arn:aws:iam::370978665478:user/ramanira
+                  AWS: !Sub "${AWS::AccountId}"
                Action: 
                  - "sts:AssumeRole"
          Policies: 
@@ -71,7 +71,7 @@ Resources:
              -
                Effect: "Allow"
                Principal:
-                  AWS: arn:aws:iam::370978665478:user/ramanira
+                  AWS: !Sub "${AWS::AccountId}"
                Action: 
                  - "sts:AssumeRole"
          Policies: 
