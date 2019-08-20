@@ -4,7 +4,7 @@ Resources:
   S3CrlBucket: 
     DeletionPolicy: Delete
     Properties: 
-      BucketName: acm-private-ca-crl-bucket
+      BucketName: !Sub "acm-private-ca-crl-bucket-${AWS::AccountId}"
       PublicAccessBlockConfiguration: 
         BlockPublicAcls: false
         BlockPublicPolicy: false
