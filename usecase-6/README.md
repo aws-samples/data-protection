@@ -84,7 +84,7 @@ For firefox :
 
 For google chrome :
 
-TBD
+[Validate Certificate Identity](https://view.highspot.com/viewer/5d5c42da66bbaa2fc928a575)
 
 For Microsoft Edge :
 
