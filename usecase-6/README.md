@@ -88,7 +88,7 @@ TBD
 
 For Microsoft Edge :
 
-TBD
+[Validate Certificate Identity](https://view.highspot.com/viewer/5d5c2e5cf7794d4833e8207a)
 
 ### 11. Quiz time. Open a link below in a new browser tab
 
