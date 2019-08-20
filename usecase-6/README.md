@@ -3,6 +3,9 @@
 This workshop demonstrates how ACM Private Certificate authority(PCA) service can be used to create a complete CA hierarchy, generate a private certificate and apply the 
 private certificate on an Application load balancer.
 
+### 0. Deploy initial CloudFormation Template
+[Base CloudFormation Stack](cf-templates/template-acm-pca.yaml)
+
 ### 1. An IAM Role called CaAdminRole is the role that a CA administrator would assume. 
 
 * Assume the role named CaAdminRole by using switch role on the AWS console in the AWS account that you are currently logged into
