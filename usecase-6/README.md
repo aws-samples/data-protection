@@ -80,7 +80,7 @@ Click link below for steps
 
 For firefox :
 
-[Validate Certificate Identity](https://view.highspot.com/viewer/5d473e2978e87d12c129ca1b)  
+[Validate Certificate Identity](https://view.highspot.com/viewer/5d5c1fe23f65f635ae005a47)  
 
 For google chrome :
 
