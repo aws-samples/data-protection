@@ -20,7 +20,10 @@ I acknowledge that AWS CloudFormation might create IAM resources with custom nam
 
 ### 3. Create a Root CA. 
 Navigate to ACM PCA Service.
+
 Click on Private CAs tab.
+
+Click Create CA.
 
 Click link below for steps :
 
