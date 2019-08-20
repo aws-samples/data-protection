@@ -59,7 +59,7 @@ Click the link below for steps
 
 Click link below for steps
 
-[Attach HTTPS Listener](https://view.highspot.com/viewer/5d473d7a659e935fa5fcd237)  
+[Attach HTTPS Listener](https://view.highspot.com/viewer/5d5b5d496a3b116f1e31bd56)  
 
 ### 10. Validate the identity of the ALB by your browser 
 
