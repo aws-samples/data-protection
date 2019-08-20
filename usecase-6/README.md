@@ -85,7 +85,13 @@ For Microsoft Edge :
 
 TBD
 
-### 11. Cleanup - Perform this step only if you are doing this exercise on your own. If you are doing this workshop as part of a AWS managed marketing event where a AWS account is provided for you, there is no need to cleanup 
+### 11. Quiz time. Open a link below in a new browser tab
+
+The **“AppDevRole”** has certain IAM permissions associated with the role
+
+[quiz](https://bit.ly/2Zh3iRY)
+
+### 12. Cleanup - Perform this step only if you are doing this exercise on your own. If you are doing this workshop as part of a AWS managed marketing event where a AWS account is provided for you, there is no need to cleanup 
 
 * Delete the HTTPS listener to the ALB
 * Delete the private certificate that you created
