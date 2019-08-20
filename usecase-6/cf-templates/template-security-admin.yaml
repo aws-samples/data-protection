@@ -87,7 +87,8 @@ Resources:
                     - acm:ListTagsForCertificate
                     - acm:DescribeCertificate
                     - acm:RequestCertificate
-                    - acm-pca:IssueCertificate"
+                    - acm:DeleteCertificate
+                    - acm-pca:IssueCertificate
                     - acm-pca:ListTags
                     - acm-pca:GetCertificate
                     - acm-pca:GetCertificateAuthorityCertificate
