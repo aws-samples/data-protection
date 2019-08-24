@@ -5,7 +5,7 @@ private certificate on an Application load balancer.
 
 ### 1. Deploy base CloudFormation Template
 
-Please download the [Base Cloudformation Stack](https://raw.githubusercontent.com/aws-samples/data-protection/master/usecase-6/cf-templates/template-security-admin.yaml) by right clicking and saving the yaml file on your laptop. 
+Please download the CF template by right clicking and save it as the filename *template-security-admin.yaml* [Base Cloudformation Stack](https://raw.githubusercontent.com/aws-samples/data-protection/master/usecase-6/cf-templates/template-security-admin.yaml) by right clicking and saving the yaml file on your laptop. 
 
 Upload and launch the cloudformation stack in your AWS account. IF you are not familiar with this, follow instructions here [Deploy Cloudformation Stack Instructions](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-using-console-create-stack-template.html)
 
@@ -20,7 +20,7 @@ hierarchy
 
 ### 3. Build the infrastructure needed for creating a CA hierarchy by deploying the cloudformation template below
 
-Please download the [CA Admin Cloudformation Stack](https://raw.githubusercontent.com/aws-samples/data-protection/master/usecase-6/cf-templates/template-ca-admin.yaml) by right clicking and saving the yaml file on your laptop. 
+Please download the CF template by right clicking and save it as the filename *template-ca-admin.yaml* [CA Admin Cloudformation Stack](https://raw.githubusercontent.com/aws-samples/data-protection/master/usecase-6/cf-templates/template-ca-admin.yaml) by right clicking and saving the yaml file on your laptop. 
 
 Upload and launch the cloudformation stack in your AWS account. IF you are not familiar with this, follow instructions here [Deploy Cloudformation Stack Instructions](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-using-console-create-stack-template.html)
 
@@ -60,7 +60,7 @@ provides the HTML code for a website. The application developer will also have p
 
 ### 8. Build the infrastructure by deploying the cloudformation template below
 
-Please download the [AppDev Cloudformation Stack](https://raw.githubusercontent.com/aws-samples/data-protection/master/usecase-6/cf-templates/template-app-dev.yaml) by right clicking and saving the yaml file on your laptop. 
+Please download the CF template by right clicking and save it as the filename *template-appdev-admin.yaml* [AppDev Cloudformation Stack](https://raw.githubusercontent.com/aws-samples/data-protection/master/usecase-6/cf-templates/template-app-dev.yaml) by right clicking and saving the yaml file on your laptop. 
 
 Upload and launch the cloudformation stack in your AWS account. IF you are not familiar with this, follow instructions here [Deploy Cloudformation Stack Instructions](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-using-console-create-stack-template.html)
 
