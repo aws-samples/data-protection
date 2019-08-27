@@ -1,9 +1,9 @@
-## ACM Private Certificate authority - Generating and using private certificates for a private domain
+## ACM Private Certificate Authority (ACM Private CA)
 
 This workshop demonstrates how ACM Private Certificate authority(PCA) service can be used to create a complete CA hierarchy, generate a private certificate and apply the 
 private certificate on an Application load balancer while following security best practices.
 
-### 1. An IAM Role called CaAdminRole is the role that a CA administrator would assume. 
+### 1. An IAM Role called **CaAdminRole** is the role that a CA administrator would assume. 
 
 * Assume the role named CaAdminRole by using switch role on the AWS console in the AWS account that you are currently logged into
 
@@ -18,29 +18,19 @@ Please download the CF template by right clicking and save link as the filename 
 
 Upload and launch the cloudformation stack in your AWS account. If you are not familiar with this, follow instructions here [Deploy Cloudformation Stack Instructions](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-using-console-create-stack-template.html)
 
-
 ### 3. Create a Root CA. 
-* Navigate to ACM PCA Service
 
-* Click Private CAs tab
-
-* Click Create CA
-
+* Navigate to ACM Service in the AWS Console
+* Click Get Started under Private Certificate Authority
 * Click this link for the rest of the steps : [Creating a Root CA](https://view.highspot.com/viewer/5d5b129b6a3b116f4230f242)
 
 ### 4. Create a Subordinate Issuing CA. 
 
-* Navigate to ACM PCA Service
-
-* Click Private CAs tab
-
-* Click Create CA
-
+* Navigate to ACM Service in the AWS Console
+* Under Private CA's click on the **Create CA** button
 * Click this link for the rest of the steps  : [Creating a Subordinate CA](https://view.highspot.com/viewer/5d5b12f7628ba2737b0f2c16)
 
-### 5. Quiz time. Open the link below in a new browser tab
-
-[quiz](https://bit.ly/2yQ5IML)
+### 5. Quiz time. Open this link in a new browser tab : [quiz](https://bit.ly/2yQ5IML)
 
 ### 6. An IAM Role called **AppDevRole** is the role that an application developer would assume. 
 
@@ -63,23 +53,15 @@ Click on this link for steps : [Issue a private certificate](https://view.highsp
 
 Click on this link for steps : [Attach HTTPS Listener](https://view.highspot.com/viewer/5d5b5d496a3b116f1e31bd56)  
 
-### 10. Validate the identity of the ALB from your browser. Please use the steps below only for the browser that you are using
+### 10. Validate the identity of the ALB from your browser. Please use the steps below for the browser that you are using
 
-For firefox :
+For firefox : [Validate Certificate Identity](https://view.highspot.com/viewer/5d5c1fe23f65f635ae005a47)  
 
-[Validate Certificate Identity](https://view.highspot.com/viewer/5d5c1fe23f65f635ae005a47)  
+For google chrome : [Validate Certificate Identity](https://view.highspot.com/viewer/5d5c42da66bbaa2fc928a575)
 
-For google chrome :
+For Microsoft Edge : [Validate Certificate Identity](https://view.highspot.com/viewer/5d5c2e5cf7794d4833e8207a)
 
-[Validate Certificate Identity](https://view.highspot.com/viewer/5d5c42da66bbaa2fc928a575)
-
-For Microsoft Edge :
-
-[Validate Certificate Identity](https://view.highspot.com/viewer/5d5c2e5cf7794d4833e8207a)
-
-### 11. Quiz time. Open a link below in a new browser tab
-
-The **“AppDevRole”** has certain IAM permissions associated with the role. Take this quiz by following this link : [quiz](https://bit.ly/2Zh3iRY)
+### 11. Quiz time. Open this link in a new browser tab : [quiz](https://bit.ly/2Zh3iRY)
 
 ## License Summary
 
