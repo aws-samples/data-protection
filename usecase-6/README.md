@@ -62,19 +62,19 @@ Click on this link for steps : [Issue a private certificate](https://view.highsp
 
 Click on this link for steps : [Attach HTTPS Listener](https://view.highspot.com/viewer/5d5b5d496a3b116f1e31bd56)  
 
-#### 11. Validate the identity of the ALB from your browser. Please use the steps below for the browser that you are using
+#### 11. Validate the identity of the ALB with the browser that your are using.
 
-For firefox : [Validate Certificate Identity](https://view.highspot.com/viewer/5d5c1fe23f65f635ae005a47)  
+For firefox : [Validate Certificate Identity on Firefox broswer](https://view.highspot.com/viewer/5d5c1fe23f65f635ae005a47)  
 
-For google chrome : [Validate Certificate Identity](https://view.highspot.com/viewer/5d5c42da66bbaa2fc928a575)
+For google chrome : [Validate Certificate Identity on chrome browser](https://view.highspot.com/viewer/5d5c42da66bbaa2fc928a575)
 
-For Microsoft Edge : [Validate Certificate Identity](https://view.highspot.com/viewer/5d5c2e5cf7794d4833e8207a)
+For Microsoft Edge : [Validate Certificate Identity on Microsoft edge browser](https://view.highspot.com/viewer/5d5c2e5cf7794d4833e8207a)
 
 #### 12. Quiz time. Open this link in a new browser tab : [quiz](https://bit.ly/2Zh3iRY)
 
 #### 13. Cleanup
 
-Don't worry about cleanup, we will take care of it. Hopefully you learnt something useful that you can take back your organization. Thank you for coming.
+Don't worry about cleanup, we will take care of it. Hopefully you learnt something useful in this workshop that you can take back your organization. Thank you for coming.
 
 #### License Summary
 
