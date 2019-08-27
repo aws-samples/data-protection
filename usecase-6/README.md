@@ -25,7 +25,7 @@ hierarchy
 
 Please download the CF template by right clicking and save link as the filename *template-ca-admin.yaml* [CA Admin Cloudformation Stack](https://raw.githubusercontent.com/aws-samples/data-protection/master/usecase-6/cf-templates/template-ca-admin.yaml) by right clicking and saving the yaml file on your laptop. 
 
-Upload and launch the cloudformation stack in your AWS account. If you are not familiar with this, follow instructions here [Deploy Cloudformation Stack Instructions](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-using-console-create-stack-template.html)
+Upload and launch the cloudformation stack in the AWS account that you are logged into. If you are not familiar with this, follow instructions here [Deploy Cloudformation Stack Instructions](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-using-console-create-stack-template.html)
 
 #### 4. Create a Root CA. 
 
