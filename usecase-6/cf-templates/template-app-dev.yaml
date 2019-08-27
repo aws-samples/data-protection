@@ -142,22 +142,6 @@ Resources:
          SubnetId: !Ref SubnetTwo
          NetworkAclId: !Ref PublicNACL
          
-   cryptocloud9env:
-      Type : AWS::Cloud9::EnvironmentEC2
-      Properties: 
-         # OwnerArn for event engine module
-         # OwnerArn: !Sub 'arn:aws:sts::${AWS::AccountId}:assumed-role/TeamRole/MasterKey'
-         # OwnerArn for testing in AWS account
-         # OwnerArn: !Sub 'arn:aws:sts::${AWS::AccountId}:user/eventengine'
-         Description: "Cloud9 environment for the crypto builders python modules"
-         AutomaticStopTimeMinutes: 60
-         InstanceType: t3.medium
-         Name: "workshop-environment"
-         SubnetId: !Ref Subnet
-         Repositories: 
-            - PathComponent: /data-protection
-              RepositoryUrl: https://github.com/aws-samples/data-protection
-
 # Create the lambda function used for the origin behind the ALB
 
    LambdaOrigin:
