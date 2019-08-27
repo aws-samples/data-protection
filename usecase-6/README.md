@@ -1,16 +1,17 @@
 ## ACM Private Certificate Authority (ACM Private CA)
 
-This workshop demonstrates how ACM Private Certificate authority(PCA) service can be used to create a complete CA hierarchy, generate a private certificate and apply the 
-private certificate on an Application load balancer while following security best practices.
+This workshop demonstrates how ACM Private Certificate Authority (PCA) service can be used to create a complete CA hierarchy, generate a private certificate, and apply the 
+private certificate on an Application Load Balancer while following security best practices.
 
 #### 1. You will be using a AWS provided account for this workshop.
 
 * If you are logged into your personal AWS account or your corporate AWS account, you should log out now.
 * Open this link in a new browser tab: [AWS provided account](https://dashboard.eventengine.run/)
+* Log in with your hash
 * Click on the **AWS Console** button
 * It should bring up a pop-up screen. On the pop-up,  under Login Link click on **Open Console**
 * You should be logged into the AWS provided account
-* Please verify that the region selected is **N.Virginia**
+* Please verify that the region selected is **N. Virginia**
 
 #### 2. An IAM Role called **CaAdminRole** is the role that a CA administrator would assume. 
 
