@@ -231,7 +231,7 @@ Resources:
     Type: AWS::ElasticLoadBalancingV2::TargetGroup
     Properties:
       HealthCheckEnabled: false
-      Name: builders-lambda-origin-one
+      Name: lambda-target-group
       TargetType: lambda
       Targets:
       - Id: !GetAtt [ LambdaOrigin, Arn ]
