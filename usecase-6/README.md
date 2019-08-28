@@ -62,7 +62,7 @@ Open this link in a new browser tab for steps : [Issue a private certificate](ht
 
 #### 10. Attach a HTTPS listener and private certificate to the ALB . 
 
-Open this link in a new browser tab for steps : [Attach HTTPS Listener](https://view.highspot.com/viewer/5d65e672a4dfa078d80584c9)  
+Open this link in a new browser tab for steps : [Attach HTTPS Listener](https://view.highspot.com/viewer/5d669c21628ba22ca196b49e)  
 
 #### 11. Validate the identity of the ALB with the browser that your are using. Please open link in a new browser tab
 
