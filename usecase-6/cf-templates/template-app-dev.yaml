@@ -217,25 +217,7 @@ Resources:
                Resource: "*"
          Roles:
             - !Ref LambdaOriginRole
-      
-   LambdaInvokePermission:
-      Type: AWS::Lambda::Permission
-      Properties:
-         FunctionName: !GetAtt 
-            - LambdaOrigin
-            - Arn
-         Action: 'lambda:InvokeFunction'
-         Principal: 'elasticloadbalancing.amazonaws.com'
-         
-   ALBTargetGroup:
-    Type: AWS::ElasticLoadBalancingV2::TargetGroup
-    Properties:
-      HealthCheckEnabled: false
-      Name: lambda-target-group
-      TargetType: lambda
-      Targets:
-      - Id: !GetAtt [ LambdaOrigin, Arn ]
-   
+              
    ALBSecurityGroup:
       Type: 'AWS::EC2::SecurityGroup'
       Properties:
