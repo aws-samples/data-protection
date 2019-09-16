@@ -31,11 +31,8 @@ def main():
     #############################################################
     """
     try:
-        az = subprocess.check_output(['curl', '-s', 'http://169.254.169.254/latest/meta-data/placement/availability-zone'])
-        list_az = az.split('-')
-        region = list_az[0]+ '-' + list_az[1] + '-' + list_az[2][0]
-        s3_client = boto3.client('s3',region)
-        kms_client = boto3.client('kms',region)
+        s3_client = boto3.client('s3')
+        kms_client = boto3.client('kms')
         
         #######################################################################
         #                                                                     #
@@ -47,8 +44,7 @@ def main():
         #                                                                     #
         #######################################################################
         botocore_session = botocore.session.Session()
-        botocore_session.set_config_variable('region', region)
-        
+
         kms_kwargs = dict(key_ids=['alias/kms_key_cse_usecase_3'])
         if botocore_session is not None:
             kms_kwargs["botocore_session"] = botocore_session
@@ -150,13 +146,13 @@ def main():
                 for chunk in decryptor:
                     plaintext.write(chunk)
                     
-        print "\nModule run was successful !!"
-        print "\nPlain text file plaintext_u.txt was encrypted twice !!"
-        print "\n Step 2 completed successfully"
+        print("\nModule run was successful !!")
+        print("\nPlain text file plaintext_u.txt was encrypted twice !!")
+        print("\n Step 2 completed successfully")
 
         
     except:
-        print "Unexpected error:", sys.exc_info()[0]
+        print("Unexpected error:", sys.exc_info()[0])
         raise
     else:
         exit(0)

@@ -18,9 +18,9 @@ def main():
         response = requests.get('https://alb.workshop.com')
         exit(1)
     except requests.exceptions.RequestException as e:
-        print 'Exception:',e
-        print "\nCertificate is not trusted - cannot validate server certificate"
-        print "\nStep-7 has been successfully completed \n"
+        print('Exception:',e)
+        print("\nCertificate is not trusted - cannot validate server certificate")
+        print("\nStep-7 has been successfully completed \n")
         exit(0)
 
 if __name__ == "__main__":

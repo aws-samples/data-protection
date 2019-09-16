@@ -17,10 +17,7 @@ def main():
     """
     try:
         gendatakey = False
-        az = subprocess.check_output(['curl', '-s', 'http://169.254.169.254/latest/meta-data/placement/availability-zone'])
-        list_az = az.split('-')
-        region = list_az[0]+ '-' + list_az[1] + '-' + list_az[2][0]
-        s3_client = boto3.client('s3', region)
+        s3_client = boto3.client('s3')
         response = s3_client.list_buckets()
         for bucket in response['Buckets']:
             if bucket['Name'].startswith("dp-workshop-bucket-cw-event"):
@@ -30,16 +27,16 @@ def main():
                 )
                 
                 if response['TagSet'][0]['Value'] == 'usecase-2-cse':
-                    print "GenerateDataKey API Called"
-                    print "\nStep 3 completed successfully"
+                    print("GenerateDataKey API Called")
+                    print("\nStep 3 completed successfully")
                     gendatakey= True
                     
         if gendatakey == False:          
-            print "\n Re-run this python module until the GenerateDataKey API called print appears"
-            print "\n The GenerateDataKey API call for the key alias kms_key_cse_usecase_2 that you created in Step 1"
-            print "\n is being monitored using a CloudWatch event"
+            print("\n Re-run this python module until the GenerateDataKey API called print appears")
+            print("\n The GenerateDataKey API call for the key alias kms_key_cse_usecase_2 that you created in Step 1")
+            print("\n is being monitored using a CloudWatch event")
     except:
-        print "Unexpected error:", sys.exc_info()[0]
+        print("Unexpected error:", sys.exc_info()[0])
         raise
     else:
         exit(0)

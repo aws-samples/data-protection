@@ -16,10 +16,7 @@ def main():
     ###################################
     """
     try:
-        az = subprocess.check_output(['curl', '-s', 'http://169.254.169.254/latest/meta-data/placement/availability-zone'])
-        list_az = az.split('-')
-        region = list_az[0]+ '-' + list_az[1] + '-' + list_az[2][0]
-        
+
         #######################################################################
         #   The kmsmasterkeyprovider class is used to store the reference to  # 
         #   the customer master key                                           #
@@ -28,8 +25,7 @@ def main():
         #   kms_key_creation.py is being used here                            #
         #######################################################################
         botocore_session = botocore.session.Session()
-        botocore_session.set_config_variable('region', region)
-        
+
         kms_kwargs = dict(key_ids=['alias/kms_key_cse_usecase_2'])
         if botocore_session is not None:
             kms_kwargs["botocore_session"] = botocore_session
@@ -80,12 +76,12 @@ def main():
                 for chunk in decryptor:
                     plaintext.write(chunk)
                     
-        print "\nModule run was successful !!"
-        print "\nYou should see the client side encrypted file encrypted_e.txt !!"
-        print "\nYou should see the cycled file plaintext_u_cycled.txt !!"
-        print "\n Step 2 completed successfully"
+        print("\nModule run was successful !!")
+        print("\nYou should see the client side encrypted file encrypted_e.txt !!")
+        print("\nYou should see the cycled file plaintext_u_cycled.txt !!")
+        print("\n Step 2 completed successfully")
     except:
-        print "Unexpected error:", sys.exc_info()[0]
+        print("Unexpected error:", sys.exc_info()[0])
         raise
     else:
         exit(0)

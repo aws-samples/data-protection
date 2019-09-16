@@ -35,10 +35,10 @@ def main():
             CertificateChain=open(current_directory_path + 'self-signed-cert.pem', 'rb').read(),
         )
         
-        print "Successfully imported signed cert and certificate chain into ACM"
-        print "\nStep-5 has been successfully completed \n"
+        print("Successfully imported signed cert and certificate chain into ACM")
+        print("\nStep-5 has been successfully completed \n")
     except:
-        print "Unexpected error:", sys.exc_info()[0]
+        print("Unexpected error:", sys.exc_info()[0])
         raise
     else:
         exit(0)

@@ -33,10 +33,7 @@ def main():
     ######################################################################
     """
     try:
-        az = subprocess.check_output(['curl', '-s', 'http://169.254.169.254/latest/meta-data/placement/availability-zone'])
-        list_az = az.split('-')
-        region = list_az[0]+ '-' + list_az[1] + '-' + list_az[2][0]
-        ddb_client = boto3.client('dynamodb', region)
+        ddb_client = boto3.client('dynamodb')
         
         #####################################################################################
         #   Generating key pair for self signed cert                                        #
@@ -89,13 +86,13 @@ def main():
         #  Create the subject and issuer for the self signed cert   #                
         #############################################################
         subject_name = x509.Name([
-            x509.NameAttribute(NameOID.COMMON_NAME, u'rootca-builder'),
-            x509.NameAttribute(NameOID.COUNTRY_NAME, u'US'),
-            x509.NameAttribute(NameOID.STATE_OR_PROVINCE_NAME, u'Nevada'),
-            x509.NameAttribute(NameOID.LOCALITY_NAME, u'Las Vegas'),
-            x509.NameAttribute(NameOID.ORGANIZATION_NAME, u'customer'),
-            x509.NameAttribute(NameOID.ORGANIZATIONAL_UNIT_NAME, u'customerdept'),
-            x509.NameAttribute(NameOID.SERIAL_NUMBER, unicode(str(rootca_serial_number)))
+            x509.NameAttribute(NameOID.COMMON_NAME, 'rootca-builder'),
+            x509.NameAttribute(NameOID.COUNTRY_NAME, 'US'),
+            x509.NameAttribute(NameOID.STATE_OR_PROVINCE_NAME, 'Nevada'),
+            x509.NameAttribute(NameOID.LOCALITY_NAME, 'Las Vegas'),
+            x509.NameAttribute(NameOID.ORGANIZATION_NAME, 'customer'),
+            x509.NameAttribute(NameOID.ORGANIZATIONAL_UNIT_NAME, 'customerdept'),
+            x509.NameAttribute(NameOID.SERIAL_NUMBER, str(str(rootca_serial_number)))
         ])
                
         issuer_name = subject_name
@@ -124,16 +121,16 @@ def main():
         current_directory_path = os.path.dirname(os.path.realpath(__file__)) + '/'
         self_signed_cert_filename_path = current_directory_path + 'self-signed-cert.pem'
         
-        textfile = open(self_signed_cert_filename_path, 'w')
+        textfile = open(self_signed_cert_filename_path, 'wb')
         textfile.write(cert_pem)
         textfile.close()
         
-        print "Success - Self signed certificate file self_signed_cert.pem created"
-        print "This self signed certificate will be used in the certificate chain of trust"
-        print "\nStep-3 has been successfully completed \n"
+        print("Success - Self signed certificate file self_signed_cert.pem created")
+        print("This self signed certificate will be used in the certificate chain of trust")
+        print("\nStep-3 has been successfully completed \n")
 
     except:
-        print "Unexpected error:", sys.exc_info()[0]
+        print("Unexpected error:", sys.exc_info()[0])
         raise
     else:
         exit(0)

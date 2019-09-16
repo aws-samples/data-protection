@@ -61,29 +61,29 @@ def main():
             CertificateAuthorityArn=subordinate_pca_arn
         )
         
-        csr = x509.load_pem_x509_csr(str(response['Csr']), default_backend())
+        csr = x509.load_pem_x509_csr(response['Csr'].encode('utf_8'), default_backend())
         
         #####################################################################
         #   Sign the subordinate private CA CSR using the self signed cert  #  
         #####################################################################
         issuer_name = x509.Name([
-            x509.NameAttribute(NameOID.COMMON_NAME, u'rootca-builder'),
-            x509.NameAttribute(NameOID.COUNTRY_NAME, u'US'),
-            x509.NameAttribute(NameOID.STATE_OR_PROVINCE_NAME, u'Nevada'),
-            x509.NameAttribute(NameOID.LOCALITY_NAME, u'Las Vegas'),
-            x509.NameAttribute(NameOID.ORGANIZATION_NAME, u'customer'),
-            x509.NameAttribute(NameOID.ORGANIZATIONAL_UNIT_NAME, u'customerdept'),
-            x509.NameAttribute(NameOID.SERIAL_NUMBER, unicode(str(root_ca_serial_number)))
+            x509.NameAttribute(NameOID.COMMON_NAME, 'rootca-builder'),
+            x509.NameAttribute(NameOID.COUNTRY_NAME, 'US'),
+            x509.NameAttribute(NameOID.STATE_OR_PROVINCE_NAME, 'Nevada'),
+            x509.NameAttribute(NameOID.LOCALITY_NAME, 'Las Vegas'),
+            x509.NameAttribute(NameOID.ORGANIZATION_NAME, 'customer'),
+            x509.NameAttribute(NameOID.ORGANIZATIONAL_UNIT_NAME, 'customerdept'),
+            x509.NameAttribute(NameOID.SERIAL_NUMBER, str(str(root_ca_serial_number)))
         ])
                
         subject_name = x509.Name([
-            x509.NameAttribute(NameOID.COMMON_NAME, u'dp-workshop.subordinate'),
-            x509.NameAttribute(NameOID.COUNTRY_NAME, u'US'),
-            x509.NameAttribute(NameOID.STATE_OR_PROVINCE_NAME, u'Nevada'),
-            x509.NameAttribute(NameOID.LOCALITY_NAME, u'Las Vegas'),
-            x509.NameAttribute(NameOID.ORGANIZATION_NAME, u'customer'),
-            x509.NameAttribute(NameOID.ORGANIZATIONAL_UNIT_NAME, u'customerdept'),
-            x509.NameAttribute(NameOID.SERIAL_NUMBER, unicode(str(subordinate_ca_serial_number)))
+            x509.NameAttribute(NameOID.COMMON_NAME, 'dp-workshop.subordinate'),
+            x509.NameAttribute(NameOID.COUNTRY_NAME, 'US'),
+            x509.NameAttribute(NameOID.STATE_OR_PROVINCE_NAME, 'Nevada'),
+            x509.NameAttribute(NameOID.LOCALITY_NAME, 'Las Vegas'),
+            x509.NameAttribute(NameOID.ORGANIZATION_NAME, 'customer'),
+            x509.NameAttribute(NameOID.ORGANIZATIONAL_UNIT_NAME, 'customerdept'),
+            x509.NameAttribute(NameOID.SERIAL_NUMBER, str(str(subordinate_ca_serial_number)))
         ])
     
         basic_contraints = x509.BasicConstraints(ca=True, path_length=0)
@@ -108,14 +108,14 @@ def main():
     
         signed_subordinate_ca_cert_filename_path = current_directory_path + 'signed_subordinate_ca_cert.pem'
         
-        textfile = open(signed_subordinate_ca_cert_filename_path, 'w')
+        textfile = open(signed_subordinate_ca_cert_filename_path, 'wb')
         textfile.write(cert_pem)
         textfile.close()
         
-        print "Successfully created signed subordinate CA pem file signed_subordinate_ca_cert.pem"
-        print "\nStep-4 has been successfully completed \n"
+        print("Successfully created signed subordinate CA pem file signed_subordinate_ca_cert.pem")
+        print("\nStep-4 has been successfully completed \n")
     except:
-        print "Unexpected error:", sys.exc_info()[0]
+        print("Unexpected error:", sys.exc_info()[0])
         raise
     else:
         exit(0)

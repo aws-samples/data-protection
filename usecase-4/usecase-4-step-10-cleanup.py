@@ -24,19 +24,16 @@ def main():
     ###########################################
     """
     try:
-        az = subprocess.check_output(['curl', '-s', 'http://169.254.169.254/latest/meta-data/placement/availability-zone'])
-        list_az = az.split('-')
-        region = list_az[0]+ '-' + list_az[1] + '-' + list_az[2][0]
-        s3_client = boto3.client('s3', region_name=region)
-        acm_pca_client = boto3.client('acm-pca', region_name=region)
-        ddb_client = boto3.client('dynamodb', region)
+        s3_client = boto3.client('s3')
+        acm_pca_client = boto3.client('acm-pca')
+        ddb_client = boto3.client('dynamodb')
         
         ####################################################################################
         #  Remove all the files created in the local filesystem as part of this usecase    #
         ####################################################################################
     
         current_directory_path = os.path.dirname(os.path.realpath(__file__)) + '/'
-        print "This step will take about 1 minute to complete\n"
+        print("This step will take about 1 minute to complete\n")
 
         self_signed_cert_filename_path = current_directory_path + 'self-signed-cert.pem'
         signed_subordinate_ca_cert_filename_path = current_directory_path + 'signed_subordinate_ca_cert.pem'
@@ -80,14 +77,14 @@ def main():
                 if  'subordinate_pca_arn' in response['Item']:
                     subordinate_pca_arn = response['Item']['subordinate_pca_arn']['S']
                 
-                ddb_client = boto3.client('dynamodb', region)
+                ddb_client = boto3.client('dynamodb')
       
                 # Delete the DDB Table that stores key value pairs shared across multiple python modules
                 response = ddb_client.delete_table(
                     TableName='shared_variables_crypto_builders'
                 )
         except ddb_client.exceptions.ResourceNotFoundException:
-            print "No DDB table found to delete !! that's OK"
+            print("No DDB table found to delete !! that's OK")
             
         if subordinate_pca_arn is not None:
             response = acm_pca_client.describe_certificate_authority(
@@ -138,11 +135,11 @@ def main():
                             Bucket=bucket_name['Name']
                             )
                         
-        print "\nEverything cleaned up ,you are all good !!\n"
-        print "\nStep-10 cleanup has been successfully completed \n"
+        print("\nEverything cleaned up ,you are all good !!\n")
+        print("\nStep-10 cleanup has been successfully completed \n")
     
     except:
-        print "Unexpected error:", sys.exc_info()[0]
+        print("Unexpected error:", sys.exc_info()[0])
         raise
     else:
         exit(0)

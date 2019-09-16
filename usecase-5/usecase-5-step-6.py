@@ -44,8 +44,8 @@ def main():
         )
         certificate_arn = response['CertificateArn']
       
-        print "Attaching HTTPS listener to ALB and requesting certificate for the private domain alb.workshop.com\n"
-        print "This step takes about a minute to complete\n"
+        print("Attaching HTTPS listener to ALB and requesting certificate for the private domain alb.workshop.com\n")
+        print("This step takes about a minute to complete\n")
 
         # It takes some time to create the certificate and for the certificate to be active , hence the sleep in the code
         time.sleep(5)
@@ -61,8 +61,8 @@ def main():
         current_directory_path = os.path.dirname(os.path.realpath(__file__)) + '/'
         cert_chain_path = current_directory_path + 'cert_chain.pem'
 
-        textfilecertchain = open(cert_chain_path, 'w')
-        textfilecertchain.write(response['CertificateChain'])
+        textfilecertchain = open(cert_chain_path, 'wb')
+        textfilecertchain.write(response['CertificateChain'].encode('utf_8'))
         textfilecertchain.close()
         
         ##################################################################################
@@ -110,11 +110,11 @@ def main():
                         ssm_client.put_parameter(Name='/dp-workshop/listener_arn',Type='String',Value=response['Listeners'][0]['ListenerArn'])
 
         time.sleep(60)
-        print "Successfully attached a HTTPS listener to the ALB"
-        print "\nSuccessfully issued a private certificate for the private domain alb.workshop.com"
-        print "\nStep-6 has been successfully completed \n"
+        print("Successfully attached a HTTPS listener to the ALB")
+        print("\nSuccessfully issued a private certificate for the private domain alb.workshop.com")
+        print("\nStep-6 has been successfully completed \n")
     except:
-        print "Unexpected error:", sys.exc_info()[0]
+        print("Unexpected error:", sys.exc_info()[0])
         raise
     else:
         exit(0)

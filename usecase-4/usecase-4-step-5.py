@@ -23,11 +23,8 @@ def main():
     ##################################################################################
     """
     try:
-        az = subprocess.check_output(['curl', '-s', 'http://169.254.169.254/latest/meta-data/placement/availability-zone'])
-        list_az = az.split('-')
-        region = list_az[0]+ '-' + list_az[1] + '-' + list_az[2][0]
-        acm_pca_client = boto3.client('acm-pca', region_name=region)
-        ddb_client = boto3.client('dynamodb', region)
+        acm_pca_client = boto3.client('acm-pca')
+        ddb_client = boto3.client('dynamodb')
         
         response = ddb_client.get_item(
             TableName='shared_variables_crypto_builders',
@@ -49,11 +46,11 @@ def main():
             CertificateChain=open(current_directory_path + 'self-signed-cert.pem', 'rb').read(),
         )
         
-        print "Successfully imported signed cert and certificate chain into ACM"
-        print "\nStep-5 has been successfully completed \n"
+        print("Successfully imported signed cert and certificate chain into ACM")
+        print("\nStep-5 has been successfully completed \n")
 
     except:
-        print "Unexpected error:", sys.exc_info()[0]
+        print("Unexpected error:", sys.exc_info()[0])
         raise
     else:
         exit(0)

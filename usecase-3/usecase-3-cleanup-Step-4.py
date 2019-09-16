@@ -18,10 +18,7 @@ def main():
     #############################################################
     """
     try:
-        az = subprocess.check_output(['curl', '-s', 'http://169.254.169.254/latest/meta-data/placement/availability-zone'])
-        list_az = az.split('-')
-        region = list_az[0]+ '-' + list_az[1] + '-' + list_az[2][0]
-        s3_client = boto3.client('s3', region)
+        s3_client = boto3.client('s3')
         
         ##########################################################################
         #   REMOVE ALL THE FILES CREATED IN THE LOCAL FILESYSTEM FOR USECASE-3   #
@@ -94,7 +91,7 @@ def main():
         ##############################################
         #     Delete all the keys that were created  #
         ##############################################
-        kms_client = boto3.client('kms',region)
+        kms_client = boto3.client('kms')
         
         response = kms_client.list_aliases(
             Limit=100
@@ -123,29 +120,12 @@ def main():
                     PendingWindowInDays=7
                 )
                 
-        # Cleanup the cloudformation stack 
-        # cf_client = boto3.client('cloudformation',region)
-        
-        # response = cf_client.list_stacks(
-        #     StackStatusFilter=[
-        #         'CREATE_COMPLETE',
-        #     ]
-        # )
-        
-        # for stack in response['StackSummaries']:
-        #     if stack['StackName'] == 'data-protection-cse-datakey-caching':
-        #         response = cf_client.delete_stack(
-        #             StackName='data-protection-cse-datakey-caching',
-        #         )
-        
-        #print "\n Cloudformation template delete initiated" 
-        print "\n Cleanup Successful" 
-        print "\n Step 4 completed successfully"
-        # print "\n If you want to re-run this usecase please wait until the cloudformation stack named data-protection-cse-datakey-caching has been deleted"
+        print("\n Cleanup Successful") 
+        print("\n Step 4 completed successfully")
 
         
     except:
-        print "Unexpected error:", sys.exc_info()[0]
+        print("Unexpected error:", sys.exc_info()[0])
         raise
     else:
         exit(0)

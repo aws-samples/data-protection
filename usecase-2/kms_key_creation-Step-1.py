@@ -15,13 +15,10 @@ def main():
     ##########################################################
     """
     try:
-        az = subprocess.check_output(['curl', '-s', 'http://169.254.169.254/latest/meta-data/placement/availability-zone'])
-        list_az = az.split('-')
-        region = list_az[0]+ '-' + list_az[1] + '-' + list_az[2][0]
-        kms_client = boto3.client('kms', region)
+        kms_client = boto3.client('kms')
         
         # Checking if the CF stack pre-req has been satisfied, if not exit
-        cf_client = boto3.client('cloudformation',region)
+        cf_client = boto3.client('cloudformation')
         response = cf_client.list_stacks(
             StackStatusFilter=[
                 'CREATE_COMPLETE',
@@ -131,11 +128,11 @@ def main():
            TargetKeyId=key_id
         )
         
-        print "\n KMS Master Key with alias name kms_key_cse_usecase_2 successfully created"
-        print "\n In the KMS console you should see the key with the alias kms_key_cse_usecase_2"
-        print "\n Step 1 completed successfully"
+        print("\n KMS Master Key with alias name kms_key_cse_usecase_2 successfully created")
+        print("\n In the KMS console you should see the key with the alias kms_key_cse_usecase_2")
+        print("\n Step 1 completed successfully")
     except:
-        print "Unexpected error:", sys.exc_info()[0]
+        print("Unexpected error:", sys.exc_info()[0])
         raise
     else:
         exit(0)

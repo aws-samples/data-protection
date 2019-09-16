@@ -17,12 +17,9 @@ def main():
     #########################################################################################
     """
     try:
-        az = subprocess.check_output(['curl', '-s', 'http://169.254.169.254/latest/meta-data/placement/availability-zone'])
-        list_az = az.split('-')
-        region = list_az[0]+ '-' + list_az[1] + '-' + list_az[2][0]
-        ddb_client = boto3.client('dynamodb', region)
-        acm_pca_client = boto3.client('acm-pca', region_name=region)
-        s3_client = boto3.client('s3', region_name=region)
+        ddb_client = boto3.client('dynamodb')
+        acm_pca_client = boto3.client('acm-pca')
+        s3_client = boto3.client('s3')
         s3_control_client = boto3.client('s3control')
 
         
@@ -38,7 +35,7 @@ def main():
             'OrganizationalUnit': 'customerdept',
             'State': 'Nevada',
             'CommonName': common_name,
-            'SerialNumber': unicode(str(subordinate_ca_serial_number)),
+            'SerialNumber': str(str(subordinate_ca_serial_number)),
             'Locality': 'Las Vegas'
         }
         
@@ -49,7 +46,8 @@ def main():
         #   for cleanup                                                                 #
         #################################################################################
         crl_bucket_name = 'builder-acm-pca-usecase-4-bucket-pca-crl' + str(random.randint(1, 100000))
-        # Doing the below because locationconstraint does not support all regions today
+        # Note: if statement necessary because locationconstraint does not support all regions today
+        region = boto3.Session().region_name
         if 'us-east-1' in region:
             s3_client.create_bucket(Bucket=crl_bucket_name)
         else:
@@ -107,8 +105,8 @@ def main():
         crl_s3_bucket_policy_json = current_directory_path + 'crl_bucket_policy.json'
     
         crl_bucket_policy = json.loads(open(crl_s3_bucket_policy_json, 'rb').read())
-        crl_bucket_policy['Statement'][0]['Resource'][0] = unicode("arn:aws:s3:::"+crl_bucket_name+"/*", 'utf_8')
-        crl_bucket_policy['Statement'][0]['Resource'][1] = unicode("arn:aws:s3:::"+crl_bucket_name, 'utf_8')
+        crl_bucket_policy['Statement'][0]['Resource'][0] = str("arn:aws:s3:::"+crl_bucket_name+"/*")
+        crl_bucket_policy['Statement'][0]['Resource'][1] = str("arn:aws:s3:::"+crl_bucket_name)
         
         # Set bucket policy CRL S3 bucket
         response = s3_client.put_bucket_policy(
@@ -138,7 +136,7 @@ def main():
         )
         
         subordinate_pca_arn = response['CertificateAuthorityArn']
-        print "Creating private certificate authority\n"
+        print("Creating private certificate authority\n")
         
         #############################################################################################
         #   The infinite loop exists to make sure that the subordinate certificate authority        #
@@ -151,15 +149,15 @@ def main():
             )
             
             if response['CertificateAuthority']['Status'] == 'PENDING_CERTIFICATE':
-                print "\nPrivate CA has been created"
-                print "Please generate the CSR and get it signed by your organizations's root cert"
+                print("\nPrivate CA has been created")
+                print("Please generate the CSR and get it signed by your organizations's root cert")
                 break
             else:
-                print "*"
+                print("*")
                 continue
             break
             
-        print "\nSuccess : The ARN of the subordinate private certificate authority is : \n" + subordinate_pca_arn
+        print("\nSuccess : The ARN of the subordinate private certificate authority is : \n" + subordinate_pca_arn)
         
         ##########################################################################
         #   Storing shared variables in dynamoDB for other python modules to use #
@@ -190,10 +188,10 @@ def main():
             UpdateExpression='SET #spa = :a, #scsn = :b',
         )
         
-        print "\nStep-2 has been successfully completed \n"
+        print("\nStep-2 has been successfully completed \n")
 
     except:
-        print "Unexpected error:", sys.exc_info()[0]
+        print("Unexpected error:", sys.exc_info()[0])
         raise
     else:
         exit(0)

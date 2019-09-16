@@ -36,7 +36,7 @@ def main():
         ####################################################################################
     
         current_directory_path = os.path.dirname(os.path.realpath(__file__)) + '/'
-        print "\nThis step takes about 45 seconds to complete \n"
+        print("\nThis step takes about 45 seconds to complete \n")
 
         self_signed_cert_filename_path = current_directory_path + 'self-signed-cert.pem'
         signed_subordinate_ca_cert_filename_path = current_directory_path + 'signed_subordinate_ca_cert.pem'
@@ -71,7 +71,7 @@ def main():
                     )
                     time.sleep(20)
         except:
-            print "No PCA to delete and clean up !!"
+            print("No PCA to delete and clean up !!")
         
         ###################################################
         #   remove all the s3 buckets that were created   #
@@ -88,9 +88,9 @@ def main():
                         )
                 response = s3_client.delete_bucket(Bucket=crl_bucket_name)
             except ClientError:
-                print 'no bucket to clean up: '+crl_bucket_name
+                print('no bucket to clean up: '+crl_bucket_name)
         except ClientError:
-            print 'no parameter value: /dp-workshop/crl_bucket_name'
+            print('no parameter value: /dp-workshop/crl_bucket_name')
 
         #####################################################################################################################################
         #   Remove HTTPS listener for the ALB, remove the TargetGroup, cleanup default security group from the ALB and cloud9 environment   #
@@ -110,7 +110,7 @@ def main():
                     ListenerArn=listener_arn
                 )
         except:
-            print "No HTTPS listener found to delete and clean up !!"
+            print("No HTTPS listener found to delete and clean up !!")
          
         # Deleting the target groups created for the ALB
         try:
@@ -126,7 +126,7 @@ def main():
                     TargetGroupArn=target_group_arn
                 )
         except:
-            print "No Target group found for the ALB to delete and clean up !!"
+            print("No Target group found for the ALB to delete and clean up !!")
         
         time.sleep(20)
         # Deleting the certificates created for the HTTPS listener of the ALB
@@ -141,7 +141,7 @@ def main():
                     CertificateArn=private_cert_arn
                 )
         except:
-            print "No private certificates for the private domain alb.workshop.com mapping to the ALB"
+            print("No private certificates for the private domain alb.workshop.com mapping to the ALB")
 
         params = ['/dp-workshop/listener_arn',
             '/dp-workshop/private_cert_arn',
@@ -155,13 +155,13 @@ def main():
             try: 
                 ssm_client.delete_parameter(Name=param)
             except ClientError as e:
-                print("Parameter "+param+" not found in store, not deleted")       
+                print(("Parameter "+param+" not found in store, not deleted"))       
             
-        print "\nEverything cleaned up, you are all good !!\n"
-        print "\nStep-9 cleanup has been successfully completed \n"
+        print("\nEverything cleaned up, you are all good !!\n")
+        print("\nStep-9 cleanup has been successfully completed \n")
 
     except:
-        print "Unexpected error:", sys.exc_info()[0]
+        print("Unexpected error:", sys.exc_info()[0])
         raise
     else:
         exit(0)

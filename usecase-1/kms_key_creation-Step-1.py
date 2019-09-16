@@ -120,10 +120,10 @@ def main():
            TargetKeyId=key_id
         )
         
-        print "\n KMS Master Key with alias name kms_key_sse_usecase_1 successfully created"
-        print "\n Step 1 completed successfully"
+        print("\n KMS Master Key with alias name kms_key_sse_usecase_1 successfully created")
+        print("\n Step 1 completed successfully")
     except:
-        print "Unexpected error:", sys.exc_info()[0]
+        print("Unexpected error:", sys.exc_info()[0])
         raise
     else:
         exit(0)

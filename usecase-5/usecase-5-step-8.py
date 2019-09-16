@@ -21,12 +21,12 @@ def main():
         self_signed_cert_file = cwd+'/data-protection/usecase-5/self-signed-cert.pem'
         # what happens if self_signed_cert_file=False?
         response = requests.get('https://alb.workshop.com', verify=self_signed_cert_file)
-        print response.text
-        print "\nCertificate is trusted and is valid"
-        print "\nStep-8 has been successfully completed \n"
+        print(response.text)
+        print("\nCertificate is trusted and is valid")
+        print("\nStep-8 has been successfully completed \n")
         exit(0)
     except requests.exceptions.RequestException as e:
-        print 'Exception:',e
+        print('Exception:',e)
         exit(1)
 
 

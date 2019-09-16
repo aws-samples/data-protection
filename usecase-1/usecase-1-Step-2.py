@@ -84,13 +84,13 @@ def main():
         with open(plaintext_cycled_filename_path, 'wb') as f:
             f.write(response['Body'].read())
             
-        print "\nModule run was successful !!"
-        print "\nplaintext_u.txt was successfully uploaded to S3,server side encrypted and stored as encrypted_e.txt!!"
-        print "\n Step 2 completed successfully"
+        print("\nModule run was successful !!")
+        print("\nplaintext_u.txt was successfully uploaded to S3,server side encrypted and stored as encrypted_e.txt!!")
+        print("\n Step 2 completed successfully")
         
         
     except:
-        print "Unexpected error:", sys.exc_info()[0]
+        print("Unexpected error:", sys.exc_info()[0])
         raise
     else:
         exit(0)

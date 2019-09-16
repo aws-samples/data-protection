@@ -106,17 +106,17 @@ def main():
                             },
                         ]
                     )
-                    print "\nLambda targets for the ALB successfully registered"
+                    print("\nLambda targets for the ALB successfully registered")
                     albNotFound = 0
     except:
-        print "Unexpected error:", sys.exc_info()[0]
+        print("Unexpected error:", sys.exc_info()[0])
         raise
     else:
         if (albNotFound):
-            print "\nError: unable to register Lambda targets for ALB\n"
+            print("\nError: unable to register Lambda targets for ALB\n")
             sys.exit(1)
         else:
-            print "\nStep-1 has been successfully completed \n"                
+            print("\nStep-1 has been successfully completed \n")                
             sys.exit(0)
 
 if __name__ == "__main__":

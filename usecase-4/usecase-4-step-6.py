@@ -34,14 +34,11 @@ def main():
     ####################################################
     """
     try:
-        az = subprocess.check_output(['curl', '-s', 'http://169.254.169.254/latest/meta-data/placement/availability-zone'])
-        list_az = az.split('-')
-        region = list_az[0]+ '-' + list_az[1] + '-' + list_az[2][0]
-        acm_pca_client = boto3.client('acm-pca', region_name=region)
-        ddb_client = boto3.client('dynamodb', region)
+        acm_pca_client = boto3.client('acm-pca')
+        ddb_client = boto3.client('dynamodb')
     
         current_directory_path = os.path.dirname(os.path.realpath(__file__)) + '/'
-        print "This step will take about 2 minutes to complete\n"
+        print("This step will take about 2 minutes to complete\n")
         
         ###########################################################################################
         #   Getting subordinate_pca_arn stored in dynamo DB                                       #
@@ -111,13 +108,13 @@ def main():
         ###########################################################################################
         endpoint_serial_number = random.randint(1, 100000)
         subject_name_csr = x509.Name([
-            x509.NameAttribute(NameOID.COMMON_NAME, u'127.0.0.1'),
-            x509.NameAttribute(NameOID.COUNTRY_NAME, u'US'),
-            x509.NameAttribute(NameOID.STATE_OR_PROVINCE_NAME, u'Nevada'),
-            x509.NameAttribute(NameOID.LOCALITY_NAME, u'Las Vegas'),
-            x509.NameAttribute(NameOID.ORGANIZATION_NAME, u'customer'),
-            x509.NameAttribute(NameOID.ORGANIZATIONAL_UNIT_NAME, u'customerdept'),
-            x509.NameAttribute(NameOID.SERIAL_NUMBER, unicode(str(endpoint_serial_number)))
+            x509.NameAttribute(NameOID.COMMON_NAME, '127.0.0.1'),
+            x509.NameAttribute(NameOID.COUNTRY_NAME, 'US'),
+            x509.NameAttribute(NameOID.STATE_OR_PROVINCE_NAME, 'Nevada'),
+            x509.NameAttribute(NameOID.LOCALITY_NAME, 'Las Vegas'),
+            x509.NameAttribute(NameOID.ORGANIZATION_NAME, 'customer'),
+            x509.NameAttribute(NameOID.ORGANIZATIONAL_UNIT_NAME, 'customerdept'),
+            x509.NameAttribute(NameOID.SERIAL_NUMBER, str(str(endpoint_serial_number)))
         ])
     
         # ca=False for non ca Certs
@@ -173,24 +170,24 @@ def main():
         webserver_cert_chain_path = current_directory_path + 'webserver_cert_chain.pem'
         webserver_privkey_path = current_directory_path + 'webserver_privkey.pem'
     
-        textfilecert = open(webserver_cert_path, 'w')
-        textfilecert.write(response['Certificate'])
+        textfilecert = open(webserver_cert_path, 'wb')
+        textfilecert.write(response['Certificate'].encode('utf_8'))
         textfilecert.close()
         
-        textfilecertchain = open(webserver_cert_chain_path, 'w')
-        textfilecertchain.write(response['CertificateChain'])
+        textfilecertchain = open(webserver_cert_chain_path, 'wb')
+        textfilecertchain.write(response['CertificateChain'].encode('utf_8'))
         textfilecertchain.close()
         
-        textfilecertchain = open(webserver_privkey_path, 'w')
+        textfilecertchain = open(webserver_privkey_path, 'wb')
         textfilecertchain.write(csr_webserver_privkey_pem)
         textfilecertchain.close()
         
-        print "Successfully created server certificate webserver_cert.pem for the flask web server\n"
-        print "Successfully created chain of trust for the flask web server"
-        print "\nStep-6 has been successfully completed \n"
+        print("Successfully created server certificate webserver_cert.pem for the flask web server\n")
+        print("Successfully created chain of trust for the flask web server")
+        print("\nStep-6 has been successfully completed \n")
 
     except:
-        print "Unexpected error:", sys.exc_info()[0]
+        print("Unexpected error:", sys.exc_info()[0])
         raise
     else:
         exit(0)

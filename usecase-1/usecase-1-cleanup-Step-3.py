@@ -17,7 +17,7 @@ def main():
     #######################################################
     """
     try:
-        print "\n This step takes about 5 seconds to complete"
+        print("\n This step takes about 5 seconds to complete")
         s3_client = boto3.client('s3')
         response = s3_client.list_buckets()
         for bucket_name in response['Buckets']:
@@ -83,10 +83,10 @@ def main():
                 AliasName='alias/kms_key_sse_usecase_1'
             )
     
-        print "\n Cleanup Successful" 
-        print "\n Step 3 cleanup completed successfully"
+        print("\n Cleanup Successful") 
+        print("\n Step 3 cleanup completed successfully")
     except:
-        print "Unexpected error:", sys.exc_info()[0]
+        print("Unexpected error:", sys.exc_info()[0])
         raise
     else:
         exit(0)

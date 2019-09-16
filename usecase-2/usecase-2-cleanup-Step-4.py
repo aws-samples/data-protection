@@ -19,10 +19,7 @@ def main():
     #######################################################
     """
     try:
-        az = subprocess.check_output(['curl', '-s', 'http://169.254.169.254/latest/meta-data/placement/availability-zone'])
-        list_az = az.split('-')
-        region = list_az[0]+ '-' + list_az[1] + '-' + list_az[2][0]
-        s3_client = boto3.client('s3', region)
+        s3_client = boto3.client('s3')
         
         ###########################################################################
         #   Remove all the files created in the local file system for usecase-2   #
@@ -76,7 +73,7 @@ def main():
         #   Delete the kms key alias kms_key_cse_usecase_2     #
         #   Schedule the key for deletion                      #                         
         ########################################################
-        kms_client = boto3.client('kms', region)
+        kms_client = boto3.client('kms')
         response = kms_client.list_aliases(
             Limit=100
         )
@@ -104,26 +101,13 @@ def main():
             )
         
         # Cleanup the cloudformation stack 
-        cf_client = boto3.client('cloudformation',region)
+        cf_client = boto3.client('cloudformation')
         
-        # response = cf_client.list_stacks(
-        #     StackStatusFilter=[
-        #         'CREATE_COMPLETE',
-        #     ]
-        # )
-        
-        # for stack in response['StackSummaries']:
-        #     if stack['StackName'] == 'data-protection-cse':
-        #         response = cf_client.delete_stack(
-        #             StackName='data-protection-cse',
-        #         )
-    
-        print "\n Cleanup Successful" 
-        print "\n Step 4 completed successfully"
-        #print "\n If you want to re-run this usecase please wait until the cloudformation stack named data-protection-cse has been deleted"
-     
+        print("\n Cleanup Successful") 
+        print("\n Step 4 completed successfully")
+
     except:
-        print "Unexpected error:", sys.exc_info()[0]
+        print("Unexpected error:", sys.exc_info()[0])
         raise
     else:
         exit(0)
