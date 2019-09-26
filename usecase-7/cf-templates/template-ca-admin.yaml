@@ -1,0 +1,56 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: "This AWS CloudFormation Template creates the necessary resources needed for CA admnistration"
+Resources: 
+  S3CrlBucket: 
+    DeletionPolicy: Delete
+    Properties: 
+      BucketName: !Sub "acm-private-ca-crl-bucket-${AWS::AccountId}"
+      PublicAccessBlockConfiguration: 
+        BlockPublicAcls: false
+        BlockPublicPolicy: false
+        IgnorePublicAcls: false
+        RestrictPublicBuckets: false
+      Tags: 
+        - 
+          Key: workshop
+          Value: acm-private-ca
+    Type: AWS::S3::Bucket
+  
+  SampleBucketPolicy: 
+    Type: AWS::S3::BucketPolicy
+    Properties: 
+      Bucket: 
+        Ref: "S3CrlBucket"
+      PolicyDocument: 
+        Statement: 
+          - 
+            Action: 
+              - s3:GetObject
+              - s3:PutObject
+              - s3:PutObjectAcl
+              - s3:GetBucketLocation
+              - s3:GetBucketAcl
+            Effect: Allow
+            Principal:
+              Service: 
+              - acm-pca.amazonaws.com
+            Resource:
+              -
+                Fn::Join: 
+                  - ""
+                  - 
+                    - "arn:aws:s3:::"
+                    - 
+                      Ref: "S3CrlBucket"
+                    - "/*"
+              -
+                Fn::Join: 
+                  - ""
+                  - 
+                    - "arn:aws:s3:::"
+                    - 
+                      Ref: "S3CrlBucket"
+                    
+                
+              
+    
