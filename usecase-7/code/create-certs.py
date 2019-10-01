@@ -35,6 +35,15 @@ def main():
                 },
                 CertificateAuthorityArn=SubArn
             )
+            tagResponse = acmClient.add_tags_to_certificate(
+                CertificateArn=response['CertificateArn'],
+                Tags=[
+                    {
+                        'Key': 'project',
+                        'Value': 'applicationV1'
+                    },
+                ]
+            )
             print(response['CertificateArn'])
         print('Certificates created. Navigate to ACM Console.')
     except:
