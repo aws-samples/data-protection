@@ -1,7 +1,8 @@
 AWSTemplateFormatVersion: "2010-09-09"
 
 Description: This AWS CloudFormation Template creates the necessary resources that a security admin can leverage for appropriate role assignments to specific job functions that
-             are needed for creating and maanging a certificate authority and issuing private certificates using ACM Private CA
+             are needed for creating and maanging a certificate authority and issuing private certificates using ACM Private CA. In addition it also creates roles for KMS encryption
+             scenarios
 
 # This IAM user will be used for all login and development
 Resources:
@@ -145,8 +146,9 @@ Resources:
                     - kms:ListGrants
                   Resource: "*"
          ManagedPolicyArns: 
-            - arn:aws:iam::aws:policy/AmazonS3FullAccess         
-                  
+            - arn:aws:iam::aws:policy/AmazonS3FullAccess 
+            - arn:aws:iam::aws:policy/IAMReadOnlyAccess        
+                            
    ApplicationTwoRole:
       Type : AWS::IAM::Role
       Properties:
@@ -163,34 +165,6 @@ Resources:
          Policies: 
          -
             PolicyName: "application-2-role-policy"
-            PolicyDocument: 
-               Version: "2012-10-17"
-               Statement: 
-                - 
-                  Effect: "Allow"
-                  Action: 
-                    - kms:*
-                    - s3:*
-                  Resource: "*"
-         ManagedPolicyArns: 
-            - arn:aws:iam::aws:policy/IAMReadOnlyAccess
-            
-   ApplicationThreeRole:
-      Type : AWS::IAM::Role
-      Properties:
-         RoleName: 'application-3-role'
-         AssumeRolePolicyDocument:
-           Version: "2012-10-17"
-           Statement:
-             -
-               Effect: "Allow"
-               Principal:
-                  AWS: !Sub "${AWS::AccountId}"
-               Action: 
-                 - "sts:AssumeRole"
-         Policies: 
-         -
-            PolicyName: "application-3-role-policy"
             PolicyDocument: 
                Version: "2012-10-17"
                Statement: 
@@ -299,6 +273,28 @@ Resources:
                       - 
                         Ref: "KmsWorkshopBucket"
                       
+   S3EncryptionKey: 
+    Type: AWS::KMS::Key
+    Properties: 
+      Description: "CMK for encrypting objects on S3"
+      KeyPolicy: 
+        Version: "2012-10-17"
+        Id: "key-default-1"
+        Statement:
+        -
+            Sid: "Enable IAM User Permissions"
+            Effect: "Allow"
+            Principal: 
+                  AWS: !Sub "${AWS::AccountId}" 
+            Action: "kms:*"
+            Resource: "*"
+
+   S3EncryptionKeyAlias:
+    Type: AWS::KMS::Alias
+    Properties:
+      AliasName: alias/bucketencryptionalias
+      TargetKeyId:
+        Ref: S3EncryptionKey
          
             
 
