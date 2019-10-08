@@ -17,11 +17,9 @@ This workshop has two parts :
 
 ### Part 1 : Using KMS for encrypting data on AWS services
 
-As a first step, please download this file to your laptop by right clicking the below link and save link as the filename *to_upload.txt* to any folder on your laptop
+As a first step, please download this file to your laptop by **right clicking** the below link and save link as the filename *to_upload.txt* to any folder on your laptop
 
 [Download File](https://raw.githubusercontent.com/aws-samples/data-protection/master/usecase-8/files/to_upload.txt) 
-
-<a href="https://raw.githubusercontent.com/aws-samples/data-protection/master/usecase-8/files/to_upload.txt" download>Click to Download</a>
 
 This workshops will cover two scenarios :
 
@@ -29,7 +27,7 @@ This workshops will cover two scenarios :
 
 Server side encryption on S3 using **AWS Managed Keys**
 
-For instructions, open this link in a new browser tab : [Click here for instructions](https://view.highspot.com/viewer/5d9c7aa2c714330cd8efb828)
+For instructions, right click and open this link in a new browser tab : [Click here for instructions](https://view.highspot.com/viewer/5d9c7aa2c714330cd8efb828)
 
 Let's work on a quiz on this topic :
 
@@ -39,7 +37,7 @@ Quiz : [quiz](https://bit.ly/2OmS1hn)
 
 Server side encryption on S3 using **Customer Managed Keys** with separation of duties between key administrators and key users.
 
-For instructions, open this link in a new browser tab : [Click here for instructions](https://view.highspot.com/viewer/5d9c7bad78e87d3e8ae94837)
+For instructions, right click and open this link in a new browser tab : [Click here for instructions](https://view.highspot.com/viewer/5d9c7bad78e87d3e8ae94837)
 
 Let's work on a quiz on this topic :
 
@@ -49,7 +47,7 @@ Quiz: [quiz](https://amazonmr.au1.qualtrics.com/jfe/form/SV_eXNtTUFRCopu48R)
 
 #### 1. An IAM Role called **CaAdminRole** is the role that a CA administrator would assume. 
 
-* Assume the role named CaAdminRole by using switch role on the AWS console in the AWS account that you are currently logged into
+* Assume the role named CaAdminRole by using switch role on the AWS console in the AWS account that you are currently logged into. The role name is **case sensitive**
 
 * This role has permissions that a Certificate Authority administrator will need for CA administration. As a CA administrator you will be responsible for creating a root and subordinate certificate authority
 hierarchy
@@ -58,7 +56,7 @@ hierarchy
 
 #### 2. Build the infrastructure needed for creating a CA hierarchy by deploying the cloudformation template below
 
-Please download the CF template by right clicking and save link as the filename *template-ca-admin.yaml* [CA Admin Cloudformation Stack](https://raw.githubusercontent.com/aws-samples/data-protection/master/usecase-6/cf-templates/template-ca-admin.yaml) by right clicking and saving the yaml file on your laptop. 
+Please download the CF template by **right clicking** and save link as the filename *template-ca-admin.yaml* [CA Admin Cloudformation Stack](https://raw.githubusercontent.com/aws-samples/data-protection/master/usecase-6/cf-templates/template-ca-admin.yaml) by right clicking and saving the yaml file on your laptop. 
 
 Upload and launch the cloudformation stack in the AWS account that you are logged into. If you are not familiar with this, follow instructions here by right clickking and opening link in a new browser tab [Deploy Cloudformation Stack Instructions](https://view.highspot.com/viewer/5d65968f81171753be07bd54)
 
@@ -87,7 +85,7 @@ provides the HTML code for a website. The application developer will also have p
 
 #### 7. Build the application infrastructure by deploying the cloudformation template below
 
-Please download the CF template by right clicking and save link as the filename *template-appdev-admin.yaml* [AppDev Cloudformation Stack](https://raw.githubusercontent.com/aws-samples/data-protection/master/usecase-6/cf-templates/template-app-dev.yaml) by right clicking and saving the yaml file on your laptop. 
+Please download the CF template by **right clicking** and save link as the filename *template-appdev-admin.yaml* [AppDev Cloudformation Stack](https://raw.githubusercontent.com/aws-samples/data-protection/master/usecase-6/cf-templates/template-app-dev.yaml) by right clicking and saving the yaml file on your laptop. 
 
 Upload and launch the cloudformation stack in your AWS account. If you are not familiar with this, follow instructions here by right clickking and opening link in a new browser tab [Deploy Cloudformation Stack Instructions](https://view.highspot.com/viewer/5d65968f81171753be07bd54)
 This cloudformation deployment takes about 3 minutes to complete.
