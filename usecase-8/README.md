@@ -21,9 +21,7 @@ As a first step, please download this file to your laptop by right clicking the 
 
 [Download File](https://raw.githubusercontent.com/aws-samples/data-protection/master/usecase-8/files/to_upload.txt) 
 
-{% raw %}
 <button onclick="window.open('./files/to_upload.txt')">Download</button>
-{% endraw %}
 
 This workshops will cover two scenarios :
 
