@@ -27,7 +27,7 @@ This workshops will cover two scenarios :
 
 Server side encryption on S3 using **AWS Managed Keys**
 
-For instructions, right click and open this link in a new browser tab : [Click here for instructions](https://view.highspot.com/viewer/5d9c7aa2c714330cd8efb828)
+For instructions, right click and open this link in a new browser tab : [Click here for instructions](https://view.highspot.com/viewer/5d9e69b634d6be6992300ade)
 
 Let's work on a quiz on this topic :
 
