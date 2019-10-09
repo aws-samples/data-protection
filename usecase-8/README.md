@@ -37,7 +37,7 @@ Quiz : [quiz](https://bit.ly/2OmS1hn)
 
 Server side encryption on S3 using **Customer Managed Keys** with separation of duties between key administrators and key users.
 
-For instructions, right click and open this link in a new browser tab : [Click here for instructions](https://view.highspot.com/viewer/5d9c7bad78e87d3e8ae94837)
+For instructions, right click and open this link in a new browser tab : [Click here for instructions](https://view.highspot.com/viewer/5d9e6e10f7794d2efc187cbe)
 
 Let's work on a quiz on this topic :
 
