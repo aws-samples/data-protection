@@ -38,7 +38,7 @@ Upload and launch the cloudformation stack in the AWS account that you are logge
 
 * Navigate to ACM Service in the AWS Console
 * Under Private CA's click on the **Create CA** button
-* Open this link in a new browser tab for the rest of the steps  : [Creating a Subordinate CA](https://view.highspot.com/viewer/5d5b12f7628ba2737b0f2c16)
+* Open this link in a new browser tab for the rest of the steps  : [Creating a Subordinate CA](https://view.highspot.com/viewer/5d9e91c1a2e3a9148b6d7deb)
 
 #### 6. Quiz time. Open this link in a new browser tab : [quiz](https://bit.ly/2yQ5IML)
 
