@@ -48,6 +48,9 @@ def main():
                         CertificateSerial=cert_serial,
                         RevocationReason='UNSPECIFIED'
                     )
+                    response = acmClient.delete_certificate(
+                        CertificateArn=certArn
+                    )
                     time.sleep(1)
                     print("Certificate revoked.")
                     
