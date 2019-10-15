@@ -31,7 +31,7 @@ For instructions, right click and open this link in a new browser tab : [Click h
 
 Let's work on a quiz on this topic :
 
-Quiz : [quiz](https://bit.ly/2OmS1hn)
+Quiz : [quiz](https://bit.ly/2BcatBk)
 
 #### Scenario 2 :
 
