@@ -89,11 +89,8 @@ Setup CloudWatch Alarms: [Alarm setup]()
 #### 14. Run mass revocation script
 Run script to create and revoke many certificates at once: [Mass revocation]()
 
-#### 13. Create and mass revoke end-entity certificates
 
-Follow 
-
-#### 13. Cleanup
+## Cleanup
 
 Don't worry about cleanup, we will take care of it. Hopefully you learnt something useful in this workshop that you can take back your organization. Thank you for coming.
 
