@@ -34,6 +34,7 @@ Resources:
                            - acm-pca:ListTags
                            - acm-pca:GetCertificate
                            - acm-pca:UntagCertificateAuthority
+                           - acm-pca:GetCertificateAuthorityCsr
                            - acm-pca:GetCertificateAuthorityCertificate
                            - acm-pca:RevokeCertificate
                            - acm-pca:UpdateCertificateAuthority
