@@ -13,6 +13,7 @@ private certificate on an Application Load Balancer while following security bes
 * You should be logged into the AWS provided account
 * Please verify that the region selected is **N. Virginia**
 
+## Setup Certificate Authority Hierarchy 
 #### 2. An IAM Role called **CaAdminRole** is the role that a CA administrator would assume. 
 
 * Assume the role named CaAdminRole by using switch role on the AWS console in the AWS account that you are currently logged into
@@ -41,6 +42,8 @@ Upload and launch the cloudformation stack in the AWS account that you are logge
 * Open this link in a new browser tab for the rest of the steps  : [Creating a Subordinate CA](https://view.highspot.com/viewer/5d9e91c1a2e3a9148b6d7deb)
 
 #### 6. Quiz time. Open this link in a new browser tab : [quiz](https://bit.ly/2yQ5IML)
+
+## Create Application
 
 #### 7. An IAM Role called **AppDevRole** is the role that an application developer would assume. 
 
