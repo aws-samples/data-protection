@@ -108,11 +108,61 @@ Resources:
             - arn:aws:iam::aws:policy/AWSCloud9User
             - arn:aws:iam::aws:policy/IAMFullAccess
             - arn:aws:iam::aws:policy/AmazonSSMFullAccess
-            
-   
-  
-         
-            
-
-
-
+   CreationLogGroup:
+      Type: AWS::Logs::LogGroup
+      Properties: 
+        LogGroupName: ca_cert_creation
+        RetentionInDays: 60
+   RevLogGroup:
+      Type: AWS::Logs::LogGroup
+      Properties: 
+        LogGroupName: cert_revocation
+        RetentionInDays: 60
+   RevEventRule: 
+      Type: AWS::Events::Rule
+      Properties: 
+        Description: "Certificate revoked"
+        EventPattern: 
+          source: 
+            - "aws.acm-pca"
+          detail-type: 
+            - "AWS API Call via CloudTrail"
+          detail: 
+            eventSource: 
+              - "acm-pca.amazonaws.com"
+            eventName:
+              - "RevokeCertificate"
+        State: "ENABLED"
+        Targets: 
+          - 
+            Arn: 
+              Fn::GetAtt: 
+                - "RevLogGroup"
+                - "Arn"
+            Id: "ca-cert-creation"
+      DependsOn:
+          - RevLogGroup
+   CreationEventRule: 
+      Type: AWS::Events::Rule
+      Properties: 
+        Description: "CA Certificate created"
+        EventPattern: 
+          source: 
+            - "aws.acm-pca"
+          detail-type: 
+            - "AWS API Call via CloudTrail"
+          detail: 
+            eventSource: 
+              - "acm-pca.amazonaws.com"
+            eventName:
+              - "ImportCertificateAuthorityCertificate"
+        State: "ENABLED"
+        Targets: 
+          - 
+            Arn: 
+              Fn::GetAtt: 
+                - "CreationLogGroup"
+                - "Arn"
+            Id: "ca-cert-creation"
+      DependsOn:
+          - CreationLogGroup    
