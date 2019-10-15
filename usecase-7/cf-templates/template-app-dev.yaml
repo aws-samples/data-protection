@@ -173,7 +173,7 @@ Resources:
          SubnetId: !Ref Subnet
          Repositories: 
             - PathComponent: /data-protection
-              RepositoryUrl: https://github.com/aws-samples/data-protection/usecase-7/code
+              RepositoryUrl: https://github.com/aws-samples/data-protection
 
    # We will use admin privileges for now and make it least privilege as we learn
    cryptocloudninerole:
