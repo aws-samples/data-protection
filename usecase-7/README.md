@@ -76,6 +76,20 @@ For Microsoft Edge : [Validate Certificate Identity on Microsoft edge browser](h
 
 #### 12. Quiz time. Open this link in a new browser tab : [quiz](https://bit.ly/2Zh3iRY)
 
+## Monitoring
+
+We will setup two Cloudwatch Alarms. The creation of a CA Certificate and mass revocation of end entity certificates. These are highly sensitive actions, thus we must setup a monitoring mechanism. To do this follow the instructions below.
+
+#### 13. Alarm setup
+Setup CloudWatch Alarms: [Alarm setup]()
+
+#### 14. Run mass revocation script
+Run script to create and revoke many certificates at once: [Mass revocation]()
+
+#### 13. Create and mass revoke end-entity certificates
+
+Follow 
+
 #### 13. Cleanup
 
 Don't worry about cleanup, we will take care of it. Hopefully you learnt something useful in this workshop that you can take back your organization. Thank you for coming.
