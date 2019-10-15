@@ -2,6 +2,23 @@ AWSTemplateFormatVersion: "2010-09-09"
 
 Description: This AWS CloudFormation Template creates the necessary resources for the data protection workshops
 
+Parameters:
+
+    ResourceName:
+        Type: String 
+        Default: builders
+        Description: Prefix for resources created in this session.
+
+    InstanceType:
+        Type: String 
+        Default: t2.medium
+        AllowedValues:
+            - t2.small
+            - t2.medium
+            - t3.small
+            - t3.medium
+        Description: Pick an instance type for the Cloud9 environment 
+
 # This IAM user will be used for all login and development
 Resources:
 
@@ -141,6 +158,54 @@ Resources:
       Properties:
          SubnetId: !Ref SubnetTwo
          NetworkAclId: !Ref PublicNACL
+
+   cryptocloud9env:
+      Type : AWS::Cloud9::EnvironmentEC2
+      Properties: 
+         # OwnerArn for event engine module
+         # OwnerArn: !Sub 'arn:aws:sts::${AWS::AccountId}:assumed-role/TeamRole/MasterKey'
+         # OwnerArn for testing in AWS account
+         # OwnerArn: !Sub 'arn:aws:sts::${AWS::AccountId}:user/eventengine'
+         Description: "Cloud9 environment for the crypto builders python modules"
+         AutomaticStopTimeMinutes: 60
+         InstanceType: !Ref InstanceType
+         Name: "workshop-environment"
+         SubnetId: !Ref Subnet
+         Repositories: 
+            - PathComponent: /data-protection
+              RepositoryUrl: https://github.com/aws-samples/data-protection
+
+   # We will use admin privileges for now and make it least privilege as we learn
+   cryptocloudninerole:
+      Type : AWS::IAM::Role
+      Properties:
+         RoleName: 'cryptobuildercloudninerole'
+         AssumeRolePolicyDocument: 
+           Version: "2012-10-17"
+           Statement: 
+             - 
+               Effect: "Allow"
+               Principal: 
+                 Service: 
+                   - "ec2.amazonaws.com"
+                   - "cloud9.amazonaws.com"
+               Action: 
+                 - "sts:AssumeRole"
+         
+   # Policy for a user trying out modules on a Cloud9 environment 
+   cryptocloudninepolicy:
+      Type : AWS::IAM::Policy
+      Properties: 
+         PolicyName : 'cryptobuilder-cloudnine-policy'
+         PolicyDocument : 
+            Version: "2012-10-17"
+            Statement:
+              -
+               Effect: "Allow"
+               Action: "*"
+               Resource: "*"
+         Roles:
+            - !Ref cryptocloudninerole
          
 # Create the lambda function used for the origin behind the ALB
 
