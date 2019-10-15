@@ -92,6 +92,8 @@ Run script to create and revoke many certificates at once: [Mass revocation](htt
 #### 15. Mass Revocation Alarm Setup
 Setup CloudWatch Alarms: [Revocation Alarm setup](https://view.highspot.com/viewer/5da6342834d6be298b1c4447)
 
+Now we have two alarms that have produced ALARM states. This is due to our mass revocation of multiple certificates by the application developer and the creation of a CA Certificate upon creating our CA hierarchy. Organizations can use this mechanism to build dashboards to monitor and alert (SNS, Email, etc) when sensitive actions take place.
+
 ## Cleanup
 
 #### AWS Event
