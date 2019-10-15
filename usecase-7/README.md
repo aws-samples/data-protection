@@ -25,7 +25,7 @@ hierarchy
 
 #### 3. Build the infrastructure needed for creating a CA hierarchy by deploying the cloudformation template below
 
-Please download the CF template by right clicking and save link as the filename *template-ca-admin.yaml* [CA Admin Cloudformation Stack](https://raw.githubusercontent.com/aws-samples/data-protection/master/usecase-6/cf-templates/template-ca-admin.yaml) by right clicking and saving the yaml file on your laptop. 
+Please download the CF template by right clicking and save link as the filename *template-ca-admin.yaml* [CA Admin Cloudformation Stack](https://raw.githubusercontent.com/aws-samples/data-protection/master/usecase-7/cf-templates/template-ca-admin.yaml) by right clicking and saving the yaml file on your laptop. 
 
 Upload and launch the cloudformation stack in the AWS account that you are logged into. If you are not familiar with this, follow instructions here by right clickking and opening link in a new browser tab [Deploy Cloudformation Stack Instructions](https://view.highspot.com/viewer/5d65968f81171753be07bd54)
 
@@ -56,7 +56,7 @@ provides the HTML code for a website. The application developer will also have p
 
 #### 8. Build the application infrastructure by deploying the cloudformation template below
 
-Please download the CF template by right clicking and save link as the filename *template-appdev.yaml* [AppDev Cloudformation Stack](https://raw.githubusercontent.com/aws-samples/data-protection/master/usecase-6/cf-templates/template-app-dev.yaml) by right clicking and saving the yaml file on your laptop. 
+Please download the CF template by right clicking and save link as the filename *template-appdev.yaml* [AppDev Cloudformation Stack](https://raw.githubusercontent.com/aws-samples/data-protection/master/usecase-7/cf-templates/template-app-dev.yaml) by right clicking and saving the yaml file on your laptop. 
 
 Upload and launch the cloudformation stack in your AWS account. If you are not familiar with this, follow instructions here by right clicking and opening link in a new browser tab [Deploy Cloudformation Stack Instructions](https://view.highspot.com/viewer/5d65968f81171753be07bd54)
 This cloudformation deployment takes about 3 minutes to complete.
