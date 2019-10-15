@@ -52,6 +52,7 @@ Resources:
                            - acm-pca:DeleteCertificateAuthority
                            - acm:DescribeCertificate
                            - acm:ListCertificates
+                           - acm:AddTagsToCertificate
                            - acm:ListTagsForCertificate
                               
          ManagedPolicyArns: 
