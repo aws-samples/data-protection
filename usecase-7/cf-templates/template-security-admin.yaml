@@ -139,7 +139,7 @@ Resources:
               Fn::GetAtt: 
                 - "RevLogGroup"
                 - "Arn"
-            Id: "ca-cert-creation"
+            Id: "cert-revocation"
       DependsOn:
           - RevLogGroup
    CreationEventRule: 
