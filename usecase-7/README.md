@@ -1,4 +1,4 @@
-## ACM Private Certificate Authority (ACM Private CA)
+# ACM Private Certificate Authority (ACM Private CA)
 
 This workshop demonstrates how ACM Private Certificate Authority (PCA) service can be used to create a complete CA hierarchy, generate a private certificate, and apply the 
 private certificate on an Application Load Balancer while following security best practices.
