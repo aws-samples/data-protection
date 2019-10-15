@@ -97,7 +97,7 @@ Now we have two alarms that have produced ALARM states. This is due to our mass 
 ## Cleanup
 
 #### AWS Event
-Don't worry about cleanup, we will take care of it. Hopefully you learnt something useful in this workshop that you can take back your organization. Thank you for coming.
+Don't worry about cleanup, we will take care of it. Hopefully you've learned something useful in this workshop that you can take back your organization. Thank you for coming.
 
 #### On Your Own
 1. Disable and delete Root CA and Subordinate CA
