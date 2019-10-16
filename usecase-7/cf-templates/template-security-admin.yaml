@@ -44,7 +44,6 @@ Resources:
                            - acm-pca:RestoreCertificateAuthority
                            - acm-pca:IssueCertificate
                            - acm-pca:CreateCertificateAuthority
-                           - acm-pca:GetCertificateAuthorityCsr
                            - acm-pca:DeletePermission
                            - acm-pca:DescribeCertificateAuthority
                            - acm-pca:CreatePermission
@@ -90,6 +89,7 @@ Resources:
                     - acm:DescribeCertificate
                     - acm:RequestCertificate
                     - acm:DeleteCertificate
+                    - acm:AddTagsToCertificate
                     - acm-pca:IssueCertificate
                     - acm-pca:ListTags
                     - acm-pca:GetCertificate
@@ -98,6 +98,7 @@ Resources:
                     - acm-pca:ListCertificateAuthorities
                     - acm-pca:CreatePermission
                     - acm-pca:ListPermissions
+                    - acm-pca:GetCertificateAuthorityCsr
                     - acm-pca:DescribeCertificateAuthority
                   Resource: "*"
          ManagedPolicyArns: 
