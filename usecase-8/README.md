@@ -23,7 +23,7 @@ As a first step, please download this file to your laptop by **right clicking** 
 
 This workshops will cover two scenarios :
 
-#### Scenario 1 :
+#### AWS Managed Keys :
 
 Server side encryption on S3 using **AWS Managed Keys**
 
@@ -33,7 +33,7 @@ Let's work on a quiz on this topic :
 
 Quiz : [quiz](https://bit.ly/2BcatBk)
 
-#### Scenario 2 :
+#### Customer Managed Keys(CMK) :
 
 Server side encryption on S3 using **Customer Managed Keys** with separation of duties between key administrators and key users.
 
