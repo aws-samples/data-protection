@@ -1,8 +1,5 @@
 #!/bin/bash
 
-alias python='python36'
-PIP3=pip-3.6
-alias pip='$(PIP3)'
 T=$(date)
 
 PACKAGE_NAMES="boto3 aws-encryption-sdk pathlib flask pyopenssl requests"
@@ -14,12 +11,14 @@ echo installing python dependencies: $PACKAGE_NAMES
 echo $T > setup.log
 
 PIPOK=0
-OUT=$(sudo /usr/bin/$PIP3 install -U pip 2>&1) # FIX!
+echo "upgrading pip (sudo)" >> setup.log
+OUT=$(sudo /usr/bin/pip-3.6 install --upgrade pip 2>&1) # FIX!
 if [ "$?" == "0" ]; then
     PIPOK=1
 else
     echo $OUT >> setup.log
-    OUT=$(pip install -U pip 2>&1)
+    echo "upgrading pip (user)" >> setup.log
+    OUT=$(pip-3.6 install ---upgrade pip 2>&1)
     if [ "$?" == "0" ]; then
         PIPOK=1
     else
@@ -28,7 +27,8 @@ else
 fi
 
 if [ "$PIPOK" == "1" ]; then
-    OUT=$(pip install --user ${PACKAGE_NAMES})
+    echo "calling pip install" >> setup.log
+    OUT=$(python36 -m pip install --user ${PACKAGE_NAMES})
     if [ "$?" == "0" ]; then
         echo "SUCCESS: installed python dependencies ${PACKAGE_NAMES}" > ok
         cat ok
