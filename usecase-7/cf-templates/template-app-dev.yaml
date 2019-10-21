@@ -299,7 +299,7 @@ Resources:
       Type: 'AWS::ElasticLoadBalancingV2::LoadBalancer'
       Properties:
          Scheme: internet-facing
-         "Name" : "acm-pca-usecase-6-alb"
+         "Name" : "acm-pca-usecase-7-alb"
          SecurityGroups:
             - !Ref ALBSecurityGroup
             - !GetAtt SystemVPC.DefaultSecurityGroup
