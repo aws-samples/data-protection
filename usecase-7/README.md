@@ -94,6 +94,8 @@ Setup CloudWatch Alarms: [Revocation Alarm setup](https://view.highspot.com/view
 
 Now we have two alarms that have produced ALARM states. This is due to our mass revocation of multiple certificates by the application developer and the creation of a CA Certificate upon creating our CA hierarchy. Organizations can use this mechanism to build dashboards to monitor and alert (SNS, Email, etc) when sensitive actions take place.
 
+#### 12. Quiz time. Open this link in a new browser tab : [quiz](https://amazonmr.au1.qualtrics.com/jfe/form/SV_cx0KvGMDSVUVLTL)
+
 ## Cleanup
 
 #### AWS Event
