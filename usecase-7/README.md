@@ -79,7 +79,7 @@ For Microsoft Edge : [Validate Certificate Identity on Microsoft edge browser](h
 
 #### 12. Quiz time. Open this link in a new browser tab : [quiz](https://bit.ly/2Zh3iRY)
 
-## Monitoring
+## Security Monitoring
 
 We will setup two Cloudwatch Alarms. The creation of a CA Certificate and mass revocation of end entity certificates. These are highly sensitive actions, thus we must setup a monitoring mechanism. To do this follow the instructions below.
 
