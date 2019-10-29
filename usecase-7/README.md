@@ -81,7 +81,7 @@ For Microsoft Edge : [Validate Certificate Identity on Microsoft edge browser](h
 
 ## Security Monitoring
 
-We will setup two Cloudwatch Alarms. The creation of a CA Certificate and mass revocation of end entity certificates. These are highly sensitive actions, thus we must setup a monitoring mechanism. To do this follow the instructions below.
+We will setup two Cloudwatch Alarms. The creation of a CA Certificate and mass revocation of end entity certificates. These are privileged actions, thus we must setup a monitoring mechanism. To do this follow the instructions below.
 
 #### 13. CA Certificate Alarm Setup
 Setup CloudWatch Alarms: [CA Cert Alarm setup](https://view.highspot.com/viewer/5da63481b7b73956e4842f3a)
