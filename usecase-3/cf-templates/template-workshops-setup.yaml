@@ -1,0 +1,652 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Description: This AWS CloudFormation Template creates the necessary resources for the data protection workshops
+
+Parameters:
+  
+   ResourceName:
+      Type: String
+      Default: builders
+      Description: Prefix for resources created in this session.
+      
+   InstanceType: 
+    Type: String
+    Default: t2.medium
+    AllowedValues: 
+      - t2.small
+      - t2.medium
+      - t3.small
+      - t3.medium
+    Description: Pick a instance type for the Cloud9 environment 
+      
+# This IAM user will be used for all login and development
+Resources:
+
+   SystemVPC:
+      Type: AWS::EC2::VPC
+      Properties:
+         CidrBlock: 192.168.0.0/16
+         EnableDnsHostnames: true
+         EnableDnsSupport: true
+         Tags:
+            - Key: workshop
+              Value: data-protection
+   
+   InternetGateway:
+      Type: AWS::EC2::InternetGateway
+      Properties:
+         Tags:
+            - Key: Name
+              Value: !Ref ResourceName
+              
+   GatewayAttachment:
+      Type: AWS::EC2::VPCGatewayAttachment
+      Properties:
+         InternetGatewayId:
+           Ref: InternetGateway
+         VpcId: !Ref SystemVPC
+         
+   RouteTable:
+      DependsOn:
+      - SystemVPC
+      Type: AWS::EC2::RouteTable
+      Properties:
+         Tags:
+           - Key: Name
+             Value: !Ref ResourceName
+         VpcId: !Ref SystemVPC
+         
+   PublicRoute:
+      DependsOn:
+         - RouteTable
+         - GatewayAttachment
+      Type: AWS::EC2::Route
+      Properties:
+         DestinationCidrBlock: 0.0.0.0/0
+         GatewayId: !Ref InternetGateway
+         RouteTableId: !Ref RouteTable
+         
+   Subnet:
+      Type: AWS::EC2::Subnet
+      Properties:
+         CidrBlock: 192.168.0.0/24
+         MapPublicIpOnLaunch: true
+         Tags:
+           - Key: Name
+             Value: !Ref ResourceName
+         VpcId: !Ref SystemVPC
+         AvailabilityZone: 
+            Fn::Select: 
+               - 0
+               - Fn::GetAZs: ""
+         
+   SubnetAssoc:
+      DependsOn:
+         - Subnet
+         - RouteTable
+      Type: AWS::EC2::SubnetRouteTableAssociation
+      Properties:
+         RouteTableId: !Ref RouteTable
+         SubnetId: !Ref Subnet
+   
+   SubnetTwo:
+      Type: AWS::EC2::Subnet
+      Properties:
+         CidrBlock: 192.168.128.0/24
+         MapPublicIpOnLaunch: true
+         Tags:
+           - Key: Name
+             Value: !Ref ResourceName
+         VpcId: !Ref SystemVPC
+         AvailabilityZone: 
+            Fn::Select: 
+               - 1
+               - Fn::GetAZs: ""
+         
+   SubnetTwoAssoc:
+      DependsOn:
+         - SubnetTwo
+         - RouteTable
+      Type: AWS::EC2::SubnetRouteTableAssociation
+      Properties:
+         RouteTableId: !Ref RouteTable
+         SubnetId: !Ref SubnetTwo
+         
+   PublicNACL:
+      Type: AWS::EC2::NetworkAcl
+      Properties:
+         VpcId: !Ref SystemVPC
+         Tags:
+           -
+            Key: Network
+            Value: Public
+            
+   InboundPublicNACLEntry:
+      Type: AWS::EC2::NetworkAclEntry
+      Properties:
+         NetworkAclId: !Ref PublicNACL
+         RuleNumber: 100
+         Protocol: -1
+         RuleAction: allow
+         Egress: false
+         CidrBlock: '0.0.0.0/0'
+         PortRange:
+           From: 0
+           To: 65535
+           
+   OutboundPublicNACLEntry:
+      Type: AWS::EC2::NetworkAclEntry
+      Properties:
+         NetworkAclId: !Ref PublicNACL
+         RuleNumber: 100
+         Protocol: -1
+         RuleAction: allow
+         Egress: true
+         CidrBlock: 0.0.0.0/0
+         PortRange:
+           From: 0
+           To: 65535
+           
+   SubnetNACLAssociation:
+      Type: AWS::EC2::SubnetNetworkAclAssociation
+      Properties:
+         SubnetId: !Ref Subnet
+         NetworkAclId: !Ref PublicNACL
+         
+   SubnetTwoNACLAssociation:
+      Type: AWS::EC2::SubnetNetworkAclAssociation
+      Properties:
+         SubnetId: !Ref SubnetTwo
+         NetworkAclId: !Ref PublicNACL
+         
+   S3Bucket: 
+      DeletionPolicy: Retain
+      Type: AWS::S3::Bucket
+      Properties:
+         Tags:
+              -
+               Key: worksop
+               Value: data-protection     
+   BucketPolicy: 
+      Type: AWS::S3::BucketPolicy
+      Properties: 
+         Bucket: 
+            Ref: S3Bucket
+         PolicyDocument: 
+            Version: "2012-10-17"
+            Statement: 
+               - 
+                  Sid: "AWSCloudTrailAclCheck"
+                  Effect: "Allow"
+                  Principal: 
+                     Service: "cloudtrail.amazonaws.com"
+                  Action: "s3:GetBucketAcl"
+                  Resource: 
+                     !Sub |-
+                     arn:aws:s3:::${S3Bucket}
+               - 
+                  Sid: "AWSCloudTrailWrite"
+                  Effect: "Allow"
+                  Principal: 
+                     Service: "cloudtrail.amazonaws.com"
+                  Action: "s3:PutObject"
+                  Resource:
+                     !Sub |-
+                     arn:aws:s3:::${S3Bucket}/AWSLogs/${AWS::AccountId}/*
+                  Condition: 
+                     StringEquals:
+                        s3:x-amz-acl: "bucket-owner-full-control"
+    
+   SystemTrail: 
+      DependsOn: 
+         - BucketPolicy
+      Type: AWS::CloudTrail::Trail
+      Properties: 
+         S3BucketName: 
+            Ref: S3Bucket
+         IsLogging: true
+
+   cryptocloud9env:
+      Type : AWS::Cloud9::EnvironmentEC2
+      Properties: 
+         # OwnerArn for event engine module
+         # OwnerArn: !Sub 'arn:aws:sts::${AWS::AccountId}:assumed-role/TeamRole/MasterKey'
+         # OwnerArn for testing in AWS account
+         # OwnerArn: !Sub 'arn:aws:sts::${AWS::AccountId}:user/eventengine'
+         Description: "Cloud9 environment for the crypto builders python modules"
+         AutomaticStopTimeMinutes: 60
+         InstanceType: !Ref InstanceType
+         Name: "workshop-environment"
+         SubnetId: !Ref Subnet
+         Repositories: 
+            - PathComponent: /data-protection
+              RepositoryUrl: https://github.com/aws-samples/data-protection
+
+   # We will use admin privileges for now and make it least privilege as we learn
+   cryptocloudninerole:
+      Type : AWS::IAM::Role
+      Properties:
+         RoleName: 'cryptobuildercloudninerole'
+         AssumeRolePolicyDocument: 
+           Version: "2012-10-17"
+           Statement: 
+             - 
+               Effect: "Allow"
+               Principal: 
+                 Service: 
+                   - "ec2.amazonaws.com"
+                   - "cloud9.amazonaws.com"
+               Action: 
+                 - "sts:AssumeRole"
+         
+   # Policy for a user trying out modules on a Cloud9 environment 
+   cryptocloudninepolicy:
+      Type : AWS::IAM::Policy
+      Properties: 
+         PolicyName : 'cryptobuilder-cloudnine-policy'
+         PolicyDocument : 
+            Version: "2012-10-17"
+            Statement:
+              -
+               Effect: "Allow"
+               Action: "*"
+               Resource: "*"
+         Roles:
+            - !Ref cryptocloudninerole
+         
+
+# Create the lambda function used for the origin behind the ALB
+
+   LambdaOrigin:
+      Type : AWS::Lambda::Function
+      Properties: 
+         FunctionName: 'builders-lambda-origin-one'
+         Handler: "index.lambda_handler"
+         Role: !GetAtt LambdaOriginRole.Arn
+         Runtime: 'python2.7'
+         Tags:
+            - Key: workshop
+              Value: data-protection
+         Code: 
+            ZipFile: |
+               from __future__ import print_function
+            
+               # This is the lambda origin behing the application load balancer
+               def lambda_handler(event, context):
+                  response = {
+                    "statusCode": 200,
+                    "statusDescription": "200 OK",
+                    "isBase64Encoded": False,
+                    "headers": {
+                    "Content-Type": "text/html; charset=utf-8"
+                    }
+                  }
+                  
+                  response['body'] = """<html>
+                  <head>
+                  <title>Hello World!</title>
+                  <style>
+                  html, body {
+                  margin: 0; padding: 0;
+                  font-family: arial; font-weight: 700; font-size: 3em;
+                  text-align: center;
+                  }
+                  </style>
+                  </head>
+                  <body>
+                  <p>Hello World!</p>
+                  </body>
+                  </html>"""
+                  
+                  return response
+   
+   # We will use admin privileges for now and make it least privilege as we learn
+   LambdaOriginRole:
+      Type : AWS::IAM::Role
+      Properties:
+         RoleName: 'acmcalblambdaoriginrole'
+         AssumeRolePolicyDocument: 
+           Version: "2012-10-17"
+           Statement: 
+             - 
+               Effect: "Allow"
+               Principal: 
+                 Service: 
+                   - "lambda.amazonaws.com"
+               Action: 
+                 - "sts:AssumeRole"
+         
+   # We will use admin privileges for now and make it least privilege as we learn
+   LambdaOriginPolicy:
+      Type : AWS::IAM::Policy
+      Properties: 
+         PolicyName : 'acm-alb-lambdaorigin-policy'
+         PolicyDocument : 
+            Version: "2012-10-17"
+            Statement:
+              -
+               Effect: "Allow"
+               Action: "*"
+               Resource: "*"
+         Roles:
+            - !Ref LambdaOriginRole
+      
+   LambdaInvokePermission:
+      Type: AWS::Lambda::Permission
+      Properties:
+         FunctionName: !GetAtt LambdaOrigin.Arn
+         Action: 'lambda:InvokeFunction'
+         Principal: 'elasticloadbalancing.amazonaws.com'
+   
+   ALBSecurityGroup:
+      Type: 'AWS::EC2::SecurityGroup'
+      Properties:
+         GroupDescription: 'ALB Security Group'
+         VpcId: !Ref SystemVPC
+      
+   # Creating a ALB in CF - Target group and listener will be createdin Boto      
+   ApplicationLoadBalancer:
+      Type: 'AWS::ElasticLoadBalancingV2::LoadBalancer'
+      Properties:
+         Scheme: internal
+         "Name" : "acm-pca-usecase-6-alb"
+         SecurityGroups:
+            - !Ref ALBSecurityGroup
+            - !GetAtt SystemVPC.DefaultSecurityGroup
+         Subnets: 
+            - Ref: Subnet
+            - Ref: SubnetTwo
+         Tags:
+            - Key: workshop
+              Value: data-protection
+   
+   DNSHostedZone: 
+      Type: "AWS::Route53::HostedZone"
+      Properties: 
+         HostedZoneConfig: 
+            Comment: "My hosted zone for private domain workshop.com"
+         Name: "workshop.com"
+         VPCs: 
+         - 
+            VPCId: !Ref SystemVPC
+            VPCRegion: !Ref "AWS::Region"
+         HostedZoneTags: 
+         - 
+            Key: workshop
+            Value: data-protection
+     
+   
+   DNSRecordSet:
+      Type: AWS::Route53::RecordSet
+      Properties:
+         HostedZoneId: !Ref DNSHostedZone
+         Comment: Private hosted zone for the acm-pca-usecase-6.
+         Name: "alb.workshop.com."
+         Type: CNAME
+         TTL: '900'
+         ResourceRecords:
+         - !GetAtt ApplicationLoadBalancer.DNSName
+
+   # Client side encryption and client side encryption with data key caching needs these resources
+   cryptocweeventcse:
+      Type : AWS::Events::Rule
+      Properties: 
+         Description: "Cloudwatch event rule for client side encryption usecases"
+         EventPattern: 
+            source: 
+               - "aws.kms"
+            detail-type: 
+               - "AWS API Call via CloudTrail"
+            detail: 
+               eventSource: 
+                  - "kms.amazonaws.com"
+               eventName: 
+                  - "GenerateDataKey"
+         Name: 'crypto-builder-cse-cw-rule-usecase-2'
+         State: "ENABLED"
+         Targets:
+            - 
+               Arn: !GetAtt cryptocselambda.Arn
+               Id: "cw-rule-cse"
+               
+# Create the lambda function used for client side encryption usecase
+# This is mainly for studying GenerateDataKey calls that happen during client
+# side encryption with data key caching and without data key caching
+
+   cryptocselambda:
+      Type : AWS::Lambda::Function
+      Properties: 
+         FunctionName: 'cryptobuilder-cse-lambda-usecase-2'
+         Handler: "index.lambda_handler"
+         Role: !GetAtt cryptocwelambdarole.Arn
+         Runtime: 'python3.6'
+         Code: 
+            ZipFile: |
+               from __future__ import print_function
+               import os
+               import boto3
+               import random
+               
+               
+               # Main event function for pushing CW events containing GenerateDataKey calls 
+               def lambda_handler(event, context):
+                   ###############################################################################################
+                   #                                                                                             #
+                   #   Lambda function get a cloudwatch event for the GenerateDatakeyCall                        #
+                   #   for the KMS service                                                                       #                                                                     #
+                   #                                                                                             #
+                   #   Checks if the encryption context matches the client side encryption context provided for  #
+                   #   cse usecases                                                                              #
+                   #                                                                                             #
+                   #   Creates a bucket with a tag containing the encryption context so that the usecase code    #
+                   #   can identify whether GenerateDataKey call was for CSE usecase-2 or usecase-3              #
+                   ###############################################################################################
+                   
+                   print (event['detail'])
+                   region = os.environ['AWS_REGION']
+                   print(region)
+                   s3_client = boto3.client('s3', region)
+                   
+                   whatfor_value = event['detail']['requestParameters']['encryptionContext']['whatfor']
+                   
+                   if whatfor_value == 'usecase-2-cse':
+                      bucket_name = 'dp-workshop-bucket-cw-event' + str(random.randint(1, 100000))
+                      # Doing the below because locationconstraint does not support all regions today
+                      if 'us-east-1' in region:
+                           s3_client.create_bucket(Bucket=bucket_name)
+                      else:
+                           s3_client.create_bucket(
+                              Bucket=bucket_name,
+                              CreateBucketConfiguration={
+                                   'LocationConstraint': region
+                              }
+                           )
+               
+                      response = s3_client.put_bucket_tagging(
+                          Bucket=bucket_name,
+                          Tagging={
+                              'TagSet': [
+                                  {
+                                      'Key': 'whatfor',
+                                      'Value': whatfor_value
+                                  },
+                              ]
+                          }
+                      )
+                      print("Exiting")
+               
+                   return
+
+   # We will use admin privileges for now and make it least privilege as we learn
+   cryptocwelambdarole:
+      Type : AWS::IAM::Role
+      Properties:
+         RoleName: 'cryptobuildercwelambdaroleusecase2'
+         AssumeRolePolicyDocument: 
+           Version: "2012-10-17"
+           Statement: 
+             - 
+               Effect: "Allow"
+               Principal: 
+                 Service: 
+                   - "lambda.amazonaws.com"
+               Action: 
+                 - "sts:AssumeRole"
+         
+      
+   # We will use admin privileges for now and make it least privilege as we learn
+   cryptocwelambdapolicy:
+      Type : AWS::IAM::Policy
+      Properties: 
+         PolicyName : 'cryptobuilder-cse-cwe-lambda-policy-usecase-2'
+         PolicyDocument : 
+            Version: "2012-10-17"
+            Statement:
+              -
+               Effect: "Allow"
+               Action: "*"
+               Resource: "*"
+         Roles:
+            - !Ref cryptocwelambdarole
+            
+   LambdaInvokePermissionCse:
+     Type: AWS::Lambda::Permission
+     Properties:
+       FunctionName: !GetAtt cryptocselambda.Arn
+       Action: 'lambda:InvokeFunction'
+       Principal: 'events.amazonaws.com'
+       SourceArn: !GetAtt cryptocweeventcse.Arn
+
+   cryptocweeventcsewithkeycaching:
+      Type : AWS::Events::Rule
+      Properties: 
+         Description: "Cloudwatch event rule for client side encryption usecases"
+         EventPattern: 
+            source: 
+               - "aws.kms"
+            detail-type: 
+               - "AWS API Call via CloudTrail"
+            detail: 
+               eventSource: 
+                  - "kms.amazonaws.com"
+               eventName: 
+                  - "GenerateDataKey"
+         Name: 'crypto-builder-cse-cw-rule-usecase-3'
+         State: "ENABLED"
+         Targets:
+            - 
+               Arn: !GetAtt cryptocselambdawithkeycaching.Arn
+               Id: "cw-rule-cse"
+               
+# Create the lambda function used for client side encryption usecase
+# This is mainly for studying GenerateDataKey calls that happen during client
+# side encryption with data key caching and without data key caching
+
+   cryptocselambdawithkeycaching:
+      Type : AWS::Lambda::Function
+      Properties: 
+         FunctionName: 'cryptobuilder-cse-lambda-usecase-3'
+         Handler: "index.lambda_handler"
+         Role: !GetAtt cryptocwelambdarolewithkeycaching.Arn
+         Runtime: 'python3.6'
+         Code: 
+            ZipFile: |
+               from __future__ import print_function
+               import os
+               import boto3
+               import random
+               
+               
+               # Main event function for pushing CW events containing GenerateDataKey calls 
+               def lambda_handler(event, context):
+                   ###############################################################################################
+                   #                                                                                             #
+                   #   Lambda function get a cloudwatch event for the GenerateDatakeyCall                        #
+                   #   for the KMS service                                                                       #                                                                     #
+                   #                                                                                             #
+                   #   Checks if the encryption context matches the client side encryption context provided for  #
+                   #   cse usecases                                                                              #
+                   #                                                                                             #
+                   #   Creates a bucket with a tag containing the encryption context so that the usecase code    #
+                   #   can identify whether GenerateDataKey call was for CSE usecase-2 or usecase-3              #
+                   ###############################################################################################
+                   
+                   print (event['detail'])
+                   region = os.environ['AWS_REGION']
+                   print(region)
+                   s3_client = boto3.client('s3', region)
+                   
+                   whatfor_value = event['detail']['requestParameters']['encryptionContext']['whatfor']
+                   
+                   if whatfor_value == 'usecase-3-cse':
+                      bucket_name = 'dp-workshop-bucket-cw-event-usecase-3' + str(random.randint(1, 100000))
+                      # Doing the below because locationconstraint does not support all regions today
+                      if 'us-east-1' in region:
+                           s3_client.create_bucket(Bucket=bucket_name)
+                      else:
+                           s3_client.create_bucket(
+                              Bucket=bucket_name,
+                              CreateBucketConfiguration={
+                                   'LocationConstraint': region
+                              }
+                           )
+               
+                      response = s3_client.put_bucket_tagging(
+                          Bucket=bucket_name,
+                          Tagging={
+                              'TagSet': [
+                                  {
+                                      'Key': 'whatfor',
+                                      'Value': whatfor_value
+                                  },
+                              ]
+                          }
+                      )
+                      print("Exiting")
+               
+                   return
+
+   # We will use admin privileges for now and make it least privilege as we learn
+   cryptocwelambdarolewithkeycaching:
+      Type : AWS::IAM::Role
+      Properties:
+         RoleName: 'cryptobuildercwelambdarolewithkeycaching-usecase-3'
+         AssumeRolePolicyDocument: 
+           Version: "2012-10-17"
+           Statement: 
+             - 
+               Effect: "Allow"
+               Principal: 
+                 Service: 
+                   - "lambda.amazonaws.com"
+               Action: 
+                 - "sts:AssumeRole"
+         
+      
+   # We will use admin privileges for now and make it least privilege as we learn
+   cryptocwelambdapolicywithkeycaching:
+      Type : AWS::IAM::Policy
+      Properties: 
+         PolicyName : 'cryptobuilder-cse-cwe-lambda-policy-usecase-3'
+         PolicyDocument : 
+            Version: "2012-10-17"
+            Statement:
+              -
+               Effect: "Allow"
+               Action: "*"
+               Resource: "*"
+         Roles:
+            - !Ref cryptocwelambdarolewithkeycaching
+            
+   LambdaInvokePermissionDataKeyCaching:
+     Type: AWS::Lambda::Permission
+     Properties:
+       FunctionName: !GetAtt cryptocselambdawithkeycaching.Arn
+       Action: 'lambda:InvokeFunction'
+       Principal: 'events.amazonaws.com'
+       SourceArn: !GetAtt cryptocweeventcsewithkeycaching.Arn
+         
+            
+
+
+
