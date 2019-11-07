@@ -81,20 +81,22 @@ For Microsoft Edge : [Validate Certificate Identity on Microsoft edge browser](h
 
 ## Security Monitoring
 
-We will setup two Cloudwatch Alarms. The creation of a CA Certificate and mass revocation of end entity certificates. These are privileged actions, thus we must setup a monitoring mechanism. To do this follow the instructions below.
+In this section we will look at how to monitor privileged actions as you build your certificate management infrastructure. We will study two scenerios. The creation of a CA Certificate and mass revocation of end entity certificates. These are privileged actions, thus we must setup a monitoring mechanism. To do this follow the instructions below.
 
-#### 13. CA Certificate Alarm Setup
+#### Scenerio 1: Monitor Mass Revocation
+This scenerio shows a developer revoking many end-entity certificates within a short period of time. We want to monitor and notify the security team if this type of privileged action takes place in order to investigate.
+
+First we will act as the Developer by creating and then revoking many certificates at once: [Mass revocation](https://view.highspot.com/viewer/5da634e266bbaa2860b471a7)
+
+#### 14. CA Certificate Alarm Setup
 Setup CloudWatch Alarms: [CA Cert Alarm setup](https://view.highspot.com/viewer/5da63481b7b73956e4842f3a)
-
-#### 14. Run mass revocation script
-Run script to create and revoke many certificates at once: [Mass revocation](https://view.highspot.com/viewer/5da634e266bbaa2860b471a7)
 
 #### 15. Mass Revocation Alarm Setup
 Setup CloudWatch Alarms: [Revocation Alarm setup](https://view.highspot.com/viewer/5da6342834d6be298b1c4447)
 
 Now we have two alarms that have produced ALARM states. This is due to our mass revocation of multiple certificates by the application developer and the creation of a CA Certificate upon creating our CA hierarchy. Organizations can use this mechanism to build dashboards to monitor and alert (SNS, Email, etc) when sensitive actions take place.
 
-#### 12. Quiz time. Open this link in a new browser tab : [quiz](https://amazonmr.au1.qualtrics.com/jfe/form/SV_cx0KvGMDSVUVLTL)
+#### 16. Quiz time. Open this link in a new browser tab : [quiz](https://amazonmr.au1.qualtrics.com/jfe/form/SV_cx0KvGMDSVUVLTL)
 
 ## Cleanup
 
