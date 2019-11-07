@@ -97,7 +97,10 @@ Creating a CA Certificate is a privileged action that should only be taken by au
 
 To do this we will setup a CloudWatch Alarm: [CA Cert Alarm setup](https://view.highspot.com/viewer/5da63481b7b73956e4842f3a)
 
+#### Create Dashboard
 Now we have two alarms that have produced ALARM states. This is due to our mass revocation of multiple certificates by the application developer and the creation of a CA Certificate upon creating our CA hierarchy. Organizations can use this mechanism to build dashboards to monitor and alert (SNS, Email, etc) when sensitive actions take place.
+
+Create CloudWatch Dashboard: [CA Cert Alarm setup]()
 
 #### 13. Quiz time. Open this link in a new browser tab : [quiz](https://amazonmr.au1.qualtrics.com/jfe/form/SV_cx0KvGMDSVUVLTL)
 
