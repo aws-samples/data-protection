@@ -102,7 +102,7 @@ To do this we will setup a CloudWatch Alarm: [CA Cert Alarm setup](https://view.
 #### 18. Create Dashboard
 Now we have two alarms that have produced ALARM states. This is due to our mass revocation of multiple certificates by the application developer and the creation of a CA Certificate upon creating our CA hierarchy. Organizations can use this mechanism to build dashboards to monitor and alert (SNS, Email, etc) when sensitive actions take place.
 
-Create CloudWatch Dashboard: [Create Dashboard]()
+Create CloudWatch Dashboard: [Create Dashboard](https://view.highspot.com/viewer/5dc592fba4dfa00d2cbd64c6)
 
 ## Cleanup
 
