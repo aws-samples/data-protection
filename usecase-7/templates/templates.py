@@ -22,7 +22,7 @@ from cryptography.hazmat.primitives.serialization import NoEncryption
 def main():
     """
     ####################################################
-    #  Creating a server cert for a flask web server   #
+    #  Creating a code signing cert                    #
     ####################################################
     """
     try:
