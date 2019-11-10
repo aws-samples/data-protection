@@ -121,7 +121,7 @@ There are a few extensions defined in RFC 5280 that are widely commonly used and
 
 In this exercise let's create a codesigning certificate using the pre-built templates provided by ACM Private CA.
 
-Follow these steps by right clicking and opening this link : [Template ACM Private CA](https://view.highspot.com/viewer/5dc85450659e930e1aff0104)
+Follow these steps by right clicking and opening this link : [Template ACM Private CA](https://view.highspot.com/viewer/5dc858b666bbaa7b82d9c6d0)
 
 Templates allow for constrained usage of certificates for specific usecases and IAM permissions can be used to control which principals - users
 or roles that can issue a specific kind of certificate.
