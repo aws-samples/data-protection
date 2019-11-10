@@ -104,6 +104,28 @@ Now we have two alarms that have produced ALARM states. This is due to our mass 
 
 Create CloudWatch Dashboard: [Create Dashboard](https://view.highspot.com/viewer/5dc592fba4dfa00d2cbd64c6)
 
+## Advanced Section :
+
+In this section we will learn about certificate extensions that can help you use certificates for applications beyond the common case of identifying TLS server endpoints. These include 
+
+* code signing
+* signing Online Certificate Status Protocol (OCSP) responses
+* TLS clients for two-way (mutual) authentication
+
+What makes one certificate useful for signing code and another useful for terminating TLS are the extension fields in the certificate. Extension fields, or simply extensions, define the usage of the certificate.
+There are a few extensions defined in RFC 5280 that are widely commonly used and broadly supported, including 
+
+* **Basic Constraints**
+* **Key Usage**
+* **Extended Key Usage**
+
+In this exercise let's create a codesigning certificate using the pre-built templates provided by ACM Private CA.
+
+Follow these steps by right clicking and opening this link : [Template ACM Private CA](https://view.highspot.com/viewer/5dc85450659e930e1aff0104)
+
+Templates allow for constrained usage of certificates for specific usecases and IAM permissions can be used to control which principals - users
+or roles that can issue a specific kind of certificate.
+
 ## Cleanup
 
 #### AWS Event
