@@ -79,7 +79,16 @@ For Microsoft Edge : [Validate Certificate Identity on Microsoft edge browser](h
 
 #### 12. Quiz time. Open this link in a new browser tab : [quiz](https://bit.ly/2Zh3iRY)
 
-## Security Monitoring
+#### 13. Cloud9 IDE environment setup
+
+* Navigate to the Cloud9 service within your AWS console
+* Open the Cloud9 IDE environment called **workshop-environment**. It takes about 30 seconds for the environment to start up.
+* In the Cloud9 IDE environment you will find a folder called data-protection in the folder pane on the left side of the screen
+* Right-click (on MacOS: control-click) the file named environment-setup.sh in the IDE and select Run
+* This script takes about a minute to complete
+* In the runner window below you should see **SUCCESS: installed python dependencies ** followed by a list of the installed packages
+
+## Security Monitoring :
 
 In this section we will look at how to monitor privileged actions as you build your certificate management infrastructure. We will study two scenerios. The creation of a CA Certificate and mass revocation of end entity certificates. 
 
