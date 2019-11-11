@@ -92,23 +92,23 @@ For Microsoft Edge : [Validate Certificate Identity on Microsoft edge browser](h
 
 In this section we will look at how to monitor privileged actions as you build your certificate management infrastructure. We will study two scenerios. The creation of a CA Certificate and mass revocation of end entity certificates. 
 
-#### 13. [Scenerio 1]: Monitor Mass Revocation
+#### 14. [Scenerio 1]: Monitor Mass Revocation
 This scenerio shows a developer revoking many end-entity certificates within a short period of time. We want to monitor and notify the security team if this type of privileged action takes place in order to investigate.
 
-##### 14. Create/Revoke End-Entity Certificates
+##### 15. Create/Revoke End-Entity Certificates
 First we will act as the Developer by creating and then revoking many certificates at once: [Mass revocation](https://view.highspot.com/viewer/5da634e266bbaa2860b471a7)
 
-##### 15. Mass Revocation Alarm Setup
+##### 16. Mass Revocation Alarm Setup
 Setup CloudWatch Alarms: [Revocation Alarm setup](https://view.highspot.com/viewer/5da6342834d6be298b1c4447)
 
-#### 16. [Scenerio 2]: CA Certificate Created
+#### 17. [Scenerio 2]: CA Certificate Created
 Creating a CA Certificate is a privileged action that should only be taken by authorized personnel within the CA Hierarchy Management team. For this reason we want to monitor the creation of any CA Certificate within our hierarchy. 
 
 To do this we will setup a CloudWatch Alarm: [CA Cert Alarm setup](https://view.highspot.com/viewer/5da63481b7b73956e4842f3a)
 
-#### 17. Quiz time. Open this link in a new browser tab : [quiz](https://amazonmr.au1.qualtrics.com/jfe/form/SV_cx0KvGMDSVUVLTL)
+#### 18. Quiz time. Open this link in a new browser tab : [quiz](https://amazonmr.au1.qualtrics.com/jfe/form/SV_cx0KvGMDSVUVLTL)
 
-#### 18. Create Dashboard
+#### 19. Create Dashboard
 Now we have two alarms that have produced ALARM states. This is due to our mass revocation of multiple certificates by the application developer and the creation of a CA Certificate upon creating our CA hierarchy. Organizations can use this mechanism to build dashboards to monitor and alert (SNS, Email, etc) when sensitive actions take place.
 
 Create CloudWatch Dashboard: [Create Dashboard](https://view.highspot.com/viewer/5dc592fba4dfa00d2cbd64c6)
