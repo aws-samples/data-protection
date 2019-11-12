@@ -102,7 +102,6 @@ Resources:
                     - acm-pca:DescribeCertificateAuthority
                   Resource: "*"
          ManagedPolicyArns: 
-            - arn:aws:iam::aws:policy/AWSCertificateManagerPrivateCAUser
             - arn:aws:iam::aws:policy/ElasticLoadBalancingFullAccess
             - arn:aws:iam::aws:policy/AWSLambdaFullAccess
             - arn:aws:iam::aws:policy/AWSCloudFormationFullAccess
