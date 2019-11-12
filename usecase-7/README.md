@@ -77,7 +77,7 @@ For Google Chrome: [Validate Certificate Identity on Chrome Browser](https://vie
 
 For Microsoft Edge: [Validate Certificate Identity on Microsoft Edge Browser](https://view.highspot.com/viewer/5d5c2e5cf7794d4833e8207a)
 
-For Google Chrome on Windows OS: [Validate Certificate Identity on Windows](https://view.highspot.com/viewer/5dcadc15b7b739360b417fb5)
+For Google Chrome on Windows: [Validate Certificate Identity on Windows](https://view.highspot.com/viewer/5dcadc15b7b739360b417fb5)
 
 #### 12. Quiz time. Open this link in a new browser tab: [quiz](https://bit.ly/2Zh3iRY)
 
