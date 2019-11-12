@@ -41,7 +41,7 @@ Upload and launch the cloudformation stack in the AWS account that you are logge
 * Under Private CA's click on the **Create CA** button
 * Open this link in a new browser tab for the rest of the steps  : [Creating a Subordinate CA](https://view.highspot.com/viewer/5d9e91c1a2e3a9148b6d7deb)
 
-#### 6. Quiz time. Open this link in a new browser tab : [quiz](https://bit.ly/2yQ5IML)
+#### 6. Quiz time. Open this link in a new browser tab: [quiz](https://bit.ly/2yQ5IML)
 
 ## Create Application
 
@@ -65,19 +65,21 @@ This cloudformation deployment takes about 3 minutes to complete.
 
 Open this link in a new browser tab for steps : [Issue a private certificate](https://view.highspot.com/viewer/5d5b133d6a3b116f29313a10)  
 
-#### 10. Attach a HTTPS listener and private certificate to the ALB . 
+#### 10. Attach a HTTPS listener and private certificate to the ALB. 
 
 Open this link in a new browser tab for steps : [Attach HTTPS Listener](https://view.highspot.com/viewer/5d669c21628ba22ca196b49e)  
 
 #### 11. Validate the identity of the ALB with the browser that your are using. Please open link in a new browser tab
 
-For firefox : [Validate Certificate Identity on Firefox broswer](https://view.highspot.com/viewer/5d5c1fe23f65f635ae005a47)  
+For Firefox: [Validate Certificate Identity on Firefox Browser](https://view.highspot.com/viewer/5d5c1fe23f65f635ae005a47)  
 
-For google chrome : [Validate Certificate Identity on chrome browser](https://view.highspot.com/viewer/5d5c42da66bbaa2fc928a575)
+For Google Chrome: [Validate Certificate Identity on Chrome Browser](https://view.highspot.com/viewer/5d5c42da66bbaa2fc928a575)
 
-For Microsoft Edge : [Validate Certificate Identity on Microsoft edge browser](https://view.highspot.com/viewer/5d5c2e5cf7794d4833e8207a)
+For Microsoft Edge: [Validate Certificate Identity on Microsoft Edge Browser](https://view.highspot.com/viewer/5d5c2e5cf7794d4833e8207a)
 
-#### 12. Quiz time. Open this link in a new browser tab : [quiz](https://bit.ly/2Zh3iRY)
+For Google Chrome on Windows OS: [Validate Certificate Identity on Windows](https://view.highspot.com/viewer/5dcadc15b7b739360b417fb5)
+
+#### 12. Quiz time. Open this link in a new browser tab: [quiz](https://bit.ly/2Zh3iRY)
 
 #### 13. Cloud9 IDE environment setup
 
@@ -88,7 +90,7 @@ For Microsoft Edge : [Validate Certificate Identity on Microsoft edge browser](h
 * This script takes about a minute to complete
 * In the runner window below you should see **SUCCESS: installed python dependencies ** followed by a list of the installed packages
 
-## Security Monitoring :
+## Security Monitoring:
 
 In this section we will look at how to monitor privileged actions as you build your certificate management infrastructure. We will study two scenerios. The creation of a CA Certificate and mass revocation of end entity certificates. 
 
