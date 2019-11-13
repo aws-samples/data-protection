@@ -1,0 +1,4 @@
+[MESSAGES CONTROL]
+# C0111: Missing docstring
+# R0904: Too many public methods
+disable=C0303,C0301

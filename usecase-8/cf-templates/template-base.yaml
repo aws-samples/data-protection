@@ -1,0 +1,302 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Description: This AWS CloudFormation Template creates the necessary resources that a security admin can leverage for appropriate role assignments to specific job functions that
+             are needed for creating and maanging a certificate authority and issuing private certificates using ACM Private CA. In addition it also creates roles for KMS encryption
+             scenarios
+
+# This IAM user will be used for all login and development
+Resources:
+   # We will use admin privileges for now and make it least privilege as we learn
+   CaAdminRole:
+      Type : AWS::IAM::Role
+      Properties:
+         RoleName: 'CaAdminRole'
+         AssumeRolePolicyDocument:
+           Version: "2012-10-17"
+           Statement:
+            -
+               Effect: "Allow"
+               Principal:
+                  AWS: !Sub "${AWS::AccountId}"
+               Action: 
+                 - "sts:AssumeRole"
+         Policies: 
+            -
+               PolicyName: "CaAdminRolePolicy"
+               PolicyDocument: 
+                  Version: "2012-10-17"
+                  Statement: 
+                      - 
+                        Effect: "Allow"
+                        Resource: "*"
+                        Action: 
+                           - acm-pca:ImportCertificateAuthorityCertificate
+                           - acm-pca:TagCertificateAuthority
+                           - acm-pca:ListTags
+                           - acm-pca:GetCertificate
+                           - acm-pca:UntagCertificateAuthority
+                           - acm-pca:GetCertificateAuthorityCertificate
+                           - acm-pca:RevokeCertificate
+                           - acm-pca:UpdateCertificateAuthority
+                           - acm-pca:ListCertificateAuthorities
+                           - acm-pca:DescribeCertificateAuthorityAuditReport
+                           - acm-pca:CreateCertificateAuthorityAuditReport
+                           - acm-pca:RestoreCertificateAuthority
+                           - acm-pca:IssueCertificate
+                           - acm-pca:CreateCertificateAuthority
+                           - acm-pca:GetCertificateAuthorityCsr
+                           - acm-pca:DeletePermission
+                           - acm-pca:DescribeCertificateAuthority
+                           - acm-pca:CreatePermission
+                           - acm-pca:ListPermissions
+                           - acm-pca:DeleteCertificateAuthority
+                           - acm:DescribeCertificate
+                           - acm:ListCertificates
+                           - acm:ListTagsForCertificate
+                              
+         ManagedPolicyArns: 
+            - arn:aws:iam::aws:policy/AWSCertificateManagerPrivateCAPrivilegedUser
+            - arn:aws:iam::aws:policy/AWSCloudFormationFullAccess
+            - arn:aws:iam::aws:policy/AmazonS3FullAccess
+            - arn:aws:iam::aws:policy/IAMReadOnlyAccess
+            - arn:aws:iam::aws:policy/AmazonSNSReadOnlyAccess
+            
+    # We will use admin privileges for now and make it least privilege as we learn
+   AppDevRole:
+      Type : AWS::IAM::Role
+      Properties:
+         RoleName: 'AppDevRole'
+         AssumeRolePolicyDocument:
+           Version: "2012-10-17"
+           Statement:
+             -
+               Effect: "Allow"
+               Principal:
+                  AWS: !Sub "${AWS::AccountId}"
+               Action: 
+                 - "sts:AssumeRole"
+         Policies: 
+         -
+            PolicyName: "AppDevACMPolicy"
+            PolicyDocument: 
+               Version: "2012-10-17"
+               Statement: 
+                - 
+                  Effect: "Allow"
+                  Action: 
+                    - acm:ListCertificates
+                    - acm:ListTagsForCertificate
+                    - acm:DescribeCertificate
+                    - acm:RequestCertificate
+                    - acm:DeleteCertificate
+                    - acm-pca:IssueCertificate
+                    - acm-pca:ListTags
+                    - acm-pca:GetCertificate
+                    - acm-pca:GetCertificateAuthorityCertificate
+                    - acm-pca:RevokeCertificate
+                    - acm-pca:ListCertificateAuthorities
+                    - acm-pca:CreatePermission
+                    - acm-pca:ListPermissions
+                    - acm-pca:DescribeCertificateAuthority
+                  Resource: "*"
+         ManagedPolicyArns: 
+            - arn:aws:iam::aws:policy/AWSCertificateManagerPrivateCAUser
+            - arn:aws:iam::aws:policy/ElasticLoadBalancingFullAccess
+            - arn:aws:iam::aws:policy/AWSLambdaFullAccess
+            - arn:aws:iam::aws:policy/AWSCloudFormationFullAccess
+            - arn:aws:iam::aws:policy/AmazonEC2FullAccess
+            - arn:aws:iam::aws:policy/AmazonS3FullAccess
+            - arn:aws:iam::aws:policy/AWSCloud9User
+            - arn:aws:iam::aws:policy/IAMFullAccess
+            - arn:aws:iam::aws:policy/AmazonSSMFullAccess
+            
+   # First part of the workshop on KMS
+   ApplicationOneRole:
+      Type : AWS::IAM::Role
+      Properties:
+         RoleName: 'application-1-role'
+         AssumeRolePolicyDocument:
+           Version: "2012-10-17"
+           Statement:
+             -
+               Effect: "Allow"
+               Principal:
+                  AWS: !Sub "${AWS::AccountId}"
+               Action: 
+                 - "sts:AssumeRole"
+         Policies: 
+         -
+            PolicyName: "application-1-role-policy"
+            PolicyDocument: 
+               Version: "2012-10-17"
+               Statement: 
+                - 
+                  Effect: "Allow"
+                  Action: 
+                    - kms:GetParametersForImport
+                    - kms:DescribeCustomKeyStores
+                    - kms:ListKeys
+                    - kms:ListKeyPolicies
+                    - kms:ListRetirableGrants
+                    - kms:GetKeyRotationStatus
+                    - kms:ListAliases
+                    - kms:GetKeyPolicy
+                    - kms:DescribeKey
+                    - kms:ListResourceTags
+                    - kms:ListGrants
+                  Resource: "*"
+         ManagedPolicyArns: 
+            - arn:aws:iam::aws:policy/AmazonS3FullAccess 
+            - arn:aws:iam::aws:policy/IAMReadOnlyAccess        
+                            
+   ApplicationTwoRole:
+      Type : AWS::IAM::Role
+      Properties:
+         RoleName: 'application-2-role'
+         AssumeRolePolicyDocument:
+           Version: "2012-10-17"
+           Statement:
+             -
+               Effect: "Allow"
+               Principal:
+                  AWS: !Sub "${AWS::AccountId}"
+               Action: 
+                 - "sts:AssumeRole"
+         Policies: 
+         -
+            PolicyName: "application-2-role-policy"
+            PolicyDocument: 
+               Version: "2012-10-17"
+               Statement: 
+                - 
+                  Effect: "Allow"
+                  Action: 
+                    - kms:Encrypt
+                    - kms:Decrypt
+                    - kms:ReEncrypt*
+                    - kms:GenerateDataKey*
+                    - kms:DescribeKey
+                    - kms:Describe*
+                    - kms:List*
+                    - kms:Get*
+                    - s3:*
+                  Resource: "*"
+         ManagedPolicyArns: 
+            - arn:aws:iam::aws:policy/IAMReadOnlyAccess
+            
+   KeyAdminRole:
+      Type : AWS::IAM::Role
+      Properties:
+         RoleName: 'key-admin-role'
+         AssumeRolePolicyDocument:
+           Version: "2012-10-17"
+           Statement:
+             -
+               Effect: "Allow"
+               Principal:
+                  AWS: !Sub "${AWS::AccountId}"
+               Action: 
+                 - "sts:AssumeRole"
+         Policies: 
+         -
+            PolicyName: "key-admin-policy"
+            PolicyDocument: 
+               Version: "2012-10-17"
+               Statement: 
+                - 
+                  Effect: "Allow"
+                  Action: 
+                    - kms:Create*
+                    - kms:Describe*
+                    - kms:Enable*
+                    - kms:List*
+                    - kms:Put*
+                    - kms:Update*
+                    - kms:Revoke*
+                    - kms:Disable*
+                    - kms:Get*
+                    - kms:Delete*
+                    - kms:TagResource
+                    - kms:UntagResource
+                    - kms:ScheduleKeyDeletion
+                    - kms:CancelKeyDeletion
+                  Resource: "*"
+         ManagedPolicyArns: 
+            - arn:aws:iam::aws:policy/IAMReadOnlyAccess
+         
+   KmsWorkshopBucket: 
+      DeletionPolicy: Delete
+      Properties: 
+        BucketName: !Sub "bucket-kms-workshop-${AWS::AccountId}-${AWS::Region}"
+        PublicAccessBlockConfiguration: 
+          BlockPublicAcls: false
+          BlockPublicPolicy: false
+          IgnorePublicAcls: false
+          RestrictPublicBuckets: false
+        Tags: 
+          - 
+            Key: workshop
+            Value: kms-workshop
+      Type: AWS::S3::Bucket
+  
+   KmsWorkshopBucketPolicy: 
+      Type: AWS::S3::BucketPolicy
+      Properties: 
+        Bucket: 
+          Ref: "KmsWorkshopBucket"
+        PolicyDocument: 
+          Statement: 
+            - 
+              Action: 
+                - s3:GetObject
+                - s3:PutObject
+                - s3:PutObjectAcl
+                - s3:GetBucketLocation
+                - s3:GetBucketAcl
+              Effect: Allow
+              Principal:
+                    AWS: !Sub "${AWS::AccountId}"
+              Resource: 
+                -
+                  Fn::Join: 
+                    - ""
+                    - 
+                      - "arn:aws:s3:::"
+                      - 
+                        Ref: "KmsWorkshopBucket"
+                      - "/*"
+                -
+                  Fn::Join: 
+                    - ""
+                    - 
+                      - "arn:aws:s3:::"
+                      - 
+                        Ref: "KmsWorkshopBucket"
+                      
+   S3EncryptionKey: 
+    Type: AWS::KMS::Key
+    Properties: 
+      Description: "CMK for encrypting objects on S3"
+      KeyPolicy: 
+        Version: "2012-10-17"
+        Id: "key-default-1"
+        Statement:
+        -
+            Sid: "Enable IAM User Permissions"
+            Effect: "Allow"
+            Principal: 
+                  AWS: !Sub "${AWS::AccountId}" 
+            Action: "kms:*"
+            Resource: "*"
+
+   S3EncryptionKeyAlias:
+    Type: AWS::KMS::Alias
+    Properties:
+      AliasName: alias/bucketencryptionalias
+      TargetKeyId:
+        Ref: S3EncryptionKey
+         
+            
+
+
+

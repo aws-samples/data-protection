@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Workshop and sample code that builders can use for experiential learning of AWS services that provide data protection. Services such as AWS KMS, AWS ACM, AWS CloudHSM and others will be explored">
+        <meta name="author" content="aws-security-workshops@amazon.com">
+        <link rel="canonical" href="https://data-protection.awssecworkshops.com/usecase-6/">
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Data Protection on AWS</title>
+        <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+        <link href="../stylesheets/custom.css" rel="stylesheet">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        <script src="../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../js/bootstrap-3.0.3.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body class="homepage">
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+
+                <!-- Collapsed navigation -->
+                <div class="navbar-header">
+                    <!-- Expander button -->
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="..">Data Protection on AWS</a>
+                </div>
+
+                <!-- Expanded navigation -->
+                <div class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li >
+                                <a href="..">Overview</a>
+                            </li>
+                            <li >
+                                <a href="../contribute/">Contributing</a>
+                            </li>
+                            <li >
+                                <a href="../license/">License</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li>
+                                <a href="https://github.com/aws-samples/data-protection/edit/master/docs/usecase-6/README.md">Edit on aws-samples/data-protection</a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="main active"><a href="#acm-private-certificate-authority-acm-private-ca">ACM Private Certificate Authority (ACM Private CA)</a></li>
+            <li><a href="#1-you-will-be-using-a-aws-provided-account-for-this-workshop">1. You will be using a AWS provided account for this workshop.</a></li>
+            <li><a href="#2-an-iam-role-called-caadminrole-is-the-role-that-a-ca-administrator-would-assume">2. An IAM Role called CaAdminRole is the role that a CA administrator would assume.</a></li>
+            <li><a href="#3-build-the-infrastructure-needed-for-creating-a-ca-hierarchy-by-deploying-the-cloudformation-template-below">3. Build the infrastructure needed for creating a CA hierarchy by deploying the cloudformation template below</a></li>
+            <li><a href="#4-create-a-root-ca">4. Create a Root CA.</a></li>
+            <li><a href="#5-create-a-subordinate-issuing-ca">5. Create a Subordinate Issuing CA.</a></li>
+            <li><a href="#6-quiz-time-open-this-link-in-a-new-browser-tab-quiz">6. Quiz time. Open this link in a new browser tab : quiz</a></li>
+            <li><a href="#7-an-iam-role-called-appdevrole-is-the-role-that-an-application-developer-would-assume">7. An IAM Role called AppDevRole is the role that an application developer would assume.</a></li>
+            <li><a href="#8-build-the-application-infrastructure-by-deploying-the-cloudformation-template-below">8. Build the application infrastructure by deploying the cloudformation template below</a></li>
+            <li><a href="#9-next-step-is-to-issue-a-private-certificate-to-put-on-the-application-load-balancer">9. Next step is to issue a private certificate to put on the application load balancer.</a></li>
+            <li><a href="#10-attach-a-https-listener-and-private-certificate-to-the-alb">10. Attach a HTTPS listener and private certificate to the ALB .</a></li>
+            <li><a href="#11-validate-the-identity-of-the-alb-with-the-browser-that-your-are-using-please-open-link-in-a-new-browser-tab">11. Validate the identity of the ALB with the browser that your are using. Please open link in a new browser tab</a></li>
+            <li><a href="#12-quiz-time-open-this-link-in-a-new-browser-tab-quiz">12. Quiz time. Open this link in a new browser tab : quiz</a></li>
+            <li><a href="#13-cleanup">13. Cleanup</a></li>
+            <li><a href="#license-summary">License Summary</a></li>
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<h2 id="acm-private-certificate-authority-acm-private-ca">ACM Private Certificate Authority (ACM Private CA)</h2>
+<p>This workshop demonstrates how ACM Private Certificate Authority (PCA) service can be used to create a complete CA hierarchy, generate a private certificate, and apply the 
+private certificate on an Application Load Balancer while following security best practices.</p>
+<h4 id="1-you-will-be-using-a-aws-provided-account-for-this-workshop">1. You will be using a AWS provided account for this workshop.</h4>
+<ul>
+<li>If you are logged into your personal AWS account or your corporate AWS account, you should log out now.</li>
+<li>Open this link in a new browser tab: <a href="https://dashboard.eventengine.run/">AWS provided account</a></li>
+<li>Log in with your hash</li>
+<li>Click on the <strong>AWS Console</strong> button</li>
+<li>It should bring up a pop-up screen. On the pop-up,  under Login Link click on <strong>Open Console</strong></li>
+<li>You should be logged into the AWS provided account</li>
+<li>Please verify that the region selected is <strong>N. Virginia</strong></li>
+</ul>
+<h4 id="2-an-iam-role-called-caadminrole-is-the-role-that-a-ca-administrator-would-assume">2. An IAM Role called <strong>CaAdminRole</strong> is the role that a CA administrator would assume.</h4>
+<ul>
+<li>
+<p>Assume the role named CaAdminRole by using switch role on the AWS console in the AWS account that you are currently logged into</p>
+</li>
+<li>
+<p>This role has permissions that a Certificate Authority administrator will need for CA administration. As a CA administrator you will be responsible for creating a root and subordinate certificate authority
+hierarchy</p>
+</li>
+<li>
+<p>If you are not familiar with switching roles, follow this tutorial if needed: <a href="https://view.highspot.com/viewer/5d66bc5cc79c523342504c3e">Assume Role in Console</a></p>
+</li>
+</ul>
+<h4 id="3-build-the-infrastructure-needed-for-creating-a-ca-hierarchy-by-deploying-the-cloudformation-template-below">3. Build the infrastructure needed for creating a CA hierarchy by deploying the cloudformation template below</h4>
+<p>Please download the CF template by right clicking and save link as the filename <em>template-ca-admin.yaml</em> <a href="https://raw.githubusercontent.com/aws-samples/data-protection/master/usecase-6/cf-templates/template-ca-admin.yaml">CA Admin Cloudformation Stack</a> by right clicking and saving the yaml file on your laptop. </p>
+<p>Upload and launch the cloudformation stack in the AWS account that you are logged into. If you are not familiar with this, follow instructions here by right clickking and opening link in a new browser tab <a href="https://view.highspot.com/viewer/5d65968f81171753be07bd54">Deploy Cloudformation Stack Instructions</a></p>
+<h4 id="4-create-a-root-ca">4. Create a Root CA.</h4>
+<ul>
+<li>Navigate to ACM Service in the AWS Console</li>
+<li>Click Get Started under Private Certificate Authority</li>
+<li>Open this link in a new browser tab for the rest of the steps : <a href="https://view.highspot.com/viewer/5d5b129b6a3b116f4230f242">Creating a Root CA</a></li>
+</ul>
+<h4 id="5-create-a-subordinate-issuing-ca">5. Create a Subordinate Issuing CA.</h4>
+<ul>
+<li>Navigate to ACM Service in the AWS Console</li>
+<li>Under Private CA's click on the <strong>Create CA</strong> button</li>
+<li>Open this link in a new browser tab for the rest of the steps  : <a href="https://view.highspot.com/viewer/5d9e91c1a2e3a9148b6d7deb">Creating a Subordinate CA</a></li>
+</ul>
+<h4 id="6-quiz-time-open-this-link-in-a-new-browser-tab-quiz">6. Quiz time. Open this link in a new browser tab : <a href="https://bit.ly/2yQ5IML">quiz</a></h4>
+<h4 id="7-an-iam-role-called-appdevrole-is-the-role-that-an-application-developer-would-assume">7. An IAM Role called <strong>AppDevRole</strong> is the role that an application developer would assume.</h4>
+<ul>
+<li>
+<p>Assume the role named <strong>AppDevRole</strong> by using switch role on the AWS console in the AWS account that you are currently logged into</p>
+</li>
+<li>
+<p>This role has permissions that a Application developer will need for building an web aplication which is fronted by an application load balancer and behind the load balancer is a lambda origin that
+provides the HTML code for a website. The application developer will also have permissions to issue a certificate under a certificate authority that they select.</p>
+</li>
+<li>
+<p>If you are not familiar with switching roles, follow this tutorial if needed: <a href="https://view.highspot.com/viewer/5d66bc5cc79c523342504c3e">Assume Role in Console</a></p>
+</li>
+</ul>
+<h4 id="8-build-the-application-infrastructure-by-deploying-the-cloudformation-template-below">8. Build the application infrastructure by deploying the cloudformation template below</h4>
+<p>Please download the CF template by right clicking and save link as the filename <em>template-appdev.yaml</em> <a href="https://raw.githubusercontent.com/aws-samples/data-protection/master/usecase-6/cf-templates/template-app-dev.yaml">AppDev Cloudformation Stack</a> by right clicking and saving the yaml file on your laptop. </p>
+<p>Upload and launch the cloudformation stack in your AWS account. If you are not familiar with this, follow instructions here by right clicking and opening link in a new browser tab <a href="https://view.highspot.com/viewer/5d65968f81171753be07bd54">Deploy Cloudformation Stack Instructions</a>
+This cloudformation deployment takes about 3 minutes to complete.</p>
+<h4 id="9-next-step-is-to-issue-a-private-certificate-to-put-on-the-application-load-balancer">9. Next step is to issue a private certificate to put on the application load balancer.</h4>
+<p>Open this link in a new browser tab for steps : <a href="https://view.highspot.com/viewer/5d5b133d6a3b116f29313a10">Issue a private certificate</a>  </p>
+<h4 id="10-attach-a-https-listener-and-private-certificate-to-the-alb">10. Attach a HTTPS listener and private certificate to the ALB .</h4>
+<p>Open this link in a new browser tab for steps : <a href="https://view.highspot.com/viewer/5d669c21628ba22ca196b49e">Attach HTTPS Listener</a>  </p>
+<h4 id="11-validate-the-identity-of-the-alb-with-the-browser-that-your-are-using-please-open-link-in-a-new-browser-tab">11. Validate the identity of the ALB with the browser that your are using. Please open link in a new browser tab</h4>
+<p>For firefox : <a href="https://view.highspot.com/viewer/5d5c1fe23f65f635ae005a47">Validate Certificate Identity on Firefox broswer</a>  </p>
+<p>For google chrome : <a href="https://view.highspot.com/viewer/5d5c42da66bbaa2fc928a575">Validate Certificate Identity on chrome browser</a></p>
+<p>For Microsoft Edge : <a href="https://view.highspot.com/viewer/5d5c2e5cf7794d4833e8207a">Validate Certificate Identity on Microsoft edge browser</a></p>
+<h4 id="12-quiz-time-open-this-link-in-a-new-browser-tab-quiz">12. Quiz time. Open this link in a new browser tab : <a href="https://bit.ly/2Zh3iRY">quiz</a></h4>
+<h4 id="13-cleanup">13. Cleanup</h4>
+<p>Don't worry about cleanup, we will take care of it. Hopefully you learnt something useful in this workshop that you can take back your organization. Thank you for coming.</p>
+<h4 id="license-summary">License Summary</h4>
+<p>This sample code is made available under a modified MIT license. See the <a href="LICENSE">LICENSE</a> file.</p></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+                <p>&copy; 2019, Amazon Web Services, Inc. or its affiliates. All rights reserved.</p>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js" defer></script>
+        <script src="../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Keyboard Shortcuts</h4>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
+
+<!--
+MkDocs version : 1.0.4
+Build Date UTC : 2019-11-13 17:55:44
+-->
