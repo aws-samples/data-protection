@@ -58,7 +58,7 @@ provides the HTML code for a website. The application developer will also have p
 
 Please download the CF template by right clicking and save link as the filename *template-appdev.yaml* [AppDev Cloudformation Stack](https://raw.githubusercontent.com/aws-samples/data-protection/master/usecase-7/cf-templates/template-app-dev.yaml) by right clicking and saving the yaml file on your laptop. 
 
-Upload and launch the cloudformation stack in your AWS account. If you are not familiar with this, follow instructions here by right clicking and opening link in a new browser tab [Deploy Cloudformation Stack Instructions](https://view.highspot.com/viewer/5d65968f81171753be07bd54)
+Upload and launch the cloudformation stack in your AWS account. If you are not familiar with this, follow instructions here by right clicking and opening link in a new browser tab [Deploy AppDev Cloudformation Stack Instructions](https://view.highspot.com/viewer/5dd6cd3c6a3b1102db4ac3ca)
 This cloudformation deployment takes about 3 minutes to complete.
 
 #### 9. Next step is to issue a private certificate to put on the application load balancer. 
