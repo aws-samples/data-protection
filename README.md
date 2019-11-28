@@ -20,7 +20,7 @@ for data in transit as well as data at rest.
 | [Level 300: Creating Private Certs ACM Private Certificate Authority - Mode-2 ](usecase-5/)  | This workshop demonstrates how you create a AWS Certificate Manager private certificate authority and use this CA to create private X.509 certififcates for a private domain and apply the cert on an application load balancer | 40 mins | 1 hour |
 | [Level 300: Creating a complete private CA hierarchy on AWS ](usecase-6/)  | This workshop demonstrates how you create a AWS Certificate Manager private certificate authority and use this CA to create private X.509 certififcates for a private domain and apply the cert on an application load balancer | 1 hour | 1 hour 30 mins |
 | [Level 300: ACM Private CA Best Practices, Monitoring and Templates for code signing certificates ](usecase-7/)  | This workshop demonstrates private CA best practices, monitoring and use of templates for code siging certs|1 hour 30 mins | 2 hours |
-| [Level 300: KMS Managed keys and ACM Private CA best practices combo workshop](usecase-8/)  | This workshop demonstrates to use KMS with AWS managed keys and completing a complete CA hiearchy on AWS | 1 hour 40 mins | 1 hour |
+| [Level 300: KMS Managed keys and ACM Private CA best practices combo workshop](usecase-8/)  | This workshop demonstrates to use KMS with AWS managed keys and completing a complete CA hiearchy on AWS | 1 hour 40 mins | 2 hours 10 mins |
 
 ## License Summary
 
