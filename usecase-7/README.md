@@ -126,13 +126,13 @@ In this section we will learn about certificate extensions that can help you use
 * TLS clients for two-way (mutual) authentication
 
 What makes one certificate useful for signing code and another useful for terminating TLS are the extension fields in the certificate. Extension fields, or simply extensions, define the usage of the certificate.
-There are a few extensions defined in RFC 5280 that are widely commonly used and broadly supported, including 
+There are a few extensions defined in RFC 5280 that are commonly used and broadly supported, including 
 
 * **Basic Constraints**
 * **Key Usage**
 * **Extended Key Usage**
 
-In this exercise let's create a codesigning certificate using the pre-built templates provided by ACM Private CA.
+In this exercise, you will create a codesigning certificate using the pre-built templates provided by ACM Private CA.
 
 Follow these steps by right clicking and opening this link : [Template ACM Private CA](https://view.highspot.com/viewer/5dc858b666bbaa7b82d9c6d0)
 
