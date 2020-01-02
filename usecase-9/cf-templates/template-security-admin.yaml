@@ -100,10 +100,11 @@ Resources:
         - 'arn:aws:iam::aws:policy/AWSCloud9User'
         - 'arn:aws:iam::aws:policy/IAMFullAccess'
         - 'arn:aws:iam::aws:policy/AmazonSSMFullAccess'
+        - 'arn:aws:iam::aws:policy/AWSSecurityHubFullAccess'
   CreationLogGroup:
     Type: 'AWS::Logs::LogGroup'
     Properties:
-      LogGroupName: ca_cert_creation
+      LogGroupName: ca_cert_creation 
       RetentionInDays: 60
   RevLogGroup:
     Type: 'AWS::Logs::LogGroup'
@@ -128,7 +129,7 @@ Resources:
       Targets:
         - Arn:
             'Fn::GetAtt':
-              - RevLogGroup
+              - LambdaCARevocation
               - Arn
           Id: cert-revocation
     DependsOn:
@@ -169,6 +170,17 @@ Resources:
       SourceArn: 
         Fn::GetAtt: 
           - CreationEventRule
+          - Arn
+  LambdaCARevocationPermission:
+    Type: "AWS::Lambda::Permission"
+    Properties:
+      Action: 'lambda:InvokeFunction'
+      FunctionName:
+        Ref: LambdaCARevocation
+      Principal: 'events.amazonaws.com'
+      SourceArn:
+        Fn::GetAtt:
+          - RevEventRule
           - Arn
   S3Bucket:
     DeletionPolicy: Retain
@@ -267,6 +279,76 @@ Resources:
             )
             print(response)
             return 200
+  LambdaCARevocation: 
+    Type: 'AWS::Lambda::Function'
+    Properties:
+      FunctionName: CertAuthRevocation
+      Handler: index.lambda_handler
+      Runtime: python3.7
+      Timeout: 60
+      Role: !GetAtt LambdaRole.Arn
+      Tags:
+        - Key: workshop
+          Value: acm-private-ca
+      Code:
+        ZipFile: |
+          import json
+          import boto3
+          import datetime
+          def lambda_handler(event, context):
+            secHubClient = boto3.client('securityhub')
+            accountNum = boto3.client('sts').get_caller_identity()['Account']
+            my_session = boto3.session.Session()
+            region = my_session.region_name
+            caCertARN = event['detail']['requestParameters']['certificateAuthorityArn']
+            date = datetime.datetime.now().isoformat() + "Z"
+            print(date)
+
+            response = secHubClient.batch_import_findings(
+               Findings=[
+                   {
+                       "SchemaVersion": "2018-10-08",
+                       "Id": region + "/" + accountNum + "/" + caCertARN,
+                       "ProductArn": "arn:aws:securityhub:" + region + ":" + accountNum + ":product/" + accountNum + "/default",
+                       "GeneratorId": caCertARN,
+                       "AwsAccountId": accountNum,
+                       "Types": [
+                           "Unusual Behaviors/Process"
+                       ],
+                       "CreatedAt": date,
+                       "UpdatedAt": date,
+                       "Severity": {
+                           "Normalized": 60
+                       },
+                       "Criticality": 80,
+                       "Title": "Certificate Authority Revocation",
+                       "Description": "A Private CA certificate was revoked in AWS Certificate Manager Private CA",
+                       "Remediation": {
+                           "Recommendation": {
+                               "Text": "Verify this CA certificate revocation was taken by a privileged user",
+                               "Url": "https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaAuthAccess.html"
+                           }
+                       },
+                       "ProductFields": {
+                           "aws/securityhub/FindingId": "arn:aws:securityhub:" + region + ":" + accountNum + ":product/" + accountNum + "/default/" + region + "/" + accountNum + "/caCertARN",
+                           "aws/securityhub/SeverityLabel": "MEDIUM",
+                           "aws/securityhub/ProductName": "ACM PCA",
+                           "aws/securityhub/CompanyName": "AWS"
+                       },
+                       "Resources": [
+                           {
+                               "Type": "Other",
+                               "Id": caCertARN,
+                               "Region": region
+                           }
+                       ],
+                       "WorkflowState": "NEW",
+                       "RecordState": "ACTIVE"
+                   },
+               ]
+            )
+            print(response)
+            return 200
   LambdaRole:
       Type: 'AWS::IAM::Role'
       Properties:
@@ -293,3 +375,4 @@ Resources:
       S3BucketName: !Ref S3Bucket
       IsLogging: true
       IsMultiRegionTrail: false
+      
