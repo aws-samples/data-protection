@@ -97,12 +97,12 @@ In this section we will look at how to monitor privileged actions as you build y
 #### 14. [Scenario 1]: Monitor Mass Revocation
 This scenerio shows a developer revoking many end-entity certificates within a short period of time. We want to monitor and notify the security team if this type of privileged action takes place in order to investigate.
 
-##### 15. Create/Revoke End-Entity Certificates
+#### 15. Create/Revoke End-Entity Certificates
 First we will act as the Developer by creating and then revoking many certificates at once: [Mass revocation](https://view.highspot.com/viewer/5da634e266bbaa2860b471a7)
 
-##### 16. Quiz time. Open this link in a new browser tab : [quiz](https://amazonmr.au1.qualtrics.com/jfe/form/SV_3mHHKwvVlxQ0v1X)
+#### 16. Quiz time. Open this link in a new browser tab : [quiz](https://amazonmr.au1.qualtrics.com/jfe/form/SV_3mHHKwvVlxQ0v1X)
 
-##### 17. Mass Revocation Alarm Setup
+#### 17. Mass Revocation Alarm Setup
 Setup CloudWatch Alarms: [Revocation Alarm setup](https://view.highspot.com/viewer/5da6342834d6be298b1c4447)
 
 #### 18. [Scenario 2]: CA Certificate Created
