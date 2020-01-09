@@ -94,7 +94,7 @@ For Google Chrome on Windows: [Validate Certificate Identity on Windows](https:/
 
 In this section we will look at how to monitor privileged actions as you build your certificate management infrastructure. We will study two scenerios. The creation of a CA Certificate and mass revocation of end entity certificates. 
 
-#### 14. [Scenerio 1]: Monitor Mass Revocation
+#### 14. [Scenario 1]: Monitor Mass Revocation
 This scenerio shows a developer revoking many end-entity certificates within a short period of time. We want to monitor and notify the security team if this type of privileged action takes place in order to investigate.
 
 ##### 15. Create/Revoke End-Entity Certificates
@@ -105,7 +105,7 @@ First we will act as the Developer by creating and then revoking many certificat
 ##### 17. Mass Revocation Alarm Setup
 Setup CloudWatch Alarms: [Revocation Alarm setup](https://view.highspot.com/viewer/5da6342834d6be298b1c4447)
 
-#### 18. [Scenerio 2]: CA Certificate Created
+#### 18. [Scenario 2]: CA Certificate Created
 Creating a CA Certificate is a privileged action that should only be taken by authorized personnel within the CA Hierarchy Management team. For this reason we want to monitor the creation of any CA Certificate within our hierarchy. 
 
 To do this we will setup a CloudWatch Alarm: [CA Cert Alarm setup](https://view.highspot.com/viewer/5da63481b7b73956e4842f3a)
