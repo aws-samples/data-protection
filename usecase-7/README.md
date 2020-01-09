@@ -11,7 +11,7 @@ private certificate on an Application Load Balancer while following security bes
 * Click on the **AWS Console** button
 * It should bring up a pop-up screen. On the pop-up,  under Login Link click on **Open Console**
 * You should be logged into the AWS provided account
-* Please verify that the region selected is **Oregon**
+* Please verify that the region selected is **N. Virginia**
 
 ## Setup Certificate Authority Hierarchy 
 #### 2. An IAM Role called **CaAdminRole** is the role that a CA administrator would assume. 
