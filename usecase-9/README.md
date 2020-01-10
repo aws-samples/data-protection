@@ -23,7 +23,7 @@ hierarchy
 
 * If you are not familiar with switching roles, follow this tutorial if needed: [Assume Role in Console](https://view.highspot.com/viewer/5d66bc5cc79c523342504c3e)
 
-#### 3. Build the infrastructure needed for creating a CA hierarchy by deploying the cloudformation template below
+#### 3. Build the infrastructure needed for creating a CA hierarchy by deploying the Cloudformation template below
 
 Please download the CF template by right clicking and save link as the filename *template-ca-admin.yaml* [CA Admin Cloudformation Stack](https://raw.githubusercontent.com/aws-samples/data-protection/master/usecase-7/cf-templates/template-ca-admin.yaml) by right clicking and saving the yaml file on your laptop. 
 
@@ -41,7 +41,7 @@ Upload and launch the cloudformation stack in the AWS account that you are logge
 * Under Private CA's click on the **Create CA** button
 * Open this link in a new browser tab for the rest of the steps  : [Creating a Subordinate CA](https://view.highspot.com/viewer/5d9e91c1a2e3a9148b6d7deb)
 
-#### 6. Quiz time. Open this link in a new browser tab: [quiz](https://bit.ly/2yQ5IML)
+#### 6. Quiz time. Open this link in a new browser tab: [Quiz](https://bit.ly/2yQ5IML)
 
 ## Create Application
 
@@ -54,7 +54,7 @@ provides the HTML code for a website. The application developer will also have p
 
 * If you are not familiar with switching roles, follow this tutorial if needed: [Assume Role in Console](https://view.highspot.com/viewer/5d66bc5cc79c523342504c3e)
 
-#### 8. Build the application infrastructure by deploying the cloudformation template below
+#### 8. Build the application infrastructure by deploying the Cloudformation template below
 
 Please download the CF template by right clicking and save link as the filename *template-appdev.yaml* [AppDev Cloudformation Stack](https://raw.githubusercontent.com/aws-samples/data-protection/master/usecase-7/cf-templates/template-app-dev.yaml) by right clicking and saving the yaml file on your laptop. 
 
@@ -79,7 +79,7 @@ For Microsoft Edge: [Validate Certificate Identity on Microsoft Edge Browser](ht
 
 For Google Chrome on Windows: [Validate Certificate Identity on Windows](https://view.highspot.com/viewer/5dcadc15b7b739360b417fb5)
 
-#### 12. Quiz time. Open this link in a new browser tab: [quiz](https://bit.ly/2Zh3iRY)
+#### 12. Quiz time. Open this link in a new browser tab: [Quiz](https://bit.ly/2Zh3iRY)
 
 #### 13. Cloud9 IDE environment setup
 
@@ -94,35 +94,30 @@ For Google Chrome on Windows: [Validate Certificate Identity on Windows](https:/
 
 In this section we will look at how to monitor privileged actions as you build your certificate management infrastructure. We will study two scenerios. The creation of a CA Certificate and mass revocation of end entity certificates. 
 
-#### 14. [Scenerio 1]: Monitor Mass Revocation
-This scenerio shows a developer revoking many end-entity certificates within a short period of time. We want to monitor and notify the security team if this type of privileged action takes place in order to investigate.
+#### 14. [Scenario 1]: Monitor Mass Revocation
+This scenario shows a developer revoking many end-entity certificates within a short period of time. We want to monitor and notify the security team if this type of privileged action takes place in order to investigate.
 
-##### 15. Create/Revoke End-Entity Certificates
+#### 15. Create/Revoke End-Entity Certificates
 First we will act as the Developer by creating and then revoking many certificates at once: [Mass revocation](https://view.highspot.com/viewer/5da634e266bbaa2860b471a7)
 
-##### 16. Quiz time. Open this link in a new browser tab : [quiz](https://amazonmr.au1.qualtrics.com/jfe/form/SV_3mHHKwvVlxQ0v1X)
+#### 16. Quiz time. Open this link in a new browser tab : [Quiz](https://amazonmr.au1.qualtrics.com/jfe/form/SV_3mHHKwvVlxQ0v1X)
 
-##### 17. Mass Revocation Alarm Setup
+#### 17. Mass Revocation Alarm Setup
 Setup CloudWatch Alarms: [Revocation Alarm setup](https://view.highspot.com/viewer/5da6342834d6be298b1c4447)
 
-#### 18. [Scenerio 2]: CA Certificate Created
+#### 18. [Scenario 2]: CA Certificate Created
 Creating a CA Certificate is a privileged action that should only be taken by authorized personnel within the CA Hierarchy Management team. For this reason we want to monitor the creation of any CA Certificate within our hierarchy. 
 
-To do this we will setup a CloudWatch Alarm: [CA Cert Alarm setup](https://view.highspot.com/viewer/5da63481b7b73956e4842f3a)
+To do this we will check Security Hub: [Security Hub INSERT NEW INSTRUCTIONS HERE](https://view.highspot.com/viewer/5da63481b7b73956e4842f3a)
 
-#### 19. Quiz time. Open this link in a new browser tab : [quiz](https://amazonmr.au1.qualtrics.com/jfe/form/SV_cx0KvGMDSVUVLTL)
-
-#### 20. Create Dashboard
-Now we have two alarms that have produced ALARM states. This is due to our mass revocation of multiple certificates by the application developer and the creation of a CA Certificate upon creating our CA hierarchy. Organizations can use this mechanism to build dashboards to monitor and alert (SNS, Email, etc) when sensitive actions take place.
-
-Create CloudWatch Dashboard: [Create Dashboard](https://view.highspot.com/viewer/5dc592fba4dfa00d2cbd64c6)
+#### 19. Quiz time. Open this link in a new browser tab : [Quiz](https://amazonmr.au1.qualtrics.com/jfe/form/SV_cx0KvGMDSVUVLTL)
 
 ## Advanced Section :
 
 In this section we will learn about certificate extensions that can help you use certificates for applications beyond the common case of identifying TLS server endpoints. These include 
 
-* code signing
-* signing Online Certificate Status Protocol (OCSP) responses
+* Code signing
+* Signing Online Certificate Status Protocol (OCSP) responses
 * TLS clients for two-way (mutual) authentication
 
 What makes one certificate useful for signing code and another useful for terminating TLS are the extension fields in the certificate. Extension fields, or simply extensions, define the usage of the certificate.
