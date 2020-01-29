@@ -2,7 +2,7 @@
 
 site_name: Data Protection on AWS
 site_short_name: Data Protection
-site_description: 'Workshop and sample code that builders can use for experiential learning of AWS services that provide data protection. Services such as AWS KMS, AWS ACM, AWS CloudHSM and others will be explored'
+site_description: 'Workshop and sample code that builders can use for experiential learning of AWS services that provide data protection. Services such as AWS KMS, AWS ACM, Amazon Macie, AWS CloudHSM and others will be explored'
 site_author: 'aws-security-workshops@amazon.com'
 site_url: 'https://data-protection.awssecworkshops.com'
 
