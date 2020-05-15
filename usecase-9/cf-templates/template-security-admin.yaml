@@ -1,0 +1,205 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Description: This AWS CloudFormation Template creates the necessary resources that a security admin can leverage for appropriate role assignments to specific job functions that
+         are needed for creating and maanging a certificate authority and issuing private certificates using ACM Private CA
+
+# This IAM user will be used for all login and development
+Resources:
+  # We will use admin privileges for now and make it least privilege as we learn
+  CaAdminRole:
+    Type : AWS::IAM::Role
+    Properties:
+       RoleName: 'CaAdminRole'
+       AssumeRolePolicyDocument:
+         Version: "2012-10-17"
+         Statement:
+          -
+             Effect: "Allow"
+             Principal:
+                AWS: !Sub "${AWS::AccountId}"
+             Action: 
+               - "sts:AssumeRole"
+       Policies: 
+          -
+             PolicyName: "CaAdminRolePolicy"
+             PolicyDocument: 
+                Version: "2012-10-17"
+                Statement: 
+                    - 
+                      Effect: "Allow"
+                      Resource: "*"
+                      Action: 
+                         - acm-pca:ImportCertificateAuthorityCertificate
+                         - acm-pca:TagCertificateAuthority
+                         - acm-pca:ListTags
+                         - acm-pca:GetCertificate
+                         - acm-pca:UntagCertificateAuthority
+                         - acm-pca:GetCertificateAuthorityCsr
+                         - acm-pca:GetCertificateAuthorityCertificate
+                         - acm-pca:RevokeCertificate
+                         - acm-pca:UpdateCertificateAuthority
+                         - acm-pca:ListCertificateAuthorities
+                         - acm-pca:DescribeCertificateAuthorityAuditReport
+                         - acm-pca:CreateCertificateAuthorityAuditReport
+                         - acm-pca:RestoreCertificateAuthority
+                         - acm-pca:IssueCertificate
+                         - acm-pca:CreateCertificateAuthority
+                         - acm-pca:DeletePermission
+                         - acm-pca:DescribeCertificateAuthority
+                         - acm-pca:CreatePermission
+                         - acm-pca:ListPermissions
+                         - acm-pca:DeleteCertificateAuthority
+                         - acm:DescribeCertificate
+                         - acm:ListCertificates
+                         - acm:AddTagsToCertificate
+                         - acm:ListTagsForCertificate
+                            
+       ManagedPolicyArns: 
+          - arn:aws:iam::aws:policy/AWSCertificateManagerPrivateCAPrivilegedUser
+          - arn:aws:iam::aws:policy/AWSCloudFormationFullAccess
+          - arn:aws:iam::aws:policy/AmazonS3FullAccess
+          - arn:aws:iam::aws:policy/IAMReadOnlyAccess
+          - arn:aws:iam::aws:policy/AmazonSNSReadOnlyAccess
+          
+  # We will use admin privileges for now and make it least privilege as we learn
+  AppDevRole:
+    Type : AWS::IAM::Role
+    Properties:
+       RoleName: 'AppDevRole'
+       AssumeRolePolicyDocument:
+         Version: "2012-10-17"
+         Statement:
+           -
+             Effect: "Allow"
+             Principal:
+                AWS: !Sub "${AWS::AccountId}"
+             Action: 
+               - "sts:AssumeRole"
+       Policies: 
+       -
+          PolicyName: "AppDevACMPolicy"
+          PolicyDocument: 
+             Version: "2012-10-17"
+             Statement: 
+              - 
+                Effect: "Allow"
+                Action: 
+                  - acm:ListCertificates
+                  - acm:ListTagsForCertificate
+                  - acm:DescribeCertificate
+                  - acm:RequestCertificate
+                  - acm:DeleteCertificate
+                  - acm:AddTagsToCertificate
+                  - acm-pca:IssueCertificate
+                  - acm-pca:ListTags
+                  - acm-pca:GetCertificate
+                  - acm-pca:GetCertificateAuthorityCertificate
+                  - acm-pca:RevokeCertificate
+                  - acm-pca:ListCertificateAuthorities
+                  - acm-pca:CreatePermission
+                  - acm-pca:ListPermissions
+                  - acm-pca:GetCertificateAuthorityCsr
+                  - acm-pca:DescribeCertificateAuthority
+                Resource: "*"
+       ManagedPolicyArns: 
+          - arn:aws:iam::aws:policy/ElasticLoadBalancingFullAccess
+          - arn:aws:iam::aws:policy/AWSLambdaFullAccess
+          - arn:aws:iam::aws:policy/AWSCloudFormationFullAccess
+          - arn:aws:iam::aws:policy/AmazonEC2FullAccess
+          - arn:aws:iam::aws:policy/AmazonS3FullAccess
+          - arn:aws:iam::aws:policy/AWSCloud9User
+          - arn:aws:iam::aws:policy/IAMFullAccess
+          - arn:aws:iam::aws:policy/AmazonSSMFullAccess
+  CreationLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties: 
+      LogGroupName: ca_cert_creation
+      RetentionInDays: 60
+  RevLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties: 
+      LogGroupName: cert_revocation
+      RetentionInDays: 60
+  RevEventRule: 
+    Type: AWS::Events::Rule
+    Properties: 
+      Description: "Certificate revoked"
+      EventPattern: 
+        source: 
+          - "aws.acm-pca"
+        detail-type: 
+          - "AWS API Call via CloudTrail"
+        detail: 
+          eventSource: 
+            - "acm-pca.amazonaws.com"
+          eventName:
+            - "RevokeCertificate"
+      State: "ENABLED"
+      Targets: 
+        - 
+          Arn: 
+            Fn::GetAtt: 
+              - "RevLogGroup"
+              - "Arn"
+          Id: "cert-revocation"
+    DependsOn:
+        - RevLogGroup
+  CreationEventRule: 
+    Type: AWS::Events::Rule
+    Properties: 
+      Description: "CA Certificate created"
+      EventPattern: 
+        source: 
+          - "aws.acm-pca"
+        detail-type: 
+          - "AWS API Call via CloudTrail"
+        detail: 
+          eventSource: 
+            - "acm-pca.amazonaws.com"
+          eventName:
+            - "ImportCertificateAuthorityCertificate"
+      State: "ENABLED"
+      Targets: 
+        - 
+          Arn: 
+            Fn::GetAtt: 
+              - "CreationLogGroup"
+              - "Arn"
+          Id: "ca-cert-creation"
+    DependsOn:
+        - CreationLogGroup 
+  S3Bucket:
+    DeletionPolicy: Retain
+    Type: 'AWS::S3::Bucket'
+    Properties: {}
+  BucketPolicy:
+    Type: 'AWS::S3::BucketPolicy'
+    Properties:
+      Bucket:
+        Ref: S3Bucket
+      PolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Sid: AWSCloudTrailAclCheck
+            Effect: Allow
+            Principal:
+              Service: cloudtrail.amazonaws.com
+            Action: 's3:GetBucketAcl'
+            Resource: !Sub 'arn:aws:s3:::${S3Bucket}'
+          - Sid: AWSCloudTrailWrite
+            Effect: Allow
+            Principal:
+              Service: cloudtrail.amazonaws.com
+            Action: 's3:PutObject'
+            Resource: !Sub 'arn:aws:s3:::${S3Bucket}/AWSLogs/${AWS::AccountId}/*'
+            Condition:
+              StringEquals:
+                's3:x-amz-acl': bucket-owner-full-control
+  myTrail:
+    DependsOn:
+      - BucketPolicy
+    Type: 'AWS::CloudTrail::Trail'
+    Properties:
+      S3BucketName: !Ref S3Bucket
+      IsLogging: true
+      IsMultiRegionTrail: false   
