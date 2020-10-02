@@ -2,7 +2,7 @@
 
 T=$(date)
 
-PACKAGE_NAMES="boto3 aws-encryption-sdk pathlib flask pyopenssl requests"
+PACKAGE_NAMES="boto3 aws-encryption-sdk==1.4.1 pathlib flask pyopenssl requests"
 if [ -z ${TEST_ENVIRONMENT+x} ] || [ "${TEST_ENVIRONMENT}" != "1" ]; then
     PACKAGE_NAMES="${PACKAGE_NAMES} ikp3db"
 fi
@@ -12,13 +12,13 @@ echo $T > setup.log
 
 PIPOK=0
 echo "upgrading pip (sudo)" >> setup.log
-OUT=$(sudo /usr/bin/pip-3.6 install --upgrade pip 2>&1) # FIX!
+OUT=$(sudo python -m pip install --upgrade pip 2>&1) # FIX!
 if [ "$?" == "0" ]; then
     PIPOK=1
 else
     echo $OUT >> setup.log
     echo "upgrading pip (user)" >> setup.log
-    OUT=$(pip-3.6 install ---upgrade pip 2>&1)
+    OUT=$(python -m pip install ---upgrade pip 2>&1)
     if [ "$?" == "0" ]; then
         PIPOK=1
     else
@@ -28,7 +28,7 @@ fi
 
 if [ "$PIPOK" == "1" ]; then
     echo "calling pip install" >> setup.log
-    OUT=$(python36 -m pip install --user ${PACKAGE_NAMES})
+    OUT=$(python -m pip install --user ${PACKAGE_NAMES})
     if [ "$?" == "0" ]; then
         echo "SUCCESS: installed python dependencies ${PACKAGE_NAMES}" > ok
         cat ok
