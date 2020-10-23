@@ -1,490 +1,92 @@
-
-
-
-<!doctype html>
-<html lang="en" class="no-js">
-  <head>
-    
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width,initial-scale=1">
-      
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="Workshop and sample code that builders can use for experiential learning of AWS services that provide data protection. Services such as AWS KMS, AWS ACM, Amazon Macie, AWS CloudHSM and others will be explored">
-      
-      
-        <link rel="canonical" href="https://data-protection.awssecworkshops.com/usecase-7/">
-      
-      
         <meta name="author" content="aws-security-workshops@amazon.com">
-      
-      <link rel="shortcut icon" href="../assets/images/aws-favicon.ico">
-      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.5.6">
-    
-    
-      
-        <title>ACM Private Certificate Authority (ACM Private CA) - Data Protection on AWS</title>
-      
-    
-    
-      <link rel="stylesheet" href="../assets/stylesheets/main.63b94e9e.min.css">
-      
-      
-    
-    
-    
-      
-        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
-        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
-      
-    
-    
-    
-      <link rel="stylesheet" href="../stylesheets/custom.css">
-    
-    
-      
-    
-    
-  </head>
-  
-  
-    <body dir="ltr">
-  
-    
-    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
-    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
-    <label class="md-overlay" for="__drawer"></label>
-    <div data-md-component="skip">
-      
-        
-        <a href="#acm-private-certificate-authority-acm-private-ca" class="md-skip">
-          Skip to content
-        </a>
-      
-    </div>
-    <div data-md-component="announce">
-      
-    </div>
-    
-      <header class="md-header" data-md-component="header">
-  <nav class="md-header-nav md-grid" aria-label="Header">
-    <a href="https://data-protection.awssecworkshops.com" title="Data Protection on AWS" class="md-header-nav__button md-logo" aria-label="Data Protection on AWS">
-      
-  <img src="../assets/images/aws_smile_logo.png" alt="logo">
+        <link rel="canonical" href="https://data-protection.awssecworkshops.com/usecase-7/">
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Data Protection on AWS</title>
+        <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+        <link href="../stylesheets/custom.css" rel="stylesheet">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
 
-    </a>
-    <label class="md-header-nav__button md-icon" for="__drawer">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
-    </label>
-    <div class="md-header-nav__title" data-md-component="header-title">
-      
-        <div class="md-header-nav__ellipsis">
-          <span class="md-header-nav__topic md-ellipsis">
-            Data Protection on AWS
-          </span>
-          <span class="md-header-nav__topic md-ellipsis">
-            
-              ACM Private Certificate Authority (ACM Private CA)
-            
-          </span>
-        </div>
-      
-    </div>
-    
-      <label class="md-header-nav__button md-icon" for="__search">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
-      </label>
-      
-<div class="md-search" data-md-component="search" role="dialog">
-  <label class="md-search__overlay" for="__search"></label>
-  <div class="md-search__inner" role="search">
-    <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
-      <label class="md-search__icon md-icon" for="__search">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
-      </label>
-      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
-      </button>
-    </form>
-    <div class="md-search__output">
-      <div class="md-search__scrollwrap" data-md-scrollfix>
-        <div class="md-search-result" data-md-component="search-result">
-          <div class="md-search-result__meta">
-            Initializing search
-          </div>
-          <ol class="md-search-result__list"></ol>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-    
-    
-      <div class="md-header-nav__source">
-        
-<a href="https://github.com/aws-samples/data-protection/" title="Go to repository" class="md-source">
-  <div class="md-source__icon md-icon">
-    
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
-  </div>
-  <div class="md-source__repository">
-    aws-samples/data-protection
-  </div>
-</a>
-      </div>
-    
-  </nav>
-</header>
-    
-    <div class="md-container" data-md-component="container">
-      
-        
-      
-      
-        
-      
-      <main class="md-main" data-md-component="main">
-        <div class="md-main__inner md-grid">
-          
-            
-              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
-  <label class="md-nav__title" for="__drawer">
-    <a href="https://data-protection.awssecworkshops.com" title="Data Protection on AWS" class="md-nav__button md-logo" aria-label="Data Protection on AWS">
-      
-  <img src="../assets/images/aws_smile_logo.png" alt="logo">
+        <script src="../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../js/bootstrap-3.0.3.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
 
-    </a>
-    Data Protection on AWS
-  </label>
-  
-    <div class="md-nav__source">
-      
-<a href="https://github.com/aws-samples/data-protection/" title="Go to repository" class="md-source">
-  <div class="md-source__icon md-icon">
-    
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
-  </div>
-  <div class="md-source__repository">
-    aws-samples/data-protection
-  </div>
-</a>
-    </div>
-  
-  <ul class="md-nav__list" data-md-scrollfix>
-    
-      
-      
-      
+    <body class="homepage">
 
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
 
-  <li class="md-nav__item">
-    <a href=".." title="Overview" class="md-nav__link">
-      Overview
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../contribute/" title="Contributing" class="md-nav__link">
-      Contributing
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../license/" title="License" class="md-nav__link">
-      License
-    </a>
-  </li>
-
-    
-  </ul>
-</nav>
-                  </div>
+                <!-- Collapsed navigation -->
+                <div class="navbar-header">
+                    <!-- Expander button -->
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="..">Data Protection on AWS</a>
                 </div>
-              </div>
-            
-            
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
-      </span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#1-you-will-be-using-a-aws-provided-account-for-this-workshop" class="md-nav__link">
-    1. You will be using a AWS provided account for this workshop.
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#setup-certificate-authority-hierarchy" class="md-nav__link">
-    Setup Certificate Authority Hierarchy
-  </a>
-  
-    <nav class="md-nav" aria-label="Setup Certificate Authority Hierarchy">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#2-an-iam-role-called-caadminrole-is-the-role-that-a-ca-administrator-would-assume" class="md-nav__link">
-    2. An IAM Role called CaAdminRole is the role that a CA administrator would assume.
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-build-the-infrastructure-needed-for-creating-a-ca-hierarchy-by-deploying-the-cloudformation-template-below" class="md-nav__link">
-    3. Build the infrastructure needed for creating a CA hierarchy by deploying the cloudformation template below
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4-create-a-root-ca" class="md-nav__link">
-    4. Create a Root CA.
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#5-create-a-subordinate-issuing-ca" class="md-nav__link">
-    5. Create a Subordinate Issuing CA.
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#6-quiz-time-open-this-link-in-a-new-browser-tab-quiz" class="md-nav__link">
-    6. Quiz time. Open this link in a new browser tab: quiz
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#create-application" class="md-nav__link">
-    Create Application
-  </a>
-  
-    <nav class="md-nav" aria-label="Create Application">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#7-an-iam-role-called-appdevrole-is-the-role-that-an-application-developer-would-assume" class="md-nav__link">
-    7. An IAM Role called AppDevRole is the role that an application developer would assume.
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#8-build-the-application-infrastructure-by-deploying-the-cloudformation-template-below" class="md-nav__link">
-    8. Build the application infrastructure by deploying the cloudformation template below
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#9-next-step-is-to-issue-a-private-certificate-to-put-on-the-application-load-balancer" class="md-nav__link">
-    9. Next step is to issue a private certificate to put on the application load balancer.
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#10-attach-a-https-listener-and-private-certificate-to-the-alb" class="md-nav__link">
-    10. Attach a HTTPS listener and private certificate to the ALB.
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#11-validate-the-identity-of-the-alb-with-the-browser-that-your-are-using-please-open-link-in-a-new-browser-tab" class="md-nav__link">
-    11. Validate the identity of the ALB with the browser that your are using. Please open link in a new browser tab
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#12-quiz-time-open-this-link-in-a-new-browser-tab-quiz" class="md-nav__link">
-    12. Quiz time. Open this link in a new browser tab: quiz
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#13-cloud9-ide-environment-setup" class="md-nav__link">
-    13. Cloud9 IDE environment setup
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#security-monitoring" class="md-nav__link">
-    Security Monitoring:
-  </a>
-  
-    <nav class="md-nav" aria-label="Security Monitoring:">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#14-scenerio-1-monitor-mass-revocation" class="md-nav__link">
-    14. [Scenerio 1]: Monitor Mass Revocation
-  </a>
-  
-    <nav class="md-nav" aria-label="14. [Scenerio 1]: Monitor Mass Revocation">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#15-createrevoke-end-entity-certificates" class="md-nav__link">
-    15. Create/Revoke End-Entity Certificates
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#16-quiz-time-open-this-link-in-a-new-browser-tab-quiz" class="md-nav__link">
-    16. Quiz time. Open this link in a new browser tab : quiz
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#17-mass-revocation-alarm-setup" class="md-nav__link">
-    17. Mass Revocation Alarm Setup
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#18-scenerio-2-ca-certificate-created" class="md-nav__link">
-    18. [Scenerio 2]: CA Certificate Created
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#19-quiz-time-open-this-link-in-a-new-browser-tab-quiz" class="md-nav__link">
-    19. Quiz time. Open this link in a new browser tab : quiz
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#20-create-dashboard" class="md-nav__link">
-    20. Create Dashboard
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#advanced-section" class="md-nav__link">
-    Advanced Section :
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#cleanup" class="md-nav__link">
-    Cleanup
-  </a>
-  
-    <nav class="md-nav" aria-label="Cleanup">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#aws-event" class="md-nav__link">
-    AWS Event
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#on-your-own" class="md-nav__link">
-    On Your Own
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#license-summary" class="md-nav__link">
-    License Summary
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
+
+                <!-- Expanded navigation -->
+                <div class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li >
+                                <a href="..">Overview</a>
+                            </li>
+                            <li >
+                                <a href="../contribute/">Contributing</a>
+                            </li>
+                            <li >
+                                <a href="../license/">License</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li>
+                                <a href="https://github.com/aws-samples/data-protection/edit/master/docs/usecase-7/README.md">Edit on aws-samples/data-protection</a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="main active"><a href="#acm-private-certificate-authority-acm-private-ca">ACM Private Certificate Authority (ACM Private CA)</a></li>
+            <li><a href="#1-you-will-be-using-a-aws-provided-account-for-this-workshop">1. You will be using a AWS provided account for this workshop.</a></li>
+            <li><a href="#setup-certificate-authority-hierarchy">Setup Certificate Authority Hierarchy</a></li>
+            <li><a href="#create-application">Create Application</a></li>
+            <li><a href="#security-monitoring">Security Monitoring:</a></li>
+            <li><a href="#advanced-section">Advanced Section :</a></li>
+            <li><a href="#cleanup">Cleanup</a></li>
     </ul>
-  
-</nav>
-                  </div>
-                </div>
-              </div>
-            
-          
-          <div class="md-content">
-            <article class="md-content__inner md-typeset">
-              
-                
-                  <a href="https://github.com/aws-samples/data-protection/edit/master/docs/usecase-7/README.md" title="Edit this page" class="md-content__button md-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
-                  </a>
-                
-                
-                  
-                
-                
-                <h1 id="acm-private-certificate-authority-acm-private-ca">ACM Private Certificate Authority (ACM Private CA)</h1>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<h1 id="acm-private-certificate-authority-acm-private-ca">ACM Private Certificate Authority (ACM Private CA)</h1>
 <p>This workshop demonstrates how ACM Private Certificate Authority (PCA) service can be used to create a complete CA hierarchy, generate a private certificate, and apply the 
 private certificate on an Application Load Balancer while following security best practices.</p>
 <h4 id="1-you-will-be-using-a-aws-provided-account-for-this-workshop">1. You will be using a AWS provided account for this workshop.</h4>
@@ -607,95 +209,89 @@ or roles that can issue a specific kind of certificate.</p>
 <li>Delete all three CloudFormation Templates</li>
 </ol>
 <h4 id="license-summary">License Summary</h4>
-<p>This sample code is made available under a modified MIT license. See the <a href="LICENSE">LICENSE</a> file.</p>
-                
-              
-              
-                
-
-
-              
-            </article>
-          </div>
+<p>This sample code is made available under a modified MIT license. See the <a href="LICENSE">LICENSE</a> file.</p></div>
         </div>
-      </main>
-      
-        
-<footer class="md-footer">
-  
-  <div class="md-footer-meta md-typeset">
-    <div class="md-footer-meta__inner md-grid">
-      <div class="md-footer-copyright">
-        
-          <div class="md-footer-copyright__highlight">
-            <a href="https://aws.amazon.com/privacy/" target="_blank">Privacy</a> | <a href="https://aws.amazon.com/terms/" target="_blank">Site terms</a> | &copy; 2020, Amazon Web Services, Inc. or its affiliates. All rights reserved.
-          </div>
-        
-        Made with
-        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
-          Material for MkDocs
-        </a>
-      </div>
-      
-  <div class="md-footer-social">
-    
-      
-      
-        
-        
-      
-      <a href="https://awssecworkshops.com" target="_blank" rel="noopener" title="awssecworkshops.com" class="md-footer-social__link">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M280.37 148.26L96 300.11V464a16 16 0 0016 16l112.06-.29a16 16 0 0015.92-16V368a16 16 0 0116-16h64a16 16 0 0116 16v95.64a16 16 0 0016 16.05L464 480a16 16 0 0016-16V300L295.67 148.26a12.19 12.19 0 00-15.3 0zM571.6 251.47L488 182.56V44.05a12 12 0 00-12-12h-56a12 12 0 00-12 12v72.61L318.47 43a48 48 0 00-61 0L4.34 251.47a12 12 0 00-1.6 16.9l25.5 31A12 12 0 0045.15 301l235.22-193.74a12.19 12.19 0 0115.3 0L530.9 301a12 12 0 0016.9-1.6l25.5-31a12 12 0 00-1.7-16.93z"/></svg>
-      </a>
-    
-      
-      
-        
-        
-      
-      <a href="https://aws.amazon.com/security/" target="_blank" rel="noopener" title="aws.amazon.com" class="md-footer-social__link">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M466.5 83.7l-192-80a48.15 48.15 0 00-36.9 0l-192 80C27.7 91.1 16 108.6 16 128c0 198.5 114.5 335.7 221.5 380.3 11.8 4.9 25.1 4.9 36.9 0C360.1 472.6 496 349.3 496 128c0-19.4-11.7-36.9-29.5-44.3zM256.1 446.3l-.1-381 175.9 73.3c-3.3 151.4-82.1 261.1-175.8 307.7z"/></svg>
-      </a>
-    
-      
-      
-        
-        
-      
-      <a href="https://twitter.com/awssecurityinfo?lang=en" target="_blank" rel="noopener" title="twitter.com" class="md-footer-social__link">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
-      </a>
-    
-      
-      
-        
-        
-      
-      <a href="https://aws.amazon.com/blogs/security/" target="_blank" rel="noopener" title="aws.amazon.com" class="md-footer-social__link">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M400 32H48C21.49 32 0 53.49 0 80v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V80c0-26.51-21.49-48-48-48zM112 416c-26.51 0-48-21.49-48-48s21.49-48 48-48 48 21.49 48 48-21.49 48-48 48zm157.533 0h-34.335c-6.011 0-11.051-4.636-11.442-10.634-5.214-80.05-69.243-143.92-149.123-149.123-5.997-.39-10.633-5.431-10.633-11.441v-34.335c0-6.535 5.468-11.777 11.994-11.425 110.546 5.974 198.997 94.536 204.964 204.964.352 6.526-4.89 11.994-11.425 11.994zm103.027 0h-34.334c-6.161 0-11.175-4.882-11.427-11.038-5.598-136.535-115.204-246.161-251.76-251.76C68.882 152.949 64 147.935 64 141.774V107.44c0-6.454 5.338-11.664 11.787-11.432 167.83 6.025 302.21 141.191 308.205 308.205.232 6.449-4.978 11.787-11.432 11.787z"/></svg>
-      </a>
-    
-  </div>
 
+        <footer class="col-md-12">
+            <hr>
+                <p><a href="https://aws.amazon.com/privacy/" target="_blank">Privacy</a> | <a href="https://aws.amazon.com/terms/" target="_blank">Site terms</a> | &copy; 2020, Amazon Web Services, Inc. or its affiliates. All rights reserved.</p>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "..",
+                shortcuts = {"search": 83, "next": 78, "help": 191, "previous": 80};
+        </script>
+        <script src="../js/base.js" defer></script>
+        <script src="../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
     </div>
-  </div>
-</footer>
-      
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Keyboard Shortcuts</h4>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
     </div>
-    
-      <script src="../assets/javascripts/vendor.d1f5a259.min.js"></script>
-      <script src="../assets/javascripts/bundle.d5fec882.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
-      
-      <script>
-        app = initialize({
-          base: "..",
-          features: [],
-          search: Object.assign({
-            worker: "../assets/javascripts/worker/search.fae956e7.min.js"
-          }, typeof search !== "undefined" && search)
-        })
-      </script>
-      
-    
-  </body>
+</div>
+
+    </body>
 </html>
+
+<!--
+MkDocs version : 1.0.4
+Build Date UTC : 2020-10-23 19:09:20
+-->

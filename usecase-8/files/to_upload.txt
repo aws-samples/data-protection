@@ -1,1 +1,0 @@
-The text file that you will be uploading to the S3 bucket
