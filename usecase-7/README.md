@@ -3,7 +3,7 @@
 This workshop demonstrates how ACM Private Certificate Authority (PCA) service can be used to create a complete CA hierarchy, generate a private certificate, and apply the 
 private certificate on an Application Load Balancer while following security best practices.
 
-#### 1. You will be using a AWS provided account for this workshop.
+#### 1a. If you are using a AWS provided account for this workshop (at an AWS event)
 
 * If you are logged into your personal AWS account or your corporate AWS account, you should log out now.
 * Open this link in a new browser tab: [AWS provided account](https://dashboard.eventengine.run/)
@@ -12,6 +12,17 @@ private certificate on an Application Load Balancer while following security bes
 * It should bring up a pop-up screen. On the pop-up,  under Login Link click on **Open Console**
 * You should be logged into the AWS provided account
 * Please verify that the region with staff
+
+#### 1b. If you are using your own AWS account
+
+* Log into your desired AWS account
+* You should be logged into the AWS provided account
+* Please verify that you're in the desired region
+
+Please download the CF template by right clicking and save link as the filename *template-ca-admin.yaml* [Security Admin Cloudformation Stack](https://raw.githubusercontent.com/aws-samples/data-protection/master/usecase-7/cf-templates/template-security-admin.yaml) by right clicking and saving the yaml file on your laptop. 
+
+Upload and launch the cloudformation stack in the AWS account that you are logged into. If you are not familiar with this, follow instructions here by right clicking and opening link in a new browser tab [Deploy Security Admin Cloudformation Stack Instructions](https://view.highspot.com/viewer/5dd6cd89a2e3a96cb78647d3)
+
 
 ## Setup Certificate Authority Hierarchy 
 #### 2. An IAM Role called **CaAdminRole** is the role that a CA administrator would assume. 
