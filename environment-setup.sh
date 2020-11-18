@@ -2,7 +2,7 @@
 
 T=$(date)
 
-PYTHON_PACKAGES="aws-encryption-sdk pathlib flask pyopenssl requests"
+PYTHON_PACKAGES="aws-encryption-sdk pathlib flask pyopenssl requests cryptography"
 if [ -z ${TEST_ENVIRONMENT+x} ] || [ "${TEST_ENVIRONMENT}" != "1" ]; then
     PYTHON_PACKAGES="${PACKAGE_NAMES} ikp3db"
 fi
