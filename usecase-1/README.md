@@ -16,15 +16,6 @@ These workshops assume that you are using the [Cloud9 IDE environment](https://a
 
 Basic python knowledge is sufficient to consume these workshops.
 
-# Setup Workshop Environment
-
-* Navigate to the Cloud9 service within your AWS console
-* Open the Cloud9 IDE environment called **workshop-environment**. It takes about 30 seconds for the environment to start up.
-* In the Cloud9 IDE environment you will find a folder called **data-protection** in the folder pane on the left side of the screen
-* Right-click (on MacOS: control-click) the file named **environment-setup.sh**  in the IDE and select **Run**
-* This script takes about a minute to complete
-* In the runner window below you should see **SUCCESS: installed python dependencies ** followed by a list of the installed packages
-
 # AWS Initialization & tear down
 
 **IMPORTANT!** 
@@ -59,6 +50,15 @@ In addition a VPC with two subnets and an internet gateway is also created.
 
 This workshop demonstrates server side encryption using AWS KMS and S3
 
+# Setup Workshop Environment
+
+* Navigate to the Cloud9 service within your AWS console
+* Open the Cloud9 IDE environment called **workshop-environment**. It takes about 30 seconds for the environment to start up.
+* In the Cloud9 IDE environment you will find a folder called **data-protection** in the folder pane on the left side of the screen
+* Right-click (on MacOS: control-click) the file named **environment-setup.sh**  in the IDE and select **Run**
+* This script takes about a minute to complete
+* In the runner window below you should see **installed python dependencies ** followed by **environment setup complete**
+
 ## Let's look at some concepts :
 
 <a><img src="images/data-at-rest-encryption-primer.png" width="700" height="500"></a><br>
@@ -66,7 +66,7 @@ This workshop demonstrates server side encryption using AWS KMS and S3
 
 ## Let's do some server side encryption
 
-Open the Cloud9 IDE environment called **workshop-environment** and navigate to the **data-protection/usecase-1** directory.
+Within the Cloud9 IDE environment navigate to the **data-protection/usecase-1** directory.
 Follow the instructions below:
 
 ### 1. Run the module named `kms_key_creation-Step-1.py`
