@@ -25,8 +25,8 @@ This workshop demonstrates how ACM Private Certificate Authority (PCA) makes it 
 * Log into your desired AWS account
 * You should be logged into the AWS provided account
 * Please verify that you're in the desired region. Please use a AWS region in which AWS Cloud9 and AWS Certificate Managed(ACM) service is available. You can find the supported reqions for a service here : [Supported Regions for services](https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/)
-* To avoid any permissions issues in your account, please make sure that you have administrator access
-* Please download the CF template by right clicking this link: [Security Admin Cloudfromation Stack](https://code.amazon.com/packages/AWS-Certificate-Manager-Workshop/blobs/mainline/--/cf-templates/template-security-admin.yaml) and save link as the filename **template-security-admin.yaml**
+* To avoid any permissions issues in your account, please make sure that you have administrator access. Also S3 block public access needs to be disabled for the CRL S3 buckets so that these buckets are accessible by the TLS client.
+* Please download the CF template by right clicking this link: [Security Admin Cloudfromation Stack](https://raw.githubusercontent.com/aws-samples/data-protection/master/usecase-9/cf-templates/template-security-admin.yaml) and save link as the filename **template-security-admin.yaml**
 * Upload and launch the cloudformation stack in the AWS account that you are logged into. If you are not familiar with this, follow instructions here by right clicking and opening this link [Deploy Security Admin Cloudformation Stack Instructions](https://aws.highspot.com/viewer/5e2f0ce034d6be0385cc9ac8)in a new browser tab Deploy Security Admin Cloudformation Stack Instructions
 
 ## Let's setup the Certificate Authority Hierarchy 
@@ -46,7 +46,7 @@ You can create Private Root and Subordinate Certificate Authorities either manua
 
 ###### 3.A.1 Build the S3 bucket needed for storing CRL's(Certificate revocation lists) by deploying the cloudformation template below
 
-To create S3 bucket that will contain the certificate revocation list (CRL), please download the CF template by right clicking and save link as the filename *template-ca-admin.yaml* [CA Admin Cloudformation Stack](https://code.amazon.com/packages/AWS-Certificate-Manager-Workshop/blobs/mainline/--/cf-templates/template-ca-admin.yaml) by right clicking and saving the yaml file on your laptop. 
+To create S3 bucket that will contain the certificate revocation list (CRL), please download the CF template by right clicking and save link as the filename *template-ca-admin.yaml* [CA Admin Cloudformation Stack](https://raw.githubusercontent.com/aws-samples/data-protection/master/usecase-9/cf-templates/template-ca-admin.yaml) by right clicking and saving the yaml file on your laptop. 
 
 Upload and launch the cloudformation stack in the AWS account that you are logged into. If you are not familiar with this, follow instructions here by right clickking and opening link in a new browser tab [Deploy CA Admin Cloudformation Stack Instructions](https://view.highspot.com/viewer/5dd6cd89a2e3a96cb78647d3)
 
@@ -64,7 +64,7 @@ Upload and launch the cloudformation stack in the AWS account that you are logge
 
 #### 3.B - Create full Private CA Hierarch automatically with a CloudFormation Template 
 
-Please download the CF template by right clicking and save link as the filename *template-pca-hierarchy.yaml* [PCA Hierarchy CF template](https://code.amazon.com/packages/AWS-Certificate-Manager-Workshop/blobs/mainline/--/cf-templates/template-pca-hierarchy.yaml)
+Please download the CF template by right clicking and save link as the filename *template-pca-hierarchy.yaml* [PCA Hierarchy CF template](https://raw.githubusercontent.com/aws-samples/data-protection/master/usecase-9/cf-templates/template-pca-hierarchy.yaml)
 Upload and launch the cloudformation stack in the AWS account that you are logged into. If you are not familiar with this, follow instructions here by right clickking and opening link in a new browser tab [Deploy CA Admin Cloudformation Stack Instructions](https://view.highspot.com/viewer/5dd6cd89a2e3a96cb78647d3)
 
 ### 4. Quiz time. Open this link in a new browser tab: [quiz](https://bit.ly/2yQ5IML)
@@ -75,7 +75,7 @@ You can choose any of the sections in the table below.
 
 | Section    | Average time to complete section |
 | :------------- |:-------------|
-| [Using Private Certificates on a HTTPS Web Application ](https://code.amazon.com/packages/AWS-Certificate-Manager-Workshop/blobs/mainline/--/HTTPS_Application_Usecase.md)  | 35 mins| 
+| [Using Private Certificates on a HTTPS Web Application ](https://raw.githubusercontent.com/aws-samples/data-protection/master/usecase-9/HTTPS_Application_Usecase.md)  | 35 mins| 
 | [Private Certificates for IOT Devices ](https://code.amazon.com/packages/AWS-Certificate-Manager-Workshop/blobs/mainline/--/IOT_Device_Usecase.md)  | 45 mins| 
 | [Monitoring ACM Private CA ](https://code.amazon.com/packages/AWS-Certificate-Manager-Workshop/blobs/mainline/--/Monitoring_ACM_Private_CA.md)  | 35 mins| 
 | [Creating different certificate types using Certificate Templates](https://code.amazon.com/packages/AWS-Certificate-Manager-Workshop/blobs/mainline/--/Templates_ACM_Private_CA.md)  | 15 mins| 
