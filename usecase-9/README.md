@@ -75,10 +75,10 @@ You can choose any of the sections in the table below.
 
 | Section    | Average time to complete section |
 | :------------- |:-------------|
-| [Using Private Certificates on a HTTPS Web Application ](https://raw.githubusercontent.com/aws-samples/data-protection/master/usecase-9/HTTPS_Application_Usecase.md)  | 35 mins| 
-| [Private Certificates for IOT Devices ](https://code.amazon.com/packages/AWS-Certificate-Manager-Workshop/blobs/mainline/--/IOT_Device_Usecase.md)  | 45 mins| 
-| [Monitoring ACM Private CA ](https://code.amazon.com/packages/AWS-Certificate-Manager-Workshop/blobs/mainline/--/Monitoring_ACM_Private_CA.md)  | 35 mins| 
-| [Creating different certificate types using Certificate Templates](https://code.amazon.com/packages/AWS-Certificate-Manager-Workshop/blobs/mainline/--/Templates_ACM_Private_CA.md)  | 15 mins| 
+| [Using Private Certificates on a HTTPS Web Application ](https://github.com/aws-samples/data-protection/blob/master/usecase-9/HTTPS_Application_Usecase.md)  | 35 mins| 
+| [Private Certificates for IOT Devices ](https://github.com/aws-samples/data-protection/blob/master/usecase-9/IOT_Device_Usecase.md)  | 45 mins| 
+| [Monitoring ACM Private CA ](https://github.com/aws-samples/data-protection/blob/master/usecase-9/Monitoring_ACM_Private_CA.md)  | 35 mins| 
+| [Creating different certificate types using Certificate Templates](https://github.com/aws-samples/data-protection/blob/master/usecase-9/Templates_ACM_Private_CA.md)  | 20 mins| 
 
 This sample code is made available under a modified MIT license. See the [LICENSE](LICENSE) file.
 
