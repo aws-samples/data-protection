@@ -29,6 +29,11 @@ This workshop demonstrates how ACM Private Certificate Authority (PCA) makes it 
 * Please download the CF template by right clicking this link: [Security Admin Cloudfromation Stack](https://raw.githubusercontent.com/aws-samples/data-protection/master/usecase-9/cf-templates/template-security-admin.yaml) and save link as the filename **template-security-admin.yaml**
 * Upload and launch the cloudformation stack in the AWS account that you are logged into. If you are not familiar with this, follow instructions here by right clicking and opening this link [Deploy Security Admin Cloudformation Stack Instructions](https://aws.highspot.com/viewer/5e2f0ce034d6be0385cc9ac8)in a new browser tab Deploy Security Admin Cloudformation Stack Instructions
 
+## Quizzes
+
+During the AWS Certificate Management Private CA Workshop you will have the opportunity to take multiple quizzes. To do that, we have embedded quiz links throughout the workshop. We're hoping that you'll take 2 minutes of your time per quiz. This will enhance learning and allow us to hold a discussion during the workshop.
+This quiz is hosted by an external company (Qualtrics), so the link above does not lead to our website. Please note that AWS will own the data gathered via this quiz, and will not share the information/results collected with quiz respondents. AWS handles your information as described in the [AWS Privacy Notice](https://aws.amazon.com/privacy/).
+
 ## Let's setup the Certificate Authority Hierarchy 
 
 ### 2. An IAM Role called **CaAdminRole** is the role that a CA administrator would assume. 
