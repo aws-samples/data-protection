@@ -9,73 +9,60 @@
         <link rel="canonical" href="https://data-protection.awssecworkshops.com/contribute/">
         <link rel="shortcut icon" href="../img/favicon.ico">
         <title>Contributing - Data Protection on AWS</title>
-        <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
         <link href="../css/font-awesome.min.css" rel="stylesheet">
         <link href="../css/base.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
         <link href="../stylesheets/custom.css" rel="stylesheet">
-        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!--[if lt IE 9]>
-            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
 
         <script src="../js/jquery-1.10.2.min.js" defer></script>
-        <script src="../js/bootstrap-3.0.3.min.js" defer></script>
+        <script src="../js/bootstrap.min.js" defer></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
         <script>hljs.initHighlightingOnLoad();</script> 
     </head>
 
     <body>
-
-        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
             <div class="container">
-
-                <!-- Collapsed navigation -->
-                <div class="navbar-header">
-                    <!-- Expander button -->
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="..">Data Protection on AWS</a>
-                </div>
+                <a class="navbar-brand" href="..">Data Protection on AWS</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
                 <!-- Expanded navigation -->
-                <div class="navbar-collapse collapse">
+                <div id="navbar-collapse" class="navbar-collapse collapse">
                         <!-- Main navigation -->
                         <ul class="nav navbar-nav">
-                            <li >
-                                <a href="..">Overview</a>
+                            <li class="navitem">
+                                <a href=".." class="nav-link">Overview</a>
                             </li>
-                            <li class="active">
-                                <a href="./">Contributing</a>
+                            <li class="navitem active">
+                                <a href="./" class="nav-link">Contributing</a>
                             </li>
-                            <li >
-                                <a href="../license/">License</a>
+                            <li class="navitem">
+                                <a href="../license/" class="nav-link">License</a>
                             </li>
                         </ul>
 
-                    <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
                                 <i class="fa fa-search"></i> Search
                             </a>
                         </li>
-                            <li >
-                                <a rel="next" href="..">
+                            <li class="nav-item">
+                                <a rel="prev" href=".." class="nav-link">
                                     <i class="fa fa-arrow-left"></i> Previous
                                 </a>
                             </li>
-                            <li >
-                                <a rel="prev" href="../license/">
+                            <li class="nav-item">
+                                <a rel="next" href="../license/" class="nav-link">
                                     Next <i class="fa fa-arrow-right"></i>
                                 </a>
                             </li>
-                            <li>
-                                <a href="https://github.com/aws-samples/data-protection/edit/master/docs/contribute.md">Edit on aws-samples/data-protection</a>
+                            <li class="nav-item">
+                                <a href="https://github.com/aws-samples/data-protection/edit/master/docs/contribute.md" class="nav-link">Edit on aws-samples/data-protection</a>
                             </li>
                     </ul>
                 </div>
@@ -83,18 +70,50 @@
         </div>
 
         <div class="container">
-                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
-    <ul class="nav bs-sidenav">
-        <li class="main active"><a href="#contributing-guidelines">Contributing Guidelines</a></li>
-            <li><a href="#reporting-bugsfeature-requests">Reporting Bugs/Feature Requests</a></li>
-            <li><a href="#contributing-via-pull-requests">Contributing via Pull Requests</a></li>
-            <li><a href="#finding-contributions-to-work-on">Finding contributions to work on</a></li>
-            <li><a href="#code-of-conduct">Code of Conduct</a></li>
-            <li><a href="#security-issue-notifications">Security issue notifications</a></li>
-            <li><a href="#licensing">Licensing</a></li>
-    </ul>
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="1"><a href="#contributing-guidelines" class="nav-link">Contributing Guidelines</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#reporting-bugsfeature-requests" class="nav-link">Reporting Bugs/Feature Requests</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#contributing-via-pull-requests" class="nav-link">Contributing via Pull Requests</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#finding-contributions-to-work-on" class="nav-link">Finding contributions to work on</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#code-of-conduct" class="nav-link">Code of Conduct</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#security-issue-notifications" class="nav-link">Security issue notifications</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#licensing" class="nav-link">Licensing</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
 </div></div>
-                <div class="col-md-9" role="main">
+                    <div class="col-md-9" role="main">
 
 <h1 id="contributing-guidelines">Contributing Guidelines</h1>
 <p>Thank you for your interest in contributing to our project. Whether it's a bug report, new feature, correction, or additional 
@@ -140,6 +159,7 @@ opensource-codeofconduct@amazon.com with any additional questions or comments.</
 <h2 id="licensing">Licensing</h2>
 <p>See the <a href="https://github.com/aws-samples/aws-security-workshops/blob/master/LICENSE">LICENSE</a> file for our project's licensing. We will ask you to confirm the licensing of your contribution.</p>
 <p>We may ask you to sign a <a href="http://en.wikipedia.org/wiki/Contributor_License_Agreement">Contributor License Agreement (CLA)</a> for larger changes.</p></div>
+            </div>
         </div>
 
         <footer class="col-md-12">
@@ -149,26 +169,26 @@ opensource-codeofconduct@amazon.com with any additional questions or comments.</
         </footer>
         <script>
             var base_url = "..",
-                shortcuts = {"search": 83, "next": 78, "help": 191, "previous": 80};
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
         </script>
         <script src="../js/base.js" defer></script>
         <script src="../search/main.js" defer></script>
 
-        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
-    <div class="modal-dialog">
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
             </div>
             <div class="modal-body">
                 <p>
                     From here you can search these documents. Enter
                     your search terms below.
                 </p>
-                <form role="form">
+                <form>
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
                     </div>
                 </form>
                 <div id="mkdocs-search-results"></div>
@@ -177,12 +197,12 @@ opensource-codeofconduct@amazon.com with any additional questions or comments.</
             </div>
         </div>
     </div>
-</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title" id="exampleModalLabel">Keyboard Shortcuts</h4>
             </div>
             <div class="modal-body">
               <table class="table">
