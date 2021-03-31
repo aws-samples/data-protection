@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <meta name="author" content="aws-security-workshops@amazon.com">
+        <link rel="canonical" href="https://data-protection.awssecworkshops.com/usecase-9/">
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>ACM Private Certificate Authority (ACM Private CA) Workshop - Data Protection on AWS</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+        <link href="../stylesheets/custom.css" rel="stylesheet">
+
+        <script src="../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../js/bootstrap.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">Data Protection on AWS</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem">
+                                <a href=".." class="nav-link">Overview</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../contribute/" class="nav-link">Contributing</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../license/" class="nav-link">License</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/aws-samples/data-protection/edit/master/docs/usecase-9/README.md" class="nav-link">Edit on aws-samples/data-protection</a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="1"><a href="#acm-private-certificate-authority-acm-private-ca-workshop" class="nav-link">ACM Private Certificate Authority (ACM Private CA) Workshop</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#quizzes" class="nav-link">Quizzes</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#lets-setup-the-certificate-authority-hierarchy" class="nav-link">Let's setup the Certificate Authority Hierarchy</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#sections" class="nav-link">Sections :</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#cleanup" class="nav-link">Cleanup</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="acm-private-certificate-authority-acm-private-ca-workshop">ACM Private Certificate Authority (ACM Private CA) Workshop</h1>
+<p>This workshop demonstrates how ACM Private Certificate Authority (PCA) makes it easy for managing your PKI infrastructure and generating private certificates for TLS terminations on web servers and IOT devices. You will get hands on experience on the following use cases :</p>
+<ul>
+<li>Creating a complete Certificate Authority(CA) hierarchy </li>
+<li>Creating a private certificate and putting it on an HTTPS listener of an application load balancer(ALB) that will terminate TLS. The client connection will come from a browser of your choice.</li>
+<li>Using private certificates on IOT devices so that the IOT devices can authenticate with AWS IOT Core and exchange messages</li>
+<li>Learn how to monitor security events associated with your private Certificate Authority using Cloudwatch and Security Hub</li>
+<li>Learn Security best practices for your PKI infrastructure</li>
+<li>Using certificate templates for generating different certificate types such as code signing, S/MIME email certificates, smart card logon and others.</li>
+<li>Throughout the workshop theare are multiple quizzes for re:inforced learning</li>
+</ul>
+<h3 id="1a-if-you-are-using-a-aws-provided-account-for-this-workshop-at-an-aws-event">1.A If you are using a AWS provided account for this workshop (at an AWS event)</h3>
+<ul>
+<li>If you are logged into your personal AWS account or your corporate AWS account, you should log out now.</li>
+<li>Open this link in a new browser tab: <a href="https://dashboard.eventengine.run/">AWS provided account</a></li>
+<li>Log in with your hash that's provided to you during the event</li>
+<li>Click on the <strong>AWS Console</strong> button</li>
+<li>It should bring up a pop-up screen. On the pop-up,  under Login Link click on <strong>Open Console</strong></li>
+<li>You should be logged into the AWS provided account</li>
+<li>Please verify that the region with staff running the evet</li>
+</ul>
+<h3 id="1b-if-you-are-using-your-own-aws-account">1.B If you are using your own AWS account</h3>
+<ul>
+<li>Log into your desired AWS account</li>
+<li>You should be logged into the AWS provided account</li>
+<li>Please verify that you're in the desired region. Please use a AWS region in which AWS Cloud9 and AWS Certificate Managed(ACM) service is available. You can find the supported reqions for a service here : <a href="https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/">Supported Regions for services</a></li>
+<li>To avoid any permissions issues in your account, please make sure that you have administrator access. Also S3 block public access needs to be disabled for the CRL S3 buckets so that these buckets are accessible by the TLS client.</li>
+<li>Please download the CF template by right clicking this link: <a href="https://raw.githubusercontent.com/aws-samples/data-protection/master/usecase-9/cf-templates/template-security-admin.yaml">Security Admin Cloudfromation Stack</a> and save link as the filename <strong>template-security-admin.yaml</strong></li>
+<li>Upload and launch the cloudformation stack in the AWS account that you are logged into. If you are not familiar with this, follow instructions here by right clicking and opening this link <a href="https://aws.highspot.com/viewer/5e2f0ce034d6be0385cc9ac8">Deploy Security Admin Cloudformation Stack Instructions</a>in a new browser tab Deploy Security Admin Cloudformation Stack Instructions</li>
+</ul>
+<h2 id="quizzes">Quizzes</h2>
+<p>During the AWS Certificate Management Private CA Workshop you will have the opportunity to take multiple quizzes. To do that, we have embedded quiz links throughout the workshop. We're hoping that you'll take 2 minutes of your time per quiz. This will enhance learning and allow us to hold a discussion during the workshop.
+This quiz is hosted by an external company (Qualtrics), so the link above does not lead to our website. Please note that AWS will own the data gathered via this quiz, and will not share the information/results collected with quiz respondents. AWS handles your information as described in the <a href="https://aws.amazon.com/privacy/">AWS Privacy Notice</a>.</p>
+<h2 id="lets-setup-the-certificate-authority-hierarchy">Let's setup the Certificate Authority Hierarchy</h2>
+<h3 id="2-an-iam-role-called-caadminrole-is-the-role-that-a-ca-administrator-would-assume">2. An IAM Role called <strong>CaAdminRole</strong> is the role that a CA administrator would assume.</h3>
+<ul>
+<li>
+<p>Assume the role named <strong>CaAdminRole</strong> by using switch role on the AWS console in the AWS account that you are currently logged into</p>
+</li>
+<li>
+<p>This role has permissions that a Certificate Authority administrator will need for CA administration. As a CA administrator, you will be responsible for creating a root and subordinate certificate authority </p>
+</li>
+<li>
+<p>If you are not familiar with switching roles, follow this tutorial if needed: <a href="https://view.highspot.com/viewer/5d66bc5cc79c523342504c3e">Assume Role in Console</a></p>
+</li>
+</ul>
+<h3 id="3-create-private-ca-hierarchy">3. Create Private CA hierarchy</h3>
+<p>You can create Private Root and Subordinate Certificate Authorities either manually (See section 3.A) or through CloudFormation template (See Section 3.B). Please choose the manual or the Cloudformation option but don't do both.</p>
+<h4 id="3a-create-private-ca-hierarch-manually">3.A - Create Private CA Hierarch Manually</h4>
+<h6 id="3a1-build-the-s3-bucket-needed-for-storing-crlscertificate-revocation-lists-by-deploying-the-cloudformation-template-below">3.A.1 Build the S3 bucket needed for storing CRL's(Certificate revocation lists) by deploying the cloudformation template below</h6>
+<p>To create S3 bucket that will contain the certificate revocation list (CRL), please download the CF template by right clicking and save link as the filename <em>template-ca-admin.yaml</em> <a href="https://raw.githubusercontent.com/aws-samples/data-protection/master/usecase-9/cf-templates/template-ca-admin.yaml">CA Admin Cloudformation Stack</a> by right clicking and saving the yaml file on your laptop. </p>
+<p>Upload and launch the cloudformation stack in the AWS account that you are logged into. If you are not familiar with this, follow instructions here by right clickking and opening link in a new browser tab <a href="https://view.highspot.com/viewer/5dd6cd89a2e3a96cb78647d3">Deploy CA Admin Cloudformation Stack Instructions</a></p>
+<h6 id="3a2-create-a-root-ca">3.A.2 Create a Root CA.</h6>
+<ul>
+<li>Navigate to ACM Service in the AWS Console</li>
+<li>Click Get Started under Private Certificate Authority</li>
+<li>Open this link in a new browser tab for the rest of the steps : <a href="https://view.highspot.com/viewer/604a590934d6be73df3ec1d9">Creating a Root CA</a></li>
+</ul>
+<h6 id="3a3-create-a-subordinate-issuing-ca">3.A.3 Create a Subordinate Issuing CA.</h6>
+<ul>
+<li>Navigate to ACM Service in the AWS Console</li>
+<li>Under Private CA's, click on the <strong>Create CA</strong> button</li>
+<li>Open this link in a new browser tab for the rest of the steps  : <a href="https://view.highspot.com/viewer/604a5d1f8117170c1176edbf">Creating a Subordinate CA</a></li>
+</ul>
+<h4 id="3b-create-full-private-ca-hierarch-automatically-with-a-cloudformation-template">3.B - Create full Private CA Hierarch automatically with a CloudFormation Template</h4>
+<p>Please download the CF template by right clicking and save link as the filename <em>template-pca-hierarchy.yaml</em> <a href="https://raw.githubusercontent.com/aws-samples/data-protection/master/usecase-9/cf-templates/template-pca-hierarchy.yaml">PCA Hierarchy CF template</a>
+Upload and launch the cloudformation stack in the AWS account that you are logged into. If you are not familiar with this, follow instructions here by right clickking and opening link in a new browser tab <a href="https://view.highspot.com/viewer/5dd6cd89a2e3a96cb78647d3">Deploy CA Admin Cloudformation Stack Instructions</a></p>
+<h3 id="4-quiz-time-open-this-link-in-a-new-browser-tab-quiz">4. Quiz time. Open this link in a new browser tab: <a href="https://bit.ly/2yQ5IML">quiz</a></h3>
+<h2 id="sections">Sections :</h2>
+<p>You can choose any of the sections in the table below.</p>
+<table>
+<thead>
+<tr>
+<th align="left">Section</th>
+<th align="left">Average time to complete section</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><a href="https://github.com/aws-samples/data-protection/blob/master/usecase-9/HTTPS_Application_Usecase.md">Using Private Certificates on a HTTPS Web Application </a></td>
+<td align="left">35 mins</td>
+</tr>
+<tr>
+<td align="left"><a href="https://github.com/aws-samples/data-protection/blob/master/usecase-9/IOT_Device_Usecase.md">Private Certificates for IOT Devices </a></td>
+<td align="left">45 mins</td>
+</tr>
+<tr>
+<td align="left"><a href="https://github.com/aws-samples/data-protection/blob/master/usecase-9/Monitoring_ACM_Private_CA.md">Monitoring ACM Private CA </a></td>
+<td align="left">35 mins</td>
+</tr>
+<tr>
+<td align="left"><a href="https://github.com/aws-samples/data-protection/blob/master/usecase-9/Templates_ACM_Private_CA.md">Creating different certificate types using Certificate Templates</a></td>
+<td align="left">20 mins</td>
+</tr>
+</tbody>
+</table>
+<p>This sample code is made available under a modified MIT license. See the <a href="LICENSE">LICENSE</a> file.</p>
+<p><a href="LICENSE">LICENSE</a></p>
+<h2 id="cleanup">Cleanup</h2>
+<h4 id="if-you-are-at-an-aws-physical-or-virtual-event">If you are at an AWS physical or virtual event</h4>
+<p>Don't worry about cleanup, we will take care of it. Hopefully you've learned something useful in this workshop that you can take back your organization. Thank you for coming.</p>
+<h4 id="if-you-are-doing-this-workshop-on-your-own">If you are doing this workshop on your own</h4>
+<p>Please delete all the Certificate authorities and the certificates that you have created so that you are not billed.</p>
+<h4 id="license-summary">License Summary</h4>
+<p>This sample code is made available under a modified MIT license. See the <a href="LICENSE">LICENSE</a> file.</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+                <p><a href="https://aws.amazon.com/privacy/" target="_blank">Privacy</a> | <a href="https://aws.amazon.com/terms/" target="_blank">Site terms</a> | &copy; 2020, Amazon Web Services, Inc. or its affiliates. All rights reserved.</p>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js" defer></script>
+        <script src="../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

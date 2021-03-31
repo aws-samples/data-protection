@@ -4,27 +4,27 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="Workshop and sample code that builders can use for experiential learning of AWS services that provide data protection. Services such as AWS KMS, AWS ACM, Amazon Macie, AWS CloudHSM and others will be explored">
+        
         <meta name="author" content="aws-security-workshops@amazon.com">
-        <link rel="canonical" href="https://data-protection.awssecworkshops.com/">
-        <link rel="shortcut icon" href="img/favicon.ico">
-        <title>Data Protection on AWS</title>
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/font-awesome.min.css" rel="stylesheet">
-        <link href="css/base.css" rel="stylesheet">
+        <link rel="canonical" href="https://data-protection.awssecworkshops.com/usecase-9/Monitoring_ACM_Private_CA/">
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Monitoring ACM Private CA - Data Protection on AWS</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
-        <link href="stylesheets/custom.css" rel="stylesheet">
+        <link href="../../stylesheets/custom.css" rel="stylesheet">
 
-        <script src="js/jquery-1.10.2.min.js" defer></script>
-        <script src="js/bootstrap.min.js" defer></script>
+        <script src="../../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../../js/bootstrap.min.js" defer></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
         <script>hljs.initHighlightingOnLoad();</script> 
     </head>
 
-    <body class="homepage">
+    <body>
         <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
             <div class="container">
-                <a class="navbar-brand" href=".">Data Protection on AWS</a>
+                <a class="navbar-brand" href="../..">Data Protection on AWS</a>
                 <!-- Expander button -->
                 <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
                     <span class="navbar-toggler-icon"></span>
@@ -34,14 +34,14 @@
                 <div id="navbar-collapse" class="navbar-collapse collapse">
                         <!-- Main navigation -->
                         <ul class="nav navbar-nav">
-                            <li class="navitem active">
-                                <a href="." class="nav-link">Overview</a>
+                            <li class="navitem">
+                                <a href="../.." class="nav-link">Overview</a>
                             </li>
                             <li class="navitem">
-                                <a href="contribute/" class="nav-link">Contributing</a>
+                                <a href="../../contribute/" class="nav-link">Contributing</a>
                             </li>
                             <li class="navitem">
-                                <a href="license/" class="nav-link">License</a>
+                                <a href="../../license/" class="nav-link">License</a>
                             </li>
                         </ul>
 
@@ -52,17 +52,7 @@
                             </a>
                         </li>
                             <li class="nav-item">
-                                <a rel="prev" class="nav-link disabled">
-                                    <i class="fa fa-arrow-left"></i> Previous
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a rel="next" href="contribute/" class="nav-link">
-                                    Next <i class="fa fa-arrow-right"></i>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="https://github.com/aws-samples/data-protection/edit/master/docs/index.md" class="nav-link">Edit on aws-samples/data-protection</a>
+                                <a href="https://github.com/aws-samples/data-protection/edit/master/docs/usecase-9/Monitoring_ACM_Private_CA.md" class="nav-link">Edit on aws-samples/data-protection</a>
                             </li>
                     </ul>
                 </div>
@@ -82,22 +72,8 @@
     <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-level="1"><a href="#aws-data-protection-workshops" class="nav-link">AWS Data Protection Workshops</a>
+            <li class="nav-item" data-level="2"><a href="#security-monitoring" class="nav-link">Security Monitoring:</a>
               <ul class="nav flex-column">
-              </ul>
-            </li>
-            
-            <li class="nav-item" data-level="1"><a href="#ubiquitous-encryption" class="nav-link">Ubiquitous Encryption</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            
-            <li class="nav-item" data-level="1"><a href="#workshops" class="nav-link">Workshops</a>
-              <ul class="nav flex-column">
-            <li class="nav-item" data-level="2"><a href="#license-summary" class="nav-link">License Summary</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
               </ul>
             </li>
         </ul>
@@ -105,40 +81,20 @@
 </div></div>
                     <div class="col-md-9" role="main">
 
-<h1 id="aws-data-protection-workshops">AWS Data Protection Workshops</h1>
-<p>If you are considering protecting data in your <a href="https://aws.amazon.com/">AWS</a> environment using methods such as encryption or certificate management, these workshops can help you learn in depth. </p>
-<h1 id="ubiquitous-encryption">Ubiquitous Encryption</h1>
-<p>Data encryption provides a strong layer of security to protect data that you store within AWS services. AWS services can help you achieve ubiquitous encryption 
-for data in transit as well as data at rest.</p>
-<p><a><img src="./images/ubiquitous-encryption.png" width="989" height="557"></a></p>
-<h1 id="workshops">Workshops</h1>
-<p>These workshops demonstrates server side encryption, client side encryption and certfificate management concepts within AWS. For example :</p>
-<table>
-<thead>
-<tr>
-<th align="left">Title</th>
-<th align="left">Description</th>
-<th align="left">Learning Time</th>
-<th align="left">Teaching Time With Discussion</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left"><a href="https://github.com/aws-samples/data-protection/tree/master/usecase-7">Level 300: ACM Private CA Best Practices, Monitoring and Templates for code signing certificates </a></td>
-<td align="left">This workshop demonstrates private CA best practices, monitoring and use of templates for code siging certs</td>
-<td align="left">1 hour 30 mins</td>
-<td align="left">2 hours</td>
-</tr>
-<tr>
-<td align="left"><a href="usecase-9/">Level 400: ACM Private CA Hierarchy creation, Monitoring using Cloudwatch, IOT Device certs and certificate templates </a></td>
-<td align="left">This workshop demonstrates how you can create a complete PKI infrastructure using ACM Private CA and get hands on with creating multiple certificat types, IOT usecases, monitoring using security hub and certificate templates</td>
-<td align="left">1 hour 30 mins</td>
-<td align="left">2 hours</td>
-</tr>
-</tbody>
-</table>
-<h2 id="license-summary">License Summary</h2>
-<p>This sample code is made available under a modified MIT license. See the <a href="LICENSE">LICENSE</a> file.</p></div>
+<h2 id="security-monitoring">Security Monitoring:</h2>
+<p><img alt="alt text" src="../img/architecture.png" /></p>
+<p>In this section we will look at how to monitor privileged actions as you build your certificate management infrastructure. We will study two scenerios. The creation of a CA Certificate and mass revocation of end entity certificates. </p>
+<h4 id="13-scenario-1-monitoring-with-security-hub">13. [Scenario 1]: Monitoring with Security Hub</h4>
+<p>In previous 
+Creating a CA Certificate is a privileged action that should only be taken by authorized personnel within the CA Hierarchy Management team. For this reason we want to monitor the creation of any CA Certificate within our hierarchy. </p>
+<p>To do this we will check the findings within Security Hub: <a href="https://view.highspot.com/viewer/5e9f63cbc714332ad7cba2f6">View results</a>.</p>
+<h4 id="14-scenario-2-monitor-mass-revocation">14. [Scenario 2]: Monitor Mass Revocation</h4>
+<p>This scenario shows a developer revoking many end-entity certificates within a short period of time. We want to monitor and notify the security team if this type of privileged action takes place in order to investigate.</p>
+<h4 id="15-createrevoke-end-entity-certificates">15. Create/Revoke End-Entity Certificates</h4>
+<p>First we will act as the Developer by creating and then revoking many certificates at once: <a href="https://view.highspot.com/viewer/5da634e266bbaa2860b471a7">Mass revocation</a></p>
+<h4 id="16-quiz-time-open-this-link-in-a-new-browser-tab-quiz">16. Quiz time. Open this link in a new browser tab : <a href="https://amazonmr.au1.qualtrics.com/jfe/form/SV_3mHHKwvVlxQ0v1X">Quiz</a></h4>
+<h4 id="17-monitor-revocation-of-certificates">17. Monitor revocation of certificates</h4>
+<p>We will navigate to Security Hub in order to monitor revocation of certificates: <a href="https://view.highspot.com/viewer/5ef51b34a2e3a9211e98c434">View results</a></p></div>
             </div>
         </div>
 
@@ -148,11 +104,11 @@ for data in transit as well as data at rest.</p>
             <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
         </footer>
         <script>
-            var base_url = ".",
+            var base_url = "../..",
                 shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
         </script>
-        <script src="js/base.js" defer></script>
-        <script src="search/main.js" defer></script>
+        <script src="../../js/base.js" defer></script>
+        <script src="../../search/main.js" defer></script>
 
         <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -220,8 +176,3 @@ for data in transit as well as data at rest.</p>
 
     </body>
 </html>
-
-<!--
-MkDocs version : 1.1.2
-Build Date UTC : 2021-03-31 18:31:34.987218+00:00
--->

@@ -4,27 +4,27 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="Workshop and sample code that builders can use for experiential learning of AWS services that provide data protection. Services such as AWS KMS, AWS ACM, Amazon Macie, AWS CloudHSM and others will be explored">
+        
         <meta name="author" content="aws-security-workshops@amazon.com">
-        <link rel="canonical" href="https://data-protection.awssecworkshops.com/">
-        <link rel="shortcut icon" href="img/favicon.ico">
-        <title>Data Protection on AWS</title>
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/font-awesome.min.css" rel="stylesheet">
-        <link href="css/base.css" rel="stylesheet">
+        <link rel="canonical" href="https://data-protection.awssecworkshops.com/usecase-9/HTTPS_Application_Usecase/">
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>ACM Private Certificate Authority (ACM Private CA) - Data Protection on AWS</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
-        <link href="stylesheets/custom.css" rel="stylesheet">
+        <link href="../../stylesheets/custom.css" rel="stylesheet">
 
-        <script src="js/jquery-1.10.2.min.js" defer></script>
-        <script src="js/bootstrap.min.js" defer></script>
+        <script src="../../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../../js/bootstrap.min.js" defer></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
         <script>hljs.initHighlightingOnLoad();</script> 
     </head>
 
-    <body class="homepage">
+    <body>
         <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
             <div class="container">
-                <a class="navbar-brand" href=".">Data Protection on AWS</a>
+                <a class="navbar-brand" href="../..">Data Protection on AWS</a>
                 <!-- Expander button -->
                 <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
                     <span class="navbar-toggler-icon"></span>
@@ -34,14 +34,14 @@
                 <div id="navbar-collapse" class="navbar-collapse collapse">
                         <!-- Main navigation -->
                         <ul class="nav navbar-nav">
-                            <li class="navitem active">
-                                <a href="." class="nav-link">Overview</a>
+                            <li class="navitem">
+                                <a href="../.." class="nav-link">Overview</a>
                             </li>
                             <li class="navitem">
-                                <a href="contribute/" class="nav-link">Contributing</a>
+                                <a href="../../contribute/" class="nav-link">Contributing</a>
                             </li>
                             <li class="navitem">
-                                <a href="license/" class="nav-link">License</a>
+                                <a href="../../license/" class="nav-link">License</a>
                             </li>
                         </ul>
 
@@ -52,17 +52,7 @@
                             </a>
                         </li>
                             <li class="nav-item">
-                                <a rel="prev" class="nav-link disabled">
-                                    <i class="fa fa-arrow-left"></i> Previous
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a rel="next" href="contribute/" class="nav-link">
-                                    Next <i class="fa fa-arrow-right"></i>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="https://github.com/aws-samples/data-protection/edit/master/docs/index.md" class="nav-link">Edit on aws-samples/data-protection</a>
+                                <a href="https://github.com/aws-samples/data-protection/edit/master/docs/usecase-9/HTTPS_Application_Usecase.md" class="nav-link">Edit on aws-samples/data-protection</a>
                             </li>
                     </ul>
                 </div>
@@ -82,19 +72,9 @@
     <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-level="1"><a href="#aws-data-protection-workshops" class="nav-link">AWS Data Protection Workshops</a>
+            <li class="nav-item" data-level="1"><a href="#acm-private-certificate-authority-acm-private-ca" class="nav-link">ACM Private Certificate Authority (ACM Private CA)</a>
               <ul class="nav flex-column">
-              </ul>
-            </li>
-            
-            <li class="nav-item" data-level="1"><a href="#ubiquitous-encryption" class="nav-link">Ubiquitous Encryption</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            
-            <li class="nav-item" data-level="1"><a href="#workshops" class="nav-link">Workshops</a>
-              <ul class="nav flex-column">
-            <li class="nav-item" data-level="2"><a href="#license-summary" class="nav-link">License Summary</a>
+            <li class="nav-item" data-level="2"><a href="#internal-https-application-use-case" class="nav-link">Internal HTTPS Application use case</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -105,40 +85,35 @@
 </div></div>
                     <div class="col-md-9" role="main">
 
-<h1 id="aws-data-protection-workshops">AWS Data Protection Workshops</h1>
-<p>If you are considering protecting data in your <a href="https://aws.amazon.com/">AWS</a> environment using methods such as encryption or certificate management, these workshops can help you learn in depth. </p>
-<h1 id="ubiquitous-encryption">Ubiquitous Encryption</h1>
-<p>Data encryption provides a strong layer of security to protect data that you store within AWS services. AWS services can help you achieve ubiquitous encryption 
-for data in transit as well as data at rest.</p>
-<p><a><img src="./images/ubiquitous-encryption.png" width="989" height="557"></a></p>
-<h1 id="workshops">Workshops</h1>
-<p>These workshops demonstrates server side encryption, client side encryption and certfificate management concepts within AWS. For example :</p>
-<table>
-<thead>
-<tr>
-<th align="left">Title</th>
-<th align="left">Description</th>
-<th align="left">Learning Time</th>
-<th align="left">Teaching Time With Discussion</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="left"><a href="https://github.com/aws-samples/data-protection/tree/master/usecase-7">Level 300: ACM Private CA Best Practices, Monitoring and Templates for code signing certificates </a></td>
-<td align="left">This workshop demonstrates private CA best practices, monitoring and use of templates for code siging certs</td>
-<td align="left">1 hour 30 mins</td>
-<td align="left">2 hours</td>
-</tr>
-<tr>
-<td align="left"><a href="usecase-9/">Level 400: ACM Private CA Hierarchy creation, Monitoring using Cloudwatch, IOT Device certs and certificate templates </a></td>
-<td align="left">This workshop demonstrates how you can create a complete PKI infrastructure using ACM Private CA and get hands on with creating multiple certificat types, IOT usecases, monitoring using security hub and certificate templates</td>
-<td align="left">1 hour 30 mins</td>
-<td align="left">2 hours</td>
-</tr>
-</tbody>
-</table>
-<h2 id="license-summary">License Summary</h2>
-<p>This sample code is made available under a modified MIT license. See the <a href="LICENSE">LICENSE</a> file.</p></div>
+<h1 id="acm-private-certificate-authority-acm-private-ca">ACM Private Certificate Authority (ACM Private CA)</h1>
+<h2 id="internal-https-application-use-case">Internal HTTPS Application use case</h2>
+<h4 id="7-an-iam-role-called-appdevrole-is-the-role-that-an-application-developer-would-assume">7. An IAM Role called <strong>AppDevRole</strong> is the role that an application developer would assume.</h4>
+<ul>
+<li>
+<p>Assume the role named <strong>AppDevRole</strong> by using switch role on the AWS console in the AWS account that you are currently logged into</p>
+</li>
+<li>
+<p>This role has permissions that a Application developer will need for building an web aplication which is fronted by an application load balancer and behind the load balancer is a lambda origin that
+provides the HTML code for a website. The application developer will also have permissions to issue a certificate under a certificate authority that they select.</p>
+</li>
+<li>
+<p>If you are not familiar with switching roles, follow this tutorial if needed: <a href="https://view.highspot.com/viewer/5d66bc5cc79c523342504c3e">Assume Role in Console</a></p>
+</li>
+</ul>
+<h4 id="8-build-the-application-infrastructure-by-deploying-the-cloudformation-template-below">8. Build the application infrastructure by deploying the cloudformation template below</h4>
+<p>Please download the CF template by right clicking and save link as the filename <em>template-appdev.yaml</em> <a href="https://raw.githubusercontent.com/aws-samples/data-protection/master/usecase-7/cf-templates/template-app-dev.yaml">AppDev Cloudformation Stack</a> by right clicking and saving the yaml file on your laptop. </p>
+<p>Upload and launch the cloudformation stack in your AWS account. If you are not familiar with this, follow instructions here by right clicking and opening link in a new browser tab <a href="https://view.highspot.com/viewer/5dd6cd3c6a3b1102db4ac3ca">Deploy AppDev Cloudformation Stack Instructions</a>
+This cloudformation deployment takes about 3 minutes to complete.</p>
+<h4 id="9-next-step-is-to-issue-a-private-certificate-to-put-on-the-application-load-balancer">9. Next step is to issue a private certificate to put on the application load balancer.</h4>
+<p>Open this link in a new browser tab for steps : <a href="https://view.highspot.com/viewer/5d5b133d6a3b116f29313a10">Issue a private certificate</a>  </p>
+<h4 id="10-attach-a-https-listener-and-private-certificate-to-the-alb">10. Attach a HTTPS listener and private certificate to the ALB.</h4>
+<p>Open this link in a new browser tab for steps : <a href="https://view.highspot.com/viewer/604a5e03f7794d6f72494487">Attach HTTPS Listener</a>  </p>
+<h4 id="11-validate-the-identity-of-the-alb-with-the-browser-that-your-are-using-please-open-link-in-a-new-browser-tab">11. Validate the identity of the ALB with the browser that your are using. Please open link in a new browser tab</h4>
+<p>For Firefox: <a href="https://view.highspot.com/viewer/5d5c1fe23f65f635ae005a47">Validate Certificate Identity on Firefox Browser</a>  </p>
+<p>For Google Chrome: <a href="https://view.highspot.com/viewer/5d5c42da66bbaa2fc928a575">Validate Certificate Identity on Chrome Browser</a></p>
+<p>For Microsoft Edge: <a href="https://view.highspot.com/viewer/5d5c2e5cf7794d4833e8207a">Validate Certificate Identity on Microsoft Edge Browser</a></p>
+<p>For Google Chrome on Windows: <a href="https://view.highspot.com/viewer/5dcadc15b7b739360b417fb5">Validate Certificate Identity on Windows</a></p>
+<h4 id="12-quiz-time-open-this-link-in-a-new-browser-tab-quiz">12. Quiz time. Open this link in a new browser tab: <a href="https://bit.ly/2Zh3iRY">quiz</a></h4></div>
             </div>
         </div>
 
@@ -148,11 +123,11 @@ for data in transit as well as data at rest.</p>
             <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
         </footer>
         <script>
-            var base_url = ".",
+            var base_url = "../..",
                 shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
         </script>
-        <script src="js/base.js" defer></script>
-        <script src="search/main.js" defer></script>
+        <script src="../../js/base.js" defer></script>
+        <script src="../../search/main.js" defer></script>
 
         <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -220,8 +195,3 @@ for data in transit as well as data at rest.</p>
 
     </body>
 </html>
-
-<!--
-MkDocs version : 1.1.2
-Build Date UTC : 2021-03-31 18:31:34.987218+00:00
--->

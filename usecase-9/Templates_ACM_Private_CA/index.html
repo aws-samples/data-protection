@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <meta name="author" content="aws-security-workshops@amazon.com">
+        <link rel="canonical" href="https://data-protection.awssecworkshops.com/usecase-9/Templates_ACM_Private_CA/">
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Templates : - Data Protection on AWS</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+        <link href="../../stylesheets/custom.css" rel="stylesheet">
+
+        <script src="../../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../../js/bootstrap.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">Data Protection on AWS</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem">
+                                <a href="../.." class="nav-link">Overview</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../../contribute/" class="nav-link">Contributing</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../../license/" class="nav-link">License</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/aws-samples/data-protection/edit/master/docs/usecase-9/Templates_ACM_Private_CA.md" class="nav-link">Edit on aws-samples/data-protection</a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="1"><a href="#templates" class="nav-link">Templates :</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#overview" class="nav-link">Overview</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#default-template-example" class="nav-link">Default template example :</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#blank-template-example" class="nav-link">Blank template example :</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="templates">Templates :</h1>
+<h2 id="overview">Overview</h2>
+<p>In this section, we will learn about certificate extensions that can help you use certificates for applications beyond the common ubiquitous case of identifying TLS server endpoints. These include </p>
+<ul>
+<li>Code signing</li>
+<li>Signing Online Certificate Status Protocol (OCSP) responses</li>
+<li>ADCS certificates</li>
+</ul>
+<p>What makes one certificate useful for signing code and another useful for terminating TLS are the various fields and extensions in the certificate. Extension fields, or simply extensions, define the usage of the certificate. There are a few extensions defined in RFC 5280 that are commonly used and broadly supported, including </p>
+<ul>
+<li><strong>Basic Constraints</strong></li>
+<li><strong>Key Usage</strong></li>
+<li><strong>Extended Key Usage</strong></li>
+</ul>
+<p>ACM Private CA provides complete flexibility in generating various kinds of certificates using four varities of templates :</p>
+<ul>
+<li>Base template</li>
+<li>CSRPassthrough templates</li>
+<li>APIPassthrough templates</li>
+<li>APICSRPassthrough templates</li>
+</ul>
+<p>In this usecase, you will learn how different certificate types can be issued by using the different template types that are available :</p>
+<h2 id="default-template-example">Default template example :</h2>
+<p>In this exercise, you will create a code signing certificate using the pre-built templates provided by ACM Private CA.</p>
+<p>Follow these steps by right clicking and opening this link : <a href="https://view.highspot.com/viewer/5dc858b666bbaa7b82d9c6d0">Template ACM Private CA</a></p>
+<h2 id="blank-template-example">Blank template example :</h2>
+<p>ACM Private CA provides a blank template where you can control certificate parameters or extensions by using CSR passthrough or API passthrough. The blank template is useful if you need complete customization of certifcates, such as building email certificates, smartcard logon certificates or any others where you need to fully control certificate parameters or extensions. We will be using the <a href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/acm-pca.html#ACMPCA.Client.issue_certificate">issuecertificate</a> API call.</p>
+<h3 id="email-certificates">Email Certificates</h3>
+<p>In this example, we will see how to use Blank templates to generate email S/MIME certificates using the <em>BlankEndEntityCertificate_APIPassthrough/V1</em> template. But first what is an email certificate?</p>
+<p>Email certificates use the <a href="https://tools.ietf.org/html/rfc3850">S/MIME (Secure/Multipurpose Internet Mail Extensions) standard</a>. The main purposes of S/MIME certificates are:
+* Authentication / Message integrity
+* Data security (encryption)
+Keep in mind, while we are splitting out the signing and encryption email certificates, you can create a single certificate for both. </p>
+<h4 id="email-signing-certificate">Email Signing Certificate</h4>
+<p>This S/MIME certificate verifies the email sender's identity for the recipient. More generally, it allows users to digitally sign their emails to verify their identity through the attestation of a trusted third party known as a certificate authority (CA).</p>
+<p>Follow these steps by right clicking and opening this link : <a href="https://view.highspot.com/viewer/60527022811717050593b62e">Email Signing Certificate Creation - ACM Private CA</a></p>
+<h4 id="email-encryption-certificate">Email Encryption Certificate</h4>
+<p>This S/MIME certificate encrypts the actual content being sent via email. More generally, it allows users to encrypt the entire contents (messages, attachments, etc.) of their emails so that the information is secure before it transmits from server to server across the internet. This helps to protect the data from man-in-the-middle (MitM) attacks.</p>
+<p>Follow these steps by right clicking and opening this link : <a href="https://view.highspot.com/viewer/6052700c34d6be026002db81">Email Encryption Certificate Creation - ACM Private CA</a></p>
+<h4 id="takeaways">Takeaways</h4>
+<p>Notice that with Email Signing Certificate the KeyUsage is 'DigitalSignature' and 'NonRepudiation'. This makes sense because we are protecting concerned with authentication and message integrity. </p>
+<p>With Email Encryption Certificate the KeyUsage is 'KeyEncipherment' since we are encrypting the contents of the email. </p>
+<h4 id="conclusion">Conclusion</h4>
+<p>As you can see this created two .pem files with the contents of the certificates. The first certificate is for S/MIME Signing and the second is for S/MIME Encryption. Keep in mind you can combine them into one certificate if needed, however some organizations split these up so that if one is not available, employees can still send signed, unencrypted emails. Some email client will require you to convert it to <a href="https://cryptography.io/en/latest/hazmat/primitives/asymmetric/serialization.html?highlight=pkcs12#cryptography.hazmat.primitives.serialization.pkcs12.serialize_key_and_certificates">PKCS12 format</a>.</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+                <p><a href="https://aws.amazon.com/privacy/" target="_blank">Privacy</a> | <a href="https://aws.amazon.com/terms/" target="_blank">Site terms</a> | &copy; 2020, Amazon Web Services, Inc. or its affiliates. All rights reserved.</p>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js" defer></script>
+        <script src="../../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
