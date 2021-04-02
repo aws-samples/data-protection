@@ -58,6 +58,8 @@ Notice that with Email Signing Certificate the KeyUsage is 'DigitalSignature' an
 
 With Email Encryption Certificate the KeyUsage is 'KeyEncipherment' since we are encrypting the contents of the email. 
 
+Please take this [Quiz](https://amazonmr.au1.qualtrics.com/jfe/form/SV_5w05YCIznyp80bc) to enhance your learning.
+
 #### Conclusion
 As you can see this created two .pem files with the contents of the certificates. The first certificate is for S/MIME Signing and the second is for S/MIME Encryption. Keep in mind you can combine them into one certificate if needed, however some organizations split these up so that if one is not available, employees can still send signed, unencrypted emails. Some email client will require you to convert it to [PKCS12 format](https://cryptography.io/en/latest/hazmat/primitives/asymmetric/serialization.html?highlight=pkcs12#cryptography.hazmat.primitives.serialization.pkcs12.serialize_key_and_certificates).
 
