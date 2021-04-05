@@ -1,0 +1,248 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: "This AWS CloudFormation Template sets up Private Root CA and Private Subordinate CA."
+
+Resources: 
+# Setup S3 Bucket to store certificate revocation list (CRL).
+  S3CrlBucket: 
+    DeletionPolicy: Delete
+    Properties: 
+      BucketName: !Sub "acm-private-ca-crl-bucket-${AWS::AccountId}"
+      PublicAccessBlockConfiguration: 
+        BlockPublicAcls: false
+        BlockPublicPolicy: false
+        IgnorePublicAcls: false
+        RestrictPublicBuckets: false
+      Tags: 
+        - 
+          Key: workshop
+          Value: acm-private-ca
+    Type: AWS::S3::Bucket
+  
+  CrlBucketPolicy: 
+    Type: AWS::S3::BucketPolicy
+    Properties: 
+      Bucket: 
+        Ref: "S3CrlBucket"
+      PolicyDocument: 
+        Statement: 
+          - 
+            Action: 
+              - s3:GetObject
+              - s3:PutObject
+              - s3:PutObjectAcl
+              - s3:GetBucketLocation
+              - s3:GetBucketAcl
+            Effect: Allow
+            Principal:
+              Service: 
+              - acm-pca.amazonaws.com
+            Resource:
+              -
+                Fn::Join: 
+                  - ""
+                  - 
+                    - "arn:aws:s3:::"
+                    - 
+                      Ref: "S3CrlBucket"
+                    - "/*"
+              -
+                Fn::Join: 
+                  - ""
+                  - 
+                    - "arn:aws:s3:::"
+                    - 
+                      Ref: "S3CrlBucket"
+
+
+# Setting Up Private CA Hieararchy
+# Setup Root CA                  
+  PrivateRootCA:
+    Type:  'AWS::ACMPCA::CertificateAuthority'
+    Properties:
+      Type: ROOT
+      KeyAlgorithm: RSA_2048
+      SigningAlgorithm: SHA256WITHRSA
+      RevocationConfiguration:
+        CrlConfiguration: 
+          S3BucketName: !Ref S3CrlBucket
+          Enabled: True
+          ExpirationInDays: 7
+      Subject: 
+        CommonName: acmpcaroot g1
+        Country: US
+        Locality: Seattle
+        Organization: mycompany
+        OrganizationalUnit: hr
+        State: Washington
+      Tags: 
+        - 
+          Key: workshop
+          Value: acm-private-ca
+        - 
+          Key: department
+          Value: hr
+        - 
+          Key: team
+          Value: ca-admin
+
+  RootCACertificate: 
+    Type: 'AWS::ACMPCA::Certificate'
+    Properties: 
+      CertificateAuthorityArn: !Ref PrivateRootCA
+      CertificateSigningRequest: !GetAtt
+        - PrivateRootCA
+        - CertificateSigningRequest
+      SigningAlgorithm: SHA256WITHRSA 
+      Validity: 
+        Type: YEARS 
+        Value: 10
+      TemplateArn: 'arn:aws:acm-pca:::template/RootCACertificate/V1'
+
+  RootCAActivation: 
+    Type: 'AWS::ACMPCA::CertificateAuthorityActivation' 
+    Properties:
+      CertificateAuthorityArn: !Ref PrivateRootCA 
+      Certificate: !GetAtt
+        - RootCACertificate
+        - Certificate 
+      Status: ACTIVE
+
+# Subordinate CA
+  PrivateSubordinateCA:
+    Type:  'AWS::ACMPCA::CertificateAuthority'
+    Properties:
+      Type: SUBORDINATE
+      KeyAlgorithm: RSA_2048
+      SigningAlgorithm: SHA256WITHRSA
+      RevocationConfiguration:
+        CrlConfiguration: 
+          S3BucketName: !Ref S3CrlBucket
+          Enabled: True
+          ExpirationInDays: 7
+      Subject: 
+        CommonName: acmsubordinateca g1
+        Country: US
+        Locality: Seattle
+        Organization: mycompany
+        OrganizationalUnit: payroll
+        State: Washington
+      Tags: 
+        - 
+          Key: workshop
+          Value: acm-private-ca
+        - 
+          Key: department
+          Value: hr
+        - 
+          Key: division
+          Value: payroll
+        - 
+          Key: team
+          Value: ca-admin
+
+  SubordinateCACertificate: 
+    DependsOn: RootCAActivation 
+    Type: 'AWS::ACMPCA::Certificate' 
+    Properties:
+      CertificateAuthorityArn: !Ref PrivateRootCA  
+      CertificateSigningRequest: !GetAtt 
+        - PrivateSubordinateCA
+        - CertificateSigningRequest
+      TemplateArn: 'arn:aws:acm-pca:::template/SubordinateCACertificate_PathLen0/V1'
+      SigningAlgorithm: SHA256WITHRSA
+      Validity: 
+        Type: YEARS 
+        Value: 3
+
+  SubordinateCAActivation: 
+    Type: 'AWS::ACMPCA::CertificateAuthorityActivation' 
+    Properties: 
+      CertificateAuthorityArn: !Ref PrivateSubordinateCA 
+      Certificate: !GetAtt 
+        - SubordinateCACertificate 
+        - Certificate 
+      CertificateChain: !GetAtt 
+        - RootCAActivation 
+        - CompleteCertificateChain
+      Status: ACTIVE 
+
+# Custom Resource for PCA Create-Permission functionality 
+# Lambda execution role
+  CreatPermissionLER:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Principal:
+            Service:
+            - lambda.amazonaws.com
+          Action:
+          - sts:AssumeRole
+      Path: "/"
+      Policies:
+      - PolicyName: ACMPCACreatPermission
+        PolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+          - Effect: Allow
+            Action:
+            - logs:CreateLogGroup
+            - logs:CreateLogStream
+            - logs:PutLogEvents
+            Resource: arn:aws:logs:*:*:*
+          - Effect: Allow
+            Action:
+            - acm-pca:CreatePermission
+            - acm-pca:PutPolicy
+            Resource: "*"
+  # Custom resource lambs
+  CreatPermissionFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      Code:
+        ZipFile: |
+          import json
+          import boto3
+          import cfnresponse
+          def handler(event, context):
+              client = boto3.client('acm-pca')
+              response = client.create_permission(
+                  CertificateAuthorityArn=event['ResourceProperties']['PrivateCAARN'],
+                  Principal='acm.amazonaws.com',
+                  SourceAccount=event['ResourceProperties']['Account'],
+                  Actions=[
+                      'IssueCertificate','GetCertificate','ListPermissions',
+                  ]
+              )
+              cfnresponse.send(event, context, cfnresponse.SUCCESS, {})
+      Runtime: python3.6
+      Handler: index.handler
+      Timeout: 30
+      Role: !GetAtt CreatPermissionLER.Arn
+
+  ### End of Custom resource for running Create Permission Command
+
+  ACMPCACreatPermission:
+    Type: Custom::ACMPCACreatPermission
+    Properties:
+      ServiceToken: !GetAtt CreatPermissionFunction.Arn
+      Account: !Ref "AWS::AccountId"
+      PrivateCAARN: !Ref PrivateSubordinateCA
+
+
+Outputs:
+  CRLBucketOutput:
+    Description: Name of the S3 bucket that contains the CRL.
+    Value: !Ref S3CrlBucket
+    Export:
+      Name: CRLBucketName
+      
+  PrivateRootCAARN:
+    Description: ARN of Private Root CA 
+    Value: !Ref PrivateRootCA
+
+  PrivateSubordinateCAARN:
+    Description: ARN of Private Subordinate CA 
+    Value: !Ref PrivateSubordinateCA

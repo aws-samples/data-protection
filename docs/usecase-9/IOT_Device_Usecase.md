@@ -229,8 +229,3 @@ From the IOT Core console, publish to the topic cloud/monthly_average_temperatur
 
 You should see the message "Hello from the IOT console" on the mqtt client within your Cloud9 environment
 
-####Quiz:####
-
-For re:inforced learning on this topic please take this quiz : [IOT Quiz](https://amazonmr.au1.qualtrics.com/jfe/form/SV_cCiyT40de2DRUHQ)
-
-
