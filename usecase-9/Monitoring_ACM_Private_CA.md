@@ -4,7 +4,6 @@
 In this section we will look at how to monitor privileged actions as you build your certificate management infrastructure. We will study two scenerios. The creation of a CA Certificate and mass revocation of end entity certificates. 
 
 #### 13. [Scenario 1]: Monitoring with Security Hub
-In previous 
 Creating a CA Certificate is a privileged action that should only be taken by authorized personnel within the CA Hierarchy Management team. For this reason we want to monitor the creation of any CA Certificate within our hierarchy. 
 
 To do this we will check the findings within Security Hub: [View results](https://view.highspot.com/viewer/5e9f63cbc714332ad7cba2f6).
