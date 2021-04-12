@@ -86,6 +86,7 @@ This script will issue the validation certificate and also get the subordinate C
 
 At this point the AWS IOT core has determined that you have the necessary permissions to sign a device certificate using the subordinate CA in your account.
 
+Navigate to left bar of Cloud9. Under usecase-9 folder you will see file called "verification_cert.pem". Right click and hit download. Save to local drive. 
 #### 5. Download the subordinate CA certificate and verification certificate from the S3 bucket into your laptop
 
 Follow the instructions here :
