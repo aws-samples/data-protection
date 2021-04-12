@@ -27,18 +27,10 @@ This cloudformation deployment takes about 2 minutes to complete.
 
 * Navigate to the Cloud9 service within your AWS console
 * Open the Cloud9 IDE environment called **IOT usecase environment**. It takes about 30 seconds for the environment to start up.
-* In the Cloud9 IDE environment you will find a folder called **AWS-Certificate-Manager-Workshop** in the folder pane on the left side of the screen
+* In the Cloud9 IDE environment you will find a folder called **usecase-9** in the folder pane on the left side of the screen
 * Delete that folder
 
-* WE need to do this until we get a public github repo. Working on this right now. In the interim do this
-
-In your mac terminal do the below :
-
-git clone ssh://git.amazon.com/pkg/AWS-Certificate-Manager-Workshop
-
-From your laptop Copy the AWS-Certificate-Manager-Workshop directory to S3 in your isengard account.
-
-Within your Cloud9 environment copy the whole **AWS-Certificate-Manager-Workshop** directory into your Cloud9 environment
+Within your Cloud9 environment open the **usecase-9** directory
 
 * Right-click (on MacOS: control-click) the file named **environment-setup.sh** in the IDE and select Run
 * This script takes about a minute to complete
@@ -56,7 +48,7 @@ Open a bash terminal.
 Change directory to /home/ec2-user/environment by using the following command :
 
 ```
-cd /home/ec2-user/environment/AWS-Certificate-Manager-Workshop
+cd /home/ec2-user/environment/usecase-9
 ```
 
 
