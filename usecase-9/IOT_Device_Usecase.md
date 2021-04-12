@@ -48,7 +48,7 @@ Open a bash terminal.
 Change directory to /home/ec2-user/environment by using the following command :
 
 ```
-cd /home/ec2-user/environment/usecase-9
+cd /home/ec2-user/environment/data-protection/usecase-9
 ```
 
 
