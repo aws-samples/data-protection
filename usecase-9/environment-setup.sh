@@ -4,7 +4,7 @@ export MQTT_RPM_URL=https://github.com/hivemq/mqtt-cli/releases/download/v1.2.0/
 export PWD=$(pwd)
 T=$(date)
 
-PYTHON_PACKAGES="aws-encryption-sdk pathlib flask pyopenssl requests"
+PYTHON_PACKAGES="aws-encryption-sdk pathlib flask pyopenssl cryptography"
 if [ -z ${TEST_ENVIRONMENT+x} ] || [ "${TEST_ENVIRONMENT}" != "1" ]; then
     PYTHON_PACKAGES="${PACKAGE_NAMES} ikp3db"
 fi
