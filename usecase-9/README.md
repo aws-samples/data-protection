@@ -27,7 +27,7 @@ This workshop demonstrates how ACM Private Certificate Authority (PCA) makes it 
 * Please verify that you're in the desired region. Please use a AWS region in which AWS Cloud9 and AWS Certificate Managed(ACM) service is available. You can find the supported reqions for a service here : [Supported Regions for services](https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/)
 * To avoid any permissions issues in your account, please make sure that you have administrator access. Also S3 block public access needs to be disabled for the CRL S3 buckets so that these buckets are accessible by the TLS client.
 * Please download the CF template by right clicking this link: [Security Admin Cloudfromation Stack](https://raw.githubusercontent.com/aws-samples/data-protection/master/usecase-9/cf-templates/template-security-admin.yaml) and save link as the filename **template-security-admin.yaml**
-* Upload and launch the cloudformation stack in the AWS account that you are logged into. If you are not familiar with this, follow instructions here by right clicking and opening this link [Deploy Security Admin Cloudformation Stack Instructions](https://aws.highspot.com/viewer/5e2f0ce034d6be0385cc9ac8)in a new browser tab Deploy Security Admin Cloudformation Stack Instructions
+* Upload and launch the cloudformation stack in the AWS account that you are logged into. If you are not familiar with this, follow instructions here by right clicking and opening this link [Deploy Security Admin Cloudformation Stack Instructions](https://github.com/aws-samples/data-protection/blob/master/usecase-9/img/SecurityAdminSteps.pdf) in a new browser tab Deploy Security Admin Cloudformation Stack Instructions
 
 ## Quizzes
 
