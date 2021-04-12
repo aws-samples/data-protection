@@ -26,6 +26,8 @@ In this usecase, you will learn how different certificate types can be issued by
 
 In this exercise, you will create a code signing certificate using the pre-built templates provided by ACM Private CA.
 
+Ensure you have run the "environment-setup.sh" script under usecase-9 folder in Cloud9 as AppDev role.
+
 Follow these steps by right clicking and opening this link : [Template ACM Private CA](https://view.highspot.com/viewer/5dc858b666bbaa7b82d9c6d0)
 
 
