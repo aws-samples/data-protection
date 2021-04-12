@@ -18,7 +18,7 @@ Also remember that please don't create CRL's when you created CA's as CRL's requ
 
 #### 2. Build the infrastructure needed for the IOT usecase by deploying the cloudformation template below
 
-Please download the CF template by right clicking and save link as the filename *template-iot-dev.yaml* [IOT Developer Cloudformation Stack](https://code.amazon.com/packages/AWS-Certificate-Manager-Workshop/blobs/mainline/--/cf-templates/template-iot-dev.yaml) by right clicking and saving the yaml file on your laptop. 
+Please download the CF template by right clicking and save link as the filename *template-iot-dev.yaml* [IOT Developer Cloudformation Stack](https://raw.githubusercontent.com/aws-samples/data-protection/master/usecase-9/cf-templates/template-iot-dev.yaml) by right clicking and saving the yaml file on your laptop. 
 
 Upload and launch the cloudformation stack in your AWS account. If you are not familiar with this, follow instructions here by right clicking and opening link in a new browser tab [Deploy IOT Developer Cloudformation Stack Instructions](https://view.highspot.com/viewer/5dd6cd3c6a3b1102db4ac3ca)
 This cloudformation deployment takes about 2 minutes to complete.
