@@ -42,7 +42,7 @@ This quiz is hosted by an external company (Qualtrics), so the link above does n
 
 * This role has permissions that a Certificate Authority administrator will need for CA administration. As a CA administrator, you will be responsible for creating a root and subordinate certificate authority 
 
-* If you are not familiar with switching roles, follow this tutorial if needed: [Assume Role in Console](https://view.highspot.com/viewer/5d66bc5cc79c523342504c3e)
+* If you are not familiar with switching roles, follow this tutorial if needed: [Assume Role in Console](https://github.com/aws-samples/data-protection/blob/master/usecase-9/img/SwitchRole.pdf)
 
 ### 3. Create Private CA hierarchy
 You can create Private Root and Subordinate Certificate Authorities either manually (See section 3.A) or through CloudFormation template (See Section 3.B). Please choose the manual or the Cloudformation option but don't do both.
