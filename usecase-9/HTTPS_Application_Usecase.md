@@ -15,16 +15,16 @@ provides the HTML code for a website. The application developer will also have p
 
 Please download the CF template by right clicking and save link as the filename *template-appdev.yaml* [AppDev Cloudformation Stack](https://raw.githubusercontent.com/aws-samples/data-protection/master/usecase-7/cf-templates/template-app-dev.yaml) by right clicking and saving the yaml file on your laptop. 
 
-Upload and launch the cloudformation stack in your AWS account. If you are not familiar with this, follow instructions here by right clicking and opening link in a new browser tab [Deploy AppDev Cloudformation Stack Instructions](https://view.highspot.com/viewer/5dd6cd3c6a3b1102db4ac3ca)
+Upload and launch the cloudformation stack in your AWS account. If you are not familiar with this, follow instructions here by right clicking and opening link in a new browser tab [Deploy AppDev Cloudformation Stack Instructions](https://github.com/aws-samples/data-protection/blob/master/usecase-9/img/AppDevSteps.pdf)
 This cloudformation deployment takes about 3 minutes to complete.
 
 #### 9. Next step is to issue a private certificate to put on the application load balancer. 
 
-Open this link in a new browser tab for steps : [Issue a private certificate](https://view.highspot.com/viewer/5d5b133d6a3b116f29313a10)  
+Open this link in a new browser tab for steps : [Issue a private certificate](https://github.com/aws-samples/data-protection/blob/master/usecase-9/img/IssuePrivateCertificate.pdf)  
 
 #### 10. Attach a HTTPS listener and private certificate to the ALB. 
 
-Open this link in a new browser tab for steps : [Attach HTTPS Listener](https://view.highspot.com/viewer/604a5e03f7794d6f72494487)  
+Open this link in a new browser tab for steps : [Attach HTTPS Listener](https://github.com/aws-samples/data-protection/blob/master/usecase-9/img/ApplyCertToLoadBalancer.pdf)  
 
 #### 11. Validate the identity of the ALB with the browser that your are using. Please open link in a new browser tab
 
