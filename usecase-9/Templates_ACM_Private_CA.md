@@ -28,7 +28,7 @@ In this exercise, you will create a code signing certificate using the pre-built
 
 Ensure you have run the "environment-setup.sh" script under usecase-9 folder in Cloud9 as AppDev role.
 
-Follow these steps by right clicking and opening this link : [Template ACM Private CA](https://view.highspot.com/viewer/5dc858b666bbaa7b82d9c6d0)
+Follow these steps by right clicking and opening this link : [Template ACM Private CA](https://github.com/aws-samples/data-protection/blob/master/usecase-9/img/TemplateCodeSigning.pdf)
 
 
 ## Blank template example :
@@ -48,12 +48,12 @@ Keep in mind, while we are splitting out the signing and encryption email certif
 #### Email Signing Certificate
 This S/MIME certificate verifies the email sender's identity for the recipient. More generally, it allows users to digitally sign their emails to verify their identity through the attestation of a trusted third party known as a certificate authority (CA).
 
-Follow these steps by right clicking and opening this link : [Email Signing Certificate Creation - ACM Private CA](https://view.highspot.com/viewer/60527022811717050593b62e)
+Follow these steps by right clicking and opening this link : [Email Signing Certificate Creation - ACM Private CA](https://github.com/aws-samples/data-protection/blob/master/usecase-9/img/EmailCertSigning.pdf)
 
 #### Email Encryption Certificate
 This S/MIME certificate encrypts the actual content being sent via email. More generally, it allows users to encrypt the entire contents (messages, attachments, etc.) of their emails so that the information is secure before it transmits from server to server across the internet. This helps to protect the data from man-in-the-middle (MitM) attacks.
 
-Follow these steps by right clicking and opening this link : [Email Encryption Certificate Creation - ACM Private CA](https://view.highspot.com/viewer/6052700c34d6be026002db81)
+Follow these steps by right clicking and opening this link : [Email Encryption Certificate Creation - ACM Private CA](https://github.com/aws-samples/data-protection/blob/master/usecase-9/img/EmailEncrypt.pdf)
 
 #### Takeaways
 Notice that with Email Signing Certificate the KeyUsage is 'DigitalSignature' and 'NonRepudiation'. This makes sense because we are protecting concerned with authentication and message integrity. 
