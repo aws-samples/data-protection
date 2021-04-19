@@ -20,7 +20,7 @@ Also remember that please don't create CRL's when you created CA's as CRL's requ
 
 Please download the CF template by right clicking and save link as the filename *template-iot-dev.yaml* [IOT Developer Cloudformation Stack](https://raw.githubusercontent.com/aws-samples/data-protection/master/usecase-9/cf-templates/template-iot-dev.yaml) by right clicking and saving the yaml file on your laptop. 
 
-Upload and launch the cloudformation stack in your AWS account. If you are not familiar with this, follow instructions here by right clicking and opening link in a new browser tab [Deploy IOT Developer Cloudformation Stack Instructions](https://view.highspot.com/viewer/5dd6cd3c6a3b1102db4ac3ca)
+Upload and launch the cloudformation stack in your AWS account. If you are not familiar with this, follow instructions here by right clicking and opening link in a new browser tab [Deploy IOT Developer Cloudformation Stack Instructions](https://github.com/aws-samples/data-protection/blob/master/usecase-9/img/IoTStackSteps.pdf)
 This cloudformation deployment takes about 2 minutes to complete.
 
 #### 3. For the next section, you need a Cloud9 IDE environment setup for executing code. PLease follow the instructions below :
@@ -90,14 +90,14 @@ At this point the AWS IOT core has determined that you have the necessary permis
 
 Follow the instructions here :
 
-Right click and open [Download Verification cert and subordinate CA cert](https://view.highspot.com/viewer/5f184ed28117173ffa84f72b)
+Right click and open [Download Verification cert and subordinate CA cert](https://github.com/aws-samples/data-protection/blob/master/usecase-9/img/DownloadCAVerificationCert.pdf)
 
 
 #### 6. Register the CA by uploading Subordinate CA certificate and Verification certificate to IOT core on the AWS console
 
 Follow the instructions here :
 
-Right click and open [Register a CA ](https://view.highspot.com/viewer/5f18a1ce66bbaa7e29833e71)
+Right click and open [Register a CA ](https://github.com/aws-samples/data-protection/blob/master/usecase-9/img/UploadVeriCertSubordinateCAIOTCore.pdf)
 
 Now the IOT core is loaded with the subordinate CA certificate. This means that any device certificate that's signed by the Subordinate CA can be trusted and validated by the IOT core.
 
@@ -125,7 +125,7 @@ bash device-cert.sh
 
 Go to the S3 console and follow the instructions below :
 
-Right click and open [Download the device cert from S3](https://view.highspot.com/viewer/5f18b1f4659e9336da5e727e)
+Right click and open [Download the device cert from S3](https://github.com/aws-samples/data-protection/blob/master/usecase-9/img/DownloadDeviceCert.pdf)
 
 #### 9. Create the IOT Policy that provides permissions for publishing and subscribing to a IOT topic
 
@@ -133,7 +133,7 @@ The IOT policy attached to a thing or a device provides permissions to a device 
 
 Follow the instructions here :
 
-Right click and open [Create IOT policy](https://view.highspot.com/viewer/5f19b8ee659e93182eb6b92a)
+Right click and open [Create IOT policy](https://github.com/aws-samples/data-protection/blob/master/usecase-9/img/CreateIOTPolicy.pdf)
 
 You have now created a policy called `alexa_temperature_policy` . This policy will allow a IOT device to publish to a topic named 'alexa/temperature'. For example think of a IOT device recording temperature and is publishing to this IOT topic called `alexa/temperature`. You will attach the policy to a IOT thing in later steps.
 
@@ -141,7 +141,7 @@ You have now created a policy called `alexa_temperature_policy` . This policy wi
 
 Follow the instructions here :
 
-Right click and open [Create and register a IOT thing](https://view.highspot.com/viewer/5f1f277a66bbaa57631f67d3)
+Right click and open [Create and register a IOT thing](https://github.com/aws-samples/data-protection/blob/master/usecase-9/img/RegisterAThing.pdf)
 
 #### 11. Configuring the MQTT(Standard for IOT Messaing) Client 
 
@@ -177,7 +177,7 @@ client.id.prefix=mydevice
 
 Navigate to the AWS IOT core service in a browser tab and follow the instructions below :
 
-Right click and open [Subscribe to a IOT topic](https://view.highspot.com/viewer/603567b6c7143363bf6ee359)
+Right click and open [Subscribe to a IOT topic](https://github.com/aws-samples/data-protection/blob/master/usecase-9/img/SubscribeIOTTopic.pdf)
 
 **Publishing from MQTT Client to IOT core:**
 
@@ -196,7 +196,7 @@ pub -t alexa/temperature -m Hello
 ```
 Follow instructions here to see the message sfomr the MQTT Client published to the IOT core:
 
-Right click and open [See the IOT device message published](https://view.highspot.com/viewer/6035695e34d6be36d2220cda)
+Right click and open [See the IOT device message published](https://github.com/aws-samples/data-protection/blob/master/usecase-9/img/SeeIOTDevicePublishedMessage.pdf)
 
 ```
 type **disconnect** and press enter to Disconnect from the IOT core connection
