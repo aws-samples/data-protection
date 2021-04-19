@@ -14,7 +14,7 @@ Also remember that please don't create CRL's when you created CA's as CRL's requ
 
 * This role has permissions that an IOT developer will need for building the necessary resources for IOT device certificate authentication use case.
 
-* If you are not familiar with switching roles, follow this tutorial if needed: Right click on [Assume Role in Console](https://view.highspot.com/viewer/5f184e81628ba22ac32681e1)
+* If you are not familiar with switching roles, follow this tutorial if needed: Right click on [Assume Role in Console](https://github.com/aws-samples/data-protection/blob/master/usecase-9/img/SwitchRole.pdf)
 
 #### 2. Build the infrastructure needed for the IOT usecase by deploying the cloudformation template below
 
