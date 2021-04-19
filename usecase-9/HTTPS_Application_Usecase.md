@@ -28,13 +28,13 @@ Open this link in a new browser tab for steps : [Attach HTTPS Listener](https://
 
 #### 11. Validate the identity of the ALB with the browser that your are using. Please open link in a new browser tab
 
-For Firefox: [Validate Certificate Identity on Firefox Browser](https://view.highspot.com/viewer/5d5c1fe23f65f635ae005a47)  
+For Firefox: [Validate Certificate Identity on Firefox Browser](https://github.com/aws-samples/data-protection/blob/master/usecase-9/img/ValidateALBIdentityFirefox.pdf)  
 
-For Google Chrome: [Validate Certificate Identity on Chrome Browser](https://view.highspot.com/viewer/5d5c42da66bbaa2fc928a575)
+For Google Chrome: [Validate Certificate Identity on Chrome Browser](https://github.com/aws-samples/data-protection/blob/master/usecase-9/img/ValidateALBIdentityChrome.pdf)
 
-For Microsoft Edge: [Validate Certificate Identity on Microsoft Edge Browser](https://view.highspot.com/viewer/5d5c2e5cf7794d4833e8207a)
+For Microsoft Edge: [Validate Certificate Identity on Microsoft Edge Browser](https://github.com/aws-samples/data-protection/blob/master/usecase-9/img/ValidateALBIdentityEdge.pdf)
 
-For Google Chrome on Windows: [Validate Certificate Identity on Windows](https://view.highspot.com/viewer/5dcadc15b7b739360b417fb5)
+For Google Chrome on Windows: [Validate Certificate Identity on Windows](https://github.com/aws-samples/data-protection/blob/master/usecase-9/img/WindowsALBCert.pdf)
 
 #### 12. Quiz time. Open this link in a new browser tab: [quiz](https://bit.ly/2Zh3iRY)
 
