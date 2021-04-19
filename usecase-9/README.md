@@ -53,7 +53,7 @@ You can create Private Root and Subordinate Certificate Authorities either manua
 
 To create S3 bucket that will contain the certificate revocation list (CRL), please download the CF template by right clicking and save link as the filename *template-ca-admin.yaml* [CA Admin Cloudformation Stack](https://raw.githubusercontent.com/aws-samples/data-protection/master/usecase-9/cf-templates/template-ca-admin.yaml) by right clicking and saving the yaml file on your laptop. 
 
-Upload and launch the cloudformation stack in the AWS account that you are logged into. If you are not familiar with this, follow instructions here by right clickking and opening link in a new browser tab [Deploy CA Admin Cloudformation Stack Instructions](https://view.highspot.com/viewer/5dd6cd89a2e3a96cb78647d3)
+Upload and launch the cloudformation stack in the AWS account that you are logged into. If you are not familiar with this, follow instructions here by right clickking and opening link in a new browser tab [Deploy CA Admin Cloudformation Stack Instructions](https://github.com/aws-samples/data-protection/blob/master/usecase-9/img/CAAdminSteps-1.pdf)
 
 ###### 3.A.2 Create a Root CA. 
 
