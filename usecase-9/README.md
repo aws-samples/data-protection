@@ -59,18 +59,18 @@ Upload and launch the cloudformation stack in the AWS account that you are logge
 
 * Navigate to ACM Service in the AWS Console
 * Click Get Started under Private Certificate Authority
-* Open this link in a new browser tab for the rest of the steps : [Creating a Root CA](https://view.highspot.com/viewer/604a590934d6be73df3ec1d9)
+* Open this link in a new browser tab for the rest of the steps : [Creating a Root CA](https://github.com/aws-samples/data-protection/blob/master/usecase-9/img/Root%20CA%20Creation-1.pdf)
 
 ###### 3.A.3 Create a Subordinate Issuing CA. 
 
 * Navigate to ACM Service in the AWS Console
 * Under Private CA's, click on the **Create CA** button
-* Open this link in a new browser tab for the rest of the steps  : [Creating a Subordinate CA](https://view.highspot.com/viewer/604a5d1f8117170c1176edbf)
+* Open this link in a new browser tab for the rest of the steps  : [Creating a Subordinate CA](https://github.com/aws-samples/data-protection/blob/master/usecase-9/img/SubordinateCACreation.pdf)
 
 #### 3.B - Create full Private CA Hierarch automatically with a CloudFormation Template 
 
 Please download the CF template by right clicking and save link as the filename *template-pca-hierarchy.yaml* [PCA Hierarchy CF template](https://raw.githubusercontent.com/aws-samples/data-protection/master/usecase-9/cf-templates/template-pca-hierarchy.yaml)
-Upload and launch the cloudformation stack in the AWS account that you are logged into. If you are not familiar with this, follow instructions here by right clickking and opening link in a new browser tab [Deploy CA Admin Cloudformation Stack Instructions](https://view.highspot.com/viewer/5dd6cd89a2e3a96cb78647d3)
+Upload and launch the cloudformation stack in the AWS account that you are logged into. If you are not familiar with this, follow instructions here by right clickking and opening link in a new browser tab [Deploy CA Admin Cloudformation Stack Instructions](https://github.com/aws-samples/data-protection/blob/master/usecase-9/img/CAAdminSteps-1.pdf)
 
 ### 4. Quiz time. Open this link in a new browser tab: [quiz](https://bit.ly/2yQ5IML)
 
