@@ -22,6 +22,11 @@ ACM Private CA provides complete flexibility in generating various kinds of cert
 
 In this usecase, you will learn how different certificate types can be issued by using the different template types that are available :
 
+## Assume AppDev Role
+* Assume the role named **AppDevRole** by using switch role on the AWS console in the AWS account that you are currently logged into
+
+* If you are not familiar with switching roles, follow this tutorial if needed: [Assume Role in Console](https://github.com/aws-samples/data-protection/blob/master/usecase-9/img/SwitchRole.pdf)
+
 ## Default template example :
 
 In this exercise, you will create a code signing certificate using the pre-built templates provided by ACM Private CA.
