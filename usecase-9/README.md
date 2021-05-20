@@ -86,6 +86,8 @@ You can choose any of the sections in the table below.
 
 If you have extra time after finishing the above use cases, please continue with the below use case on IOT. This section is optional
 
+| Section    | Average time to complete section |
+| :------------- |:-------------|
 | [Private Certificates for IOT Devices ](https://github.com/aws-samples/data-protection/blob/master/usecase-9/IOT_Device_Usecase.md)  | 45 mins| 
 
 This sample code is made available under a modified MIT license. See the [LICENSE](LICENSE) file.
