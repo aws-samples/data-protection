@@ -62,9 +62,8 @@ Upload and launch the cloudformation stack in the AWS account that you are logge
 * Open this link in a new browser tab for the rest of the steps : [Creating a Root CA](https://github.com/aws-samples/data-protection/blob/master/usecase-9/img/Root%20CA%20Creation-1.pdf)
 
 ###### 3.A.3 Root CA Quiz Time (Open in new tab)
-[Quiz 1](https://bit.ly/2To8mmf)
-
-[Quiz 2](https://bit.ly/2YQr7El)
+* [Quiz 1](https://bit.ly/2To8mmf)
+* [Quiz 2](https://bit.ly/2YQr7El)
 
 ###### 3.A.4 Create a Subordinate Issuing CA. 
 
@@ -73,9 +72,8 @@ Upload and launch the cloudformation stack in the AWS account that you are logge
 * Open this link in a new browser tab for the rest of the steps  : [Creating a Subordinate CA](https://github.com/aws-samples/data-protection/blob/master/usecase-9/img/SubordinateCACreation.pdf)
 
 ###### 3.A.5 Subordinate CA Quiz Time (Open in new tab)
-[Quiz 1](https://bit.ly/2KqPgcm)
-
-[Quiz 2](https://bit.ly/2YWdJOW)
+* [Quiz 1](https://bit.ly/2KqPgcm)
+* [Quiz 2](https://bit.ly/2YWdJOW)
 
 #### 3.B - Create full Private CA Hierarch automatically with a CloudFormation Template 
 
