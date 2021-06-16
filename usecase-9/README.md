@@ -61,10 +61,11 @@ Upload and launch the cloudformation stack in the AWS account that you are logge
 * Click Get Started under Private Certificate Authority
 * Open this link in a new browser tab for the rest of the steps : [Creating a Root CA](https://github.com/aws-samples/data-protection/blob/master/usecase-9/img/Root%20CA%20Creation-1.pdf)
 
-Root CA Quiz Part 1. Open this link in a new browser tab: [quiz](https://bit.ly/2To8mmf)
-Root CA Quiz Part 2. Open this link in a new browser tab: [quiz](https://bit.ly/2YQr7El)
+###### 3.A.3 Root CA Quiz Time (Open in new tab)
+[Quiz 1](https://bit.ly/2To8mmf)
+[Quiz 2](https://bit.ly/2YQr7El)
 
-###### 3.A.3 Create a Subordinate Issuing CA. 
+###### 3.A.4 Create a Subordinate Issuing CA. 
 
 * Navigate to ACM Service in the AWS Console
 * Under Private CA's, click on the **Create CA** button
