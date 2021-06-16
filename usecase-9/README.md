@@ -63,6 +63,7 @@ Upload and launch the cloudformation stack in the AWS account that you are logge
 
 ###### 3.A.3 Root CA Quiz Time (Open in new tab)
 [Quiz 1](https://bit.ly/2To8mmf)
+
 [Quiz 2](https://bit.ly/2YQr7El)
 
 ###### 3.A.4 Create a Subordinate Issuing CA. 
