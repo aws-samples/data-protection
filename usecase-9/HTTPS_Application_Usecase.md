@@ -24,7 +24,8 @@ Open this link in a new browser tab for steps : [Issue a private certificate](ht
 
 #### 10. Attach a HTTPS listener and private certificate to the ALB. 
 
-Open this link in a new browser tab for steps : [Attach HTTPS Listener](https://github.com/aws-samples/data-protection/blob/master/usecase-9/img/ApplyCertToLoadBalancer.pdf)  
+* Open this link in a new browser tab for steps : [Attach HTTPS Listener](https://github.com/aws-samples/data-protection/blob/master/usecase-9/img/ApplyCertToLoadBalancer.pdf)  
+* [Quiz](https://bit.ly/2KXE06k)
 
 #### 11. Validate the identity of the ALB with the browser that your are using. Please open link in a new browser tab
 
