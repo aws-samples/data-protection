@@ -20,12 +20,13 @@ This cloudformation deployment takes about 3 minutes to complete.
 
 #### 9. Next step is to issue a private certificate to put on the application load balancer. 
 
-Open this link in a new browser tab for steps : [Issue a private certificate](https://github.com/aws-samples/data-protection/blob/master/usecase-9/img/IssuePrivateCertificate.pdf)  
+* Open this link in a new browser tab for steps : [Issue a private certificate](https://github.com/aws-samples/data-protection/blob/master/usecase-9/img/IssuePrivateCertificate.pdf)  
+* [Quiz](https://bit.ly/2KXE06k)
 
 #### 10. Attach a HTTPS listener and private certificate to the ALB. 
 
 * Open this link in a new browser tab for steps : [Attach HTTPS Listener](https://github.com/aws-samples/data-protection/blob/master/usecase-9/img/ApplyCertToLoadBalancer.pdf)  
-* [Quiz](https://bit.ly/2KXE06k)
+* [Quiz](https://bit.ly/2Hh1lin)
 
 #### 11. Validate the identity of the ALB with the browser that your are using. Please open link in a new browser tab
 
