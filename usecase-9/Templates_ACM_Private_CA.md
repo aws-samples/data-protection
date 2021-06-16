@@ -35,6 +35,8 @@ Ensure you have run the "environment-setup.sh" script under usecase-9 folder in 
 
 Follow these steps by right clicking and opening this link : [Template ACM Private CA](https://github.com/aws-samples/data-protection/blob/master/usecase-9/img/TemplateCodeSigning.pdf)
 
+[Quiz](https://bit.ly/32BKui2)
+
 
 ## Blank template example :
 
