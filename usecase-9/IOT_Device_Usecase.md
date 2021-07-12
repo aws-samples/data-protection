@@ -6,8 +6,6 @@ If you are building IOT applications where client devices need to validate their
 
 Run the CF template stack template-security-admin.yaml in your AWS account.
 
-Also remember that please don't create CRL's when you created CA's as CRL's required public S3 buckets and I would think that your isengard account is probably having the setting of blocking public S3 buckets.
-
 ### 1. An IAM Role called **IOTDevRole** is the role that an IOT developer would assume. 
 
 * Assume the role named **IOTDevRole** by using switch role on the AWS console in the AWS account that you are currently logged into
