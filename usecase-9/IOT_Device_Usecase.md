@@ -4,7 +4,7 @@ If you are building IOT applications where client devices need to validate their
 
 ### 0. Create the base template
 
-Run the CF template stack template-security-admin.yaml in your isengard account.
+Run the CF template stack template-security-admin.yaml in your AWS account.
 
 Also remember that please don't create CRL's when you created CA's as CRL's required public S3 buckets and I would think that your isengard account is probably having the setting of blocking public S3 buckets.
 
