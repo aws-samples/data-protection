@@ -1,6 +1,6 @@
 ## IOT device certificates :
 
-If you are building IOT applications where client devices need to validate their identity to central control servers, you could use AWS IOT core or your own control server that your organization has built. In this section of the workshop, we will go through a hands on exercise showing you how you get client device certificates and deploy them to an IOT device simulator and also how the AWS IOT core validates these device certificates.
+If you are building IOT applications where client devices need to validate their identity to central control servers, you could use AWS IOT core or your own control server that your organization has built. In this section of the workshop, we will go through a hands on exercise showing you how you get client device certificates and deploy them to an IOT device simulator and also how the AWS IOT core validates these device certificates to establish a successful TLS connection.
 
 ### 0. Create the base template
 
