@@ -80,9 +80,9 @@ Run the script `verification-cert.sh` using the command below :
 bash verification-cert.sh
 ```
 
-This script will issue the validation certificate and also get the subordinate CA certificate and upload it to the S3 bucket named `certificate-holder-<your-account-number>`. The bucket would be in the region that you are currently operating in.
+This script will issue the verification certificate and also get the subordinate CA certificate from ACM PCA and upload it to the S3 bucket named `certificate-holder-<your-account-number>`. The bucket would be in the region that you are currently operating in.
 
-At this point the AWS IOT core has determined that you have the necessary permissions to sign a device certificate using the subordinate CA in your account.
+At this point the AWS IOT core service has determined that you have the necessary permissions to sign a device certificate using the subordinate CA in your account.
 
 #### 5. Download the subordinate CA certificate and verification certificate from the S3 bucket into your laptop
 
