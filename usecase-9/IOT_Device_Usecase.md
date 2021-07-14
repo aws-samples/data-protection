@@ -35,7 +35,7 @@ Within your Cloud9 environment open the **usecase-9** directory
 * The script installs various tools and packages for this section of the workshop, see the comments in the script for more information
 * The script is finished when you see **environment setup complete**, additional log info can be found in the file `setup.log`
 
-#### 4. Create the verification certificate and get it signed by the Subordinate CA
+#### 4. Create the verification certificate and get it signed by the Subordinate CA that you had created earlier
 
 The verification certificate is needed because that's the mechanism that the AWS IOT core uses to ascertain that you have access to the  Subordinate CA for signing an end entity certificate. There is also a registration code that's needed in the process and this code is used by the AWS IOT core to ascertain that the principal creating and uploading the verification certificate operation has permissions to access to the IOT Core within the AWS console.
 
@@ -72,7 +72,7 @@ openssl req -new -key verification_cert.key -out verification_cert.csr
 
 You should see the file verification_cert.csr generated.
 
-The verification_cert.csr will be now signed by the subordinate CA and the certificate content is put into a .pem file
+The verification_cert.csr will be now signed by the subordinate CA that you created earlier and the certificate content is put into a .pem file
 
 Run the script `verification-cert.sh` using the command below :
 
