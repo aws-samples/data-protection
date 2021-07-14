@@ -64,7 +64,7 @@ Let's get the registration code from IOT core to put into the Common name for th
 aws iot get-registration-code
 ```
 
-We will now generate the verification certificate signing request(CSR). Fill in values at the prompt and when prompted for `Common name` enter the registration code(without quotes) as returned by the above command. For other parameters choose anything you like. Don't put anything for the challenge password or optional company name, just press enter and it should be good.
+We will now generate the verification certificate signing request(CSR). Fill in values at the prompt and when prompted for `Common name` enter the registration code(without quotes) as returned by the above command. For other parameters choose anything you like. Don't put anything for the challenge password or optional company name, just press enter two times and it should be good.
 
 ```
 openssl req -new -key verification_cert.key -out verification_cert.csr
