@@ -98,6 +98,8 @@ If you have extra time after finishing the above use cases, please continue with
 | :------------- |:-------------|
 | [Private Certificates for IOT Devices ](https://github.com/aws-samples/data-protection/blob/master/usecase-9/IOT_Device_Usecase.md)  | 45 mins| 
 
+To review how the roles used in this workshop follow the principle of least privilege see [Least Privilege Document](https://github.com/aws-samples/data-protection/blob/master/usecase-9/img/ACMLeastPrivilegeConcepts.pdf)
+
 This sample code is made available under a modified MIT license. See the [LICENSE](LICENSE) file.
 
 [LICENSE](LICENSE)
