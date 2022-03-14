@@ -215,7 +215,7 @@ Resources:
          FunctionName: 'builders-lambda-origin-one'
          Handler: "index.lambda_handler"
          Role: !GetAtt LambdaOriginRole.Arn
-         Runtime: 'python3.7'
+         Runtime: 'python3.9'
          Tags:
             - Key: workshop
               Value: acm-private-ca
