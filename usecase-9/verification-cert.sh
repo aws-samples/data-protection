@@ -1,6 +1,5 @@
 #!/bin/bash
 
-export AWS_DEFAULT_REGION=us-east-1 # aws configure get region 
 export CSR_FILE=verification_cert.csr
 export ACCOUNT=$(aws sts get-caller-identity --query Account --output text)
 export BUCKET=certificate-holder-${ACCOUNT}
