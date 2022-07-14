@@ -34,9 +34,9 @@ echo $T >> setup.log
 wget https://www.amazontrust.com/repository/AmazonRootCA1.pem 2>&1 >> setup.log
 
 echo set mqtt properties
-echo auth.server.cafile=/home/ec2-user/environment/AWS-Certificate-Manager-Workshop/AmazonRootCA1.pem >>  ~/.mqtt-cli/config.properties
-echo auth.client.key=/home/ec2-user/environment/AWS-Certificate-Manager-Workshop/device_cert.key >>  ~/.mqtt-cli/config.properties
-echo auth.client.cert=/home/ec2-user/environment/AWS-Certificate-Manager-Workshop/device_cert.pem >>  ~/.mqtt-cli/config.properties
+echo auth.server.cafile=/home/ec2-user/environment/data-protection/usecase-9/AmazonRootCA1.pem >>  ~/.mqtt-cli/config.properties
+echo auth.client.key=/home/ec2-user/environment/data-protection/usecase-9/device_cert.key >>  ~/.mqtt-cli/config.properties
+echo auth.client.cert=/home/ec2-user/environment/data-protection/usecase-9/device_cert.pem >>  ~/.mqtt-cli/config.properties
 
 T=$(date)
 echo $T >> setup.log
