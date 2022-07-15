@@ -2,6 +2,7 @@
 
 export CSR_FILE=device_cert.csr
 export ACCOUNT=$(aws sts get-caller-identity --query Account --output text)
+export AWS_DEFAULT_REGION=$(aws configure get region)
 export BUCKET=certificate-holder-${ACCOUNT}
 export SPLIT='/-----BEGIN CERTIFICATE-----/'
 export END_CERT='-----END CERTIFICATE-----'
