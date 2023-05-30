@@ -13,8 +13,8 @@ for data in transit as well as data at rest.
 
 | Title | Description | Learning Time | Teaching Time With Discussion | 
 | :------- | :---------- | :-- | :-- |
-| [Level 200: ACM Private CA Best Practices, Monitoring and Templates for code signing certificates ](usecase-7/)  | This workshop demonstrates private CA best practices, monitoring and use of templates for code siging certs|1 hour 30 mins | 2 hours |
-| [Level 400: ACM Private CA Hierarchy creation, Monitoring using Cloudwatch, IOT Device certs and certificate templates ](usecase-9/)  | This workshop demonstrates private CA best practices, monitoring and use of templates for code siging certs|1 hour 30 mins | 2 hours |
+| [Level 200: AWS Private CA Best Practices, Monitoring and Templates for code signing certificates ](usecase-7/)  | This workshop demonstrates private CA best practices, monitoring and use of templates for code siging certs|1 hour 30 mins | 2 hours |
+| [Level 400: AWS Private CA Hierarchy creation, Monitoring using Cloudwatch, IOT Device certs and certificate templates ](usecase-9/)  | This workshop demonstrates private CA best practices, monitoring and use of templates for code siging certs|1 hour 30 mins | 2 hours |
 
 ## License Summary
 
