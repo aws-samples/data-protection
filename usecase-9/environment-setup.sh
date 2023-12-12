@@ -12,10 +12,10 @@ fi
 echo configuring python environment, please wait...
 echo $T > setup.log
 sudo rm -rf /root/.cache/pip 2>&1 >> setup.log
-sudo python -m pip install --upgrade pip 2>&1 >> setup.log
-sudo python -m pip uninstall -y aws-sam-cli 2>&1 >> setup.log
-sudo python -m pip install --upgrade boto3 awscli 2>&1 >> setup.log
-python -m pip install --user ${PYTHON_PACKAGES} 2>&1 >> setup.log
+sudo python3 -m pip install --upgrade pip 2>&1 >> setup.log
+sudo python3 -m pip uninstall -y aws-sam-cli 2>&1 >> setup.log
+sudo python3 -m pip install --upgrade boto3 awscli 2>&1 >> setup.log
+python3 -m pip install --user ${PYTHON_PACKAGES} 2>&1 >> setup.log
 echo python setup complete
 
 echo installing other tools
