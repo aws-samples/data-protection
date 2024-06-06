@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export MQTT_RPM_URL=https://github.com/hivemq/mqtt-cli/releases/download/v1.2.0/mqtt-cli-1.2.0.noarch.rpm
+export MQTT_RPM_URL=https://github.com/hivemq/mqtt-cli/releases/download/v4.25.0/mqtt-cli-4.25.0.rpm
 export PWD=$(pwd)
 T=$(date)
 
