@@ -8,7 +8,7 @@ export END_CERT='-----END CERTIFICATE-----'
 export PWD=$(pwd)
 
 # get subordinate CA Arn
-SUB_ARN=$(aws acm-pca list-certificate-authorities --output json | jq -r ‘.CertificateAuthorities[] | select(.Status == “ACTIVE” and .Type == “SUBORDINATE”) | .Arn’)
+SUB_ARN=$(aws acm-pca list-certificate-authorities --output json | jq -r '.CertificateAuthorities[] | select(.Status == "ACTIVE" and .Type == "SUBORDINATE") | .Arn')
 
 # issue cert 
 CERT_ARN=$(aws acm-pca issue-certificate --certificate-authority-arn ${SUB_ARN} --csr file://./${CSR_FILE} --signing-algorithm SHA256WITHRSA --validity "Value=50,Type=DAYS" --output json | jq -r .CertificateArn)
