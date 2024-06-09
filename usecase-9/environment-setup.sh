@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export MQTT_RPM_URL=https://github.com/hivemq/mqtt-cli/releases/download/v4.25.0/mqtt-cli-4.25.0.rpm
+export MQTT_RPM_URL=https://github.com/hivemq/mqtt-cli/releases/download/v1.2.0/mqtt-cli-1.2.0.noarch.rpm
 export PWD=$(pwd)
 T=$(date)
 
@@ -24,7 +24,8 @@ echo $T >> setup.log
 sudo rpm --import https://yum.corretto.aws/corretto.key 2>&1 >> setup.log
 sudo curl -L -o /etc/yum.repos.d/corretto.repo https://yum.corretto.aws/corretto.repo 2>&1 >> setup.log
 sudo yum update -y 2>&1 >> setup.log
-sudo yum install -y java-11-amazon-corretto-devel jq csplit ${MQTT_RPM_URL} 2>&1 >> setup.log
+sudo yum install -y java-11-amazon-corretto-devel jq 2>&1 >> setup.log
+sudo yum install -y ${MQTT_RPM_URL}
 mqtt --version 2>&1 >> setup.log # generates ~/.mqtt/config.properties
 npm install -g c9 2>&1 >> setup.log
 
