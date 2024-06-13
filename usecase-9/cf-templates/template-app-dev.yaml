@@ -296,6 +296,8 @@ Resources:
       
    # Creating a ALB in CF - Target group and listener will be createdin Boto      
    ApplicationLoadBalancer:
+      DependsOn:
+        - GatewayAttachment
       Type: 'AWS::ElasticLoadBalancingV2::LoadBalancer'
       Properties:
          Scheme: internet-facing
